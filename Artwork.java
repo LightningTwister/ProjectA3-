@@ -205,4 +205,18 @@ abstract class Artwork {
     protected String getArtworkSeller() {
         return artworkSeller;
     }
+
+    @Override
+    public String toString() {
+        return "Artwork{" +
+                "artworkTitle='" + artworkTitle + '\'' +
+                ", artworkDescription='" + artworkDescription + '\'' +
+                ", artworkCreator='" + artworkCreator + '\'' +
+                ", artworkYearCreated=" + artworkYearCreated +
+                ", reservePrice=" + reservePrice +
+                ", numOfBids=" + numOfBids +
+                ", dateTimeArtworkPlaced=" + dateTimeArtworkPlaced +
+                ", artworkSeller='" + artworkSeller + '\'' +
+                '}';
+    }
 }
