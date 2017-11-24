@@ -62,4 +62,12 @@ public class Painting extends Artwork {
     public void setHeight(int newHeight) {
         this.height = newHeight;
     }
+
+    @Override
+    public String toString() {
+        return "Painting{" +
+                "width=" + width +
+                ", height=" + height +
+                "} " + super.toString();
+    }
 }
