@@ -96,4 +96,15 @@ public class Sculpture extends Artwork {
     public void setMaterial(String newMaterial) {
         this.material = newMaterial;
     }
+
+    @Override
+    public String toString() {
+        return "Sculpture{" +
+                "width=" + width +
+                ", height=" + height +
+                ", depth=" + depth +
+                ", material='" + material + '\'' +
+                "} " + super.toString();
+    }
+
 }
