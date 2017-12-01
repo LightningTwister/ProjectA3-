@@ -21,26 +21,79 @@ public class Database {
     public Database(){
         login();
     }
+
+
     public ArrayList<Bid> getBidHistory(){
-        return Browsing.browseBidHistory(bids, currentUser.getBids());
+        ArrayList<Integer> idList = currentUser.getBids();
+        ArrayList<Bid> result = new ArrayList<Bid>();
+        for(int id : idList){
+                result.add(bids.get(id));
+        }
+        return result;
     }
     public ArrayList<Bid> getBidHistory(int id){
-        return Browsing.browseBidHistory(bids, Browsing.browseArtworks(artworks, id).get(0).getBids());
+        ArrayList<Integer> idList = artworks.get(id).getBids();
+        ArrayList<Bid> result = new ArrayList<Bid>();
+        for(int bid : idList){
+            result.add(bids.get(bid));
+        }
+        return result;
     }
 
-    public HashMap<Integer, Artwork> getArtworkList(String typeOfList){
+    public ArrayList<Artwork> getArtworkList(String typeOfList){
+        int paint1Sculp2All;
         switch (typeOfList){
-            case "Painting": return Browsing.browseArtworks(artworks,true); break;
-            case "Sculpture": return Browsing.browseArtworks(artworks,false); break;
-            case "All": return artworks; break;
+            case "Painting": paint1Sculp2All = 0; break;
+            case "Sculpture": paint1Sculp2All = 1; break;
+            case "All": break;
             default: System.out.println("ERROR: invalid getArtwork query"); return new ArrayList<Artwork>();
         }
+
+        ArrayList<Artwork> result = new ArrayList<Artwork>();
+        for (Map.Entry artwork : artworks.entrySet())
+        {
+            if(paint1Sculp2All == 1){
+                if (artwork.getValue() instanceof  Sculpture) {
+                    result.add((Artwork) artwork.getValue());
+                }
+            }else if(paint1Sculp2All == 0){
+                if (artwork.getValue() instanceof  Painting) {
+                    result.add((Artwork) artwork.getValue());
+                }
+            }else {
+                result.add((Artwork) artwork.getValue());
+            }
+
+
+        }
+        return result;
     }
 
+    public static HashMap<Integer, Artwork> browseArtworks(HashMap<Integer, Artwork> artworkList, boolean isPaintings){
+        HashMap<Integer, Artwork> result = new HashMap<Integer, Artwork>();
+        for (Map.Entry artwork : artworkList.entrySet())
+        {
+            if(isPaintings){
+                if (artwork.getValue() instanceof  Sculpture) {
+                    result.put((Integer) artwork.getKey(), (Artwork) artwork.getValue());
+                }
+            }else{
+                if (artwork.getValue() instanceof  Painting) {
+                    result.put((Integer) artwork.getKey(), (Artwork) artwork.getValue());
+                }
+            }
 
+
+        }
+        return result;
+    }
 
     public ArrayList<UserProfile> getUserList(){
-        return Browsing.browseUsers(currentUser.getFavouriteusers());
+        ArrayList<UserProfile> result = new ArrayList<UserProfile>();
+        for(int id : currentUser.getFaveUsers()){
+            result.add(users.get(id));
+        }
+        return result;
     }
 
 
@@ -94,7 +147,7 @@ public class Database {
     }
 
     //public int createUser(( ArrayList<Object>){
-    //waiting on userprofile
+    //     UserProfile (String userName, String firstName, String lastName, int phoneNumber, String address, String postCode, String profilePicture)
     //}
 /* not implementing sincelastlogin
     public ArrayList<Artwork> newArtworks(){
