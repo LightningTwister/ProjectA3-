@@ -117,7 +117,7 @@ public class Database {
     }
 
     public void newArtwork( ArrayList<Object> info){
-        Integer bidID = getNextID(artworks);
+        Integer artworkID = getNextID(artworks);
         int type = (int)info.get(0);
         String artworkTitle = (String) info.get(1);
         String artworkDescription = (String) info.get(2);
@@ -134,7 +134,7 @@ public class Database {
         if(type == 0){
             Painting painting = new Painting(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated,
                                 reservePrice, numOfBids, userNameSeller, width, height);
-            artworks.put(bidID, painting);
+            artworks.put(artworkID, painting);
         }else{
             int depth = (int)info.get(10);
             String material = (String) info.get(11);
@@ -142,13 +142,27 @@ public class Database {
             Sculpture sculpture = new Sculpture(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated, reservePrice,
                                   numOfBids,String userNameSeller, width, height, depth, material);
 
-            artworks.put(bidID, sculpture);
+            artworks.put(artworkID, sculpture);
         }
     }
 
-    //public int createUser(( ArrayList<Object>){
-    //     UserProfile (String userName, String firstName, String lastName, int phoneNumber, String address, String postCode, String profilePicture)
-    //}
+    public void createUser( ArrayList<Object> info){
+        Integer userID = getNextID(users);
+        String userName = (String) info.get(1);
+        String firstName = (String) info.get(1);
+        String lastName = (String) info.get(1);
+        int phoneNumber = (int) info.get(1);
+        String address = (String) info.get(1);
+        String postCode = (String) info.get(1);
+        String profilePicture = "Generic path ?";
+
+        //id in constructor where ?
+        UserProfile newUser = new UserProfile (String userName, String firstName, String lastName, phoneNumber, address, postCode, profilePicture);
+        users.put(userID, newUser);
+    }
+
+
+
 /* not implementing sincelastlogin
     public ArrayList<Artwork> newArtworks(){
 
@@ -168,6 +182,7 @@ public class Database {
     public void logout(){
         FileWriter.writeToFile(USER_PATH,ARTWORK_PATH,BID_PATH,users,artworks,bids);
     }
+
 
     public void setCurrentUser(String username){
         for (Map.Entry current : users.entrySet())
@@ -203,16 +218,14 @@ public class Database {
         bids = FileWriter.writeFile(BID_PATH, "bidList");
     }
 
-    private void updateIDs(){
-
-    }
-
     private Integer getNextID(HashMap hash){
         Integer id = 0;
+        Integer currentID = 0;
         for (Map.Entry current : hash.entrySet())
         {
-            if(current.getKey()>id){
-                id = current.getKey();
+            currentID = (Integer)current.getKey();
+            if((currentID>id){
+                id = currentID;
             }
         }
         id++;
