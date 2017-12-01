@@ -41,7 +41,7 @@ public class Database {
     }
 
     public ArrayList<Artwork> getArtworkList(String typeOfList){
-        int paint1Sculp2All;
+        int paint1Sculp2All = -1;
         switch (typeOfList){
             case "Painting": paint1Sculp2All = 0; break;
             case "Sculpture": paint1Sculp2All = 1; break;
