@@ -352,5 +352,16 @@ public class Database {
    // public Bid getBids(Integer id){
      //   return bids.get(id);
     //}
+    public ArrayList<UserProfiles> getFaveUsers (){
+        ArrayList<UserProfiles> currentUserFaveProfiles = new ArrayList<>();
+        for (int faveUsersIterator : currentUser.faveUsers){
+            for (Map.Entry<Integer, UserProfiles> hashMapIterator : users.entrySet()){
+                if ( faveUsersIterator == hashMapIterator.getKey()){
+                    currentUserFaveProfiles.add(hashMapIterator.getValue());
+                }
+            }
+        }
+        return currentUserFaveProfiles;
+    }
 
 }

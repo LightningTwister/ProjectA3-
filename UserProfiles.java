@@ -17,9 +17,9 @@ public class UserProfiles {
 	ArrayList<Integer> wonArtworks = new ArrayList<Integer>();
 	ArrayList<Integer> completedAuctions = new ArrayList<Integer>();
 	ArrayList<Integer> bidHistory = new ArrayList<Integer>();
-	ArrayList<Integer> FaveUsers = new ArrayList<Integer>();
+	ArrayList<Integer> faveUsers = new ArrayList<Integer>();
 
-	public UserProfiles (String userName, String firstName, String lastName, String phoneNumber, ArrayList<String> address, String postCode ,String profilePicture, int id){
+	public UserProfiles (String userName, String firstName, String lastName, String phoneNumber, ArrayList<String> address, String postCode ,String profilePicture, int id, ArrayList<Integer> fUsers){
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -29,8 +29,10 @@ public class UserProfiles {
 		//this.logInDate = logInDate;
 		this.profilePicture = profilePicture;
 		this.id = id;
+		this.faveUsers = fUsers;
 
 	}
+
 
 	public int getId() {
 		return id;
@@ -105,7 +107,7 @@ public class UserProfiles {
 	}
 	
 	public ArrayList<Integer> getFaveUsers () {
-		return FaveUsers;
+		return faveUsers;
 
 	}
 	

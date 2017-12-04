@@ -67,12 +67,11 @@ public class FileReader {
 
     	Date logInTime = new Date(in.nextLong());
 		String path = in.next();
-
-
-
-
-		userList.add(new UserProfiles(userName, firstName, lastName, phoneNumber,userAddress, postCode ,path, Integer.valueOf(id)));
-		in.close();
+		ArrayList<Integer> faveUsers = new ArrayList<>();
+		while (in.hasNextInt()){
+			faveUsers.add(in.nextInt());
+		}
+		userList.add(new UserProfiles(userName, firstName, lastName, phoneNumber,userAddress, postCode ,path, Integer.valueOf(id), faveUsers));
     	return userList;
     }
     private static ArrayList loadPaintingsToSystem(Scanner in){
