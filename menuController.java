@@ -57,7 +57,7 @@ public class menuController{
             userController controller = fxmlLoader.<userController>getController();
 
             controller.getUser(Run.database.getCurrentUser());
-            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("User Page");
@@ -84,7 +84,7 @@ public class menuController{
             controller.loadArtworks(Run.database.getAllArtworks());
 
 
-            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Artwork Page");

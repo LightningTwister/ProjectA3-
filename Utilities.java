@@ -1,4 +1,7 @@
 import javafx.scene.control.Alert;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 
 /**
@@ -48,6 +51,28 @@ public class Utilities {
         alert.setTitle("Cancelled!");
         alert.setHeaderText(null);
         alert.setContentText("Cancelled");
+        alert.showAndWait();
+    }
+
+    /**
+     * If a selected artwork is not Sculpture or Painting create a pop up
+     */
+    public static void artworkSelectionFailed(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Selected index is not a Painting or a Sculpture");
+        alert.showAndWait();
+    }
+
+    /**
+     * Create a pop up alert when no artwork is selected
+     */
+    public static void noArtworkSelected(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Cannot edit Artwork as no artwork is selected. Please select an Artwork first.");
         alert.showAndWait();
     }
 	/**
@@ -233,7 +258,7 @@ public class Utilities {
 	
 	/**
      *  Closes this window once it is not required.
-	 @param The pane of this window
+	 @param rootPane pane of this window to be deleted
      */
     public static void closeWindow(Pane rootPane) {
         Stage stage = (Stage) rootPane.getScene().getWindow();

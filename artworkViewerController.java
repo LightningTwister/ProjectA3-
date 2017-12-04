@@ -112,10 +112,10 @@ public class artworkViewerController{
             // load the edit page controller with a new painting and sculpture object with the new id number.
             controller.artworkToAdd(newPainting,newSculpture,artworks.size()-1 );
 
-            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
-            editStage.setTitle(Main.EDITP_WINDOW_TITLE);
+            editStage.setTitle(Run.EDITP_WINDOW_TITLE);
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
 
@@ -152,10 +152,10 @@ public class artworkViewerController{
 
             controller.paintingToEditing(selectedPainting);
 
-            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
-            editStage.setTitle(Main.EDITP_WINDOW_TITLE);
+            editStage.setTitle(Run.EDITP_WINDOW_TITLE);
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
 
@@ -183,10 +183,10 @@ public class artworkViewerController{
 
             controller.sculptureToEdit(selectedSculpture);
 
-            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
-            editStage.setTitle(Main.EDITS_WINDOW_TITLE);
+            editStage.setTitle(Run.EDITS_WINDOW_TITLE);
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
 
