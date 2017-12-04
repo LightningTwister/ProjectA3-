@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
  *
  * @author Hugh
  */
-public class UploadImage extends A3PrototypeImage {
+public class UploadImage {
     private BufferedImage toReturn;
     
     private BufferedImage returnImage() {
