@@ -1,0 +1,2 @@
+1,Username1,Name1,Surname1,07464223649Address1,Address2,Address3,SA1 4HH,3123213124,/path/to/pic/
+2,tim123,TIMertdf,Watson,0796701787321 Catherine St, Swansea, W glam, SA1 4JT,3123213124,/path
