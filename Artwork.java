@@ -7,7 +7,7 @@ import java.util.Date;
  * @author Tim Watson 880158
  * @version 1
  */
-abstract class Artwork {
+ abstract class Artwork {
 
     private String artworkTitle;
     private String artworkDescription;
@@ -19,6 +19,7 @@ abstract class Artwork {
     private Date dateTimeArtworkPlaced;
     //private Bid artworkBid;
     private String artworkSeller;
+    private int id;
 
     /**
      * Constructor to create a new artwork.
@@ -33,7 +34,7 @@ abstract class Artwork {
      */
     protected Artwork(String artworkTitle, String artworkDescription,
             String artworkCreator, int artworkYearCreated, double reservePrice,
-            int numOfBids, String usernameOfSeller) {
+            int numOfBids, String usernameOfSeller, int id) {
 
         this.artworkTitle = artworkTitle;
         this.artworkDescription = artworkDescription;
@@ -43,8 +44,12 @@ abstract class Artwork {
         this.numOfBids = numOfBids;
         this.dateTimeArtworkPlaced = new Date();
         this.artworkSeller = usernameOfSeller;
+        this.id = id;
         //this.artworkBid = new Bid(reservePrice, numOfBids);
     }
+protected  Artwork(){
+
+}
 
     //protected void artworkAuction(UserProfile user, int bid) {
     //    artworkBid.initBidSystem(user, bid);
@@ -191,7 +196,7 @@ abstract class Artwork {
     /**
      * Set method to change the name of the Artwork seller.
      *
-     * @param artworkSeller Name of the new Artwork Seller.
+     * @param newArtworkSeller Name of the new Artwork Seller.
      */
     protected void setArtworkSeller(String newArtworkSeller) {
         this.artworkSeller = newArtworkSeller;
@@ -206,6 +211,14 @@ abstract class Artwork {
         return artworkSeller;
     }
 
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Artwork{" +
@@ -215,6 +228,7 @@ abstract class Artwork {
                 ", artworkYearCreated=" + artworkYearCreated +
                 ", reservePrice=" + reservePrice +
                 ", numOfBids=" + numOfBids +
+
                 ", dateTimeArtworkPlaced=" + dateTimeArtworkPlaced +
                 ", artworkSeller='" + artworkSeller + '\'' +
                 '}';

@@ -22,12 +22,16 @@ public class Painting extends Artwork {
     public Painting(String artworkTitle, String artworkDescription, 
                 String artworkCreator, int artworkYearCreated, 
                     double reservePrice, int numOfBids, String userNameSeller, 
-                        int width, int height) {
+                        int width, int height , int id) {
         
         super(artworkTitle, artworkDescription, artworkCreator, 
-                artworkYearCreated, reservePrice, numOfBids, userNameSeller);
+                artworkYearCreated, reservePrice, numOfBids, userNameSeller, id);
         this.width = width;
         this.height = height;
+
+    }
+
+    public Painting(){
 
     }
 
