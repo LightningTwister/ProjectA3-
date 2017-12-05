@@ -160,6 +160,18 @@ public class UserProfiles {
 		//find position in list
 		//currentAuctions.remove();
 	}
+	public void deleteFaveUser(int id){
+		int iterator = 0;
+		for (int a : faveUsers){
+			if (a == id){
+				faveUsers.remove(iterator);
+				return;
+			}
+			iterator++;
+		}
+
+	}
+
 
 	@Override
 	public String toString() {

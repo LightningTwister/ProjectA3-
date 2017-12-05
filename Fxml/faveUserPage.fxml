@@ -10,12 +10,13 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnCancel" layoutX="471.0" layoutY="215.0" mnemonicParsing="false" text="Cancel" />
+            <Button fx:id="btnCancel" layoutX="463.0" layoutY="327.0" mnemonicParsing="false" text="Cancel" />
             <TextField fx:id="userBox" layoutX="30.0" layoutY="180.0" promptText="User Name" />
             <TextField fx:id="fNameBox" layoutX="30.0" layoutY="252.0" promptText="First Name" />
             <TextField fx:id="sNameBox" layoutX="203.0" layoutY="252.0" promptText="Second Name" />
             <TextField fx:id="phoneBox" layoutX="203.0" layoutY="180.0" promptText="Phone Number" />
             <ImageView fx:id="bannerImg" fitHeight="150.0" fitWidth="200.0" layoutX="382.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="btnFaveUser" layoutX="287.0" layoutY="327.0" mnemonicParsing="false" text="Delete Favourite user" />
          </children>
       </Pane>
    </center>

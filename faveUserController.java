@@ -21,7 +21,7 @@ import java.util.ArrayList;
  *  @version 1
  */
 public class faveUserController {
-
+        private int id;
 
         @FXML
         private TextField userBox,fNameBox,sNameBox,phoneBox;
@@ -29,7 +29,7 @@ public class faveUserController {
 
 
         @FXML
-        private Button btnCancel;
+        private Button btnCancel, btnFaveUser;
 
         @FXML
         Pane rootPane;
@@ -45,8 +45,8 @@ public class faveUserController {
             userBox.setText(user.getUserName());
             fNameBox.setText(user.getFirstName());
             sNameBox.setText(user.getLastName());
-
             phoneBox.setText(String.valueOf(user.getPhoneNumber()));
+            id = user.getId();
 
 
 
@@ -60,10 +60,17 @@ public class faveUserController {
                 Utilities.closeWindow(rootPane);
 
             });
+            btnFaveUser.setOnAction(e -> {
+                removeFaveUser();
+                Utilities.closeWindow(rootPane);
+            });
 
         }
 
 
+    private void removeFaveUser(){
+        Run.database.getCurrentUser().deleteFaveUser(id);
+    }
 
 
 
