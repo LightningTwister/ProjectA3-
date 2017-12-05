@@ -101,7 +101,7 @@ public class artworkViewerController{
     private void addPage(){
         try{
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/AddPage.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
 
             AddController controller = fxmlLoader.<AddController>getController();
@@ -145,7 +145,7 @@ public class artworkViewerController{
     private void editPaintingPage(Painting selectedPainting ){
         try{
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("paintingPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/paintingPage.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
 
             PaintingController controller = fxmlLoader.<PaintingController>getController() ;
@@ -176,7 +176,7 @@ public class artworkViewerController{
     private void editSculpturePage(Sculpture selectedSculpture){
         try{
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SculpturePage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/SculpturePage.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
 
             SculptureController controller = fxmlLoader.<SculptureController>getController() ;

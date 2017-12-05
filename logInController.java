@@ -41,7 +41,7 @@ public class logInController{
             Run.database.setCurrentUser(Run.database.getUser(usernameBox.getText()));
             try{
 
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/menu.fxml"));
                 AnchorPane root = (AnchorPane) fxmlLoader.load();
 
                 Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);

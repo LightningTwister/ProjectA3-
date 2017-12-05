@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,8 +34,9 @@ public class Run extends Application {
 
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("logInPage.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("/Fxml/logInPage.fxml"));
 
+            Parent root = FXMLLoader.load(getClass().getResource("/Fxml/logInPage.fxml"));
 
             Scene scene = new Scene(root,MAIN_WINDOW_WIDTH,MAIN_WINDOW_HEIGHT);
             primaryStage.setScene(scene);

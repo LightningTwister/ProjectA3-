@@ -51,7 +51,7 @@ public class menuController{
 
         try{
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("userPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/userPage.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
 
             userController controller = fxmlLoader.<userController>getController();
@@ -76,7 +76,7 @@ public class menuController{
     private void artworkPage(){
         try{
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("artworkViewer.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
 
             artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();

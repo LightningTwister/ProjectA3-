@@ -1,11 +1,18 @@
 import com.sun.deploy.util.StringUtils;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sun.plugin.javascript.navig.Anchor;
+
 import java.util.ArrayList;
 
 /**
@@ -51,6 +58,10 @@ public class userController {
             postcodeBox.setText(this.user.getPostCode());
             phoneBox.setText(String.valueOf(this.user.getPhoneNumber()));
 
+            for(Integer u: this.user.getFaveUsers()){
+                fuserDrop.getItems().add(Run.database.getUser(u).getUserName());
+            }
+
         }
 
     /**
@@ -60,6 +71,41 @@ public class userController {
             btnSave.setOnAction(e -> {
                 saveChanges();
             });
+            fuserDrop.setOnAction(e -> {
+                viewSelection();
+            });
+        }
+
+    /**
+     * When a favourite user is selected from the combo box a view window is opened
+     */
+    private void viewSelection(){
+            Utilities.cancelled();
+
+        try{
+
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/userPage.fxml"));
+            Pane root = (Pane) fxmlLoader.load();
+
+            userController controller = fxmlLoader.<userController>getController();
+
+            controller.getUser(Run.database.getUser(fuserDrop.getValue().toString()));
+
+            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+            editStage.setTitle("Favourite User");
+            editStage.initModality(Modality.APPLICATION_MODAL);
+
+            editStage.showAndWait();
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
         }
 
     /**
@@ -80,6 +126,8 @@ public class userController {
                 for(String a: addressArray){
                     addressList.add(a);
                 }
+
+
 
                 Utilities.saveUser(this.user,userName,fName,sName,phone,addressList,postCode,
                         "/path",this.user.getId());
