@@ -11,7 +11,8 @@ public class Database {
 
     private final String ARTWORK_PATH ="Data/artworkfile.txt";
     private final String USER_PATH = "Data/UserList.txt";
-    public final String BANNER_PATH = "file:Data/Artatawe Banner.png";
+    public final String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
+    public final String ICON_PATH = "file:Data/SystemPictures/Artatawe Logo.jpg";
     //private final String BID_PATH;
     private UserProfiles currentUser;
     private HashMap<Integer, UserProfiles> users = new HashMap<>();
@@ -343,7 +344,8 @@ public class Database {
    // }
 
     public UserProfiles getUser(Integer id){
-        return users.get(id);
+
+        return Utilities.getUser(id);
     }
 
     public Artwork getArtwork(Integer id){

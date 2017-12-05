@@ -13,15 +13,15 @@
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btnSave" layoutX="493.0" layoutY="347.0" mnemonicParsing="false" text="Save Changes" />
-            <TextField fx:id="userBox" layoutX="31.0" layoutY="92.0" promptText="User Name" />
-            <TextField fx:id="fNameBox" layoutX="31.0" layoutY="138.0" promptText="First Name" />
-            <TextField fx:id="sNameBox" layoutX="192.0" layoutY="138.0" promptText="Second Name" />
-            <TextField fx:id="phoneBox" layoutX="419.0" layoutY="138.0" promptText="Phone Number" />
+            <TextField fx:id="userBox" layoutX="31.0" layoutY="31.0" promptText="User Name" />
+            <TextField fx:id="fNameBox" layoutX="31.0" layoutY="67.0" promptText="First Name" />
+            <TextField fx:id="sNameBox" layoutX="31.0" layoutY="101.0" promptText="Second Name" />
+            <TextField fx:id="phoneBox" layoutX="30.0" layoutY="138.0" promptText="Phone Number" />
             <TextField fx:id="postcodeBox" layoutX="31.0" layoutY="322.0" promptText="Post Code" />
             <TextArea fx:id="addressBox" layoutX="31.0" layoutY="176.0" prefHeight="142.0" prefWidth="148.0" promptText="Address Box" />
-            <ImageView fx:id="bannerImg" fitHeight="85.0" fitWidth="200.0" layoutX="241.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
             <ComboBox fx:id="fuserDrop" layoutX="204.0" layoutY="322.0" prefWidth="150.0" promptText="Favourite Users" />
             <Button fx:id="btnFave" layoutX="367.0" layoutY="322.0" mnemonicParsing="false" text="View" />
+            <ImageView fx:id="imgProfile" fitHeight="150.0" fitWidth="200.0" layoutX="279.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
    </center>

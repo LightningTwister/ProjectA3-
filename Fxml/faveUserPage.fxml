@@ -17,6 +17,7 @@
             <TextField fx:id="phoneBox" layoutX="203.0" layoutY="180.0" promptText="Phone Number" />
             <ImageView fx:id="bannerImg" fitHeight="150.0" fitWidth="200.0" layoutX="382.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="btnFaveUser" layoutX="287.0" layoutY="327.0" mnemonicParsing="false" text="Delete Favourite user" />
+            <ImageView fx:id="imgProfile" fitHeight="150.0" fitWidth="200.0" layoutX="87.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
    </center>

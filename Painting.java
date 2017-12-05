@@ -6,6 +6,7 @@
 public class Painting extends Artwork {
     private int width;
     private int height;
+    private String picture;
     
     /**
      * Constructor to instantiate a painting object.
@@ -22,13 +23,22 @@ public class Painting extends Artwork {
     public Painting(String artworkTitle, String artworkDescription, 
                 String artworkCreator, int artworkYearCreated, 
                     double reservePrice, int numOfBids, String userNameSeller, 
-                        int width, int height , int id) {
+                        int width, int height , int id, String picture) {
         
         super(artworkTitle, artworkDescription, artworkCreator, 
                 artworkYearCreated, reservePrice, numOfBids, userNameSeller, id);
         this.width = width;
         this.height = height;
+        this.picture = picture;
 
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public Painting(){

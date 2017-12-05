@@ -9,6 +9,7 @@
       <Button fx:id="btnBid" layoutX="126.0" layoutY="159.0" mnemonicParsing="false" text="Place a Bid" />
       <Button fx:id="btnProfile" layoutX="268.0" layoutY="159.0" mnemonicParsing="false" text="My Profile" />
       <Button fx:id="btnArtworks" layoutX="407.0" layoutY="159.0" mnemonicParsing="false" text="My Artworks" />
-      <ImageView fx:id="bannerImg" fitHeight="150.0" fitWidth="200.0" layoutX="207.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgIcon" fitHeight="150.0" fitWidth="200.0" layoutX="214.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgBanner" fitHeight="150.0" fitWidth="200.0" layoutX="203.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

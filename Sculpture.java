@@ -9,7 +9,10 @@ public class Sculpture extends Artwork {
     private int height;
     private int depth;
     private String material;
+    private String picture;
     //To do, additional photos.
+
+
 
     /**
      * Constructor to instantiate a Sculpture object.
@@ -27,12 +30,21 @@ public class Sculpture extends Artwork {
      */
     public Sculpture(String artworkTitle, String artworkDescription, String artworkCreator, int artworkYearCreated,
                      double reservePrice, int numOfBids,String sellerUserName, int width, int height,int id,
-                     int depth, String material) {
+                     int depth, String material, String picture) {
         super(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated, reservePrice, numOfBids, sellerUserName, id);
         this.width = width;
         this.height = height;
         this.depth = depth;
         this.material = material;
+        this.picture = picture;
+
+    }
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public Sculpture(){

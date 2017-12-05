@@ -23,7 +23,7 @@ public class menuController{
     @FXML
     Pane rootPane;
     @FXML
-    ImageView bannerImg;
+    ImageView imgBanner,imgIcon;
 
 
     /**
@@ -40,7 +40,8 @@ public class menuController{
         btnArtworks.setOnAction(e -> {
             artworkPage();
         });
-        bannerImg.setImage(Utilities.getImage("file:Data/youcant.jpg"));
+        imgBanner.setImage(Utilities.getImage(Run.database.BANNER_PATH));
+        imgIcon.setImage(Utilities.getImage(Run.database.ICON_PATH));
 
     }
 

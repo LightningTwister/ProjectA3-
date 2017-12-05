@@ -35,18 +35,19 @@
                   <Label alignment="CENTER" layoutX="526.0" layoutY="158.0" text="Height" />
                   <Button fx:id="buttonId" layoutX="67.0" layoutY="349.0" mnemonicParsing="false" text="Save" />
                   <Button fx:id="cancelButton" layoutX="136.0" layoutY="349.0" mnemonicParsing="false" text="Cancel" />
+                <Button fx:id="btnViewImage" layoutX="503.0" layoutY="349.0" mnemonicParsing="false" text="View Images" />
                   <Label fx:id="depthText" alignment="CENTER" layoutX="527.0" layoutY="221.0" text="Depth" />
                   <Label fx:id="materialText" alignment="CENTER" layoutX="522.0" layoutY="276.0" text="Material" />
                   <Label layoutX="21.0" layoutY="209.0" text="£" />
                   <Label layoutX="596.0" layoutY="110.0" text="cm" />
                   <Label layoutX="596.0" layoutY="179.0" text="cm" />
                   <Label fx:id="depthUnits" layoutX="596.0" layoutY="242.0" text="cm" />
-                  <ImageView fx:id="bannerImg" fitHeight="42.0" fitWidth="260.0" layoutX="182.0" layoutY="-7.0">
+                  <ImageView fx:id="bannerImg" fitHeight="42.0" fitWidth="260.0" layoutX="188.0" layoutY="23.0">
 
                         </ImageView>
-                  <TextField fx:id="nameOfArtwork" alignment="CENTER" layoutX="246.0" layoutY="87.0" promptText="Artwork Title" />
-                  <Label alignment="CENTER" layoutX="275.0" layoutY="60.0" text="Artworks Title" />
-                  <TextField fx:id="descriptionBox" alignment="CENTER" layoutX="211.0" layoutY="119.0" prefHeight="197.0" prefWidth="230.0" />
+                  <TextField fx:id="nameOfArtwork" alignment="CENTER" layoutX="246.0" layoutY="107.0" promptText="Artwork Title" />
+                  <Label alignment="CENTER" layoutX="284.0" layoutY="75.0" text="Artworks Title" />
+                  <TextField fx:id="descriptionBox" alignment="CENTER" layoutX="214.0" layoutY="161.0" prefHeight="197.0" prefWidth="230.0" />
                   <RadioButton fx:id="sculptureRadio" layoutX="469.0" layoutY="44.0" mnemonicParsing="false" selected="true" text="Sculpture">
                      <toggleGroup>
                         <ToggleGroup fx:id="selectObject" />
@@ -55,6 +56,7 @@
                   <RadioButton fx:id="paintingRadio" layoutX="469.0" layoutY="66.0" mnemonicParsing="false" text="Painting" toggleGroup="$selectObject">
 
                   </RadioButton>
+
             </children>
           </AnchorPane>
         </children>

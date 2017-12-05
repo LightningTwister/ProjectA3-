@@ -77,7 +77,6 @@ public class artworkViewerController{
     public void loadArtworks(ArrayList<Artwork> artworkList){
         this.artworks = artworkList;
         refreshArtworkList();
-        System.out.println(Run.database.getAllArtworks().size());
     }
 
     /**
@@ -145,7 +144,7 @@ public class artworkViewerController{
     private void editPaintingPage(Painting selectedPainting ){
         try{
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/ArtworkPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/ArtworkPage.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
 
             ArtworkController controller = fxmlLoader.<ArtworkController>getController() ;
@@ -176,7 +175,7 @@ public class artworkViewerController{
     private void editSculpturePage(Sculpture selectedSculpture){
         try{
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/ArtworkPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/ArtworkPage.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
 
             ArtworkController controller = fxmlLoader.<ArtworkController>getController() ;

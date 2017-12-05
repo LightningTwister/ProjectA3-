@@ -40,7 +40,7 @@ public class User_Controller {
         Pane rootPane;
 
         @FXML
-        ImageView bannerImg;
+        ImageView imgProfile;
 
     /**
      * Method that gets the current user of the program and loads the relevant information into the editing boxes
@@ -84,7 +84,7 @@ public class User_Controller {
             });
 
 
-        bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
+        imgProfile.setImage(Utilities.getImage(Run.database.getCurrentUser().getProfilePicture()));
 
     }
 
@@ -112,6 +112,7 @@ public class User_Controller {
 
         }catch(Exception e){
            Utilities.nothingSelected();
+
         }
 
         fuserDrop.getItems().clear();

@@ -88,7 +88,7 @@ public class FileReader {
 		int dWidth = in.nextInt();
 		int dHeight = in.nextInt();
 		int id = in.nextInt();
-		artworkList.add(new Painting(artworkTitle, description, creatorName, yearCreated, reservePrice, numOfBids, userNameSeller,dWidth, dHeight,id));
+		artworkList.add(new Painting(artworkTitle, description, creatorName, yearCreated, reservePrice, numOfBids, userNameSeller,dWidth, dHeight,id,pathToArtPic));
 		in.close();
 		//to do additional photos.
     	return artworkList;
@@ -110,7 +110,7 @@ public class FileReader {
 		int dDepth = in.nextInt();
 		String material = in.next();
 
-		artworkList.add(new Sculpture(artworkTitle, description, creatorName, yearCreated, reservePrice, numOfBids, userNameSeller, dWidth, dHeight,id, dDepth, material));
+		artworkList.add(new Sculpture(artworkTitle, description, creatorName, yearCreated, reservePrice, numOfBids, userNameSeller, dWidth, dHeight,id, dDepth, material,pathToArtPic));
 		in.close();
 		return artworkList;
     }

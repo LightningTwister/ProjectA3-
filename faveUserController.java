@@ -1,19 +1,17 @@
-import com.sun.deploy.util.StringUtils;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import sun.plugin.javascript.navig.Anchor;
 
-import java.util.ArrayList;
+import javafx.fxml.FXML;
+
+import javafx.scene.control.Button;
+
+import javafx.scene.control.TextField;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+
+
+
+
 
 /**
  *  This class controls the fave user page gui
@@ -26,7 +24,8 @@ public class faveUserController {
         @FXML
         private TextField userBox,fNameBox,sNameBox,phoneBox;
 
-
+        @FXML
+        ImageView imgProfile;
 
         @FXML
         private Button btnCancel, btnFaveUser;
@@ -48,7 +47,9 @@ public class faveUserController {
             phoneBox.setText(String.valueOf(user.getPhoneNumber()));
             id = user.getId();
 
+        Image profileImage = Utilities.getImage(Run.database.getUser(id).getProfilePicture());
 
+        imgProfile.setImage(profileImage);
 
         }
 
@@ -64,6 +65,7 @@ public class faveUserController {
                 removeFaveUser();
                 Utilities.closeWindow(rootPane);
             });
+
 
         }
 

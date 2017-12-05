@@ -76,6 +76,16 @@ public class Utilities {
         alert.setContentText("Nothing was selected, please select something first!");
         alert.showAndWait();
     }
+    /**
+     * Create a pop up alert when nothing is selected from a combo/list view
+     */
+    public static void noImageFound(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("No image found, please specify a path for an image");
+        alert.showAndWait();
+    }
 	/**
 	* Temporary class that creates a pop up because class is not implemented yet
 	* DELETE THIS *************************************************
@@ -267,8 +277,24 @@ public class Utilities {
     }
 
     public static Image getImage(String path){
-        Image image = new Image(path);
-         return image;
+        try{
+            Image image = new Image(path);
+            return image;
+        }catch (Exception e){
+            noImageFound();
+            return new Image("file:Data/SystemPictures/noImageFound.jpg");
+        }
+    }
+    public static UserProfiles getUser(int id){
+        int iterator = 0;
+        for (UserProfiles a : Run.database.getAllUsers()){
+            if (a.getId() == id){
+
+                return a;
+            }
+            iterator++;
+        }
+        return null;
     }
 
 

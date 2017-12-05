@@ -2,9 +2,15 @@
 
 import javafx.fxml.FXML;
 
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -18,14 +24,15 @@ public class ArtworkController {
     private Painting painting;
     private Sculpture sculpture;
     private int nextId;
+    private ImageView artworkImage;
 
     @FXML
     private TextField nameBox, yearBox, reserveBox, bidsBox, userNameBox, widthBox, heightBox, depthBox, materialBox
-            ,nameOfArtwork, descriptionBox;
+            ,nameOfArtwork, descriptionBox ;
     @FXML
     RadioButton sculptureRadio, paintingRadio;
     @FXML
-    Button buttonId, cancelButton;
+    Button buttonId, cancelButton, btnViewImage;
     @FXML
     Pane rootPane;
     @FXML
@@ -53,12 +60,29 @@ public class ArtworkController {
         paintingRadio.setOnAction(e -> {
             toggleBoxes(false);
         });
+        btnViewImage.setOnAction((e -> {
+
+            BorderPane pane = new BorderPane();
+            pane.setCenter(artworkImage);
+            Scene scene = new Scene(pane);
+
+
+            Stage editStage = new Stage();
+            editStage.setScene(scene);
+            editStage.setTitle("Image");
+            editStage.initModality(Modality.APPLICATION_MODAL);
+            editStage.showAndWait();
+
+        }));
         bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
     }
 
     public void getArtwork(Object artwork){
         if (artwork instanceof Painting){
             this.painting = (Painting) artwork;
+            ImageView img = new ImageView();
+            img.setImage((Utilities.getImage(this.painting.getPicture())));
+            this.artworkImage = img;
             nameBox.setText(painting.getArtworkCreator());
             yearBox.setText(String.valueOf(painting.getArtworkYearCreated()));
             reserveBox.setText(String.valueOf(painting.getReservePrice()));
@@ -76,6 +100,9 @@ public class ArtworkController {
 
         }else{
             this.sculpture = (Sculpture) artwork;
+            ImageView img = new ImageView();
+            img.setImage((Utilities.getImage(this.sculpture.getPicture())));
+            this.artworkImage = img;
             nameBox.setText(sculpture.getArtworkCreator());
             yearBox.setText(String.valueOf(sculpture.getArtworkYearCreated()));
             reserveBox.setText(String.valueOf(sculpture.getReservePrice()));
