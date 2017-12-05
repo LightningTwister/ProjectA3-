@@ -20,7 +20,7 @@ import java.util.ArrayList;
  *  @author Tim Watson 880158
  *  @version 1
  */
-public class userController {
+public class User_Controller {
 
         private UserProfiles user;
 
@@ -77,7 +77,7 @@ public class userController {
             fuserDrop.setOnAction(e -> {
                 viewSelection();
             });
-        bannerImg.setImage(Utilities.getImage("file:Data/youcant.jpg"));
+        bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
 
     }
 

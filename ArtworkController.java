@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -54,7 +53,7 @@ public class ArtworkController {
         paintingRadio.setOnAction(e -> {
             toggleBoxes(false);
         });
-        bannerImg.setImage(Utilities.getImage("file:Data/youcant.jpg"));
+        bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
     }
 
     public void getArtwork(Object artwork){
@@ -69,9 +68,12 @@ public class ArtworkController {
             heightBox.setText(String.valueOf(painting.getHeight()));
             nameOfArtwork.setText(painting.getArtworkTitle());
             descriptionBox.setText(painting.getArtworkDescription());
+            paintingRadio.setSelected(true);
             paintingRadio.setVisible(false);
             sculptureRadio.setVisible(false);
-            paintingRadio.setSelected(true);
+            toggleBoxes(false);
+
+
         }else{
             this.sculpture = (Sculpture) artwork;
             nameBox.setText(sculpture.getArtworkCreator());
@@ -85,9 +87,10 @@ public class ArtworkController {
             nameOfArtwork.setText(sculpture.getArtworkTitle());
             depthBox.setText(String.valueOf(sculpture.getDepth()));
             materialBox.setText(sculpture.getMaterial());
+            sculptureRadio.setSelected(true);
             paintingRadio.setVisible(false);
             sculptureRadio.setVisible(false);
-            sculptureRadio.setSelected(true);
+
         }
     }
 

@@ -36,7 +36,7 @@ public class logInController{
             ChangeScreen();
         });
 
-        bannerImg.setImage(Utilities.getImage("file:Data/youcant.jpg"));
+        bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
 
     }
 

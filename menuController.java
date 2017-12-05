@@ -48,20 +48,17 @@ public class menuController{
      * Method that trys to open the user page using the current logged in user.
      */
     private void userPage(){
-        //ArrayList<String> address = new ArrayList<>();
-        //address.add("21 catherine St");
-        //address.add("Swansea");
-        //address.add("W Glamorgan");
-
 
         try{
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/userPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/User_Page.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
 
-            userController controller = fxmlLoader.<userController>getController();
+            User_Controller controller = fxmlLoader.<User_Controller>getController();
 
             controller.getUser(Run.database.getCurrentUser());
+
+
             Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);

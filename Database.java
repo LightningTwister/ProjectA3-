@@ -11,6 +11,7 @@ public class Database {
 
     private final String ARTWORK_PATH ="Data/artworkfile.txt";
     private final String USER_PATH = "Data/UserList.txt";
+    public final String BANNER_PATH = "file:Data/Artatawe Banner.png";
     //private final String BID_PATH;
     private UserProfiles currentUser;
     private HashMap<Integer, UserProfiles> users = new HashMap<>();
