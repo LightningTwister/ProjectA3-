@@ -52,7 +52,7 @@ public class artworkViewerController{
 
         // Check if user selected an item
         if (selectedIndex < 0) {
-            Utilities.noArtworkSelected();
+            Utilities.nothingSelected();
             return;
         }
         if (artworks.get(selectedIndex) instanceof Painting){

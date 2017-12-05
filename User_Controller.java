@@ -34,7 +34,7 @@ public class User_Controller {
         private ComboBox fuserDrop;
 
         @FXML
-        private Button btnSave;
+        private Button btnSave, btnFave;
 
         @FXML
         Pane rootPane;
@@ -61,11 +61,15 @@ public class User_Controller {
             postcodeBox.setText(this.user.getPostCode());
             phoneBox.setText(String.valueOf(this.user.getPhoneNumber()));
 
-            for(Integer u: this.user.getFaveUsers()){
-                fuserDrop.getItems().add(Run.database.getUser(u).getUserName());
-            }
+            populateCombo();
+    }
 
+    private void populateCombo(){
+        fuserDrop.getItems().clear();
+        for(Integer u: this.user.getFaveUsers()){
+            fuserDrop.getItems().add(Run.database.getUser(u).getUserName());
         }
+    }
 
     /**
      * When the user page is opened save button is linked to the save method
@@ -74,9 +78,12 @@ public class User_Controller {
             btnSave.setOnAction(e -> {
                 saveChanges();
             });
-            fuserDrop.setOnAction(e -> {
+
+            btnFave.setOnAction(e -> {
                 viewSelection();
             });
+
+
         bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
 
     }
@@ -100,16 +107,17 @@ public class User_Controller {
             editStage.setScene(editScene);
             editStage.setTitle("Favourite User");
             editStage.initModality(Modality.APPLICATION_MODAL);
-
             editStage.showAndWait();
 
 
         }catch(Exception e){
-            e.printStackTrace();
+           Utilities.nothingSelected();
         }
 
+        fuserDrop.getItems().clear();
+        populateCombo();
 
-        }
+    }
 
     /**
      * When the save button is pressed this method updates the current object into the users database

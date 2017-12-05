@@ -67,13 +67,13 @@ public class Utilities {
     }
 
     /**
-     * Create a pop up alert when no artwork is selected
+     * Create a pop up alert when nothing is selected from a combo/list view
      */
-    public static void noArtworkSelected(){
+    public static void nothingSelected(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Cannot edit Artwork as no artwork is selected. Please select an Artwork first.");
+        alert.setContentText("Nothing was selected, please select something first!");
         alert.showAndWait();
     }
 	/**

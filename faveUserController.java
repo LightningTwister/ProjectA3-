@@ -58,9 +58,13 @@ public class faveUserController {
     public void initialize() {
             btnCancel.setOnAction(e -> {
                 Utilities.closeWindow(rootPane);
+
             });
 
         }
+
+
+
 
 
     }

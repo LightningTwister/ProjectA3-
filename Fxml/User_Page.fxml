@@ -19,8 +19,9 @@
             <TextField fx:id="phoneBox" layoutX="419.0" layoutY="138.0" promptText="Phone Number" />
             <TextField fx:id="postcodeBox" layoutX="31.0" layoutY="322.0" promptText="Post Code" />
             <TextArea fx:id="addressBox" layoutX="31.0" layoutY="176.0" prefHeight="142.0" prefWidth="148.0" promptText="Address Box" />
-            <ComboBox fx:id="fuserDrop" layoutX="432.0" layoutY="271.0" prefWidth="150.0" promptText="Favourite Users" />
             <ImageView fx:id="bannerImg" fitHeight="85.0" fitWidth="200.0" layoutX="241.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <ComboBox fx:id="fuserDrop" layoutX="204.0" layoutY="322.0" prefWidth="150.0" promptText="Favourite Users" />
+            <Button fx:id="btnFave" layoutX="367.0" layoutY="322.0" mnemonicParsing="false" text="View" />
          </children>
       </Pane>
    </center>
