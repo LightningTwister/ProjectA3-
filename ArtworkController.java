@@ -3,6 +3,7 @@
 import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -14,9 +15,9 @@ import java.util.ArrayList;
  * @author Tim Watson 880158
  * @version 1
  */
-public class AddController {
-    private Painting newPainting;
-    private Sculpture newSculpture;
+public class ArtworkController {
+    private Painting painting;
+    private Sculpture sculpture;
     private int nextId;
 
     @FXML
@@ -30,6 +31,9 @@ public class AddController {
     Pane rootPane;
     @FXML
     Label depthText, materialText, depthUnits;
+    @FXML
+    private ImageView bannerImg;
+
 
     /**
      *  When the artwork add page is opened this method links buttons to methods and radio buttons
@@ -50,6 +54,41 @@ public class AddController {
         paintingRadio.setOnAction(e -> {
             toggleBoxes(false);
         });
+        bannerImg.setImage(Utilities.getImage("file:Data/youcant.jpg"));
+    }
+
+    public void getArtwork(Object artwork){
+        if (artwork instanceof Painting){
+            this.painting = (Painting) artwork;
+            nameBox.setText(painting.getArtworkCreator());
+            yearBox.setText(String.valueOf(painting.getArtworkYearCreated()));
+            reserveBox.setText(String.valueOf(painting.getReservePrice()));
+            bidsBox.setText(String.valueOf(painting.getNumOfBids()));
+            userNameBox.setText(painting.getArtworkSeller());
+            widthBox.setText(String.valueOf(painting.getWidth()));
+            heightBox.setText(String.valueOf(painting.getHeight()));
+            nameOfArtwork.setText(painting.getArtworkTitle());
+            descriptionBox.setText(painting.getArtworkDescription());
+            paintingRadio.setVisible(false);
+            sculptureRadio.setVisible(false);
+            paintingRadio.setSelected(true);
+        }else{
+            this.sculpture = (Sculpture) artwork;
+            nameBox.setText(sculpture.getArtworkCreator());
+            yearBox.setText(String.valueOf(sculpture.getArtworkYearCreated()));
+            reserveBox.setText(String.valueOf(sculpture.getReservePrice()));
+            bidsBox.setText(String.valueOf(sculpture.getNumOfBids()));
+            userNameBox.setText(sculpture.getArtworkSeller());
+            widthBox.setText(String.valueOf(sculpture.getWidth()));
+            heightBox.setText(String.valueOf(sculpture.getHeight()));
+            descriptionBox.setText(sculpture.getArtworkDescription());
+            nameOfArtwork.setText(sculpture.getArtworkTitle());
+            depthBox.setText(String.valueOf(sculpture.getDepth()));
+            materialBox.setText(sculpture.getMaterial());
+            paintingRadio.setVisible(false);
+            sculptureRadio.setVisible(false);
+            sculptureRadio.setSelected(true);
+        }
     }
 
     /**
@@ -107,15 +146,15 @@ public class AddController {
                 }
 
                 String material = materialBox.getText();
-               Utilities.saveSculpture(newSculpture,year, reserve, bids, width,height,depth,
+               Utilities.saveSculpture(sculpture,year, reserve, bids, width,height,depth,
                         creatorName,userName,material,title,desc,nextId );
-               Run.database.addArtwork(newSculpture);
+               Run.database.addArtwork(sculpture);
                Run.database.saveArtwork();
 
             }else if (paintingRadio.isSelected()){
-               Utilities.savePainting(newPainting, year, reserve, bids, width,height,
+               Utilities.savePainting(painting, year, reserve, bids, width,height,
                         creatorName,userName,title,desc, nextId);
-                Run.database.addArtwork(newPainting);
+                Run.database.addArtwork(painting);
                 Run.database.saveArtwork();
             }else{
                 throw new Exception("Error: Radio button not selected");
@@ -143,8 +182,8 @@ public class AddController {
      */
     public void artworkToAdd(Painting painting, Sculpture sculpture, int id) {
 
-        this.newPainting = painting;
-        this.newSculpture = sculpture;
+        this.painting = painting;
+        this.sculpture = sculpture;
         this.nextId = id;
 
 

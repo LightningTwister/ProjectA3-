@@ -101,10 +101,10 @@ public class artworkViewerController{
     private void addPage(){
         try{
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/AddPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/ArtworkPage.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
 
-            AddController controller = fxmlLoader.<AddController>getController();
+            ArtworkController controller = fxmlLoader.<ArtworkController>getController() ;
 
             Painting newPainting = new Painting();
             Sculpture newSculpture = new Sculpture();
@@ -145,12 +145,12 @@ public class artworkViewerController{
     private void editPaintingPage(Painting selectedPainting ){
         try{
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/paintingPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/ArtworkPage.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
 
-            PaintingController controller = fxmlLoader.<PaintingController>getController() ;
+            ArtworkController controller = fxmlLoader.<ArtworkController>getController() ;
 
-            controller.paintingToEditing(selectedPainting);
+            controller.getArtwork(selectedPainting);
 
             Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
@@ -176,12 +176,12 @@ public class artworkViewerController{
     private void editSculpturePage(Sculpture selectedSculpture){
         try{
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/SculpturePage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/ArtworkPage.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
 
-            SculptureController controller = fxmlLoader.<SculptureController>getController() ;
+            ArtworkController controller = fxmlLoader.<ArtworkController>getController() ;
 
-            controller.sculptureToEdit(selectedSculpture);
+            controller.getArtwork(selectedSculpture);
 
             Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();

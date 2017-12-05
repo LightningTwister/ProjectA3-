@@ -1,4 +1,5 @@
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -264,5 +265,12 @@ public class Utilities {
         Stage stage = (Stage) rootPane.getScene().getWindow();
         stage.close();
     }
+
+    public static Image getImage(String path){
+        Image image = new Image(path);
+         return image;
+    }
+
+
 
 }

@@ -2,6 +2,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -21,6 +22,9 @@ public class menuController{
     private Button btnProfile,btnBid,btnArtworks;
     @FXML
     Pane rootPane;
+    @FXML
+    ImageView bannerImg;
+
 
     /**
      * When this class is started this links the buttons on the main menu page
@@ -36,6 +40,7 @@ public class menuController{
         btnArtworks.setOnAction(e -> {
             artworkPage();
         });
+        bannerImg.setImage(Utilities.getImage("file:Data/youcant.jpg"));
 
     }
 

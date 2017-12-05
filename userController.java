@@ -6,12 +6,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sun.plugin.javascript.navig.Anchor;
+
+
 
 import java.util.ArrayList;
 
@@ -38,6 +38,9 @@ public class userController {
 
         @FXML
         Pane rootPane;
+
+        @FXML
+        ImageView bannerImg;
 
     /**
      * Method that gets the current user of the program and loads the relevant information into the editing boxes
@@ -74,21 +77,21 @@ public class userController {
             fuserDrop.setOnAction(e -> {
                 viewSelection();
             });
-        }
+        bannerImg.setImage(Utilities.getImage("file:Data/youcant.jpg"));
+
+    }
 
     /**
      * When a favourite user is selected from the combo box a view window is opened
      */
     private void viewSelection(){
-            Utilities.cancelled();
-
         try{
 
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/userPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/faveUserPage.fxml"));
             Pane root = (Pane) fxmlLoader.load();
 
-            userController controller = fxmlLoader.<userController>getController();
+            faveUserController controller = fxmlLoader.<faveUserController>getController();
 
             controller.getUser(Run.database.getUser(fuserDrop.getValue().toString()));
 
