@@ -3,5 +3,8 @@
 !*.fxml
 !*.txt
 !*/
+!*.jpg
+!*.jpeg
+!.png
 *.xml
 *.xml
