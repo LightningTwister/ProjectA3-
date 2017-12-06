@@ -35,6 +35,7 @@ public class DrawImage extends UploadImage {
     private Canvas canvas;
     private double pressX, pressY;
     public void start (Stage drawingStage) {
+        try {
         BorderPane drawingPane = new BorderPane();
         canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         drawingPane.setCenter(canvas);
@@ -49,6 +50,10 @@ public class DrawImage extends UploadImage {
         Scene scene = new Scene(drawingPane,WINDOW_WIDTH,WINDOW_HEIGHT);
         drawingStage.setScene(scene);
         drawingStage.show();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
         
         
         selectLine.setOnAction(event -> {
