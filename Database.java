@@ -338,13 +338,13 @@ public class Database {
     //    bids = FileWriter.writeFile(BID_PATH, "bidList");
    // }
 
-    private Integer getNextID(HashMap hash){
+    private Integer getNextID(HashMap<Integer, UserProfiles> hash){
         Integer id = 0;
         Integer currentID = 0;
         for (Map.Entry current : hash.entrySet())
         {
             currentID = (Integer)current.getKey();
-            if((currentID>id){
+            if(currentID>id){
                 id = currentID;
              }
         }
