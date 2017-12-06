@@ -263,20 +263,29 @@ public class Database {
     //    }
    // }
 
-   // public void createUser( ArrayList<Object> info){
-   //     Integer userID = getNextID(users);
-   //     String userName = (String) info.get(1);
-   //     String firstName = (String) info.get(1);
-   //     String lastName = (String) info.get(1);
-   //     int phoneNumber = (int) info.get(1);
-   //     String address = (String) info.get(1);
-   //     String postCode = (String) info.get(1);
-    //    String profilePicture = "Generic path ?";
+    public void createUser( ArrayList<Object> info) throws Exception{
+        Integer userID = getNextID(users);
+        String userName = (String) info.get(1);
+        String firstName = (String) info.get(1);
+        String lastName = (String) info.get(1);
+        String phoneNumber = (String) info.get(1);
+        //String address = (String) info.get(1);
+        String postCode = (String) info.get(1);
+        String profilePicture = "Generic path ?";
+        ArrayList<String> address = new ArrayList<>();
+        ArrayList<Integer> fUsers = new ArrayList<>();
 
-        //id in constructor where ?
-    //    UserProfile newUser = new UserProfile (String userName, String firstName, String lastName, phoneNumber, address, postCode, profilePicture);
-   //     users.put(userID, newUser);
-   // }
+
+        for(Map.Entry current : users.entrySet()){
+            UserProfiles currentt = (UserProfiles) current.getValue();
+            if(currentt.getUserName() == userName){
+                throw new Exception("Username Taken");
+            }
+        }
+
+        UserProfiles newUser = new UserProfiles (userName, firstName, lastName, phoneNumber, address, postCode , profilePicture, userID, fUsers);
+        users.put(userID, newUser);
+    }
 
 
 
@@ -329,19 +338,19 @@ public class Database {
     //    bids = FileWriter.writeFile(BID_PATH, "bidList");
    // }
 
-    //private Integer getNextID(HashMap hash){
-    //    Integer id = 0;
-     //   Integer currentID = 0;
-    //    for (Map.Entry current : hash.entrySet())
-    //    {
-    //        currentID = (Integer)current.getKey();
-    //        if((currentID>id){
-    //            id = currentID;
-    //        }
-   //     }
-   //     id++;
-  //      return id;
-   // }
+    private Integer getNextID(HashMap hash){
+        Integer id = 0;
+        Integer currentID = 0;
+        for (Map.Entry current : hash.entrySet())
+        {
+            currentID = (Integer)current.getKey();
+            if((currentID>id){
+                id = currentID;
+             }
+        }
+        id++;
+        return id;
+    }
 
     public UserProfiles getUser(Integer id){
 

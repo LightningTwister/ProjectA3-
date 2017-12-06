@@ -71,7 +71,7 @@ public class faveUserController {
 
 
     private void removeFaveUser(){
-        Run.database.getCurrentUser().deleteFaveUser(id);
+        Run.database.getCurrentUser().toggleFaveUser(id);
     }
 
 
