@@ -265,20 +265,18 @@ public class Database {
 
     public void createUser( ArrayList<Object> info) throws Exception{
         Integer userID = getNextID(users);
-        String userName = (String) info.get(1);
+        String userName = (String) info.get(0);
         String firstName = (String) info.get(1);
-        String lastName = (String) info.get(1);
-        String phoneNumber = (String) info.get(1);
-        //String address = (String) info.get(1);
-        String postCode = (String) info.get(1);
+        String lastName = (String) info.get(2);
+        String phoneNumber = (String) info.get(3);
+        ArrayList<String> address = (ArrayList<String>) info.get(4);
+        String postCode = (String) info.get(5);
         String profilePicture = "Generic path ?";
-        ArrayList<String> address = new ArrayList<>();
         ArrayList<Integer> fUsers = new ArrayList<>();
 
 
-        for(Map.Entry current : users.entrySet()){
-            UserProfiles currentt = (UserProfiles) current.getValue();
-            if(currentt.getUserName() == userName){
+        for(UserProfiles profile : this.getAllUsers()){
+            if(profile.getUserName().equalsIgnoreCase(userName)){
                 throw new Exception("Username Taken");
             }
         }
