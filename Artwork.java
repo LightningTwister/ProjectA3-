@@ -17,7 +17,7 @@ import java.util.Date;
     private double reservePrice;
     private int numOfBids;
     private Date dateTimeArtworkPlaced;
-    //private Bid artworkBid;
+    private Bid artworkBid;
     private String artworkSeller;
     private int id;
 
@@ -45,19 +45,19 @@ import java.util.Date;
         this.dateTimeArtworkPlaced = new Date();
         this.artworkSeller = usernameOfSeller;
         this.id = id;
-        //this.artworkBid = new Bid(reservePrice, numOfBids);
+        this.artworkBid = new Bid(reservePrice, numOfBids, id);
     }
 protected  Artwork(){
 
 }
 
-    //protected void artworkAuction(UserProfile user, int bid) {
-    //    artworkBid.initBidSystem(user, bid);
-    //}
-    //private void updateBidInfo() {
-    //    numOfBids = artworkBid.getNumOfBids();
-    //    reservePrice = artworkBid.getReservePrice();
-    //}
+    protected void artworkAuction(UserProfiles user, int bid) {
+        artworkBid.initBidSystem(user, bid);
+    }
+    private void updateBidInfo() {
+        numOfBids = artworkBid.getNumOfBids();
+        reservePrice = artworkBid.getReservePrice();
+    }
     /**
      * Get Method to retrieve the name of this Artwork
      *
@@ -217,6 +217,10 @@ protected  Artwork(){
 
     public void setId(int id){
         this.id = id;
+    }
+
+    public Bid getArtworkBid() {
+        return artworkBid;
     }
 
     @Override
