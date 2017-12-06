@@ -65,16 +65,6 @@ public class ArtworkController {
         });
         btnViewImage.setOnAction((e ->{
             showPictures();
-           // BorderPane pane = new BorderPane();
-           // pane.setCenter(artworkImage);
-           // Scene scene = new Scene(pane);
-
-
-            //Stage editStage = new Stage();
-           // editStage.setScene(scene);
-           // editStage.setTitle("Image");
-           // editStage.initModality(Modality.APPLICATION_MODAL);
-           // editStage.showAndWait();
 
         }));
         bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
@@ -91,7 +81,7 @@ public class ArtworkController {
 
             ArrayList<String> a = new ArrayList<>();
             a.add(picturePath);
-            //a.add("file:Data/ArtworkPictures/sculpture.jpg");
+            a.add("file:Data/ArtworkPictures/sculpture.jpg");
             controller.showPictures(a );
 
             Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
@@ -186,7 +176,7 @@ public class ArtworkController {
             ArrayList checkLetters = new ArrayList<String>();
 
             checkLetters.add(nameBox.getText());
-            checkLetters.add(userNameBox.getText());
+
             checkLetters.add(nameOfArtwork.getText());
             checkLetters.add(descriptionBox.getText());
 
@@ -218,12 +208,16 @@ public class ArtworkController {
             }else if (paintingRadio.isSelected()){
                Utilities.savePainting(painting, year, reserve, bids, width,height,
                         creatorName,userName,title,desc, nextId, this.picturePath);
+
                 Run.database.addArtwork(painting);
                 Run.database.saveArtwork();
             }else{
                 throw new Exception("Error: Radio button not selected");
             }
 
+            for(Artwork a: Run.database.getAllArtworks()){
+                System.out.println(a.toString());
+            }
 
             Utilities.savedInput();
 
@@ -249,6 +243,8 @@ public class ArtworkController {
         this.painting = painting;
         this.sculpture = sculpture;
         this.nextId = id;
+        this.userNameBox.setText(Run.database.getCurrentUser().getUserName());
+        this.bidsBox.setEditable(true);
 
 
     }

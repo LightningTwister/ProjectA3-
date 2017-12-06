@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArtworkPictureController">
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArtworkPictureController">
    <center>
       <ScrollPane fx:id="ScrollPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <content>
@@ -20,6 +20,7 @@
             <Button fx:id="btnPrevious" layoutX="216.0" layoutY="1.0" mnemonicParsing="false" text="Previous" />
             <Button fx:id="btnNext" layoutX="300.0" layoutY="1.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Next" />
             <Button fx:id="btnRemove" layoutX="487.0" layoutY="1.0" mnemonicParsing="false" text="Remove Picture" />
+            <Button fx:id="btnAdd" layoutX="395.0" layoutY="3.0" mnemonicParsing="false" text="Add Picture" />
          </children>
       </Pane>
    </bottom>

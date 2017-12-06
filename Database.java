@@ -1,5 +1,3 @@
-import sun.plugin.util.UserProfile;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +12,7 @@ public class Database {
     private final String BID_HISTORY_PATH = "Data/bidhistory.txt";
     public final String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
     public final String ICON_PATH = "file:Data/SystemPictures/Artatawe Logo.jpg";
+	public final String NO_IMAGE_PATH = "file:Data/SystemPictures/noImageFound.jpg";
     //private final String BID_PATH;
     private UserProfiles currentUser;
     private HashMap<Integer, UserProfiles> users = new HashMap<>();

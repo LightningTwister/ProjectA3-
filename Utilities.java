@@ -92,6 +92,13 @@ public class Utilities {
         alert.setContentText("No image found, please specify a path for an image");
         alert.showAndWait();
     }
+    public static void noImagesInList(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("There are now no images for this artwork, default image added!");
+        alert.showAndWait();
+    }
 	/**
 	* Temporary class that creates a pop up because class is not implemented yet
 	* DELETE THIS *************************************************
@@ -291,7 +298,7 @@ public class Utilities {
             return image;
         }catch (Exception e){
             noImageFound();
-            return new Image("file:Data/SystemPictures/noImageFound.jpg");
+            return new Image(Run.database.NO_IMAGE_PATH);
         }
     }
     public static UserProfiles getUser(int id){
@@ -319,7 +326,7 @@ public class Utilities {
             Path source = Paths.get(file.toURI());
 
 
-            Path directory = Paths.get(folder + file.getName());
+            Path directory = Paths.get(folder + "/"+file.getName());
 
             try{
                 Files.copy(source,directory, StandardCopyOption.REPLACE_EXISTING);

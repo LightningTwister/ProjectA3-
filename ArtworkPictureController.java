@@ -1,25 +1,24 @@
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+
 import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+
 
 import java.util.ArrayList;
 
 public class ArtworkPictureController {
 
     private ArrayList<Image> artworkList ;
+    private ArrayList<String> artworkPaths;
     private int index ;
     @FXML
     Pane rootPane;
 
    @FXML
-   Button btnNext, btnPrevious, btnRemove;
+   Button btnNext, btnPrevious, btnRemove, btnAdd;
 
     @FXML
     ScrollPane ScrollPane;
@@ -46,13 +45,53 @@ public class ArtworkPictureController {
             btnNext.setVisible(true);
         });
         btnRemove.setOnAction(e -> {
+            deletePicture();
 
         });
+        btnAdd.setOnAction(e -> {
+            addPicture();
+        });
 
+    }
+    private void addPicture(){
+        String fileLocation = Utilities.changeImage("Select an artwork picture", "Data/ArtworkPictures");
+        if (fileLocation.equals("FAILED")){
+            Utilities.noImageFound();
+        }else{
+            if(artworkPaths.size() == 1){
+                if (artworkPaths.get(0).equals( Run.database.NO_IMAGE_PATH)){
+                    artworkPaths.remove(0);
+                    artworkList.remove(0);
+                }
+            }
+            artworkList.add(Utilities.getImage("file:"+fileLocation));
+            artworkPaths.add("file:"+fileLocation);
+        }
+        restart();
+
+    }
+    private void restart(){
+        index = 0;
+        ScrollPane.setContent(new ImageView(artworkList.get(index)));
+        recheckButtons();
+    }
+    private void recheckButtons(){
+        if (index == 0){
+            btnPrevious.setVisible(false);
+        }else{
+            btnPrevious.setVisible(true);
+        }
+        if (artworkList.size() ==1){
+            btnNext.setVisible(false);
+        }
+        else{
+            btnNext.setVisible(true);
+        }
     }
 
     public void showPictures(ArrayList<String> artworkStrings){
         ArrayList<Image> newArtworkList = new ArrayList<>();
+        this.artworkPaths = artworkStrings;
         for(String a: artworkStrings){
 
             newArtworkList.add(Utilities.getImage(a));
@@ -68,6 +107,19 @@ public class ArtworkPictureController {
             btnNext.setVisible(false);
         }
 
+
+    }
+    private void deletePicture(){
+        this.artworkPaths.remove(index);
+        this.artworkList.remove(index);
+        index = 0;
+
+        if (artworkList.size() == 0){
+            this.artworkPaths.add(Run.database.NO_IMAGE_PATH);
+            this.artworkList.add(Utilities.getImage(artworkPaths.get(index)));
+            btnAdd.setVisible(true);
+        }
+        restart();
 
     }
 }
