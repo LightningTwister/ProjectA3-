@@ -4,7 +4,7 @@ import java.util.regex.*;
 
 public class UserProfiles {
 
-	private final String PHONE_REGEX = "^\\+([0-9\\-]?){9,11}[0-9]$";
+	private final String PHONE_REGEX = "^0[0-9]{10}$";
 	private final String POSTCODE_REGEX = "^([A-PR-UWYZ](([0-9](([0-9]|[A-HJKSTUW])?)?)|([A-HK-Y][0-9]([0-9]|[ABEHMNPRVWXY])?)) ?[0-9][ABD-HJLNP-UW-Z]{2})$";
 	private String userName;
 	private String firstName;
@@ -129,8 +129,12 @@ public class UserProfiles {
 		Pattern pattern = Pattern.compile(PHONE_REGEX);
 		String phoneCopy = phoneNumber;
 
-		phoneCopy = phoneCopy.replaceAll("[\\-\\+]", "");
+		phoneCopy = phoneCopy.replaceAll(" ", "");
+		System.out.println(phoneCopy);
+		System.out.println(phoneNumber);
 		final Matcher matcher = pattern.matcher(phoneCopy);
+		System.out.println(matcher.matches());
+
 		if(matcher.matches()){
 			this.phoneNumber = phoneNumber;
 		}else {
@@ -152,6 +156,7 @@ public class UserProfiles {
 	 * @param postCode the postcode of the user
 	 */
 	public void setPostCode (String postCode) throws Exception {
+		postCode = postCode.replaceAll(" ", "");
 		Pattern pattern = Pattern.compile(POSTCODE_REGEX);
 		final Matcher matcher = pattern.matcher(postCode);
 
