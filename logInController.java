@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -19,7 +20,7 @@ import javafx.stage.Stage;
  */
 public class logInController{
     @FXML
-    private Button btnLogIn;
+    private Button btnLogIn, createUser;
     @FXML
     Pane rootPane;
     @FXML
@@ -36,9 +37,13 @@ public class logInController{
             ChangeScreen();
         });
 
-        bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
+        createUser.setOnAction(e -> {
+            registerNewUser();
+        });
 
+        bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
     }
+
 
     /**
      *  Method that when clicked checks username entered and if it is accepted navigate to the menu page.
@@ -74,7 +79,24 @@ public class logInController{
 
     }
 
+	@FXML
+    private void registerNewUser(){
+		try{
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/CreateUser.fxml"));
+			BorderPane root = (BorderPane) fxmlLoader.load();
 
+			Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+			Stage editStage = new Stage();
+			editStage.setScene(editScene);
+			editStage.setTitle("Registration");
+			editStage.initModality(Modality.APPLICATION_MODAL);
+
+			editStage.show();
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+    }
 
 
 }
