@@ -2,6 +2,7 @@
 
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -13,6 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 
 /**
@@ -25,6 +27,7 @@ public class ArtworkController {
     private Sculpture sculpture;
     private int nextId;
     private ImageView artworkImage;
+    private String picturePath;
 
     @FXML
     private TextField nameBox, yearBox, reserveBox, bidsBox, userNameBox, widthBox, heightBox, depthBox, materialBox
@@ -60,28 +63,58 @@ public class ArtworkController {
         paintingRadio.setOnAction(e -> {
             toggleBoxes(false);
         });
-        btnViewImage.setOnAction((e -> {
+        btnViewImage.setOnAction((e ->{
+            showPictures();
+           // BorderPane pane = new BorderPane();
+           // pane.setCenter(artworkImage);
+           // Scene scene = new Scene(pane);
 
-            BorderPane pane = new BorderPane();
-            pane.setCenter(artworkImage);
-            Scene scene = new Scene(pane);
 
-
-            Stage editStage = new Stage();
-            editStage.setScene(scene);
-            editStage.setTitle("Image");
-            editStage.initModality(Modality.APPLICATION_MODAL);
-            editStage.showAndWait();
+            //Stage editStage = new Stage();
+           // editStage.setScene(scene);
+           // editStage.setTitle("Image");
+           // editStage.initModality(Modality.APPLICATION_MODAL);
+           // editStage.showAndWait();
 
         }));
         bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
     }
+    private void showPictures() {
+        try {
+
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkPictureOpen.fxml"));
+
+            BorderPane root = (BorderPane) fxmlLoader.load();
+
+            ArtworkPictureController controller = fxmlLoader.<ArtworkPictureController>getController();
+
+            ArrayList<String> a = new ArrayList<>();
+            a.add(picturePath);
+            //a.add("file:Data/ArtworkPictures/sculpture.jpg");
+            controller.showPictures(a );
+
+            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+            editStage.setTitle("Pictures");
+            editStage.initModality(Modality.APPLICATION_MODAL);
+            editStage.showAndWait();
+
+
+        } catch (Exception e) {
+            Utilities.noImageFound();
+
+        }
+    }
+
 
     public void getArtwork(Object artwork){
         if (artwork instanceof Painting){
             this.painting = (Painting) artwork;
+            this.picturePath = this.painting.getPicture();
             ImageView img = new ImageView();
-            img.setImage((Utilities.getImage(this.painting.getPicture())));
+            img.setImage((Utilities.getImage(picturePath)));
             this.artworkImage = img;
             nameBox.setText(painting.getArtworkCreator());
             yearBox.setText(String.valueOf(painting.getArtworkYearCreated()));
@@ -101,7 +134,8 @@ public class ArtworkController {
         }else{
             this.sculpture = (Sculpture) artwork;
             ImageView img = new ImageView();
-            img.setImage((Utilities.getImage(this.sculpture.getPicture())));
+            this.picturePath = this.sculpture.getPicture();
+            img.setImage((Utilities.getImage(picturePath)));
             this.artworkImage = img;
             nameBox.setText(sculpture.getArtworkCreator());
             yearBox.setText(String.valueOf(sculpture.getArtworkYearCreated()));
@@ -139,7 +173,7 @@ public class ArtworkController {
      * When the save button is pressed this method verifies the variable types and then adds this new object to the
      * artwork list.
      */
-    @FXML
+    
     private void saveChanges() {
         try{
            int year = Integer.valueOf(yearBox.getText());
@@ -177,13 +211,13 @@ public class ArtworkController {
 
                 String material = materialBox.getText();
                Utilities.saveSculpture(sculpture,year, reserve, bids, width,height,depth,
-                        creatorName,userName,material,title,desc,nextId );
+                        creatorName,userName,material,title,desc,nextId, this.picturePath );
                Run.database.addArtwork(sculpture);
                Run.database.saveArtwork();
 
             }else if (paintingRadio.isSelected()){
                Utilities.savePainting(painting, year, reserve, bids, width,height,
-                        creatorName,userName,title,desc, nextId);
+                        creatorName,userName,title,desc, nextId, this.picturePath);
                 Run.database.addArtwork(painting);
                 Run.database.saveArtwork();
             }else{
@@ -217,6 +251,16 @@ public class ArtworkController {
         this.nextId = id;
 
 
+    }
+    private void changeImage(){
+         String fileLocation = Utilities.changeImage("Select an Artwork picture", "Data/ArtworkPictures");
+        if (fileLocation.equals("FAILED")){
+            Utilities.noImageFound();
+        }else{
+            this.artworkImage.setImage((Utilities.getImage("file:"+fileLocation)));
+                this.picturePath = ( "file:"+fileLocation);
+            
+        }
     }
 
 

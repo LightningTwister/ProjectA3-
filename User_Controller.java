@@ -1,4 +1,4 @@
-import com.sun.deploy.util.StringUtils;
+//import com.sun.deploy.util.StringUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -101,31 +101,15 @@ public class User_Controller {
     }
 
     private void changeImage(){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select a profile picture");
-        fileChooser.setInitialDirectory(new File("Data/ProfilePictures"));
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter
-                ("Image types","*.jpeg","*.jpg","*.png"));
-
-        Stage fileOpen = new Stage();
-        File file = fileChooser.showOpenDialog(fileOpen);
-        if (file != null){
-            Path source = Paths.get(file.toURI());
-
-
-            Path directory = Paths.get("Data/ProfilePictures/" + file.getName());
-
-            try{
-                Files.copy(source,directory, StandardCopyOption.REPLACE_EXISTING);
-
-                imgProfile.setImage((Utilities.getImage("file:"+directory.toString())));
-                this.picturePath = "file:"+directory.toString();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
+        
+        String fileLocation = Utilities.changeImage("Select a profile picture", "Data/ProfilePictures");
+        if (fileLocation.equals("FAILED")){
+            Utilities.noImageFound();
+        }else{
+            imgProfile.setImage((Utilities.getImage("file:"+fileLocation)));
+                this.picturePath = "file:"+fileLocation;
         }
-
+           
     }
 
     /**
@@ -173,7 +157,7 @@ public class User_Controller {
                 String postCode = String.valueOf(postcodeBox.getText());
 
                 String phone = String.valueOf(phoneBox.getText());
-                String addressArray[] = StringUtils.splitString(addressBox.getText(),"\n");
+                String addressArray[] = addressBox.getText().split("\\r?\\n");
                 ArrayList<String> addressList = new ArrayList<>();
                 for(String a: addressArray){
                     addressList.add(a);
@@ -183,7 +167,7 @@ public class User_Controller {
 
                 Utilities.saveUser(this.user,userName,fName,sName,phone,addressList,postCode,
                         picturePath,this.user.getId());
-                System.out.println(this.user.toString());
+               
 
                 Utilities.savedInput();
                 Run.database.saveUsers();

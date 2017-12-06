@@ -1,9 +1,15 @@
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import javafx.stage.FileChooser;
 
 /**
 * This class contains repeated code in static methods to be used by the whole program 
@@ -161,7 +167,7 @@ public class Utilities {
      * @param id Identifier value of the artwork 
      */
     public static void saveSculpture(Sculpture newSculpture, int year, double reservePrice, int bids, int width, int height,
-                        int depth, String creatorName,String userName, String material, String title, String desc,int id) {
+                        int depth, String creatorName,String userName, String material, String title, String desc,int id,String picLocation) {
 
         try {
             newSculpture.setArtworkYearCreated(year);
@@ -176,6 +182,7 @@ public class Utilities {
             newSculpture.setMaterial(material);
             newSculpture.setArtworkTitle(title);
             newSculpture.setArtworkDescription(desc);
+            newSculpture.setPicture(picLocation);
 
 
         } catch (Exception e) {
@@ -199,7 +206,7 @@ public class Utilities {
      * @param id Identifier value of this artwork
      */
     public static void savePainting(Painting newPainting, int year, double reservePrice, int bids, int width, int height
-                                     , String creatorName,String userName, String title, String desc, int id){
+                                     , String creatorName,String userName, String title, String desc, int id, String picLocation){
 
 
         try{
@@ -213,6 +220,7 @@ public class Utilities {
 
             newPainting.setArtworkTitle(title);
             newPainting.setArtworkDescription(desc);
+            newPainting.setPicture(picLocation);
 
 
         }catch(Exception e){
@@ -297,7 +305,31 @@ public class Utilities {
         }
         return null;
     }
+    
+    public static String changeImage(String title,String folder){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(title);
+        fileChooser.setInitialDirectory(new File(folder));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter
+                ("Image types","*.jpeg","*.jpg","*.png"));
+
+        Stage fileOpen = new Stage();
+        File file = fileChooser.showOpenDialog(fileOpen);
+        if (file != null){
+            Path source = Paths.get(file.toURI());
 
 
+            Path directory = Paths.get(folder + file.getName());
 
+            try{
+                Files.copy(source,directory, StandardCopyOption.REPLACE_EXISTING);
+
+                return directory.toString();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+           
+        }
+        return "FAILED";
+    }
 }
