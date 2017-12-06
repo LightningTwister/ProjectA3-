@@ -1,5 +1,6 @@
 
-import java.awt.image.BufferedImage;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -17,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javax.imageio.ImageIO;
 import javafx.application.Application;
+import javafx.scene.Parent;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -29,12 +31,13 @@ import javafx.application.Application;
  * @author Hugh
  */
 public class DrawImage extends Application {
-    private static final int CANVAS_WIDTH = 400;
-    private static final int CANVAS_HEIGHT = 400;
-    private static final int WINDOW_WIDTH = 400;
-    private static final int WINDOW_HEIGHT = 600;
+    @FXML
     private Canvas canvas;
+    
     private double pressX, pressY;
+    
+    @FXML
+    private Button selectLine, selectCircle,confirmDrawing;
 
     public static void main(String[] args) {
         launch(args);
@@ -43,18 +46,8 @@ public class DrawImage extends Application {
     @Override
     public void start (Stage drawingStage) {
         try {
-            BorderPane drawingPane = new BorderPane();
-            canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-            drawingPane.setCenter(canvas);
-            VBox menuBar = new VBox();
-	        menuBar.setSpacing(10);
-	        menuBar.setPadding(new Insets(10, 10, 10, 10));
-	        drawingPane.setTop(menuBar);
-        
-            Button selectLine = new Button("Line");
-            Button selectCircle = new Button("Filled Circle");
-            Button confirmDrawing = new Button("Confirm (finish)");
-            Scene scene = new Scene(drawingPane,WINDOW_WIDTH,WINDOW_HEIGHT);
+            Parent drawingPane = FXMLLoader.load(getClass().getResource("/DrawImageFXML.fxml"));
+            Scene scene = new Scene(drawingPane,640,480);
             drawingStage.setScene(scene);
             drawingStage.show();
             selectLine.setOnAction(event -> {
@@ -126,5 +119,3 @@ public class DrawImage extends Application {
     //}
     
 }
-
-
