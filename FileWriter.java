@@ -71,10 +71,23 @@ public class FileWriter {
                          out.println();
                  }
 
+
              }
              out.close();
 
 
+         }else if (type.toLowerCase().equals("bidhistorylist")){
+             System.out.println("Writing bidhistory to file.");
+             for (Artwork a : Run.database.getAllArtworks()){
+                 out.print(a.getId());
+                 for(int i = 0; i < a.getArtworkBid().getBidHistory().getAmountBidArray().size(); i++){
+                     out.print(delim + a.getArtworkBid().getBidHistory().getProfilesOfBidders().get(i));
+                     out.print(delim + a.getArtworkBid().getBidHistory().getAmountBidArray().get(i));
+                     out.print(delim + (a.getArtworkBid().getBidHistory().getDateArray().get(i)));
+                     out.println();
+                 }
+             }
+             out.close();
          }
     }
 

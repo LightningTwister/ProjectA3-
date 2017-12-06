@@ -11,13 +11,14 @@ public class Database {
 
     private final String ARTWORK_PATH ="Data/artworkfile.txt";
     private final String USER_PATH = "Data/UserList.txt";
+    private final String BID_HISTORY_PATH = "Data/bidhistory.txt";
     public final String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
     public final String ICON_PATH = "file:Data/SystemPictures/Artatawe Logo.jpg";
     //private final String BID_PATH;
     private UserProfiles currentUser;
     private HashMap<Integer, UserProfiles> users = new HashMap<>();
     private HashMap<Integer, Artwork> artworks = new HashMap<>();
-   // private HashMap<Integer, Bid> bids;
+    private HashMap<Integer, BidHistory> bidHistory = new HashMap<>();
 
     /**
      * Constructor that instantiates a database
@@ -48,6 +49,7 @@ public class Database {
     private void login(){
         loadArtworks();
         loadUsers();
+        associateBidHistoryToArtworkBid();
     }
 
     /**
@@ -137,6 +139,17 @@ public class Database {
      */
     public void saveUsers(){
         FileWriter.openFile("Data/Userlist1.txt", "userlist");
+    }
+
+    private  void associateBidHistoryToArtworkBid() throws NullPointerException{
+        ArrayList<BidHistory> bH = FileReader.readFile(BID_HISTORY_PATH, "bidhistorylist");
+        for (Map.Entry<Integer, Artwork> a : artworks.entrySet()){
+            for(BidHistory b : bH) {
+                if (a.getValue().getArtworkBid().getArtworkID() == b.getArtworkID()){
+                    a.getValue().getArtworkBid().setBidHistory(b);
+                }
+            }
+        }
     }
 
 
