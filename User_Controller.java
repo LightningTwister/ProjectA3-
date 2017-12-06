@@ -6,13 +6,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import java.io.File;
 
 
-
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 /**
@@ -23,6 +30,7 @@ import java.util.ArrayList;
 public class User_Controller {
 
         private UserProfiles user;
+        private String picturePath;
 
         @FXML
         private TextField userBox,fNameBox,sNameBox,postcodeBox,phoneBox;
@@ -34,7 +42,7 @@ public class User_Controller {
         private ComboBox fuserDrop;
 
         @FXML
-        private Button btnSave, btnFave;
+        private Button btnSave, btnFave, btnChangeImage;
 
         @FXML
         Pane rootPane;
@@ -60,6 +68,7 @@ public class User_Controller {
             addressBox.setText(a);
             postcodeBox.setText(this.user.getPostCode());
             phoneBox.setText(String.valueOf(this.user.getPhoneNumber()));
+            this.picturePath = user.getProfilePicture();
 
             populateCombo();
     }
@@ -82,9 +91,40 @@ public class User_Controller {
             btnFave.setOnAction(e -> {
                 viewSelection();
             });
+            btnChangeImage.setOnAction(e -> {
+                changeImage();
+            });
 
 
         imgProfile.setImage(Utilities.getImage(Run.database.getCurrentUser().getProfilePicture()));
+
+    }
+
+    private void changeImage(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select a profile picture");
+        fileChooser.setInitialDirectory(new File("Data/ProfilePictures"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter
+                ("Image types","*.jpeg","*.jpg","*.png"));
+
+        Stage fileOpen = new Stage();
+        File file = fileChooser.showOpenDialog(fileOpen);
+        if (file != null){
+            Path source = Paths.get(file.toURI());
+
+
+            Path directory = Paths.get("Data/ProfilePictures/" + file.getName());
+
+            try{
+                Files.copy(source,directory, StandardCopyOption.REPLACE_EXISTING);
+
+                imgProfile.setImage((Utilities.getImage("file:"+directory.toString())));
+                this.picturePath = "file:"+directory.toString();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
 
     }
 
@@ -142,7 +182,8 @@ public class User_Controller {
 
 
                 Utilities.saveUser(this.user,userName,fName,sName,phone,addressList,postCode,
-                        "/path",this.user.getId());
+                        picturePath,this.user.getId());
+                System.out.println(this.user.toString());
 
                 Utilities.savedInput();
                 Run.database.saveUsers();

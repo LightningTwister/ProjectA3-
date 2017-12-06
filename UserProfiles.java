@@ -71,7 +71,9 @@ public class UserProfiles {
 	 * @param id
 	 * @param fUsers
 	 */
-	public UserProfiles (String userName, String firstName, String lastName, String phoneNumber, ArrayList<String> address, String postCode ,String profilePicture, int id, ArrayList<Integer> fUsers){
+	public UserProfiles (String userName, String firstName, String lastName, String phoneNumber,
+						 	ArrayList<String> address, String postCode ,String profilePicture, int id,
+								 ArrayList<Integer> fUsers){
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;

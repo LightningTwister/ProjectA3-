@@ -15,7 +15,7 @@ public class FileWriter {
                  out.print(e.getUserName() + delim);
                  out.print(e.getFirstName() + delim);
                  out.print(e.getLastName() + delim);
-                 out.print(e.getPhoneNumber());
+                 out.print(e.getPhoneNumber()+ delim);
                  for (String s : e.getAddress()){
                      out.print(s + delim);
                  }
