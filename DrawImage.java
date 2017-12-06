@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javax.imageio.ImageIO;
+import javafx.application.Application;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,58 +28,65 @@ import javax.imageio.ImageIO;
  *
  * @author Hugh
  */
-public class DrawImage extends UploadImage {
+public class DrawImage extends Application {
     private static final int CANVAS_WIDTH = 400;
     private static final int CANVAS_HEIGHT = 400;
     private static final int WINDOW_WIDTH = 400;
     private static final int WINDOW_HEIGHT = 600;
     private Canvas canvas;
     private double pressX, pressY;
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
     public void start (Stage drawingStage) {
         try {
-        BorderPane drawingPane = new BorderPane();
-        canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-        drawingPane.setCenter(canvas);
-        VBox menuBar = new VBox();
-	menuBar.setSpacing(10);
-	menuBar.setPadding(new Insets(10, 10, 10, 10)); 
-	drawingPane.setTop(menuBar);
+            BorderPane drawingPane = new BorderPane();
+            canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+            drawingPane.setCenter(canvas);
+            VBox menuBar = new VBox();
+	        menuBar.setSpacing(10);
+	        menuBar.setPadding(new Insets(10, 10, 10, 10));
+	        drawingPane.setTop(menuBar);
         
-        Button selectLine = new Button("Line");
-        Button selectCircle = new Button("Filled Circle");
-        Button confirmDrawing = new Button("Confirm (finish)");
-        Scene scene = new Scene(drawingPane,WINDOW_WIDTH,WINDOW_HEIGHT);
-        drawingStage.setScene(scene);
-        drawingStage.show();
+            Button selectLine = new Button("Line");
+            Button selectCircle = new Button("Filled Circle");
+            Button confirmDrawing = new Button("Confirm (finish)");
+            Scene scene = new Scene(drawingPane,WINDOW_WIDTH,WINDOW_HEIGHT);
+            drawingStage.setScene(scene);
+            drawingStage.show();
+            selectLine.setOnAction(event -> {
+                setCurrentShape("line");
+            });
+
+            selectCircle.setOnAction(event -> {
+                setCurrentShape("circle");
+            });
+
+            canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent event) -> {
+                setStartXY(event.getX(),event.getY());
+            });
+
+            canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent event) -> {
+                if ("line".equals(currentShape)) {
+                    createLine(pressX,pressY,event.getX(),event.getY());
+                } else {
+                    createFilledCircle(pressX,pressY,event.getX(),event.getY());
+                }
+            });
+
+            confirmDrawing.setOnAction(event -> {
+                saveDrawing();
+            });
         }
         catch(Exception e) {
             e.printStackTrace();
         }
         
         
-        selectLine.setOnAction(event -> {
-            setCurrentShape("line");
-        });
-        
-        selectCircle.setOnAction(event -> {
-            setCurrentShape("circle");
-        });
-        
-        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent event) -> {
-            setStartXY(event.getX(),event.getY());
-        });
-        
-        canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent event) -> {
-            if ("line".equals(currentShape)) {
-                createLine(pressX,pressY,event.getX(),event.getY());
-            } else {
-                createFilledCircle(pressX,pressY,event.getX(),event.getY());
-            }
-        });
-        
-        confirmDrawing.setOnAction(event -> {
-            saveDrawing();
-        });
+
            
     }
     
@@ -112,9 +120,11 @@ public class DrawImage extends UploadImage {
         }
     }
     
-    public BufferedImage drawingHandler() {
-        start(null);
-        return(uploadImage("CustomImage.png"));
-    }
+    //public BufferedImage drawingHandler() {
+    //    start(null);
+    //    return(uploadImage("CustomImage.png"));
+    //}
     
 }
+
+
