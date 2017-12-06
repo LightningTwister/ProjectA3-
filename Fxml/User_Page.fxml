@@ -22,6 +22,7 @@
             <ComboBox fx:id="fuserDrop" layoutX="204.0" layoutY="322.0" prefWidth="150.0" promptText="Favourite Users" />
             <Button fx:id="btnFave" layoutX="367.0" layoutY="322.0" mnemonicParsing="false" text="View" />
             <ImageView fx:id="imgProfile" fitHeight="150.0" fitWidth="200.0" layoutX="279.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="btnChangeImage" layoutX="379.0" layoutY="235.0" mnemonicParsing="false" text="Select New Image" />
          </children>
       </Pane>
    </center>

@@ -239,7 +239,7 @@ public class Utilities {
             profile.setUserName(userName);
             profile.setFirstName(fName);
             profile.setLastName(lName);
-            profile.setPhoneNumber(phoneNum);
+            //profile.setPhoneNumber(phoneNum);
 
             profile.setAddress(address);
             profile.setPostCode(postcode);
@@ -249,6 +249,7 @@ public class Utilities {
 
 
         }catch(Exception e){
+            e.printStackTrace();
             Utilities.wrongInputFound();
         }
     }
