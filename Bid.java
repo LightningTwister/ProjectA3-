@@ -1,86 +1,68 @@
-import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Created by LT on 07/12/2017.
+ */
 public class Bid {
-    private double reservePrice;
-    private int numOfBids;
-    private String highestBidder;
-    private double highestBid;
-    private Date highestBidDate;
+    private int userID;
+    private int ubidID;
+    private int uartworkID;
+    private double uamount;
+    private Date udatePlaced;
 
-    private int artworkID;
-    private BidHistory bidHistory;
+    public Bid(double amount){
+        uamount = amount;
+    }
+    public Bid(double amount, int userID, int bidID, int artworkID, Bid currBid) throws Exception{
+        setAmount(amount);
+        setArtworkID(artworkID);
+        setBidID(bidID);
+        setUserID(userID);
 
-    public Bid(double rPrice, int numOfBids, int artID){
-        this.reservePrice = rPrice;
-        this.numOfBids = numOfBids;
-        this.artworkID = artID;
-        this.highestBid = 0;
-    }
+        bidAccepted(currBid);
 
-
-    public double getReservePrice() {
-        return reservePrice;
+        //udatePlaced = new Date();
+        //udatePlaced.setTime();
     }
-    //Maybe that aint important?
-    public void setReservePrice(double reservePrice) {
-        this.reservePrice = reservePrice;
-    }
-
-    public int getNumOfBids() {
-        return numOfBids;
-    }
-    //same for this one.
-    public void setNumOfBids(int numOfBids) {
-        this.numOfBids = numOfBids;
-    }
-    private void bidResolve(){
-        if (numOfBids == 0){
-            System.out.println("You won the auction!");
+    private void bidAccepted(Bid currBid) throws Exception{
+        if(uamount < currBid.getAmount()) {
+            throw new Exception("Bid too low");
         }
     }
 
-    public void initBidSystem(UserProfiles currentBidder, double bid){
-        if (currentBidder.getUserName().toLowerCase().equals(highestBidder)){
-            System.out.println("You can't bid when you are the highest bidder.");
-        }
-        else if (bid < reservePrice) {
-            System.out.println("Bid refused. You need to place a bid higher than the reserve price.");
-        }
-        else if (bid <= highestBid){
-            System.out.println("Bid refused. Your bid is equal to or lower than the current highest bid.");
-        }
-        else{
-            this.highestBid = bid;
-            this.numOfBids--;
-            this.highestBidder = currentBidder.getUserName();
-            this.highestBidDate = new Date();
-            bidHistory.updateHistories(highestBid, highestBidder, highestBidDate);
-        }
-        bidResolve();
+    public void setUserID(int userID){
+        this.userID = userID;
     }
 
-    public BidHistory getBidHistory() {
-        return bidHistory;
+    public void setBidID(int ubidID){
+        this.ubidID = ubidID;
     }
 
-    public void setBidHistory(BidHistory bidHistory) {
-        this.bidHistory = bidHistory;
+    public void setArtworkID(int uartworkID){
+        this.uartworkID = uartworkID;
     }
 
-    public int getArtworkID() {
-        return artworkID;
+    public void setAmount(double amount){
+        uamount = amount;
     }
 
-    public String getHighestBidder() {
-        return highestBidder;
+    public int getUserID(){
+        return userID;
+    }
+    public int getBidID(){
+        return ubidID;
     }
 
-    public double getHighestBid() {
-        return highestBid;
+    public int getArtworkID(){
+        return uartworkID;
     }
 
-    public Date getHighestBidDate() {
-        return highestBidDate;
+    public double getAmount(){
+        return uamount;
     }
+
+    public Date getDatePlaced(){
+        return udatePlaced;
+    }
+
 }

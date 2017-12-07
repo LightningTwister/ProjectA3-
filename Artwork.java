@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -11,13 +12,14 @@ import java.util.Date;
 
     private String artworkTitle;
     private String artworkDescription;
-
+    //To do, add photo (Dunno how yet =} )
     private String artworkCreator;
     private int artworkYearCreated;
     private double reservePrice;
     private int numOfBids;
     private Date dateTimeArtworkPlaced;
-    private Bid artworkBid;
+    private Bid highestBid;
+    private ArrayList<Integer> bidHistory = new ArrayList<>();
     private String artworkSeller;
     private int id;
 
@@ -40,24 +42,39 @@ import java.util.Date;
         this.artworkDescription = artworkDescription;
         this.artworkCreator = artworkCreator;
         this.artworkYearCreated = artworkYearCreated;
-        this.reservePrice = reservePrice;
         this.numOfBids = numOfBids;
         this.dateTimeArtworkPlaced = new Date();
         this.artworkSeller = usernameOfSeller;
         this.id = id;
-        this.artworkBid = new Bid(reservePrice, numOfBids, id);
+        this.reservePrice = reservePrice;
+        highestBid = new Bid(reservePrice);
+        //this.artworkBid = new Bid(reservePrice, numOfBids);
     }
 protected  Artwork(){
 
 }
 
-    protected void artworkAuction(UserProfiles user, int bid) {
-        artworkBid.initBidSystem(user, bid);
+    protected void placeBid(Bid newBid)throws Exception {
+        highestBid = newBid;
+        bidHistory.add(newBid.getBidID());
+        numOfBids--;
     }
-    private void updateBidInfo() {
-        numOfBids = artworkBid.getNumOfBids();
-        reservePrice = artworkBid.getReservePrice();
+
+    public Bid getHighestBid(){
+        return highestBid;
     }
+
+    public ArrayList getBidHistory(){
+        return bidHistory;
+    }
+
+    //protected void artworkAuction(UserProfile user, int bid) {
+    //    artworkBid.initBidSystem(user, bid);
+    //}
+    //private void updateBidInfo() {
+    //    numOfBids = artworkBid.getNumOfBids();
+    //    reservePrice = artworkBid.getReservePrice();
+    //}
     /**
      * Get Method to retrieve the name of this Artwork
      *
@@ -136,7 +153,8 @@ protected  Artwork(){
      * @return Value of the reserved price.
      */
     protected double getReservePrice() {
-        return reservePrice;
+    //   return reservePrice;
+        return 1;
     }
 
     /**
@@ -181,7 +199,7 @@ protected  Artwork(){
      * @param newReservePrice New reserve price.
      */
     protected void setReservePrice(double newReservePrice) {
-        this.reservePrice = newReservePrice;
+    //    this.reservePrice = newReservePrice;
     }
 
     /**
@@ -219,10 +237,6 @@ protected  Artwork(){
         this.id = id;
     }
 
-    public Bid getArtworkBid() {
-        return artworkBid;
-    }
-
     @Override
     public String toString() {
         return "Artwork{" +
@@ -230,7 +244,7 @@ protected  Artwork(){
                 ", artworkDescription='" + artworkDescription + '\'' +
                 ", artworkCreator='" + artworkCreator + '\'' +
                 ", artworkYearCreated=" + artworkYearCreated +
-                ", reservePrice=" + reservePrice +
+              //  ", reservePrice=" + reservePrice +
                 ", numOfBids=" + numOfBids +
 
                 ", dateTimeArtworkPlaced=" + dateTimeArtworkPlaced +

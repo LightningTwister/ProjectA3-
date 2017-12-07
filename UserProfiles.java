@@ -342,6 +342,9 @@ public class UserProfiles {
 		}
 	}
 
+	public void addBid(int bidid){
+		bidHistory.add(bidid);
+	}
 
 	@Override
 	public String toString() {

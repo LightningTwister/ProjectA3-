@@ -1,3 +1,5 @@
+import sun.plugin.util.UserProfile;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,17 +9,16 @@ import java.util.Map;
  */
 public class Database {
 
-    private final String ARTWORK_PATH ="Data/test.txt";
+    private final String ARTWORK_PATH ="Data/artworkfile.txt";
     private final String USER_PATH = "Data/UserList.txt";
-    private final String BID_HISTORY_PATH = "Data/bidhistory.txt";
+    private final String BID_PATH = "";
     public final String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
     public final String ICON_PATH = "file:Data/SystemPictures/Artatawe Logo.jpg";
-	public final String NO_IMAGE_PATH = "file:Data/SystemPictures/noImageFound.jpg";
-    //private final String BID_PATH;
+
     private UserProfiles currentUser;
-    private HashMap<Integer, UserProfiles> users = new HashMap<>();
-    private HashMap<Integer, Artwork> artworks = new HashMap<>();
-    private HashMap<Integer, BidHistory> bidHistory = new HashMap<>();
+    private HashMap<Integer, UserProfiles> users;
+    private HashMap<Integer, Artwork> artworks;
+    private HashMap<Integer, Bid> bids;
 
     /**
      * Constructor that instantiates a database
@@ -48,7 +49,7 @@ public class Database {
     private void login(){
         loadArtworks();
         loadUsers();
-        associateBidHistoryToArtworkBid();
+        loadBids();
     }
 
     /**
@@ -69,7 +70,8 @@ public class Database {
      *  Method that gets users from a file and stores them
      */
     private void loadUsers(){
-        ArrayList<UserProfiles> rProfiles = new ArrayList<>();
+        users = new HashMap<>();
+        ArrayList<UserProfiles> rProfiles;
             rProfiles= FileReader.readFile(USER_PATH,"userlist");
 
         for(UserProfiles a: rProfiles){
@@ -81,8 +83,8 @@ public class Database {
      *  Method that gets artworks from a file and stores them
      */
     private void loadArtworks(){
-
-        ArrayList<Artwork> rArtworks = new ArrayList<Artwork>();
+        artworks = new HashMap<>();
+        ArrayList<Artwork> rArtworks;
                 rArtworks=FileReader.readFile(ARTWORK_PATH,"artworkList");
 
 
@@ -90,6 +92,16 @@ public class Database {
 
                 artworks.put(Integer.valueOf(a.getId()),a);
         }
+    }
+
+    private void loadBids(){
+        bids = new HashMap<>();
+        //ArrayList<Bid> rBids;
+        //rBids= FileReader.readFile(BID_PATH,"bidList");
+
+        //for(Bid a: rBids){
+        //    bids.put(Integer.valueOf(a.getBidID()),a);
+        //}
     }
 
     /**
@@ -140,34 +152,36 @@ public class Database {
         FileWriter.openFile("Data/Userlist1.txt", "userlist");
     }
 
-    private  void associateBidHistoryToArtworkBid() throws NullPointerException{
-        ArrayList<BidHistory> bH = FileReader.readFile(BID_HISTORY_PATH, "bidhistorylist");
-        for (Map.Entry<Integer, Artwork> a : artworks.entrySet()){
-            for(BidHistory b : bH) {
-                if (a.getValue().getArtworkBid().getArtworkID() == b.getArtworkID()){
-                    a.getValue().getArtworkBid().setBidHistory(b);
-                }
-            }
+
+    public ArrayList<Bid> getBidHistory(){
+        ArrayList<Integer> idList = currentUser.getBidHistory();
+        ArrayList<Bid> result = new ArrayList<Bid>();
+        for(int id : idList){
+                result.add(bids.get(id));
         }
+        return result;
+    }
+    public ArrayList<Bid> getBidHistory(int id){
+        ArrayList<Integer> idList = artworks.get(id).getBidHistory();
+        ArrayList<Bid> result = new ArrayList<Bid>();
+        for(int bid : idList){
+            result.add(bids.get(bid));
+        }
+        return result;
     }
 
-
-   // public ArrayList<Bid> getBidHistory(){
-    //    ArrayList<Integer> idList = currentUser.getBids();
-    //    ArrayList<Bid> result = new ArrayList<Bid>();
-   //     for(int id : idList){
-    //            result.add(bids.get(id));
-   //     }
-    //    return result;
-    //}
-    //public ArrayList<Bid> getBidHistory(int id){
-     //   ArrayList<Integer> idList = artworks.get(id).getBids();
-     //   ArrayList<Bid> result = new ArrayList<Bid>();
-     //   for(int bid : idList){
-     //       result.add(bids.get(bid));
-     //   }
-     //   return result;
-    //}
+    public void placeBid(double amount, int artID) throws Exception{
+        Artwork art = this.getArtwork(artID);
+        int bid = this.getNextIDBid();
+        Bid currentHighest = art.getHighestBid();
+        if(currentHighest.getUserID() == currentUser.getId()){
+            throw new Exception("You can't bid again");
+        }
+        Bid newBid= new Bid(amount,currentUser.getId(),bid , artID, currentHighest);
+        art.placeBid(newBid);
+        currentUser.addBid(bid);
+        bids.put(bid,newBid);
+    }
 
     public ArrayList<Artwork> getArtworkList(String typeOfList){
         int paint1Sculp2All = -1;
@@ -248,7 +262,7 @@ public class Database {
     //public void newArtwork( ArrayList<Object> info){
     //    Integer artworkID = getNextID(artworks);
     //    int type = (int)info.get(0);
-     //   String artworkTitle = (String) info.get(1);
+    //    String artworkTitle = (String) info.get(1);
      //   String artworkDescription = (String) info.get(2);
      //   String artworkCreator = (String) info.get(3);
      //   int artworkYearCreated = (int)info.get(4);
@@ -276,7 +290,7 @@ public class Database {
    // }
 
     public void createUser( ArrayList<Object> info) throws Exception{
-        Integer userID = getNextID(users);
+        Integer userID = getNextIDProfile();
         String userName = (String) info.get(0);
         String firstName = (String) info.get(1);
         String lastName = (String) info.get(2);
@@ -348,10 +362,11 @@ public class Database {
     //    bids = FileWriter.writeFile(BID_PATH, "bidList");
    // }
 
-    private Integer getNextID(HashMap<Integer, UserProfiles> hash){
+    private Integer getNextIDArtwork(){
+        if(artworks.size() == 0) return 1;
         Integer id = 0;
         Integer currentID = 0;
-        for (Map.Entry current : hash.entrySet())
+        for (Map.Entry current : artworks.entrySet())
         {
             currentID = (Integer)current.getKey();
             if(currentID>id){
@@ -359,6 +374,38 @@ public class Database {
              }
         }
         id++;
+        return id;
+    }
+
+    private Integer getNextIDProfile(){
+        if(users.size() == 0) return 1;
+        Integer id = 0;
+        Integer currentID = 0;
+        for (Map.Entry current : users.entrySet())
+        {
+            currentID = (Integer)current.getKey();
+            if(currentID>id){
+                id = currentID;
+            }
+        }
+        id++;
+        return id;
+    }
+
+    private Integer getNextIDBid(){
+        if(bids.size() == 0) return 1;
+        Integer id = 0;
+        Integer currentID = 0;
+
+        for (Map.Entry current : bids.entrySet())
+        {
+            currentID = (Integer)current.getKey();
+            if(currentID>id){
+                id = currentID;
+            }
+        }
+        id++;
+
         return id;
     }
 
