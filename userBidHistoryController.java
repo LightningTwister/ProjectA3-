@@ -27,7 +27,7 @@ public class userBidHistoryController {
 
     public void initialize() {
         try {
-            Run.database.placeBid(10000,1);
+            Run.database.placeBid(Double.MAX_VALUE,1);
         }catch (Exception e){
             Utilities.BidTooLow();
         }

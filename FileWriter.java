@@ -82,7 +82,7 @@ public class FileWriter {
              out.close();
 
 
-         }else if (type.toLowerCase().equals("bidhistorylist")){
+         }/*else if (type.toLowerCase().equals("bidhistorylist")){
              System.out.println("Writing bidhistory to file.");
              for (Artwork a : Run.database.getAllArtworks()){
                  out.print(a.getId());
@@ -94,7 +94,7 @@ public class FileWriter {
                  }
              }
              out.close();
-         }
+         }*/
 
     }
 

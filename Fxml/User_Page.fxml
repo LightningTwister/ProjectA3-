@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User_Controller">
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User_Controller">
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -23,6 +23,7 @@
             <Button fx:id="btnFave" layoutX="367.0" layoutY="322.0" mnemonicParsing="false" text="View" />
             <ImageView fx:id="imgProfile" fitHeight="150.0" fitWidth="200.0" layoutX="279.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="btnChangeImage" layoutX="379.0" layoutY="235.0" mnemonicParsing="false" text="Select New Image" />
+            <Button fx:id="bidHistories" layoutX="496.0" layoutY="306.0" mnemonicParsing="false" text="Bid Histories" />
          </children>
       </Pane>
    </center>

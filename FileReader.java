@@ -12,7 +12,7 @@ public class FileReader {
 	private static ArrayList<UserProfiles> userList = new ArrayList<>();
 	private static ArrayList<Artwork> artworkList = new ArrayList<>();
 	//private static ArrayList<FaveUsers> faveUsersList = new ArrayList<>();
-	private static ArrayList<BidHistory> bidHistoryList = new ArrayList<>();
+	//private static ArrayList<BidHistory> bidHistoryList = new ArrayList<>();
 	private static final int ADDRESS_SIZE = 3;
 
 
@@ -44,7 +44,7 @@ public class FileReader {
 
 
 		}
-		else if (type.toLowerCase().equals("bidhistorylist")){
+		/*else if (type.toLowerCase().equals("bidhistorylist")){
 			while (in.hasNext()){
 				String curLine = in.nextLine();
 
@@ -52,7 +52,7 @@ public class FileReader {
 				file = loadArtworkBidHistory(line);
 				line.close();
 			}
-		}
+		}*/
 
     	return file;
 		}
@@ -132,7 +132,7 @@ public class FileReader {
 		in.close();
 		return artworkList;
     }
-	public static ArrayList<BidHistory> loadArtworkBidHistory(Scanner in){
+	/*public static ArrayList<BidHistory> loadArtworkBidHistory(Scanner in){
 		in.useDelimiter(",");
 		int artID = in.nextInt();
 		String pBuyer;
@@ -151,7 +151,7 @@ public class FileReader {
 		}
 		bidHistoryList.add(new BidHistory(artID,amounts,profiles,dates));
 		return bidHistoryList;
-	}
+	}*/
 
 	public static ArrayList readFile(String fileName, String type){
         Scanner in =  null;

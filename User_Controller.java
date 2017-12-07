@@ -42,7 +42,7 @@ public class User_Controller {
         private ComboBox fuserDrop;
 
         @FXML
-        private Button btnSave, btnFave, btnChangeImage;
+        private Button btnSave, btnFave, btnChangeImage, bidHistories;
 
         @FXML
         Pane rootPane;
@@ -95,6 +95,9 @@ public class User_Controller {
                 changeImage();
             });
 
+            bidHistories.setOnAction(e -> {
+                goToBidHistory();
+            });
 
         imgProfile.setImage(Utilities.getImage(Run.database.getCurrentUser().getProfilePicture()));
 
@@ -141,6 +144,26 @@ public class User_Controller {
 
         fuserDrop.getItems().clear();
         populateCombo();
+
+    }
+
+    @FXML
+    private void goToBidHistory(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/UserBidHistory.fxml"));
+            BorderPane root = (BorderPane) fxmlLoader.load();
+
+            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+            editStage.setTitle("BidHistory");
+            editStage.initModality(Modality.APPLICATION_MODAL);
+
+            editStage.show();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
     }
 
