@@ -95,6 +95,7 @@ public class FileWriter {
              }
              out.close();
          }
+
     }
 
     public static void openFile(String fileName, String type){
