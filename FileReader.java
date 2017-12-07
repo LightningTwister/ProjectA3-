@@ -91,7 +91,7 @@ public class FileReader {
     	int yearCreated = in.nextInt();
     	double reservePrice = in.nextDouble();
     	int numOfBids = in.nextInt();
-    	String userNameSeller = in.next();
+    	int userNameSeller = in.nextInt();
     	Date auctionPlaced = new Date(in.nextLong());
 		int dWidth = in.nextInt();
 		int dHeight = in.nextInt();
@@ -110,12 +110,12 @@ public class FileReader {
 		ArrayList<String> artworkPaths = new ArrayList<>();
 		String artworkTitle = in.next();
 		String description = in.next();
-		//String pathToArtPic = in.next();
+
 		String creatorName = in.next();
 		int yearCreated = in.nextInt();
 		double reservePrice = in.nextDouble();
 		int numOfBids = in.nextInt();
-		String userNameSeller = in.next();
+		int userNameSeller = in.nextInt();
 		Date auctionPlaced = new Date(in.nextLong());
     	int dWidth = in.nextInt();
 		int dHeight = in.nextInt();

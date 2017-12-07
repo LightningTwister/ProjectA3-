@@ -1,5 +1,4 @@
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -12,7 +11,7 @@ import java.util.Date;
 
     private String artworkTitle;
     private String artworkDescription;
-    //To do, add photo (Dunno how yet =} )
+
     private String artworkCreator;
     private int artworkYearCreated;
     private double reservePrice;
@@ -20,7 +19,7 @@ import java.util.Date;
     private Date dateTimeArtworkPlaced;
     private Bid highestBid;
     private ArrayList<Integer> bidHistory = new ArrayList<>();
-    private String artworkSeller;
+    private int artworkSellerId;
     private int id;
 
     /**
@@ -32,29 +31,28 @@ import java.util.Date;
      * @param artworkYearCreated The year this Art piece was created.
      * @param reservePrice Price for the Artwork to be sold at.
      * @param numOfBids Maximum number of bids allowed on this Artwork.
-     * @param usernameOfSeller user selling this artwork.
+     * @param idOfSeller user selling this artwork.
      */
     protected Artwork(String artworkTitle, String artworkDescription,
             String artworkCreator, int artworkYearCreated, double reservePrice,
-            int numOfBids, String usernameOfSeller, int id) {
+            int numOfBids, int idOfSeller, int id) {
 
         this.artworkTitle = artworkTitle;
         this.artworkDescription = artworkDescription;
         this.artworkCreator = artworkCreator;
         this.artworkYearCreated = artworkYearCreated;
+        this.reservePrice = reservePrice;
         this.numOfBids = numOfBids;
         this.dateTimeArtworkPlaced = new Date();
-        this.artworkSeller = usernameOfSeller;
+        this.artworkSellerId = idOfSeller;
+		highestBid = new Bid(reservePrice);
         this.id = id;
-        this.reservePrice = reservePrice;
-        highestBid = new Bid(reservePrice);
-        //this.artworkBid = new Bid(reservePrice, numOfBids);
+        //this.artworkBid = new Bid(reservePrice, numOfBids, id);
     }
 protected  Artwork(){
 
 }
-
-    protected void placeBid(Bid newBid)throws Exception {
+protected void placeBid(Bid newBid)throws Exception {
         highestBid = newBid;
         bidHistory.add(newBid.getBidID());
         numOfBids--;
@@ -64,17 +62,10 @@ protected  Artwork(){
         return highestBid;
     }
 
-    public ArrayList getBidHistory(){
+	public ArrayList getBidHistory(){
         return bidHistory;
     }
-
-    //protected void artworkAuction(UserProfile user, int bid) {
-    //    artworkBid.initBidSystem(user, bid);
-    //}
-    //private void updateBidInfo() {
-    //    numOfBids = artworkBid.getNumOfBids();
-    //    reservePrice = artworkBid.getReservePrice();
-    //}
+    
     /**
      * Get Method to retrieve the name of this Artwork
      *
@@ -153,8 +144,7 @@ protected  Artwork(){
      * @return Value of the reserved price.
      */
     protected double getReservePrice() {
-    //   return reservePrice;
-        return 1;
+        return reservePrice;
     }
 
     /**
@@ -199,7 +189,7 @@ protected  Artwork(){
      * @param newReservePrice New reserve price.
      */
     protected void setReservePrice(double newReservePrice) {
-    //    this.reservePrice = newReservePrice;
+        this.reservePrice = newReservePrice;
     }
 
     /**
@@ -216,8 +206,8 @@ protected  Artwork(){
      *
      * @param newArtworkSeller Name of the new Artwork Seller.
      */
-    protected void setArtworkSeller(String newArtworkSeller) {
-        this.artworkSeller = newArtworkSeller;
+    protected void setArtworkSeller(int newArtworkSeller) {
+        this.artworkSellerId = newArtworkSeller;
     }
 
     /**
@@ -225,8 +215,8 @@ protected  Artwork(){
      *
      * @return Name of the seller.
      */
-    protected String getArtworkSeller() {
-        return artworkSeller;
+    protected int getArtworkSeller() {
+        return artworkSellerId;
     }
 
     public int getId() {
@@ -237,6 +227,8 @@ protected  Artwork(){
         this.id = id;
     }
 
+   
+
     @Override
     public String toString() {
         return "Artwork{" +
@@ -244,11 +236,11 @@ protected  Artwork(){
                 ", artworkDescription='" + artworkDescription + '\'' +
                 ", artworkCreator='" + artworkCreator + '\'' +
                 ", artworkYearCreated=" + artworkYearCreated +
-              //  ", reservePrice=" + reservePrice +
+                ", reservePrice=" + reservePrice +
                 ", numOfBids=" + numOfBids +
 
                 ", dateTimeArtworkPlaced=" + dateTimeArtworkPlaced +
-                ", artworkSeller='" + artworkSeller + '\'' +
+                ", artworkSeller='" + artworkSellerId + '\'' +
                 '}';
     }
 }

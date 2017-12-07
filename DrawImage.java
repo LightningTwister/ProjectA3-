@@ -152,7 +152,7 @@ public class DrawImage extends Application {
             i = ImageIO.read(f);
             outputImage = i;
         } catch (IOException ex) {
-            Logger.getLogger(UploadImage.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
     

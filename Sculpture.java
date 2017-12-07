@@ -23,16 +23,17 @@ public class Sculpture extends Artwork {
      * @param artworkYearCreated Year the Sculpture was created.
      * @param reservePrice Minimum price the sculpture can be sold for.
      * @param numOfBids Maximum number of bids allowed on the sculpture.
-     * @param sellerUserName User name of the person selling this Sculpture.
+     * @param sellerId User name of the person selling this Sculpture.
      * @param width Width of the sculpture in cm's.
      * @param height Height of the sculpture in cm's.
      * @param depth Depth of the sculpture in cm's.
      * @param material The material the sculpture is made out of.
      */
     public Sculpture(String artworkTitle, String artworkDescription, String artworkCreator, int artworkYearCreated,
-                     double reservePrice, int numOfBids,String sellerUserName, int width, int height,int id,
+                     double reservePrice, int numOfBids,int sellerId, int width, int height,int id,
                      int depth, String material,ArrayList<String> picture) {
-        super(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated, reservePrice, numOfBids, sellerUserName, id);
+        super(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated, reservePrice, numOfBids, sellerId, id);
+
         this.width = width;
         this.height = height;
         this.depth = depth;

@@ -1,5 +1,3 @@
-import sun.plugin.util.UserProfile;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,17 +7,16 @@ import java.util.Map;
  */
 public class Database {
 
-    //private final String ARTWORK_PATH ="Data/test.txt";
     private final String ARTWORK_PATH ="Data/artworkfile.txt";
     private final String USER_PATH = "Data/UserList.txt";
-    private final String BID_PATH = "";
+    private final String BID_HISTORY_PATH = "Data/bidhistory.txt";
     public final String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
     public final String ICON_PATH = "file:Data/SystemPictures/Artatawe Logo.jpg";
-    public final String NO_IMAGE_PATH = "file:Data/SystemPictures/noImageFound.jpg";
-
+	public final String NO_IMAGE_PATH = "file:Data/SystemPictures/noImageFound.jpg";
+    //private final String BID_PATH;
     private UserProfiles currentUser;
-    private HashMap<Integer, UserProfiles> users;
-    private HashMap<Integer, Artwork> artworks;
+    private HashMap<Integer, UserProfiles> users = new HashMap<>();
+    private HashMap<Integer, Artwork> artworks = new HashMap<>();
     private HashMap<Integer, Bid> bids;
 
     /**
@@ -72,11 +69,12 @@ public class Database {
      *  Method that gets users from a file and stores them
      */
     private void loadUsers(){
-        users = new HashMap<>();
-        ArrayList<UserProfiles> rProfiles;
+        ArrayList<UserProfiles> rProfiles = new ArrayList<>();
             rProfiles= FileReader.readFile(USER_PATH,"userlist");
 
         for(UserProfiles a: rProfiles){
+
+
                 users.put(Integer.valueOf(a.getId()),a);
         }
     }
@@ -85,18 +83,19 @@ public class Database {
      *  Method that gets artworks from a file and stores them
      */
     private void loadArtworks(){
-        artworks = new HashMap<>();
-        ArrayList<Artwork> rArtworks;
+
+        ArrayList<Artwork> rArtworks = new ArrayList<Artwork>();
                 rArtworks=FileReader.readFile(ARTWORK_PATH,"artworkList");
 
 
         for(Artwork a: rArtworks){
 
+
                 artworks.put(Integer.valueOf(a.getId()),a);
         }
     }
-
-    private void loadBids(){
+	
+	private void loadBids(){
         bids = new HashMap<>();
         //ArrayList<Bid> rBids;
         //rBids= FileReader.readFile(BID_PATH,"bidList");
@@ -105,7 +104,6 @@ public class Database {
         //    bids.put(Integer.valueOf(a.getBidID()),a);
         //}
     }
-
     /**
      * Return all artworks stored
      * @return List of all artworks
@@ -113,7 +111,6 @@ public class Database {
     public ArrayList<Artwork> getAllArtworks(){
         ArrayList<Artwork> aArtworks = new ArrayList<>();
         for(Artwork a: artworks.values()){
-
             aArtworks.add(a);
         }
         return aArtworks;
@@ -154,7 +151,6 @@ public class Database {
         FileWriter.openFile("Data/Userlist1.txt", "userlist");
     }
 
-
     public ArrayList<Bid> getBidHistory(){
         ArrayList<Integer> idList = currentUser.getBidHistory();
         ArrayList<Bid> result = new ArrayList<Bid>();
@@ -171,8 +167,7 @@ public class Database {
         }
         return result;
     }
-
-    public void placeBid(double amount, int artID) throws Exception{
+	 public void placeBid(double amount, int artID) throws Exception{
         Artwork art = this.getArtwork(artID);
         int bid = this.getNextIDBid();
         Bid currentHighest = art.getHighestBid();
@@ -184,7 +179,6 @@ public class Database {
         currentUser.addBid(bid);
         bids.put(bid,newBid);
     }
-
     public ArrayList<Artwork> getArtworkList(String typeOfList){
         int paint1Sculp2All = -1;
         switch (typeOfList){
@@ -264,7 +258,7 @@ public class Database {
     //public void newArtwork( ArrayList<Object> info){
     //    Integer artworkID = getNextID(artworks);
     //    int type = (int)info.get(0);
-    //    String artworkTitle = (String) info.get(1);
+     //   String artworkTitle = (String) info.get(1);
      //   String artworkDescription = (String) info.get(2);
      //   String artworkCreator = (String) info.get(3);
      //   int artworkYearCreated = (int)info.get(4);
@@ -292,7 +286,7 @@ public class Database {
    // }
 
     public void createUser( ArrayList<Object> info) throws Exception{
-        Integer userID = getNextIDProfile();
+        Integer userID = getNextID(users);
         String userName = (String) info.get(0);
         String firstName = (String) info.get(1);
         String lastName = (String) info.get(2);
@@ -364,7 +358,7 @@ public class Database {
     //    bids = FileWriter.writeFile(BID_PATH, "bidList");
    // }
 
-    private Integer getNextIDArtwork(){
+   private Integer getNextIDArtwork(){
         if(artworks.size() == 0) return 1;
         Integer id = 0;
         Integer currentID = 0;
@@ -393,21 +387,17 @@ public class Database {
         id++;
         return id;
     }
-
-    private Integer getNextIDBid(){
-        if(bids.size() == 0) return 1;
+    private Integer getNextID(HashMap<Integer, UserProfiles> hash){
         Integer id = 0;
         Integer currentID = 0;
-
-        for (Map.Entry current : bids.entrySet())
+        for (Map.Entry current : hash.entrySet())
         {
             currentID = (Integer)current.getKey();
             if(currentID>id){
                 id = currentID;
-            }
+             }
         }
         id++;
-
         return id;
     }
 

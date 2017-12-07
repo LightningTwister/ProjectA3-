@@ -19,10 +19,13 @@ public class ArtworkPictureController {
     Pane rootPane;
 
    @FXML
-   Button btnNext, btnPrevious, btnRemove, btnAdd;
+   Button btnNext, btnPrevious, btnRemove, btnAdd, btnSave;
 
     @FXML
     ScrollPane ScrollPane;
+
+    @FXML
+    Label labelOf;
 
 
     /**
@@ -52,7 +55,27 @@ public class ArtworkPictureController {
         btnAdd.setOnAction(e -> {
             addPicture();
         });
+        btnSave.setOnAction(e -> {
+            savePictures();
 
+        });
+
+    }
+    private void savePictures(){
+        if (artwork.equals("painting")) {
+            if (artworkList.size() > 1) {
+                Utilities.maximumPicturesReached();
+                return;
+            }
+        }
+
+        if(artworkList.size() == 1 && artworkPaths.get(0).equals(Run.database.NO_IMAGE_PATH)){
+            Utilities.noImageFound();
+            return;
+        }else{
+            Utilities.savedInput();
+            Utilities.closeWindow(rootPane);
+        }
     }
     private void addPicture(){
         if(artwork.equals("painting")&& artworkPaths.size() >= 1
@@ -65,6 +88,9 @@ public class ArtworkPictureController {
                 Utilities.noImageFound();
             }else{
                 if(artworkPaths.size() == 1){
+                    //If a user is adding a picture
+                    //and the only picture stored is the default no image picture
+                    //remove default picture
                     if (artworkPaths.get(0).equals( Run.database.NO_IMAGE_PATH)){
                         artworkPaths.remove(0);
                         artworkList.remove(0);
@@ -82,6 +108,7 @@ public class ArtworkPictureController {
         index = 0;
         ScrollPane.setContent(new ImageView(artworkList.get(index)));
         recheckButtons();
+
     }
     private void recheckButtons(){
         if (index == 0){
@@ -95,6 +122,7 @@ public class ArtworkPictureController {
         else{
             btnNext.setVisible(true);
         }
+        labelOf.setText(index+ 1+" of "+ artworkList.size());
     }
 
     public void showPictures(ArrayList<String> artworkStrings, String artwork){
@@ -102,11 +130,23 @@ public class ArtworkPictureController {
         this.artwork = artwork;
         this.index = 0;
         this.artworkPaths = artworkStrings;
-        for(String a: artworkStrings){
 
-            newArtworkList.add(Utilities.getImage(a));
+        if (artworkPaths.size() ==0){
 
+            newArtworkList.add(Utilities.getImage(Run.database.NO_IMAGE_PATH));
+
+
+                    artworkPaths.add(Run.database.NO_IMAGE_PATH);
+
+
+        }else{
+
+            for(String a: artworkStrings){
+                newArtworkList.add(Utilities.getImage(a));
+
+            }
         }
+
         artworkList = newArtworkList;
 
         ScrollPane.setContent(new ImageView(artworkList.get(index)));
@@ -116,7 +156,7 @@ public class ArtworkPictureController {
         }else{
             btnNext.setVisible(false);
         }
-
+        labelOf.setText(index +1 +" of "+ artworkList.size());
 
     }
     private void deletePicture(){

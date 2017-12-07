@@ -18,17 +18,18 @@ public class Painting extends Artwork {
      * @param artworkYearCreated Year the Painting was created.
      * @param reservePrice The minimum price the Painting can be sold for.
      * @param numOfBids Maximum number of bids on the painting.
-     * @param userNameSeller Name of the seller of the Painting.
+     * @param userId of the seller of the Painting.
      * @param width Width of the painting in cm's.
      * @param height Height of the painting in cm's.
      */
     public Painting(String artworkTitle, String artworkDescription, 
                 String artworkCreator, int artworkYearCreated, 
-                    double reservePrice, int numOfBids, String userNameSeller, 
+                    double reservePrice, int numOfBids, int userId,
                         int width, int height , int id, ArrayList<String> picture) {
         
         super(artworkTitle, artworkDescription, artworkCreator, 
-                artworkYearCreated, reservePrice, numOfBids, userNameSeller, id);
+                artworkYearCreated, reservePrice, numOfBids, userId, id);
+
         this.width = width;
         this.height = height;
         this.pathToPictures = picture;

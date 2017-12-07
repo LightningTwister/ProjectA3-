@@ -341,10 +341,10 @@ public class UserProfiles {
 			faveUsers.add(bid);
 		}
 	}
-
 	public void addBid(int bidid){
 		bidHistory.add(bidid);
 	}
+
 
 	@Override
 	public String toString() {

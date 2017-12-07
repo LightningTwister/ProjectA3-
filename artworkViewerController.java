@@ -19,7 +19,8 @@ import javafx.scene.control.Button;
  *  @version 1
  */
 public class artworkViewerController{
-    private static ArrayList<Artwork> artworks = new ArrayList<Artwork>();
+    private static ArrayList<Artwork> artworksForUser = new ArrayList<Artwork>();
+    private static ArrayList<Artwork> fullList = new ArrayList<>();
     @FXML
     private Button btnEdit,btnAdd;
     @FXML
@@ -50,16 +51,19 @@ public class artworkViewerController{
 
         int selectedIndex = lstArtworks.getSelectionModel().getSelectedIndex();
 
+
         // Check if user selected an item
         if (selectedIndex < 0) {
             Utilities.nothingSelected();
             return;
         }
-        if (artworks.get(selectedIndex) instanceof Painting){
-            Painting selectedPainting = (Painting)artworks.get(selectedIndex);
+        if (artworksForUser.get(selectedIndex) instanceof Painting){
+            Painting selectedPainting = (Painting)artworksForUser.get(selectedIndex);
+
             editPaintingPage(selectedPainting);
-        }else if (artworks.get(selectedIndex) instanceof  Sculpture){
-            Sculpture selectedSculpture = (Sculpture)artworks.get(selectedIndex);
+        }else if (artworksForUser.get(selectedIndex) instanceof  Sculpture){
+            Sculpture selectedSculpture = (Sculpture)artworksForUser.get(selectedIndex);
+            System.out.println(selectedSculpture);
             editSculpturePage(selectedSculpture);
         }else{
             Utilities.artworkSelectionFailed();
@@ -75,7 +79,9 @@ public class artworkViewerController{
      * @param artworkList the artwork list of this user.
      */
     public void loadArtworks(ArrayList<Artwork> artworkList){
-        this.artworks = artworkList;
+        this.artworksForUser = new ArrayList<>(artworkList);
+        this.fullList = artworkList;
+
         refreshArtworkList();
     }
 
@@ -87,9 +93,17 @@ public class artworkViewerController{
         lstArtworks.getItems().clear();
 
         // Add each artwork to the displayed list
-        for (Artwork c : artworks) {
+        for (Artwork c : fullList) {
             // Puts selected data into the list view.
-            lstArtworks.getItems().add(c.getArtworkTitle()+ "  :" + c.getArtworkSeller() );
+
+            if(c.getArtworkSeller()== (Run.database.getCurrentUser().getId())) {
+
+                lstArtworks.getItems().add(String.format("%-30s%-30s%-5s", "Title: " + c.getArtworkTitle(), "Creator: "
+                        + c.getArtworkCreator(), "Reserve: " + c.getReservePrice()));
+
+            }else{
+                artworksForUser.remove(c);
+            }
         }
 
     }
@@ -109,7 +123,7 @@ public class artworkViewerController{
             Sculpture newSculpture = new Sculpture();
 
             // load the edit page controller with a new painting and sculpture object with the new id number.
-            controller.artworkToAdd(newPainting,newSculpture,artworks.size()-1 );
+            controller.artworkToAdd(newPainting,newSculpture,artworksForUser.size()-1 );
 
             Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
@@ -121,10 +135,10 @@ public class artworkViewerController{
             // Checks what object is being saved by the user, it will either be a painting or sculpture.
             if(newPainting.getArtworkCreator() == null &&
                     !(newSculpture.getArtworkCreator() == null)){
-                artworks.add(newSculpture);
+                artworksForUser.add(newSculpture);
             }else if (!(newPainting.getArtworkCreator() == null) &&
                     (newSculpture.getArtworkCreator() == null)){
-                artworks.add(newPainting);
+                artworksForUser.add(newPainting);
             }
 
 
@@ -148,8 +162,7 @@ public class artworkViewerController{
             BorderPane root = (BorderPane) fxmlLoader.load();
 
             ArtworkController controller = fxmlLoader.<ArtworkController>getController() ;
-
-            controller.getArtwork(selectedPainting);
+            controller.getArtwork(selectedPainting, Run.database.getCurrentUser().getId());
 
             Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
@@ -180,7 +193,7 @@ public class artworkViewerController{
 
             ArtworkController controller = fxmlLoader.<ArtworkController>getController() ;
 
-            controller.getArtwork(selectedSculpture);
+            controller.getArtwork(selectedSculpture, Run.database.getCurrentUser().getId());
 
             Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();

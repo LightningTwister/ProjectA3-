@@ -25,9 +25,8 @@ import java.util.Set;
 public class ArtworkController {
     private Painting painting;
     private Sculpture sculpture;
-    private int nextId;
-    private ImageView artworkImage;
-    private ArrayList<String> picturePath;
+    private int nextId, userId;
+    private ArrayList<String> picturePath = new ArrayList<>();
 
     @FXML
     private TextField nameBox, yearBox, reserveBox, bidsBox, userNameBox, widthBox, heightBox, depthBox, materialBox
@@ -50,6 +49,7 @@ public class ArtworkController {
     public void initialize() {
         buttonId.setOnAction(e ->{
             saveChanges();
+
         });
 
         cancelButton.setOnAction(e -> {
@@ -101,7 +101,7 @@ public class ArtworkController {
     }
 
 
-    public void getArtwork(Object artwork){
+    public void getArtwork(Object artwork, int id){
         if (artwork instanceof Painting){
             this.painting = (Painting) artwork;
 
@@ -115,7 +115,10 @@ public class ArtworkController {
             yearBox.setText(String.valueOf(painting.getArtworkYearCreated()));
             reserveBox.setText(String.valueOf(painting.getReservePrice()));
             bidsBox.setText(String.valueOf(painting.getNumOfBids()));
-            userNameBox.setText(painting.getArtworkSeller());
+            userId =id;
+
+            userNameBox.setText(Run.database.getUser(userId).getUserName());
+
             widthBox.setText(String.valueOf(painting.getWidth()));
             heightBox.setText(String.valueOf(painting.getHeight()));
             nameOfArtwork.setText(painting.getArtworkTitle());
@@ -134,7 +137,10 @@ public class ArtworkController {
             yearBox.setText(String.valueOf(sculpture.getArtworkYearCreated()));
             reserveBox.setText(String.valueOf(sculpture.getReservePrice()));
             bidsBox.setText(String.valueOf(sculpture.getNumOfBids()));
-            userNameBox.setText(sculpture.getArtworkSeller());
+            userId = id;
+
+            userNameBox.setText(Run.database.getUser(userId).getUserName());
+
             widthBox.setText(String.valueOf(sculpture.getWidth()));
             heightBox.setText(String.valueOf(sculpture.getHeight()));
             descriptionBox.setText(sculpture.getArtworkDescription());
@@ -178,7 +184,11 @@ public class ArtworkController {
 
             ArrayList checkLetters = new ArrayList<String>();
 
-            checkLetters.add(nameBox.getText());
+
+            if(!Utilities.checkImagesAdded(this.picturePath)){
+                throw new Exception("No image specified please add one");
+
+            }
 
             checkLetters.add(nameOfArtwork.getText());
             checkLetters.add(descriptionBox.getText());
@@ -187,7 +197,7 @@ public class ArtworkController {
                 throw new Exception("Input type is incorrect");
             }
             String creatorName = nameBox.getText();
-            String userName = userNameBox.getText();
+
             String title = nameOfArtwork.getText();
             String desc = descriptionBox.getText();
 
@@ -204,13 +214,13 @@ public class ArtworkController {
 
                 String material = materialBox.getText();
                Utilities.saveSculpture(sculpture,year, reserve, bids, width,height,depth,
-                        creatorName,userName,material,title,desc,nextId, this.picturePath );
+                        creatorName,userId,material,title,desc,nextId, this.picturePath );
                Run.database.addArtwork(sculpture);
                Run.database.saveArtwork();
 
             }else if (paintingRadio.isSelected()){
                Utilities.savePainting(painting, year, reserve, bids, width,height,
-                        creatorName,userName,title,desc, nextId, this.picturePath);
+                        creatorName,userId,title,desc, nextId, this.picturePath);
 
                 Run.database.addArtwork(painting);
                 Run.database.saveArtwork();
@@ -227,6 +237,7 @@ public class ArtworkController {
             Utilities.closeWindow(rootPane);
 
         }catch(Exception e){
+
             Utilities.wrongInputFound();
         }
 
@@ -251,16 +262,6 @@ public class ArtworkController {
 
 
     }
-   // private void changeImage(){
-    //     String fileLocation = Utilities.changeImage("Select an Artwork picture", "Data/ArtworkPictures");
-     //   if (fileLocation.equals("FAILED")){
-     //       Utilities.noImageFound();
-     //   }else{
-     //       this.artworkImage.setImage((Utilities.getImage("file:"+fileLocation)));
-     //           this.picturePath = ( "file:"+fileLocation);
-            
-    //    }
-    //}
 
 
 }

@@ -92,15 +92,13 @@ public class Utilities {
         alert.setContentText("No image found, please specify a path for an image");
         alert.showAndWait();
     }
-
-    public static void BidTooLow(){
+	 public static void BidTooLow(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText("Bid too low/Already the highest bidder");
         alert.showAndWait();
     }
-
     public static void noImagesInList(){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
@@ -108,7 +106,6 @@ public class Utilities {
         alert.setContentText("There are now no images for this artwork, default image added!");
         alert.showAndWait();
     }
-
     public static void maximumPicturesReached(){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
@@ -186,12 +183,12 @@ public class Utilities {
      * @param width Width value in cm of this artwork
      * @param depth Depth value in cm of this Sculpture
      * @param material Name of the main material this Sculpture is made of
-     * @param userName Username of the person selling this artwork
+     * @param userId Username of the person selling this artwork
      * @param desc A brief description of the artwork
      * @param id Identifier value of the artwork 
      */
     public static void saveSculpture(Sculpture newSculpture, int year, double reservePrice, int bids, int width, int height,
-                        int depth, String creatorName,String userName, String material, String title, String desc,int id,ArrayList<String> picLocation) {
+                        int depth, String creatorName,int userId, String material, String title, String desc,int id,ArrayList<String> picLocation) {
 
         try {
             newSculpture.setArtworkYearCreated(year);
@@ -202,7 +199,7 @@ public class Utilities {
             newSculpture.setDepth(depth);
 
             newSculpture.setArtworkCreator(creatorName);
-            newSculpture.setArtworkSeller(userName);
+            newSculpture.setArtworkSeller(userId);
             newSculpture.setMaterial(material);
             newSculpture.setArtworkTitle(title);
             newSculpture.setArtworkDescription(desc);
@@ -224,13 +221,13 @@ public class Utilities {
      * @param width Value of the width of this artwork in cm's
      * @param height Value of the height of this artwork in cm's
      * @param creatorName name of the person who created this painting
-     * @param userName username of the person selling this artwork
+     * @param userId username of the person selling this artwork
      * @param title Name of this artwork
      * @param desc Brief description of what this artwork is
      * @param id Identifier value of this artwork
      */
     public static void savePainting(Painting newPainting, int year, double reservePrice, int bids, int width, int height
-                                     , String creatorName,String userName, String title, String desc, int id, ArrayList<String> picLocation){
+                                     , String creatorName,int userId, String title, String desc, int id, ArrayList<String> picLocation){
 
 
         try{
@@ -240,7 +237,7 @@ public class Utilities {
             newPainting.setWidth(width);
             newPainting.setHeight(height);
             newPainting.setArtworkCreator(creatorName);
-            newPainting.setArtworkSeller(userName);
+            newPainting.setArtworkSeller(userId);
 
             newPainting.setArtworkTitle(title);
             newPainting.setArtworkDescription(desc);
@@ -328,6 +325,19 @@ public class Utilities {
             iterator++;
         }
         return null;
+    }
+    public static boolean checkImagesAdded(ArrayList<String> paths){
+        if(paths == null){
+            return false;
+        }
+        if(paths.size() == 0){
+            Utilities.noImageFound();
+            return false;
+        }else if(paths.size() == 1 && paths.get(0).equals(Run.database.NO_IMAGE_PATH)){
+            Utilities.noImageFound();
+            return false;
+        }
+        return true;
     }
     
     public static String changeImage(String title,String folder){

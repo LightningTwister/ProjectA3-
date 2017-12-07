@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArtworkPictureController">
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArtworkPictureController">
    <center>
       <ScrollPane fx:id="ScrollPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <content>
@@ -17,10 +18,12 @@
    <bottom>
       <Pane prefHeight="29.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnPrevious" layoutX="216.0" layoutY="1.0" mnemonicParsing="false" text="Previous" />
-            <Button fx:id="btnNext" layoutX="300.0" layoutY="1.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Next" />
+            <Button fx:id="btnPrevious" layoutX="14.0" layoutY="1.0" mnemonicParsing="false" text="Previous" />
+            <Button fx:id="btnNext" layoutX="85.0" layoutY="1.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Next" />
             <Button fx:id="btnRemove" layoutX="487.0" layoutY="1.0" mnemonicParsing="false" text="Remove Picture" />
             <Button fx:id="btnAdd" layoutX="395.0" layoutY="3.0" mnemonicParsing="false" text="Add Picture" />
+            <Label fx:id="labelOf" layoutX="158.0" layoutY="5.0" text="1 of X" />
+            <Button fx:id="btnSave" layoutX="287.0" layoutY="2.0" mnemonicParsing="false" text="Save Changes" />
          </children>
       </Pane>
    </bottom>
