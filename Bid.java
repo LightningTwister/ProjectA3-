@@ -13,7 +13,7 @@ public class Bid {
     public Bid(double amount){
         uamount = amount;
     }
-    public Bid(double amount, int userID, int bidID, int artworkID, Bid currBid) throws Exception{
+    public Bid(int bidID, double amount, int userID, int artworkID, Bid currBid) throws Exception{
         setAmount(amount);
         setArtworkID(artworkID);
         setBidID(bidID);
@@ -44,6 +44,10 @@ public class Bid {
 
     public void setAmount(double amount){
         uamount = amount;
+    }
+
+    public void datePlaced(Date udatePlaced){
+        this.udatePlaced = udatePlaced;
     }
 
     public int getUserID(){

@@ -173,7 +173,7 @@ public class Database {
         if(currentHighest.getUserID() == currentUser.getId()){
             throw new Exception("You can't bid again");
         }
-        Bid newBid= new Bid(amount,currentUser.getId(),bid , artID, currentHighest);
+        Bid newBid= new Bid(bid ,amount, currentUser.getId(), artID, currentHighest);
         art.placeBid(newBid);
         currentUser.addBid(bid);
         bids.put(bid,newBid);
