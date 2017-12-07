@@ -7,7 +7,7 @@ import java.util.Map;
  */
 public class Database {
 
-    private final String ARTWORK_PATH ="Data/artworkfile.txt";
+    private final String ARTWORK_PATH ="Data/test.txt";
     private final String USER_PATH = "Data/UserList.txt";
     private final String BID_HISTORY_PATH = "Data/bidhistory.txt";
     public final String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";

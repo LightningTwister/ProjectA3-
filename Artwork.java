@@ -11,7 +11,7 @@ import java.util.Date;
 
     private String artworkTitle;
     private String artworkDescription;
-    //To do, add photo (Dunno how yet =} )
+
     private String artworkCreator;
     private int artworkYearCreated;
     private double reservePrice;

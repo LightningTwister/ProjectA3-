@@ -27,7 +27,7 @@ public class ArtworkController {
     private Sculpture sculpture;
     private int nextId;
     private ImageView artworkImage;
-    private String picturePath;
+    private ArrayList<String> picturePath;
 
     @FXML
     private TextField nameBox, yearBox, reserveBox, bidsBox, userNameBox, widthBox, heightBox, depthBox, materialBox
@@ -79,10 +79,12 @@ public class ArtworkController {
 
             ArtworkPictureController controller = fxmlLoader.<ArtworkPictureController>getController();
 
-            ArrayList<String> a = new ArrayList<>();
-            a.add(picturePath);
-            a.add("file:Data/ArtworkPictures/sculpture.jpg");
-            controller.showPictures(a );
+            if (paintingRadio.isSelected()){
+                controller.showPictures(picturePath, "painting");
+            }else{
+                controller.showPictures(picturePath, "sculpture");
+            }
+
 
             Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
@@ -102,10 +104,13 @@ public class ArtworkController {
     public void getArtwork(Object artwork){
         if (artwork instanceof Painting){
             this.painting = (Painting) artwork;
-            this.picturePath = this.painting.getPicture();
-            ImageView img = new ImageView();
-            img.setImage((Utilities.getImage(picturePath)));
-            this.artworkImage = img;
+
+
+            this.picturePath = this.painting.getPictures();
+
+
+
+
             nameBox.setText(painting.getArtworkCreator());
             yearBox.setText(String.valueOf(painting.getArtworkYearCreated()));
             reserveBox.setText(String.valueOf(painting.getReservePrice()));
@@ -123,10 +128,8 @@ public class ArtworkController {
 
         }else{
             this.sculpture = (Sculpture) artwork;
-            ImageView img = new ImageView();
-            this.picturePath = this.sculpture.getPicture();
-            img.setImage((Utilities.getImage(picturePath)));
-            this.artworkImage = img;
+
+            this.picturePath = this.sculpture.getPictures();
             nameBox.setText(sculpture.getArtworkCreator());
             yearBox.setText(String.valueOf(sculpture.getArtworkYearCreated()));
             reserveBox.setText(String.valueOf(sculpture.getReservePrice()));
@@ -248,16 +251,16 @@ public class ArtworkController {
 
 
     }
-    private void changeImage(){
-         String fileLocation = Utilities.changeImage("Select an Artwork picture", "Data/ArtworkPictures");
-        if (fileLocation.equals("FAILED")){
-            Utilities.noImageFound();
-        }else{
-            this.artworkImage.setImage((Utilities.getImage("file:"+fileLocation)));
-                this.picturePath = ( "file:"+fileLocation);
+   // private void changeImage(){
+    //     String fileLocation = Utilities.changeImage("Select an Artwork picture", "Data/ArtworkPictures");
+     //   if (fileLocation.equals("FAILED")){
+     //       Utilities.noImageFound();
+     //   }else{
+     //       this.artworkImage.setImage((Utilities.getImage("file:"+fileLocation)));
+     //           this.picturePath = ( "file:"+fileLocation);
             
-        }
-    }
+    //    }
+    //}
 
 
 }

@@ -99,6 +99,13 @@ public class Utilities {
         alert.setContentText("There are now no images for this artwork, default image added!");
         alert.showAndWait();
     }
+    public static void maximumPicturesReached(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("You can't have more than one image for a painting!");
+        alert.showAndWait();
+    }
 	/**
 	* Temporary class that creates a pop up because class is not implemented yet
 	* DELETE THIS *************************************************
@@ -174,7 +181,7 @@ public class Utilities {
      * @param id Identifier value of the artwork 
      */
     public static void saveSculpture(Sculpture newSculpture, int year, double reservePrice, int bids, int width, int height,
-                        int depth, String creatorName,String userName, String material, String title, String desc,int id,String picLocation) {
+                        int depth, String creatorName,String userName, String material, String title, String desc,int id,ArrayList<String> picLocation) {
 
         try {
             newSculpture.setArtworkYearCreated(year);
@@ -213,7 +220,7 @@ public class Utilities {
      * @param id Identifier value of this artwork
      */
     public static void savePainting(Painting newPainting, int year, double reservePrice, int bids, int width, int height
-                                     , String creatorName,String userName, String title, String desc, int id, String picLocation){
+                                     , String creatorName,String userName, String title, String desc, int id, ArrayList<String> picLocation){
 
 
         try{

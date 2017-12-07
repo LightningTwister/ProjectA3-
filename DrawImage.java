@@ -1,6 +1,5 @@
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -18,7 +17,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javax.imageio.ImageIO;
 import javafx.application.Application;
-import javafx.scene.Parent;
+import static javafx.application.Application.launch;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -31,13 +33,18 @@ import javafx.scene.Parent;
  * @author Hugh
  */
 public class DrawImage extends Application {
-    @FXML
+    
+    
     private Canvas canvas;
     
     private double pressX, pressY;
-    
-    @FXML
-    private Button selectLine, selectCircle,confirmDrawing;
+    private static final int WINDOW_WIDTH = 600;
+    private static final int WINDOW_HEIGHT = 400;
+    private static final int CANVAS_WIDTH = 400;
+    private static final int CANVAS_HEIGHT = 400;
+        
+    private GraphicsContext gc;
+    private BufferedImage outputImage;
 
     public static void main(String[] args) {
         launch(args);
@@ -46,41 +53,64 @@ public class DrawImage extends Application {
     @Override
     public void start (Stage drawingStage) {
         try {
-            Parent drawingPane = FXMLLoader.load(getClass().getResource("/DrawImageFXML.fxml"));
-            Scene scene = new Scene(drawingPane,640,480);
+            Pane drawingPane = buildGUI();
+            Scene scene = new Scene(drawingPane,600,400);
             drawingStage.setScene(scene);
             drawingStage.show();
-            selectLine.setOnAction(event -> {
-                setCurrentShape("line");
-            });
-
-            selectCircle.setOnAction(event -> {
-                setCurrentShape("circle");
-            });
-
-            canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent event) -> {
-                setStartXY(event.getX(),event.getY());
-            });
-
-            canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent event) -> {
-                if ("line".equals(currentShape)) {
-                    createLine(pressX,pressY,event.getX(),event.getY());
-                } else {
-                    createFilledCircle(pressX,pressY,event.getX(),event.getY());
-                }
-            });
-
-            confirmDrawing.setOnAction(event -> {
-                saveDrawing();
-            });
         }
         catch(Exception e) {
             e.printStackTrace();
         }
-        
-        
+    }
+    
+    private Pane buildGUI(){
+        BorderPane root = new BorderPane();
+        canvas = new Canvas(CANVAS_WIDTH,CANVAS_HEIGHT);
+        root.setCenter(canvas);
+        VBox sidebar = new VBox();
+        sidebar.setSpacing(10);
+        sidebar.setPadding(new Insets(10,10,10,10));
+        root.setLeft(sidebar);
+        Button selectLine = new Button("Select Line");
+	Button selectCircle = new Button("Select Circle");
+        final ColorPicker colourPicker = new ColorPicker();
+        colourPicker.setValue(Color.BLUE);
+        gc = canvas.getGraphicsContext2D();
+        gc.setFill(Color.BLUE);
+        gc.setStroke(Color.BLUE);
+        Button confirmDrawing = new Button("Save Image");
+        sidebar.getChildren().addAll(selectLine,selectCircle,colourPicker,confirmDrawing);
+        selectLine.setOnAction(event -> {
+            createFilledCircle(200,200,400,400);
+            setCurrentShape("line");
+        });
 
-           
+        selectCircle.setOnAction(event -> {
+                createFilledCircle(200,20,400,40);
+            setCurrentShape("circle");
+        });
+        
+        colourPicker.setOnAction(event -> {
+            gc.setFill(colourPicker.getValue());
+            gc.setStroke(colourPicker.getValue());
+        });
+
+        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent event) -> {
+            setStartXY(event.getX(),event.getY());
+        });
+
+        canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent event) -> {
+            if ("line".equals(currentShape)) {
+                createLine(pressX,pressY,event.getX(),event.getY());
+            } else {
+                createFilledCircle(pressX,pressY,event.getX(),event.getY());
+            }
+        });
+
+        confirmDrawing.setOnAction(event -> {
+            saveDrawing();
+        });
+        return root;
     }
     
     private String currentShape = "line";
@@ -95,13 +125,15 @@ public class DrawImage extends Application {
     }
     
     private void createLine(double startX, double startY, double endX, double endY) {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc = canvas.getGraphicsContext2D();
         gc.strokeLine(startX, startY, endX, endY);
     }
     
     private void createFilledCircle(double startX, double startY, double endX, double endY) {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.fillOval(startX, startY, endX, endY);
+        gc  = canvas.getGraphicsContext2D();
+        double width = endX - startX;
+        double height = endY - startY;
+        gc.fillOval(startX, startY, width, height);
     }
     
     private void saveDrawing() {
@@ -113,9 +145,19 @@ public class DrawImage extends Application {
         }
     }
     
-    //public BufferedImage drawingHandler() {
-    //    start(null);
-    //    return(uploadImage("CustomImage.png"));
-    //}
+    private void setOutputImage() {
+        File f = new File("CustomImage.png");
+        BufferedImage i;
+        try {
+            i = ImageIO.read(f);
+            outputImage = i;
+        } catch (IOException ex) {
+            Logger.getLogger(UploadImage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public BufferedImage getOutputImage() {
+        return outputImage;
+    }
     
 }

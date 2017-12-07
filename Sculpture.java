@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Class to create a sculpture Object.
@@ -9,7 +10,7 @@ public class Sculpture extends Artwork {
     private int height;
     private int depth;
     private String material;
-    private String picture;
+    private ArrayList<String> pathToPictures;
     //To do, additional photos.
 
 
@@ -30,21 +31,31 @@ public class Sculpture extends Artwork {
      */
     public Sculpture(String artworkTitle, String artworkDescription, String artworkCreator, int artworkYearCreated,
                      double reservePrice, int numOfBids,String sellerUserName, int width, int height,int id,
-                     int depth, String material, String picture) {
+                     int depth, String material,ArrayList<String> picture) {
         super(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated, reservePrice, numOfBids, sellerUserName, id);
         this.width = width;
         this.height = height;
         this.depth = depth;
         this.material = material;
-        this.picture = picture;
+        this.pathToPictures = picture;
 
     }
-    public String getPicture() {
-        return picture;
+    public ArrayList<String> getPictures() {
+        return pathToPictures;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void addPicture(String picture) {
+        this.pathToPictures.add( picture);
+    }
+    public void removePicture(String path){
+        for(String artworkPath: this.pathToPictures){
+            if (path.equals(artworkPath)){
+                this.pathToPictures.remove(artworkPath);
+            }
+        }
+    }
+    public void setPicture(ArrayList<String> pictures){
+        this.pathToPictures = pictures;
     }
 
     public Sculpture(){
