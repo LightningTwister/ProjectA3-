@@ -92,6 +92,15 @@ public class Utilities {
         alert.setContentText("No image found, please specify a path for an image");
         alert.showAndWait();
     }
+
+    public static void BidTooLow(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Bid too low/Already the highest bidder");
+        alert.showAndWait();
+    }
+
     public static void noImagesInList(){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
@@ -99,6 +108,7 @@ public class Utilities {
         alert.setContentText("There are now no images for this artwork, default image added!");
         alert.showAndWait();
     }
+
     public static void maximumPicturesReached(){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");

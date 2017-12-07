@@ -9,11 +9,13 @@ import java.util.Map;
  */
 public class Database {
 
+    //private final String ARTWORK_PATH ="Data/test.txt";
     private final String ARTWORK_PATH ="Data/artworkfile.txt";
     private final String USER_PATH = "Data/UserList.txt";
     private final String BID_PATH = "";
     public final String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
     public final String ICON_PATH = "file:Data/SystemPictures/Artatawe Logo.jpg";
+    public final String NO_IMAGE_PATH = "file:Data/SystemPictures/noImageFound.jpg";
 
     private UserProfiles currentUser;
     private HashMap<Integer, UserProfiles> users;
