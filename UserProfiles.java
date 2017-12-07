@@ -16,11 +16,11 @@ public class UserProfiles {
 	private int auctionID;
 	private Date logInDate;
 	private int id;
-	ArrayList<Integer> currentAuctions = new ArrayList<Integer>();
-	ArrayList<Integer> wonArtworks = new ArrayList<Integer>();
-	ArrayList<Integer> completedAuctions = new ArrayList<Integer>();
-	ArrayList<Integer> bidHistory = new ArrayList<Integer>();
-	ArrayList<Integer> faveUsers = new ArrayList<Integer>();
+	private ArrayList<Integer> currentAuctions;
+	private ArrayList<Integer> wonArtworks;
+	private ArrayList<Integer> completedAuctions;
+	private ArrayList<Integer> bidHistory;
+	private ArrayList<Integer> faveUsers;
 
 	/**
 	 * Constructor for existing user used by the filereader to read the files
@@ -83,7 +83,12 @@ public class UserProfiles {
 		//this.logInDate = logInDate;
 		this.profilePicture = profilePicture;
 		this.id = id;
-		this.faveUsers = fUsers;
+
+		currentAuctions = new ArrayList<Integer>();
+		wonArtworks = new ArrayList<Integer>();
+		completedAuctions = new ArrayList<Integer>();
+		bidHistory = new ArrayList<Integer>();
+		faveUsers = new ArrayList<Integer>();
 
 	}
 
@@ -277,6 +282,15 @@ public class UserProfiles {
 	}
 
 	/**
+	 * gets the list of current auctions the user has
+	 * @return the list of current auctions the user has
+	 */
+	public ArrayList<Integer> getCurrentAuctions () {
+		return currentAuctions;
+
+	}
+
+	/**
 	 * gets the list of bids the user has placed
 	 * @return the list of bids the user has placed
 	 */
@@ -286,12 +300,8 @@ public class UserProfiles {
 	}
 
 
-	//public void getCompletedAuction (int auctionID) {
-		//int retval=completedAuctions.get() = x; //x will be somin or other;
-	//}
-
 	/**
-	 * gets the list of current auctions the user has
+	 * adds an auction to current auctions the user has
 	 * @return the list of current auctions the user has
 	 */
 	public void addCurrentAuction (int auctionID) {
@@ -309,18 +319,19 @@ public class UserProfiles {
 
 	/**
 	 * Method for changing an active auction to conpleted status
-	 * @param bidID
+	 * @param artworkID
 	 */
-	public void completeAuction(int bidID){
+	public void completeAuction(int artworkID){
 		boolean existed = false;
-		for(int id : currentAuctions){
-			if(id == bidID){
+		for(int i=0;i < currentAuctions.size(); i++){
+			if(currentAuctions.get(i) == artworkID){
 				existed = true;
+				currentAuctions.remove(i);
 			}
 		}
 
 		if(existed){
-			completedAuctions.add(bidID);
+			completedAuctions.add(artworkID);
 		}
 	}
 
