@@ -12,6 +12,7 @@ public class FileReader {
 	private static ArrayList<UserProfiles> userList = new ArrayList<>();
 	private static ArrayList<Artwork> artworkList = new ArrayList<>();
 	//private static ArrayList<FaveUsers> faveUsersList = new ArrayList<>();
+	private static ArrayList<BidHistory> bidHistoryList = new ArrayList<>();
 	private static final int ADDRESS_SIZE = 3;
 
 
@@ -41,6 +42,16 @@ public class FileReader {
 				line.close();
 			}
 
+
+		}
+		else if (type.toLowerCase().equals("bidhistorylist")){
+			while (in.hasNext()){
+				String curLine = in.nextLine();
+
+				Scanner line = new Scanner(curLine);
+				file = loadArtworkBidHistory(line);
+				line.close();
+			}
 		}
 		//for(Artwork a : artworkList) {
 		//	System.out.println(a.toString());
@@ -114,6 +125,26 @@ public class FileReader {
 		in.close();
 		return artworkList;
     }
+	public static ArrayList<BidHistory> loadArtworkBidHistory(Scanner in){
+		in.useDelimiter(",");
+		int artID = in.nextInt();
+		String pBuyer;
+		double amount;
+		Date date;
+		ArrayList<Double> amounts = new ArrayList<>();
+		ArrayList<String> profiles = new ArrayList<>();
+		ArrayList<Date> dates = new ArrayList<>();
+		while (in.hasNext()){
+			pBuyer = in.next();
+			amount = in.nextDouble();
+			date = new Date(in.nextLong());
+			profiles.add(pBuyer);
+			amounts.add(amount);
+			dates.add(date);
+		}
+		bidHistoryList.add(new BidHistory(artID,amounts,profiles,dates));
+		return bidHistoryList;
+	}
 
 	public static ArrayList readFile(String fileName, String type){
         Scanner in =  null;
