@@ -31,11 +31,11 @@ public class FileWriter {
                  if (a instanceof Painting) {
 
                      Painting p = (Painting)a;
-                     System.out.println("Writing painting to file.");
+                     //System.out.println("Writing painting to file.");
                          out.print("p" + delim);
                          out.print(p.getArtworkTitle() + delim);
                          out.print(p.getArtworkDescription() + delim);
-                         out.print("PATH NEEDS TO BE IMPLEMENTED"+delim);
+
                          out.print(p.getArtworkCreator() + delim);
                          out.print(p.getArtworkYearCreated() + delim);
                          out.print(p.getReservePrice() + delim);
@@ -44,7 +44,11 @@ public class FileWriter {
                          out.print(231240124+delim);
                          out.print(p.getWidth() + delim);
                          out.print(p.getHeight() + delim);
-                         out.print(p.getId());
+                         out.print(p.getId()+ delim);
+                         for(String nextPicture: p.getPictures()){
+                             out.print(nextPicture+delim);
+                         }
+
                          out.println();
 
                  }
@@ -52,11 +56,10 @@ public class FileWriter {
                      else if (a instanceof Sculpture) {
 
                         Sculpture s = (Sculpture)a;
-                        System.out.println("Writing sculpture to file.");
+                        //System.out.println("Writing sculpture to file.");
                         out.print("s" + delim);
                          out.print(s.getArtworkTitle() + delim);
                          out.print(s.getArtworkDescription() + delim);
-                         out.print("PATH NEEDS TO BE IMPLEMENTED"+delim);
                          out.print(s.getArtworkCreator() + delim);
                          out.print(s.getArtworkYearCreated() + delim);
                          out.print(s.getReservePrice() + delim);
@@ -67,7 +70,10 @@ public class FileWriter {
                          out.print(s.getHeight() + delim);
                          out.print(s.getId()+delim);
                          out.print(s.getDepth()+ delim);
-                         out.print(s.getMaterial());
+                         out.print(s.getMaterial()+ delim);
+                     for(String nextPicture: s.getPictures()){
+                         out.print(nextPicture+delim);
+                     }
                          out.println();
                  }
 

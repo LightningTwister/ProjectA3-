@@ -14,6 +14,7 @@ public class ArtworkPictureController {
     private ArrayList<Image> artworkList ;
     private ArrayList<String> artworkPaths;
     private int index ;
+    private String artwork;
     @FXML
     Pane rootPane;
 
@@ -54,20 +55,27 @@ public class ArtworkPictureController {
 
     }
     private void addPicture(){
-        String fileLocation = Utilities.changeImage("Select an artwork picture", "Data/ArtworkPictures");
-        if (fileLocation.equals("FAILED")){
-            Utilities.noImageFound();
+        if(artwork.equals("painting")&& artworkPaths.size() >= 1
+                && !(artworkPaths.get(0).equals(Run.database.NO_IMAGE_PATH))){
+            Utilities.maximumPicturesReached();
+
         }else{
-            if(artworkPaths.size() == 1){
-                if (artworkPaths.get(0).equals( Run.database.NO_IMAGE_PATH)){
-                    artworkPaths.remove(0);
-                    artworkList.remove(0);
+            String fileLocation = Utilities.changeImage("Select an artwork picture", "Data/ArtworkPictures");
+            if (fileLocation.equals("FAILED")){
+                Utilities.noImageFound();
+            }else{
+                if(artworkPaths.size() == 1){
+                    if (artworkPaths.get(0).equals( Run.database.NO_IMAGE_PATH)){
+                        artworkPaths.remove(0);
+                        artworkList.remove(0);
+                    }
                 }
+                artworkList.add(Utilities.getImage("file:"+fileLocation));
+                artworkPaths.add("file:"+fileLocation);
             }
-            artworkList.add(Utilities.getImage("file:"+fileLocation));
-            artworkPaths.add("file:"+fileLocation);
+            restart();
         }
-        restart();
+
 
     }
     private void restart(){
@@ -89,8 +97,10 @@ public class ArtworkPictureController {
         }
     }
 
-    public void showPictures(ArrayList<String> artworkStrings){
+    public void showPictures(ArrayList<String> artworkStrings, String artwork){
         ArrayList<Image> newArtworkList = new ArrayList<>();
+        this.artwork = artwork;
+        this.index = 0;
         this.artworkPaths = artworkStrings;
         for(String a: artworkStrings){
 

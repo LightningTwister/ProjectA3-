@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Class to create a Painting Object.
  * @author Tim Watson 880158
@@ -6,7 +8,7 @@
 public class Painting extends Artwork {
     private int width;
     private int height;
-    private String picture;
+    private ArrayList<String> pathToPictures;
     
     /**
      * Constructor to instantiate a painting object.
@@ -23,22 +25,32 @@ public class Painting extends Artwork {
     public Painting(String artworkTitle, String artworkDescription, 
                 String artworkCreator, int artworkYearCreated, 
                     double reservePrice, int numOfBids, String userNameSeller, 
-                        int width, int height , int id, String picture) {
+                        int width, int height , int id, ArrayList<String> picture) {
         
         super(artworkTitle, artworkDescription, artworkCreator, 
                 artworkYearCreated, reservePrice, numOfBids, userNameSeller, id);
         this.width = width;
         this.height = height;
-        this.picture = picture;
+        this.pathToPictures = picture;
 
     }
 
-    public String getPicture() {
-        return picture;
+    public ArrayList<String> getPictures() {
+        return pathToPictures;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void addPicture(String picture) {
+        this.pathToPictures.add( picture);
+    }
+    public void removePicture(String path){
+        for(String artworkPath: this.pathToPictures){
+            if (path.equals(artworkPath)){
+                this.pathToPictures.remove(artworkPath);
+            }
+        }
+    }
+    public void setPicture(ArrayList<String> pictures){
+        this.pathToPictures = pictures;
     }
 
     public Painting(){
