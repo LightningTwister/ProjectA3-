@@ -3,7 +3,7 @@
 !*.fxml
 !*.txt
 !*/
-!*/*
+!Data/ProfilePictures/
 !*.jpg
 !*.jpeg
 !.png
