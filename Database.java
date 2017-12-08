@@ -284,27 +284,53 @@ public class Database {
     //    }
    // }
 
-    public void createUser( ArrayList<Object> info) throws Exception{
-        Integer userID = getNextIDProfile();
-        String userName = (String) info.get(0);
-        String firstName = (String) info.get(1);
-        String lastName = (String) info.get(2);
-        String phoneNumber = (String) info.get(3);
-        ArrayList<String> address = (ArrayList<String>) info.get(4);
-        String postCode = (String) info.get(5);
-        String profilePicture = "Generic path ?";
-        ArrayList<Integer> fUsers = new ArrayList<>();
+    public  boolean createUser( ArrayList<Object> info) {
+            boolean check = true;
+            try{
+
+                for(Object a: info){
+
+                    if(a.toString().isEmpty()){
+                        check = false;
+                        return check;
+                    }
+
+                }
+
+                Integer userID = getNextIDProfile();
+                String userName = (String) info.get(0);
+                String firstName = (String) info.get(1);
+                String lastName = (String) info.get(2);
+                String postCode = (String) info.get(3);
+                int checkNum = Integer.valueOf((String)info.get(4));
+                String phoneNumber = ((String) info.get(4));
+                ArrayList<String> address = (ArrayList<String>) info.get(5);
+                String profilePicture = (String)info.get(6);
+
+                ArrayList<Integer> fUsers = new ArrayList<>();
 
 
-        for(UserProfiles profile : this.getAllUsers()){
-            if(profile.getUserName().equalsIgnoreCase(userName)){
-                throw new Exception("Username Taken");
+                for(UserProfiles profile : this.getAllUsers()){
+                    if(profile.getUserName().equalsIgnoreCase(userName)){
+                        check = false;
+                        Utilities.userNameTaken();
+                        return check;
+                    }
+                }
+
+                UserProfiles newUser = new UserProfiles (userName, firstName, lastName, phoneNumber, address, postCode , profilePicture, userID, fUsers);
+                users.put(userID, newUser);
+            }catch (Exception e){
+                Utilities.wrongInputFound();
+                return false;
             }
-        }
 
-        UserProfiles newUser = new UserProfiles (userName, firstName, lastName, phoneNumber, address, postCode , profilePicture, userID, fUsers);
-        users.put(userID, newUser);
+
+            return check;
+
     }
+
+
 
 
 

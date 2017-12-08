@@ -1,4 +1,4 @@
-//import com.sun.deploy.util.StringUtils;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -6,20 +6,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.FileChooser;
+
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import java.io.File;
 
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+
+
 import java.util.ArrayList;
 
 /**
@@ -208,6 +205,7 @@ public class User_Controller {
 
                 String postCode = String.valueOf(postcodeBox.getText());
 
+                int phoneNum = Integer.valueOf(phoneBox.getText());
                 String phone = String.valueOf(phoneBox.getText());
                 String addressArray[] = addressBox.getText().split("\\r?\\n");
                 ArrayList<String> addressList = new ArrayList<>();

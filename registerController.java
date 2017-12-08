@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 
 public class registerController {
+    private String picPath;
     @FXML
     private TextField username, firstname, surname, phone, postcode;
 
@@ -24,21 +25,35 @@ public class registerController {
     private Pane rootPane;
 
     @FXML
-    private Button submit, cancel;
+    private Button submit, cancel, btnPicture;
 
 
     public void initialize() {
         submit.setOnAction(e -> {
-            sendNudes();
+            saveProfile();
         });
 
         cancel.setOnAction(e -> {
             Utilities.cancelled();
             Utilities.closeWindow(rootPane);
         });
+
+        btnPicture.setOnAction(e -> {
+            getPicture();
+        });
     }
 
-    private void sendNudes(){
+    private void getPicture(){
+        String fileLocation = Utilities.changeImage("Select a profile picture", "Data/ProfilePictures/Built In");
+        if (fileLocation.equals("FAILED")){
+            Utilities.noImageFound();
+        }else{
+
+            this.picPath = "file:"+fileLocation;
+        }
+    }
+
+    private void saveProfile(){
         try{
 
             String userName = username.getText();
@@ -61,14 +76,19 @@ public class registerController {
             user.add(postCode);
             user.add(phone1);
             user.add(addressList);
+            user.add(picPath);
 
-            Run.database.createUser(user);
+            boolean emptyCheck = Run.database.createUser(user);
 
-            Utilities.savedInput();
-            Run.database.saveUsers();
-            Utilities.closeWindow(rootPane);
+            if (emptyCheck == true){
+                Utilities.savedInput();
+                Run.database.saveUsers();
+                Utilities.closeWindow(rootPane);
+            }
+
 
         }catch (Exception e){
+            e.printStackTrace();
             Utilities.wrongInputFound();
         }
     }

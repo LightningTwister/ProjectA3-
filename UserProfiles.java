@@ -38,7 +38,8 @@ public class UserProfiles {
 	 * @param completedAuctions list of auction IDs the user has put up which have since finished
 	 * @param bidHistory list of bid IDs of bids the user has placed
 	 */
-	public UserProfiles (int id, String userName, String firstName, String lastName, String phoneNumber, ArrayList<String> address, String postCode ,String profilePicture,
+	public UserProfiles (int id, String userName, String firstName, String lastName, String phoneNumber,
+						 ArrayList<String> address, String postCode ,String profilePicture,
 						 ArrayList<Integer> faveUsers, ArrayList<Integer> currentAuctions, ArrayList<Integer> wonArtworks,
 						 ArrayList<Integer> completedAuctions, ArrayList<Integer> bidHistory){
 		this.userName = userName;
@@ -83,12 +84,13 @@ public class UserProfiles {
 		//this.logInDate = logInDate;
 		this.profilePicture = profilePicture;
 		this.id = id;
+		this.faveUsers = fUsers;
 
 		currentAuctions = new ArrayList<Integer>();
 		wonArtworks = new ArrayList<Integer>();
 		completedAuctions = new ArrayList<Integer>();
 		bidHistory = new ArrayList<Integer>();
-		faveUsers = new ArrayList<Integer>();
+		//faveUsers = new ArrayList<Integer>();
 
 	}
 
@@ -335,21 +337,23 @@ public class UserProfiles {
 		}
 	}
 
+
+
 	/**
-	 * Both an add and remove method for favourite users
-	 * @param bid
+	 * WTF IS THIS ?
+	 * @param id
 	 */
-	public void toggleFaveUser(int bid){
+	public void toggleFaveUser(int id){
 		boolean existed = false;
 		for (int i = 0; i < faveUsers.size();i++){
-			if (faveUsers.get(i) == bid){
+			if (faveUsers.get(i) == id){
 				faveUsers.remove(i);
 				existed = true;
 			}
 		}
 
 		if(!existed){
-			faveUsers.add(bid);
+			faveUsers.add(id);
 		}
 	}
 	public void addBid(int bidid){

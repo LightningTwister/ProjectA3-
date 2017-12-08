@@ -21,7 +21,10 @@ public class FileWriter {
                  }
                  out.print(e.getPostCode() + delim);
                  out.print( "3123213124"+ delim);
-                 out.print(e.getProfilePicture());
+                 out.print(e.getProfilePicture()+delim);
+                 for(Integer a: e.getFaveUsers()){
+                     out.print(a + delim);
+                 }
                  out.println();
              }
 

@@ -113,6 +113,13 @@ public class Utilities {
         alert.setContentText("You can't have more than one image for a painting!");
         alert.showAndWait();
     }
+    public static void userNameTaken(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Username taken, select another");
+        alert.showAndWait();
+    }
 	/**
 	* Temporary class that creates a pop up because class is not implemented yet
 	* DELETE THIS *************************************************

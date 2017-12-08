@@ -22,13 +22,13 @@ public class faveUserController {
         private int id;
 
         @FXML
-        private TextField userBox,fNameBox,sNameBox,phoneBox;
+        private TextField userBox;
 
         @FXML
         ImageView imgProfile;
 
         @FXML
-        private Button btnCancel, btnFaveUser;
+        private Button btnCancel, btnFaveUser, addButton;
 
         @FXML
         Pane rootPane;
@@ -40,15 +40,9 @@ public class faveUserController {
      */
     public void getUser(UserProfiles user) {
 
-
-            userBox.setText(user.getUserName());
-            fNameBox.setText(user.getFirstName());
-            sNameBox.setText(user.getLastName());
-            phoneBox.setText(String.valueOf(user.getPhoneNumber()));
-            id = user.getId();
-
+        userBox.setText(user.getUserName());
+        id = user.getId();
         Image profileImage = Utilities.getImage(Run.database.getUser(id).getProfilePicture());
-
         imgProfile.setImage(profileImage);
 
         }
@@ -65,10 +59,18 @@ public class faveUserController {
                 removeFaveUser();
                 Utilities.closeWindow(rootPane);
             });
+            addButton.setOnAction(e ->{
+
+                addFaveUser();
+                Utilities.closeWindow(rootPane);
+            });
 
 
         }
 
+        private void addFaveUser(){
+        Run.database.getCurrentUser().toggleFaveUser(id);
+        }
 
     private void removeFaveUser(){
         Run.database.getCurrentUser().toggleFaveUser(id);

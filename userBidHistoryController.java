@@ -60,7 +60,7 @@ public class userBidHistoryController {
         dropDown.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
-                changeHistory(dropDown.getItems().get((Integer) number2));
+                //changeHistory(dropDown.getItems().get((Integer) number2));
             }
         });
 
