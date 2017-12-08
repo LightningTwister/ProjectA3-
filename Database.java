@@ -158,14 +158,31 @@ public class Database {
         }
         return result;
     }
-    public ArrayList<Bid> getBidHistory(int id){
+
+    /*public ArrayList<Bid> getBidHistory(int id){
         ArrayList<Integer> idList = artworks.get(id).getBidHistory();
         ArrayList<Bid> result = new ArrayList<Bid>();
         for(int bid : idList){
             result.add(bids.get(bid));
         }
         return result;
+    }*/
+
+    public ArrayList<String> getBidHistory(int id){
+        ArrayList<Integer> idList = artworks.get(id).getBidHistory();
+        ArrayList<String> result = new ArrayList<>();
+        UserProfiles user;
+        Bid currBid;
+        for(int bid : idList){
+            currBid = bids.get(bid);
+            user = users.get(currBid.getUserID());
+            result.add(user.getUserName() + "Amount Bid: " + currBid.getAmount() + " on " + currBid.getDatePlaced());
+        }
+
+        return result;
     }
+
+
 	 public void placeBid(double amount, int artID) throws Exception{
         Artwork art = this.getArtwork(artID);
         int bid = this.getNextIDBid();
