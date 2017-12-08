@@ -3,6 +3,7 @@
 !*.fxml
 !*.txt
 !*/
+!*/*/
 !*.jpg
 !*.jpeg
 !.png
