@@ -4,13 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 
 
 /**
@@ -21,10 +18,12 @@ import javafx.scene.control.Button;
 public class artworkViewerController{
     private static ArrayList<Artwork> artworksForUser = new ArrayList<Artwork>();
     private static ArrayList<Artwork> fullList = new ArrayList<>();
+
     @FXML
     private Button btnEdit,btnAdd;
     @FXML
     ListView<String> lstArtworks;
+
 
 
     /**

@@ -32,7 +32,7 @@ public class Sculpture extends Artwork {
     public Sculpture(String artworkTitle, String artworkDescription, String artworkCreator, int artworkYearCreated,
                      double reservePrice, int numOfBids,int sellerId, int width, int height,int id,
                      int depth, String material,ArrayList<String> picture) {
-        super(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated, reservePrice, numOfBids, sellerId, id);
+        super(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated, reservePrice, numOfBids, sellerId, id, picture.get(0));
 
         this.width = width;
         this.height = height;
@@ -43,6 +43,14 @@ public class Sculpture extends Artwork {
     }
     public ArrayList<String> getPictures() {
         return pathToPictures;
+    }
+
+    public ArrayList<String> getPathToPictures() {
+        return pathToPictures;
+    }
+
+    public void setPathToPictures(ArrayList<String> pathToPictures) {
+        this.pathToPictures = pathToPictures;
     }
 
     public void addPicture(String picture) {

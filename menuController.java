@@ -38,7 +38,7 @@ public class menuController{
             userPage();
         });
         btnBid.setOnAction(e -> {
-            Utilities.classNotImplemented();
+            openBidWindow();
         });
         btnArtworks.setOnAction(e -> {
             artworkPage();
@@ -46,6 +46,33 @@ public class menuController{
         imgBanner.setImage(Utilities.getImage(Run.database.BANNER_PATH));
         imgIcon.setImage(Utilities.getImage(Run.database.ICON_PATH));
         labelLastLogIn.setText("You Last Logged in: "+ Run.database.getCurrentUser().getLogInDate());
+
+    }
+
+    private void openBidWindow(){
+        try{
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/browseBids.fxml"));
+            BorderPane root = (BorderPane) fxmlLoader.load();
+
+            BrowseBidsController controller = fxmlLoader.<BrowseBidsController>getController();
+
+
+            controller.loadArtworks(Run.database.getAllArtworks());
+
+
+
+
+            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+            editStage.setTitle("Browse Bids");
+            editStage.initModality(Modality.APPLICATION_MODAL);
+            editStage.showAndWait();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
     }
 

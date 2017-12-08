@@ -22,6 +22,9 @@ import java.util.Date;
     private ArrayList<Integer> bidHistory = new ArrayList<>();
     private int artworkSellerId;
     private int id;
+    private String picture;
+
+
 
     /**
      * Constructor to create a new artwork.
@@ -36,7 +39,7 @@ import java.util.Date;
      */
     protected Artwork(String artworkTitle, String artworkDescription,
             String artworkCreator, int artworkYearCreated, double reservePrice,
-            int numOfBids, int idOfSeller, int id) {
+            int numOfBids, int idOfSeller, int id, String picture) {
 
         this.artworkTitle = artworkTitle;
         this.artworkDescription = artworkDescription;
@@ -48,11 +51,20 @@ import java.util.Date;
         this.artworkSellerId = idOfSeller;
 		highestBid = new Bid(reservePrice);
         this.id = id;
+        this.picture = picture;
+
         //this.artworkBid = new Bid(reservePrice, numOfBids, id);
     }
 protected  Artwork(){
 
 }
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 protected void placeBid(Bid newBid)throws Exception {
         highestBid = newBid;
         bidHistory.add(newBid.getBidID());

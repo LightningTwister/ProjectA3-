@@ -28,12 +28,20 @@ public class Painting extends Artwork {
                         int width, int height , int id, ArrayList<String> picture) {
         
         super(artworkTitle, artworkDescription, artworkCreator, 
-                artworkYearCreated, reservePrice, numOfBids, userId, id);
+                artworkYearCreated, reservePrice, numOfBids, userId, id, picture.get(0));
 
         this.width = width;
         this.height = height;
         this.pathToPictures = picture;
 
+    }
+
+    public ArrayList<String> getPathToPictures() {
+        return pathToPictures;
+    }
+
+    public void setPathToPictures(ArrayList<String> pathToPictures) {
+        this.pathToPictures = pathToPictures;
     }
 
     public ArrayList<String> getPictures() {
