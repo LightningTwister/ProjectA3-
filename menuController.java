@@ -2,6 +2,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -24,6 +25,8 @@ public class menuController{
     Pane rootPane;
     @FXML
     ImageView imgBanner,imgIcon;
+    @FXML
+    Label labelLastLogIn;
 
 
     /**
@@ -42,6 +45,7 @@ public class menuController{
         });
         imgBanner.setImage(Utilities.getImage(Run.database.BANNER_PATH));
         imgIcon.setImage(Utilities.getImage(Run.database.ICON_PATH));
+        labelLastLogIn.setText("You Last Logged in: "+ Run.database.getCurrentUser().getLogInDate());
 
     }
 
@@ -102,13 +106,6 @@ public class menuController{
         }
     }
 
-    /**
-     *  Closes this window once it is not required.
-     */
-    private void closeWindow() {
-        Stage stage = (Stage) rootPane.getScene().getWindow();
-        stage.close();
-    }
 
 
 

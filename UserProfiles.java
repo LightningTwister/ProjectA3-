@@ -14,7 +14,7 @@ public class UserProfiles {
 	private String postCode;
 	private String profilePicture;
 	private int auctionID;
-	private Date logInDate;
+	private String logInDate;
 	private int id;
 	private ArrayList<Integer> currentAuctions;
 	private ArrayList<Integer> wonArtworks;
@@ -22,8 +22,11 @@ public class UserProfiles {
 	private ArrayList<Integer> bidHistory;
 	private ArrayList<Integer> faveUsers;
 
+
+
 	/**
 	 * Constructor for existing user used by the filereader to read the files
+
 	 * @param id id of the user main distinguishing characteristic of the user
 	 * @param userName username of the user
 	 * @param firstName first name of the user
@@ -74,14 +77,14 @@ public class UserProfiles {
 	 */
 	public UserProfiles (String userName, String firstName, String lastName, String phoneNumber,
 						 	ArrayList<String> address, String postCode ,String profilePicture, int id,
-								 ArrayList<Integer> fUsers){
+								 ArrayList<Integer> fUsers, String date){
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.postCode = postCode;
-		//this.logInDate = logInDate;
+		this.logInDate = date;
 		this.profilePicture = profilePicture;
 		this.id = id;
 		this.faveUsers = fUsers;
@@ -92,6 +95,14 @@ public class UserProfiles {
 		bidHistory = new ArrayList<Integer>();
 		//faveUsers = new ArrayList<Integer>();
 
+	}
+
+	public String getLogInDate() {
+		return logInDate;
+	}
+
+	public void setLogInDate(String logInDate) {
+		this.logInDate = logInDate;
 	}
 
 

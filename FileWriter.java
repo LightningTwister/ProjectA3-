@@ -1,15 +1,21 @@
 import javax.xml.crypto.Data;
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class FileWriter {
     private static String delim = ",";
 
     private static void writeDataToFile(PrintWriter out, String type){
+
          if (type.toLowerCase().equals("userlist")){
-             System.out.println("Writing users to file.");
+             //System.out.println("Writing users to file.");
              for (UserProfiles e : Run.database.getAllUsers()){
                  out.print(e.getId()+ delim);
                  out.print(e.getUserName() + delim);
@@ -20,7 +26,8 @@ public class FileWriter {
                      out.print(s + delim);
                  }
                  out.print(e.getPostCode() + delim);
-                 out.print( "3123213124"+ delim);
+
+                 out.print( e.getLogInDate()+ delim);
                  out.print(e.getProfilePicture()+delim);
                  for(Integer a: e.getFaveUsers()){
                      out.print(a + delim);

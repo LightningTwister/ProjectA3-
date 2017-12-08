@@ -3,10 +3,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class FileReader {
 	private static ArrayList<UserProfiles> userList = new ArrayList<>();
@@ -70,15 +70,16 @@ public class FileReader {
     		userAddress.add(in.next());
     	}
     	String postCode = in.next();
+		String date = (in.next());
 
-    	Date logInTime = new Date(in.nextLong());
+
 		String path = in.next();
 		ArrayList<Integer> faveUsers = new ArrayList<>();
 		while (in.hasNextInt()){
 			faveUsers.add(in.nextInt());
 		}
 		userList.add(new UserProfiles(userName, firstName, lastName, phoneNumber,userAddress, postCode ,path,
-				Integer.valueOf(id), faveUsers));
+				Integer.valueOf(id), faveUsers, date));
     	return userList;
     }
     private static ArrayList loadPaintingsToSystem(Scanner in){

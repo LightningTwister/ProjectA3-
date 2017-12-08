@@ -8,7 +8,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 import javafx.stage.FileChooser;
 
 /**
@@ -272,6 +276,9 @@ public class Utilities {
     public static void saveUser(UserProfiles profile,String userName, String fName, String lName, String phoneNum,
                                 ArrayList<String> address, String postcode, String profilePicture, int id  ){
         try{
+
+
+
             profile.setUserName(userName);
             profile.setFirstName(fName);
             profile.setLastName(lName);
@@ -281,6 +288,7 @@ public class Utilities {
             profile.setPostCode(postcode);
             profile.setId(id);
             profile.setProfilePicture(profilePicture);
+            profile.setLogInDate(getDate());
 
 
 
@@ -419,5 +427,11 @@ public class Utilities {
 
         return check;
 
+    }
+    public static String getDate(){
+        Date today = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("EEE dd MMM yyyy hh:mm:ss");
+        String reportDate = df.format(today);
+        return reportDate;
     }
 }

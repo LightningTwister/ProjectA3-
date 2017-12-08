@@ -1,6 +1,5 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by LT on 10/11/2017.
@@ -8,7 +7,7 @@ import java.util.Map;
 public class Database {
 
     private final String ARTWORK_PATH ="Data/artworkfile.txt";
-    private final String USER_PATH = "Data/UserList.txt";
+    private final String USER_PATH = "Data/UserList1.txt";
     private final String BID_HISTORY_PATH = "Data/bidhistory.txt";
     public final String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
     public final String ICON_PATH = "file:Data/SystemPictures/Artatawe Logo.jpg";
@@ -49,6 +48,7 @@ public class Database {
         loadArtworks();
         loadUsers();
         loadBids();
+
     }
 
     /**
@@ -309,8 +309,12 @@ public class Database {
                     return false;
                 }
             }
+            SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy hh:mm:ss");
+            Date today = Calendar.getInstance().getTime();
+            String reportDate = df.format(today);
 
-            UserProfiles newUser = new UserProfiles (userName, firstName, lastName, phoneNumber, address, postCode , profilePicture, userID, fUsers);
+            UserProfiles newUser = new UserProfiles (userName, firstName, lastName, phoneNumber, address, postCode ,
+                    profilePicture, userID, fUsers,reportDate );
             users.put(userID, newUser);
         }catch (Exception e){
             e.printStackTrace();
