@@ -134,9 +134,7 @@ public class ArtworkPictureController {
         if (artworkPaths.size() ==0){
 
             newArtworkList.add(Utilities.getImage(Run.database.NO_IMAGE_PATH));
-
-
-                    artworkPaths.add(Run.database.NO_IMAGE_PATH);
+            artworkPaths.add(Run.database.NO_IMAGE_PATH);
 
 
         }else{

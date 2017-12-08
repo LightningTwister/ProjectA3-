@@ -42,7 +42,7 @@ public class User_Controller {
         private ComboBox fuserDrop;
 
         @FXML
-        private Button btnSave, btnFave, btnChangeImage, bidHistories;
+        private Button btnSave, btnFave, btnChangeImage, bidHistories, btnDraw;
 
         @FXML
         Pane rootPane;
@@ -99,7 +99,36 @@ public class User_Controller {
                 goToBidHistory();
             });
 
+            btnDraw.setOnAction(e ->{
+                openDrawWindow();
+            });
+
         imgProfile.setImage(Utilities.getImage(Run.database.getCurrentUser().getProfilePicture()));
+
+
+    }
+
+    private void openDrawWindow(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/Drawing.fxml"));
+            Pane root = (Pane) fxmlLoader.load();
+
+            DrawingController controller = fxmlLoader.<DrawingController>getController();
+
+
+
+            Scene editScene = new Scene(root);
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+            editStage.setTitle("Draw Your Own Profile Picture");
+            editStage.initModality(Modality.APPLICATION_MODAL);
+            editStage.showAndWait();
+
+        }catch(Exception e){
+            Utilities.cancelled();
+        }
+        picturePath = Run.database.getCurrentUser().getProfilePicture();
+        imgProfile.setImage(Utilities.getImage(picturePath));
 
     }
 
