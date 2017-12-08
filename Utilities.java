@@ -275,7 +275,7 @@ public class Utilities {
             profile.setUserName(userName);
             profile.setFirstName(fName);
             profile.setLastName(lName);
-            //profile.setPhoneNumber(phoneNum);
+            profile.setPhoneNumber(phoneNum);
 
             profile.setAddress(address);
             profile.setPostCode(postcode);
@@ -372,5 +372,52 @@ public class Utilities {
            
         }
         return "FAILED";
+    }
+    public static boolean checkPhoneNum(String phoneNum){
+
+        return (phoneNum.charAt(0) == '0' && phoneNum.charAt(1) == '7' &&
+                phoneNum.length() == 11 && phoneNum.matches("[0-9]+"));
+    }
+    public static boolean checkPostCode(String postcode){
+
+
+        return postcode.matches("^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)" +
+                "| (([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9] " +
+                "[abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$");
+    }
+    public static boolean checkUserDetails(ArrayList<Object> info){
+
+        boolean check = true;
+        try{
+
+            for(Object a: info){
+
+                if(a.toString().isEmpty()){
+                    check = false;
+                    return check;
+                }
+
+            }
+
+            String postCode = (String) info.get(3);
+            if(!(Utilities.checkPostCode(postCode))){
+                return false;
+            }
+
+            String phoneNumber = ((String) info.get(4));
+            if(!(Utilities.checkPhoneNum(phoneNumber))){
+                return false;
+            }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+            Utilities.wrongInputFound();
+            return false;
+        }
+
+
+        return check;
+
     }
 }

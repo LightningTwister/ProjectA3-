@@ -84,6 +84,8 @@ public class registerController {
                 Utilities.savedInput();
                 Run.database.saveUsers();
                 Utilities.closeWindow(rootPane);
+            }else{
+                Utilities.wrongInputFound();
             }
 
 

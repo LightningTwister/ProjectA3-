@@ -134,20 +134,11 @@ public class UserProfiles {
 	 * Sets the phone number of the user
 	 * @param phoneNumber the phone number of the user
 	 */
-	public void setPhoneNumber (String phoneNumber) throws Exception {
-		Pattern pattern = Pattern.compile(PHONE_REGEX);
-		String phoneCopy = phoneNumber;
-
-		phoneCopy = phoneCopy.replaceAll(" ", "");
-		System.out.println(phoneCopy);
-		System.out.println(phoneNumber);
-		final Matcher matcher = pattern.matcher(phoneCopy);
-		System.out.println(matcher.matches());
-
-		if(matcher.matches()){
+	public void setPhoneNumber (String phoneNumber) {
+		if(Utilities.checkPhoneNum(phoneNumber)){
 			this.phoneNumber = phoneNumber;
-		}else {
-			throw new Exception("Invalid Phone number");
+		}else{
+			Utilities.wrongInputFound();
 		}
 
 	}
@@ -164,15 +155,11 @@ public class UserProfiles {
 	 * Sets the postcode of the user
 	 * @param postCode the postcode of the user
 	 */
-	public void setPostCode (String postCode) throws Exception {
-		postCode = postCode.replaceAll(" ", "");
-		Pattern pattern = Pattern.compile(POSTCODE_REGEX);
-		final Matcher matcher = pattern.matcher(postCode);
-
-		if(matcher.matches()){
+	public void setPostCode (String postCode) {
+		if(Utilities.checkPostCode(postCode)){
 			this.postCode = postCode;
-		}else {
-			throw new Exception("Invalid Postcode");
+		}else{
+			Utilities.wrongInputFound();
 		}
 
 	}

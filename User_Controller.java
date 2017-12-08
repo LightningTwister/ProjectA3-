@@ -205,25 +205,44 @@ public class User_Controller {
 
                 String postCode = String.valueOf(postcodeBox.getText());
 
-                int phoneNum = Integer.valueOf(phoneBox.getText());
+               // int phoneNum = Integer.valueOf(phoneBox.getText());
                 String phone = String.valueOf(phoneBox.getText());
+
+
                 String addressArray[] = addressBox.getText().split("\\r?\\n");
                 ArrayList<String> addressList = new ArrayList<>();
                 for(String a: addressArray){
                     addressList.add(a);
                 }
 
+                ArrayList<Object> info = new ArrayList<>();
+                info.add(userName);
+                info.add(fName);
+                info.add(sName);
+                info.add(postCode);
+                info.add(phone);
+                info.add(addressArray);
 
 
-                Utilities.saveUser(this.user,userName,fName,sName,phone,addressList,postCode,
-                        picturePath,this.user.getId());
-               
 
-                Utilities.savedInput();
-                Run.database.saveUsers();
-                Utilities.closeWindow(rootPane);
+
+                if(!(Utilities.checkUserDetails(info))){
+                    Utilities.wrongInputFound();
+                }else{
+                    Utilities.saveUser(this.user,userName,fName,sName,phone,addressList,postCode,
+                            picturePath,this.user.getId());
+
+
+                    Utilities.savedInput();
+                    Run.database.saveUsers();
+                    Utilities.closeWindow(rootPane);
+                }
+
+
+
 
             }catch (Exception e){
+                e.printStackTrace();
                 Utilities.wrongInputFound();
             }
 
