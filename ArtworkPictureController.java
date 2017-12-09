@@ -3,12 +3,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import javafx.scene.layout.Pane;
-
-
 import java.util.ArrayList;
 
+/**
+ *  Controller for the viewing picture window
+ */
 public class ArtworkPictureController {
 
     private ArrayList<Image> artworkList ;
@@ -16,16 +16,15 @@ public class ArtworkPictureController {
     private int index ;
     private String artwork;
     @FXML
-    Pane rootPane;
+    private Pane rootPane;
 
    @FXML
-   Button btnNext, btnPrevious, btnRemove, btnAdd, btnSave;
+   private Button btnNext, btnPrevious, btnRemove, btnAdd, btnSave;
+   @FXML
+   private ScrollPane ScrollPane;
 
     @FXML
-    ScrollPane ScrollPane;
-
-    @FXML
-    Label labelOf;
+    private Label labelOf;
 
 
     /**
@@ -61,7 +60,12 @@ public class ArtworkPictureController {
         });
 
     }
+
+    /**
+     * Method that saves changes made to the pictures for this object
+     */
     private void savePictures(){
+        //Don't let a painting have more than one image
         if (artwork.equals("painting")) {
             if (artworkList.size() > 1) {
                 Utilities.maximumPicturesReached();
@@ -77,6 +81,10 @@ public class ArtworkPictureController {
             Utilities.closeWindow(rootPane);
         }
     }
+
+    /**
+     *  Add new paths to images for this object
+     */
     private void addPicture(){
         if(artwork.equals("painting")&& artworkPaths.size() >= 1
                 && !(artworkPaths.get(0).equals(Run.database.NO_IMAGE_PATH))){
@@ -101,15 +109,21 @@ public class ArtworkPictureController {
             }
             restart();
         }
-
-
     }
+
+    /**
+     *  Reset the gui elements when a picture is changed.
+     */
     private void restart(){
         index = 0;
         ScrollPane.setContent(new ImageView(artworkList.get(index)));
         recheckButtons();
 
     }
+
+    /**
+     * Update buttons on page to show the correct buttons for scrolling
+     */
     private void recheckButtons(){
         if (index == 0){
             btnPrevious.setVisible(false);
@@ -125,6 +139,12 @@ public class ArtworkPictureController {
         labelOf.setText(index+ 1+" of "+ artworkList.size());
     }
 
+    /**
+     *  Method that shows the pictures for an artwork
+     * @param artworkStrings Paths to the pictures for this Artwork
+     * @param artwork String to show if this is a painting or a sculpture
+     * @param bid Boolean to decide wether or not this page has been opened from the bid viewing page
+     */
     public void showPictures(ArrayList<String> artworkStrings, String artwork, boolean bid){
         if(bid){
             btnSave.setVisible(false);
@@ -142,17 +162,12 @@ public class ArtworkPictureController {
             newArtworkList.add(Utilities.getImage(Run.database.NO_IMAGE_PATH));
             artworkPaths.add(Run.database.NO_IMAGE_PATH);
 
-
         }else{
-
             for(String a: artworkStrings){
                 newArtworkList.add(Utilities.getImage(a));
-
             }
         }
-
         artworkList = newArtworkList;
-
         ScrollPane.setContent(new ImageView(artworkList.get(index)));
         btnPrevious.setVisible(false);
         if (artworkList.size() > 1){
@@ -163,6 +178,10 @@ public class ArtworkPictureController {
         labelOf.setText(index +1 +" of "+ artworkList.size());
 
     }
+
+    /**
+     * Remove a path to a picture for this artwork picture
+     */
     private void deletePicture(){
         this.artworkPaths.remove(index);
         this.artworkList.remove(index);
