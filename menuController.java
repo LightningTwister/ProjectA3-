@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class menuController{
     @FXML
-    private Button btnProfile,btnBid,btnArtworks;
+    private Button btnProfile,btnBid,btnArtworks, btnSold,btnWon;
     @FXML
     Pane rootPane;
     @FXML
@@ -43,10 +43,66 @@ public class menuController{
         btnArtworks.setOnAction(e -> {
             artworkPage();
         });
+        btnSold.setOnAction(e ->{
+            openSold();
+        });
+        btnWon.setOnAction(e ->{
+            openWon();
+        });
         imgBanner.setImage(Utilities.getImage(Run.database.BANNER_PATH));
         imgIcon.setImage(Utilities.getImage(Run.database.ICON_PATH));
         labelLastLogIn.setText("You Last Logged in: "+ Run.database.getCurrentUser().getLogInDate());
 
+    }
+    private void openSold(){
+        try{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
+        BorderPane root = (BorderPane) fxmlLoader.load();
+
+        artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
+
+        controller.soldView();
+
+
+        Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+        Stage editStage = new Stage();
+        editStage.setScene(editScene);
+        editStage.setTitle("Sold Artworks");
+        editStage.initModality(Modality.APPLICATION_MODAL);
+        editStage.showAndWait();
+
+
+
+
+    }catch(Exception e){
+        e.printStackTrace();
+    }
+
+    }
+    private void openWon(){
+
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
+            BorderPane root = (BorderPane) fxmlLoader.load();
+
+            artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
+
+            controller.wonView();
+
+
+            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+            editStage.setTitle("Won Artworks");
+            editStage.initModality(Modality.APPLICATION_MODAL);
+            editStage.showAndWait();
+
+
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void openBidWindow(){

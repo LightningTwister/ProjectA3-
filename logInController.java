@@ -63,6 +63,7 @@ public class logInController{
                 editStage.setTitle("Main Menu");
                 editStage.initModality(Modality.APPLICATION_MODAL);
 
+                /**
                 try {
                     Run.database.placeBid(Double.MAX_VALUE,1);
                 }catch (Exception e){
@@ -72,7 +73,7 @@ public class logInController{
                 Run.database.getCurrentUser().addCurrentAuction(1);
                 Run.database.getCurrentUser().completeAuction(1);
                 Run.database.getCurrentUser().addCurrentAuction(2);
-
+*/
                 editStage.show();
                 Utilities.closeWindow(rootPane);
 

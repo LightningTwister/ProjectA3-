@@ -270,7 +270,6 @@ public class UserProfiles {
 	 */
 	public ArrayList<Integer> getWonArtworks () {
 		return wonArtworks;
-	
 	}
 
 	/**
@@ -281,6 +280,7 @@ public class UserProfiles {
 		return completedAuctions;
 		
 	}
+
 
 	/**
 	 * gets the list of current auctions the user has

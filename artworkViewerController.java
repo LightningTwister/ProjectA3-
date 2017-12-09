@@ -19,10 +19,12 @@ public class artworkViewerController{
     private static ArrayList<Artwork> artworksForUser = new ArrayList<Artwork>();
 
 
+
     @FXML
     private Button btnEdit,btnAdd;
     @FXML
     ListView<String> lstArtworks;
+
 
 
 
@@ -38,6 +40,7 @@ public class artworkViewerController{
         btnAdd.setOnAction(e -> {
                 addPage();
         });
+
         refreshArtworkList();
     }
 
@@ -81,6 +84,7 @@ public class artworkViewerController{
         this.artworksForUser = new ArrayList<>(artworkList);
 
 
+
         refreshArtworkList();
     }
 
@@ -90,7 +94,7 @@ public class artworkViewerController{
     private void refreshArtworkList() {
         // Clear the displayed list
         lstArtworks.getItems().clear();
-        artworksForUser.clear();
+        //artworksForUser.clear();
 
         // Add each artwork to the displayed list
         for (Artwork c : Run.database.getAllArtworks()) {
@@ -210,4 +214,39 @@ public class artworkViewerController{
         }
     }
 
+public void soldView(){
+    btnAdd.setVisible(false);
+    btnEdit.setVisible(false);
+        artworksForUser.clear();
+        lstArtworks.getItems().clear();
+        artworksForUser = Run.database.getCompletedAuctions();
+
+    for (Artwork c : artworksForUser) {
+
+
+            lstArtworks.getItems().add(c.getArtworkTitle()+ "  "+ c.getHighestBid().getAmount()+ "  "+
+                    Run.database.getUser(c.getHighestBid().getUserID()).getUserName());
+
+    }
+
 }
+public void wonView(){
+    btnAdd.setVisible(false);
+    btnEdit.setVisible(false);
+   artworksForUser.clear();
+   lstArtworks.getItems().clear();
+
+
+
+   for(Integer a: Run.database.getCurrentUser().getWonArtworks()){
+       System.out.println(a);
+       artworksForUser.add(Run.database.getArtwork(a));
+       lstArtworks.getItems().add(Run.database.getArtwork(a).getArtworkTitle());
+   }
+    //artworksForUser = Run.database
+
+}
+
+        }
+
+
