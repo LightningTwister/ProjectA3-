@@ -220,12 +220,6 @@ public class Database {
                 result.add((Artwork) artwork.getValue());
             }
 
-            for(int i = 0; i < result.size(); i++){
-                if(result.get(i).getNumOfBids() == 0){
-                    result.remove(i);
-                }
-            }
-
 
         }
         return result;
