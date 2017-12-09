@@ -9,29 +9,22 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-
-
-
-
 /**
  *  This class controls the fave user page gui
  *  @author Tim Watson 880158
- *  @version 1
+ *  @version 1.1
  */
 public class faveUserController {
         private int id;
 
         @FXML
         private TextField userBox;
-
         @FXML
-        ImageView imgProfile;
-
+        private ImageView imgProfile;
         @FXML
         private Button btnCancel, btnFaveUser, addButton;
-
         @FXML
-        Pane rootPane;
+        private Pane rootPane;
 
     /**
      * Method that gets the current user of the program and loads the relevant information into the editing boxes
@@ -68,10 +61,16 @@ public class faveUserController {
 
         }
 
-        private void addFaveUser(){
+    /**
+     * Add a Favourite user when the fave user button is clicked
+     */
+    private void addFaveUser(){
         Run.database.getCurrentUser().toggleFaveUser(id);
         }
 
+    /**
+     * Remove a favourite user the delete button is pressed
+     */
     private void removeFaveUser(){
         Run.database.getCurrentUser().toggleFaveUser(id);
     }
