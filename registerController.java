@@ -16,18 +16,19 @@ import java.util.ArrayList;
 public class registerController {
     private String picPath;
     @FXML
-    private TextField username, firstname, surname, phone, postcode;
+    private TextField username, firstName, surname, phone, postcode;
 
     @FXML
-    private TextArea adress;
-
+    private TextArea address;
     @FXML
     private Pane rootPane;
-
     @FXML
     private Button submit, cancel, btnPicture;
 
 
+    /**
+     * Initialise method that links gui elements to their respective method
+     */
     public void initialize() {
         submit.setOnAction(e -> {
             saveProfile();
@@ -43,6 +44,9 @@ public class registerController {
         });
     }
 
+    /**
+     * Open a select picture gui, to select a default image for this profile
+     */
     private void getPicture(){
         String fileLocation = Utilities.changeImage("Select a profile picture", "Data/ProfilePictures/Built In");
         if (fileLocation.equals("FAILED")){
@@ -53,17 +57,20 @@ public class registerController {
         }
     }
 
+    /**
+     * Method that checks all inputs are valid and then creates a new profile
+     */
     private void saveProfile(){
         try{
 
             String userName = username.getText();
-            String fName = firstname.getText();
+            String fName = firstName.getText();
             String sName = surname.getText();
 
             String postCode = String.valueOf(postcode.getText());
 
             String phone1 = String.valueOf(phone.getText());
-            String addressArray[] = StringUtils.splitString(adress.getText(),"\n");
+            String addressArray[] = StringUtils.splitString(address.getText(),"\n");
             ArrayList<String> addressList = new ArrayList<>();
             for(String a: addressArray){
                 addressList.add(a);

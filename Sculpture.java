@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Class to create a sculpture Object.
  * @author Tim Watson 880158
- * @version 1
+ * @version 2
  */
 public class Sculpture extends Artwork {
     private int width;
@@ -11,9 +11,6 @@ public class Sculpture extends Artwork {
     private int depth;
     private String material;
     private ArrayList<String> pathToPictures;
-    //To do, additional photos.
-
-
 
     /**
      * Constructor to instantiate a Sculpture object.
@@ -28,6 +25,7 @@ public class Sculpture extends Artwork {
      * @param height Height of the sculpture in cm's.
      * @param depth Depth of the sculpture in cm's.
      * @param material The material the sculpture is made out of.
+     * @param picture List of paths to pictures for this sculpture.
      */
     public Sculpture(String artworkTitle, String artworkDescription, String artworkCreator, int artworkYearCreated,
                      double reservePrice, int numOfBids,int sellerId, int width, int height,int id,
@@ -41,7 +39,24 @@ public class Sculpture extends Artwork {
         this.pathToPictures = picture;
 
     }
-    //For File I/O
+
+    /**
+     * Constructor to instantiate a Sculpture object.
+     * @param artworkTitle Name of Sculpture.
+     * @param artworkDescription Description of Sculpture.
+     * @param artworkCreator Name of the person who created the Sculpture.
+     * @param artworkYearCreated Year the Sculpture was created.
+     * @param reservePrice Minimum price the sculpture can be sold for.
+     * @param numOfBids Maximum number of bids allowed on the sculpture.
+     * @param sellerId User name of the person selling this Sculpture.
+     * @param width Width of the sculpture in cm's.
+     * @param height Height of the sculpture in cm's.
+     * @param depth Depth of the sculpture in cm's.
+     * @param material The material the sculpture is made out of.
+     * @param picture List of paths to pictures for this sculpture.
+     * @param highestBid Bid object that is currently the highest on this artwork
+     * @param bidHistory List of bids placed on this artwork
+     */
     public Sculpture(String artworkTitle, String artworkDescription, String artworkCreator, int artworkYearCreated,
                      double reservePrice, int numOfBids,int sellerId, int width, int height,int id,
                      int depth, String material,ArrayList<String> picture, Bid highestBid, ArrayList<Integer> bidHistory) {
@@ -58,21 +73,26 @@ public class Sculpture extends Artwork {
     }
 
 
+    /**
+     * Get all the paths to pictures of this sculpture
+     * @return List of paths to pictures
+     */
     public ArrayList<String> getPictures() {
         return pathToPictures;
     }
 
-    public ArrayList<String> getPathToPictures() {
-        return pathToPictures;
-    }
-
-    public void setPathToPictures(ArrayList<String> pathToPictures) {
-        this.pathToPictures = pathToPictures;
-    }
-
+    /**
+     * Add a singlar path to a photo to this artworks photos
+     * @param picture Path to a picture
+     */
     public void addPicture(String picture) {
         this.pathToPictures.add( picture);
     }
+
+    /**
+     * Remove one path to a photo for this artwork
+     * @param path Path to be removed from the stored list
+     */
     public void removePicture(String path){
         for(String artworkPath: this.pathToPictures){
             if (path.equals(artworkPath)){
@@ -80,6 +100,11 @@ public class Sculpture extends Artwork {
             }
         }
     }
+
+    /**
+     * Set the list of picture paths to a new list
+     * @param pictures New list of pictures
+     */
     public void setPicture(ArrayList<String> pictures){
         this.pathToPictures = pictures;
     }
