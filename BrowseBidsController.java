@@ -55,7 +55,7 @@ public class BrowseBidsController {
             currentArtwork = scrollList.get(index);
             nextArtwork();
         });
-      
+
         btnView.setOnAction(e -> {
             viewSelectedArtwork();
 
@@ -94,10 +94,10 @@ public class BrowseBidsController {
             // load the edit page controller with a new painting and sculpture object with the new id number.
             controller.artworkToBid(currentArtwork);
 
-            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
-            editStage.setTitle(Run.EDITP_WINDOW_TITLE);
+            editStage.setTitle(Main.EDITP_WINDOW_TITLE);
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
 
@@ -113,7 +113,7 @@ public class BrowseBidsController {
 
             if (checkFave.isSelected()){
                 for (Artwork artwork: artworksToBidOn){
-                    if(Run.database.getCurrentUser().getFaveUsers().contains(artwork.getArtworkSeller()) ){
+                    if(Main.database.getCurrentUser().getFaveUsers().contains(artwork.getArtworkSeller()) ){
                         faveUserList.add(artwork);
                     }
                 }
@@ -163,7 +163,7 @@ public class BrowseBidsController {
      */
     private void noArtworkFound() {
         labelTitle.setText("Title: NO ARTWORK COULD BE FOUND");
-        imgView.setImage(Utilities.getImage(Run.database.NO_IMAGE_PATH));
+        imgView.setImage(Utilities.getImage(Main.database.NO_IMAGE_PATH));
         descBox.setText("");
         btnPrev.setVisible(false);
         btnNext.setVisible(false);
@@ -177,7 +177,7 @@ public class BrowseBidsController {
     public void loadArtworks(ArrayList<Artwork> artworkList) {
 
         for (Artwork art : artworkList) {
-            if (!(art.getArtworkSeller() == Run.database.getCurrentUser().getId()) && (art.getNumOfBids() > 0)) {
+            if (!(art.getArtworkSeller() == Main.database.getCurrentUser().getId()) && (art.getNumOfBids() > 0)) {
 
                 this.artworksToBidOn.add(art);
             }

@@ -308,7 +308,7 @@ public class Utilities {
      * @return boolean if the username is found
      */
     public static boolean checkUsername(String entered){
-        for(UserProfiles a: Run.database.getAllUsers()){
+        for(UserProfiles a: Main.database.getAllUsers()){
             if(a.getUserName().equals(entered)){
                 return true;
             }
@@ -336,7 +336,7 @@ public class Utilities {
             return image;
         }catch (Exception e){
             noImageFound();
-            return new Image(Run.database.NO_IMAGE_PATH);
+            return new Image(Main.database.NO_IMAGE_PATH);
         }
     }
 
@@ -347,7 +347,7 @@ public class Utilities {
      */
     public static UserProfiles getUser(int id){
         int iterator = 0;
-        for (UserProfiles a : Run.database.getAllUsers()){
+        for (UserProfiles a : Main.database.getAllUsers()){
             if (a.getId() == id){
 
                 return a;
@@ -369,7 +369,7 @@ public class Utilities {
         if(paths.size() == 0){
             Utilities.noImageFound();
             return false;
-        }else if(paths.size() == 1 && paths.get(0).equals(Run.database.NO_IMAGE_PATH)){
+        }else if(paths.size() == 1 && paths.get(0).equals(Main.database.NO_IMAGE_PATH)){
             Utilities.noImageFound();
             return false;
         }

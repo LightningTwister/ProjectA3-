@@ -59,11 +59,11 @@ public class userBidHistoryController {
      */
     @FXML
     public void populateTree(){
-        ArrayList<Integer> currentAuctions = Run.database.getCurrentUser().getCurrentAuctions();
-        ArrayList<Integer> completedAuctions = Run.database.getCurrentUser().getCompletedAuctions();
+        ArrayList<Integer> currentAuctions = Main.database.getCurrentUser().getCurrentAuctions();
+        ArrayList<Integer> completedAuctions = Main.database.getCurrentUser().getCompletedAuctions();
         artworks = new ArrayList();
         TreeItem<String> placeholder;
-        ArrayList<Bid> bids = Run.database.getBidHistory();
+        ArrayList<Bid> bids = Main.database.getBidHistory();
 
         TreeItem<String> root = new TreeItem<>();
         root.setExpanded(true);
@@ -77,16 +77,16 @@ public class userBidHistoryController {
 
 
         for(Bid bid: bids){
-            Artwork artwork = Run.database.getArtwork(bid.getArtworkID());
+            Artwork artwork = Main.database.getArtwork(bid.getArtworkID());
 
             newBranch(("Artwork name: " + artwork.getArtworkTitle() + " Amount Bid: " +  bid.getAmount()  + " Date Placed: " + bid.getDatePlaced()),userHistoryRoot);
         }
 
         for(int i = 0; i < currentAuctions.size(); i++){
             int currentID = currentAuctions.get(i);
-            artworks.add(Run.database.getArtwork(currentID));
+            artworks.add(Main.database.getArtwork(currentID));
             placeholder = newBranch(artworks.get(i).getArtworkTitle(), currentArtworkRoot);
-            for(String j : Run.database.getBidHistory(artworks.get(i).getId())){
+            for(String j : Main.database.getBidHistory(artworks.get(i).getId())){
                 newBranch(j,placeholder);
             }
         }
@@ -94,9 +94,9 @@ public class userBidHistoryController {
         artworks = new ArrayList<>();
         for(int i = 0; i < completedAuctions.size(); i++){
             int currentID = completedAuctions.get(i);
-            artworks.add(Run.database.getArtwork(currentID));
+            artworks.add(Main.database.getArtwork(currentID));
             placeholder = newBranch(artworks.get(i).getArtworkTitle(), completedArtworkRoot);
-            for(String j : Run.database.getBidHistory(artworks.get(i).getId())){
+            for(String j : Main.database.getBidHistory(artworks.get(i).getId())){
                 newBranch(j,placeholder);
             }
         }

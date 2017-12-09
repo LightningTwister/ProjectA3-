@@ -68,7 +68,7 @@ public class User_Controller {
         fuserDrop.getItems().clear();
 
         for (Integer u : this.user.getFaveUsers()) {
-            fuserDrop.getItems().add(Run.database.getUser(u).getUserName());
+            fuserDrop.getItems().add(Main.database.getUser(u).getUserName());
         }
     }
 
@@ -95,7 +95,7 @@ public class User_Controller {
             openDrawWindow();
         });
 
-        imgProfile.setImage(Utilities.getImage(Run.database.getCurrentUser().getProfilePicture()));
+        imgProfile.setImage(Utilities.getImage(Main.database.getCurrentUser().getProfilePicture()));
 
 
     }
@@ -121,7 +121,7 @@ public class User_Controller {
         } catch (Exception e) {
             Utilities.cancelled();
         }
-        picturePath = Run.database.getCurrentUser().getProfilePicture();
+        picturePath = Main.database.getCurrentUser().getProfilePicture();
         imgProfile.setImage(Utilities.getImage(picturePath));
 
     }
@@ -154,9 +154,9 @@ public class User_Controller {
             faveUserController controller = fxmlLoader.<faveUserController>getController();
 
 
-            controller.getUser(Run.database.getUser(fuserDrop.getValue().toString()));
+            controller.getUser(Main.database.getUser(fuserDrop.getValue().toString()));
 
-            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Favourite User");
@@ -183,7 +183,7 @@ public class User_Controller {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/UserBidHistory.fxml"));
             Pane root = fxmlLoader.load();
 
-            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
 
             editStage.setScene(editScene);
@@ -237,7 +237,8 @@ public class User_Controller {
 
 
                 Utilities.savedInput();
-                Run.database.saveUsers();
+                Main.database.saveUsers();
+                Main.database.saveUsers();
                 Utilities.closeWindow(rootPane);
             }
 

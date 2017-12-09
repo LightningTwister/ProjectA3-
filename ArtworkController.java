@@ -76,8 +76,8 @@ public class ArtworkController {
         btnFave.setOnAction(e -> {
             toggleUserToFaves();
         });
-        bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
-        this.userId = Run.database.getCurrentUser().getId();
+        bannerImg.setImage(Utilities.getImage(Main.database.BANNER_PATH));
+        this.userId = Main.database.getCurrentUser().getId();
     }
 
     /**
@@ -100,7 +100,7 @@ public class ArtworkController {
             }
 
 
-            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Pictures");
@@ -130,7 +130,7 @@ public class ArtworkController {
             reserveBox.setText(String.valueOf(painting.getReservePrice()));
             bidsBox.setText(String.valueOf(painting.getNumOfBids()));
             nextId = painting.getId();
-            userNameBox.setText(Run.database.getUser(userId).getUserName());
+            userNameBox.setText(Main.database.getUser(userId).getUserName());
             widthBox.setText(String.valueOf(painting.getWidth()));
             heightBox.setText(String.valueOf(painting.getHeight()));
             nameOfArtwork.setText(painting.getArtworkTitle());
@@ -150,7 +150,7 @@ public class ArtworkController {
             reserveBox.setText(String.valueOf(sculpture.getReservePrice()));
             bidsBox.setText(String.valueOf(sculpture.getNumOfBids()));
             nextId = sculpture.getId();
-            userNameBox.setText(Run.database.getUser(userId).getUserName());
+            userNameBox.setText(Main.database.getUser(userId).getUserName());
             widthBox.setText(String.valueOf(sculpture.getWidth()));
             heightBox.setText(String.valueOf(sculpture.getHeight()));
             descriptionBox.setText(sculpture.getArtworkDescription());
@@ -228,20 +228,20 @@ public class ArtworkController {
                 String material = materialBox.getText();
                Utilities.saveSculpture(sculpture,year, reserve, bids, width,height,depth,
                         creatorName,userId,material,title,desc,nextId, this.picturePath );
-               Run.database.addArtwork(sculpture);
-               Run.database.saveArtwork();
+                Main.database.addArtwork(sculpture);
+                Main.database.saveArtwork();
 
             }else if (paintingRadio.isSelected()){
                Utilities.savePainting(painting, year, reserve, bids, width,height,
                         creatorName,userId,title,desc, nextId, this.picturePath);
 
-                Run.database.addArtwork(painting);
-                Run.database.saveArtwork();
+                Main.database.addArtwork(painting);
+                Main.database.saveArtwork();
             }else{
                 throw new Exception("Error: Radio button not selected");
             }
 
-            for(Artwork a: Run.database.getAllArtworks()){
+            for(Artwork a: Main.database.getAllArtworks()){
                 System.out.println(a.toString());
             }
 
@@ -272,7 +272,7 @@ public class ArtworkController {
         this.painting = painting;
         this.sculpture = sculpture;
         this.nextId = id;
-        this.userNameBox.setText(Run.database.getCurrentUser().getUserName());
+        this.userNameBox.setText(Main.database.getCurrentUser().getUserName());
         this.bidsBox.setEditable(true);
         btnBid.setVisible(false);
         btnFave.setVisible(false);
@@ -302,11 +302,11 @@ public class ArtworkController {
 
 
         userId = artwork.getArtworkSeller();
-        if(Run.database.getCurrentUser().getFaveUsers().contains(userId)){
+        if(Main.database.getCurrentUser().getFaveUsers().contains(userId)){
             btnFave.setVisible(false);
         }
 
-        userNameBox.setText(String.valueOf(Run.database.getUser(artwork.getArtworkSeller()).getUserName()));
+        userNameBox.setText(String.valueOf(Main.database.getUser(artwork.getArtworkSeller()).getUserName()));
         nameOfArtwork.setText(artwork.getArtworkTitle());
         descriptionBox.setText(artwork.getArtworkDescription());
 
@@ -338,8 +338,8 @@ public class ArtworkController {
      * Adds the seller of this artwork to the current users favourite user list
      */
     private void toggleUserToFaves(){
-        Run.database.getCurrentUser().toggleFaveUser(userId);
-        Run.database.saveUsers();
+        Main.database.getCurrentUser().toggleFaveUser(userId);
+        Main.database.saveUsers();
         
         Utilities.savedInput();
         btnFave.setVisible(false);
@@ -356,7 +356,7 @@ public class ArtworkController {
             placeBidController controller = fxmlLoader.getController();
             controller.setArtwork(artwork);
 
-            Scene editScene = new Scene(root, (Run.EDIT_WINDOW_WIDTH/2), (Run.EDIT_WINDOW_HEIGHT/2));
+            Scene editScene = new Scene(root, (Main.EDIT_WINDOW_WIDTH/2), (Main.EDIT_WINDOW_HEIGHT/2));
             Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Place Bid");

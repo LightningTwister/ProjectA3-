@@ -85,11 +85,11 @@ public class registerController {
             user.add(addressList);
             user.add(picPath);
 
-            boolean emptyCheck = Run.database.createUser(user);
+            boolean emptyCheck = Main.database.createUser(user);
 
             if (emptyCheck == true){
                 Utilities.savedInput();
-                Run.database.saveUsers();
+                Main.database.saveUsers();
                 Utilities.closeWindow(rootPane);
             }else{
                 Utilities.wrongInputFound();

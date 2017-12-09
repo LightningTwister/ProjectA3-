@@ -41,7 +41,7 @@ public class logInController{
             registerNewUser();
         });
 
-        bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
+        bannerImg.setImage(Utilities.getImage(Main.database.BANNER_PATH));
     }
 
 
@@ -51,13 +51,13 @@ public class logInController{
     @FXML
     private void ChangeScreen(){
         if (Utilities.checkUsername(usernameBox.getText())){
-            Run.database.setCurrentUser(Run.database.getUser(usernameBox.getText()));
+            Main.database.setCurrentUser(Main.database.getUser(usernameBox.getText()));
             try{
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/menu.fxml"));
                 AnchorPane root = (AnchorPane) fxmlLoader.load();
 
-                Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+                Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
                 Stage editStage = new Stage();
                 editStage.setScene(editScene);
                 editStage.setTitle("Main Menu");
@@ -88,7 +88,7 @@ public class logInController{
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/CreateUser.fxml"));
 			BorderPane root = (BorderPane) fxmlLoader.load();
 
-			Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+			Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
 			Stage editStage = new Stage();
 			editStage.setScene(editScene);
 			editStage.setTitle("Registration");

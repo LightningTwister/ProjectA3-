@@ -50,9 +50,9 @@ public class menuController {
         btnWon.setOnAction(e -> {
             openWon();
         });
-        imgBanner.setImage(Utilities.getImage(Run.database.BANNER_PATH));
-        imgIcon.setImage(Utilities.getImage(Run.database.ICON_PATH));
-        labelLastLogIn.setText("You Last Logged in: " + Run.database.getCurrentUser().getLogInDate());
+        imgBanner.setImage(Utilities.getImage(Main.database.BANNER_PATH));
+        imgIcon.setImage(Utilities.getImage(Main.database.ICON_PATH));
+        labelLastLogIn.setText("You Last Logged in: " + Main.database.getCurrentUser().getLogInDate());
 
     }
 
@@ -67,7 +67,7 @@ public class menuController {
             artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
 
             controller.soldView();
-            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Sold Artworks");
@@ -92,7 +92,7 @@ public class menuController {
             artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
             controller.wonView();
 
-            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Won Artworks");
@@ -117,10 +117,10 @@ public class menuController {
             BrowseBidsController controller = fxmlLoader.<BrowseBidsController>getController();
 
 
-            controller.loadArtworks(Run.database.getAllArtworks());
+            controller.loadArtworks(Main.database.getAllArtworks());
 
 
-            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Browse Bids");
@@ -145,10 +145,10 @@ public class menuController {
 
             User_Controller controller = fxmlLoader.<User_Controller>getController();
 
-            controller.getUser(Run.database.getCurrentUser());
+            controller.getUser(Main.database.getCurrentUser());
 
 
-            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("User Page");
@@ -172,10 +172,10 @@ public class menuController {
 
             artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
 
-            controller.loadArtworks(Run.database.getAllArtworks());
+            controller.loadArtworks(Main.database.getAllArtworks());
 
 
-            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH,Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Artwork Page");

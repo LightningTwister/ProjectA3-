@@ -23,7 +23,7 @@ public class FileWriter {
 
         if (type.toLowerCase().equals("userlist")) {
             //System.out.println("Writing users to file.");
-            for (UserProfiles e : Run.database.getAllUsers()) {
+            for (UserProfiles e : Main.database.getAllUsers()) {
                 out.print(e.getId() + delim);
                 out.print(e.getUserName() + delim);
                 out.print(e.getFirstName() + delim);
@@ -44,7 +44,7 @@ public class FileWriter {
 
             out.close();
         } else if (type.toLowerCase().equals("artworklist")) {
-            for (Artwork a : Run.database.getAllArtworks()) {
+            for (Artwork a : Main.database.getAllArtworks()) {
                 if (a instanceof Painting) {
 
                     Painting p = (Painting) a;

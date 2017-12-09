@@ -35,7 +35,7 @@ public class faveUserController {
 
         userBox.setText(user.getUserName());
         id = user.getId();
-        Image profileImage = Utilities.getImage(Run.database.getUser(id).getProfilePicture());
+        Image profileImage = Utilities.getImage(Main.database.getUser(id).getProfilePicture());
         imgProfile.setImage(profileImage);
 
         }
@@ -65,14 +65,14 @@ public class faveUserController {
      * Add a Favourite user when the fave user button is clicked
      */
     private void addFaveUser(){
-        Run.database.getCurrentUser().toggleFaveUser(id);
+        Main.database.getCurrentUser().toggleFaveUser(id);
         }
 
     /**
      * Remove a favourite user the delete button is pressed
      */
     private void removeFaveUser(){
-        Run.database.getCurrentUser().toggleFaveUser(id);
+        Main.database.getCurrentUser().toggleFaveUser(id);
     }
 
 

@@ -73,7 +73,7 @@ public class ArtworkPictureController {
             }
         }
 
-        if(artworkList.size() == 1 && artworkPaths.get(0).equals(Run.database.NO_IMAGE_PATH)){
+        if(artworkList.size() == 1 && artworkPaths.get(0).equals(Main.database.NO_IMAGE_PATH)){
             Utilities.noImageFound();
             return;
         }else{
@@ -87,7 +87,7 @@ public class ArtworkPictureController {
      */
     private void addPicture(){
         if(artwork.equals("painting")&& artworkPaths.size() >= 1
-                && !(artworkPaths.get(0).equals(Run.database.NO_IMAGE_PATH))){
+                && !(artworkPaths.get(0).equals(Main.database.NO_IMAGE_PATH))){
             Utilities.maximumPicturesReached();
 
         }else{
@@ -99,7 +99,7 @@ public class ArtworkPictureController {
                     //If a user is adding a picture
                     //and the only picture stored is the default no image picture
                     //remove default picture
-                    if (artworkPaths.get(0).equals( Run.database.NO_IMAGE_PATH)){
+                    if (artworkPaths.get(0).equals( Main.database.NO_IMAGE_PATH)){
                         artworkPaths.remove(0);
                         artworkList.remove(0);
                     }
@@ -159,8 +159,8 @@ public class ArtworkPictureController {
 
         if (artworkPaths.size() ==0){
 
-            newArtworkList.add(Utilities.getImage(Run.database.NO_IMAGE_PATH));
-            artworkPaths.add(Run.database.NO_IMAGE_PATH);
+            newArtworkList.add(Utilities.getImage(Main.database.NO_IMAGE_PATH));
+            artworkPaths.add(Main.database.NO_IMAGE_PATH);
 
         }else{
             for(String a: artworkStrings){
@@ -188,7 +188,7 @@ public class ArtworkPictureController {
         index = 0;
 
         if (artworkList.size() == 0){
-            this.artworkPaths.add(Run.database.NO_IMAGE_PATH);
+            this.artworkPaths.add(Main.database.NO_IMAGE_PATH);
             this.artworkList.add(Utilities.getImage(artworkPaths.get(index)));
             btnAdd.setVisible(true);
         }

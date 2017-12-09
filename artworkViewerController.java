@@ -93,10 +93,10 @@ public class artworkViewerController {
         //artworksForUser.clear();
 
         // Add each artwork to the displayed list
-        for (Artwork c : Run.database.getAllArtworks()) {
+        for (Artwork c : Main.database.getAllArtworks()) {
             // Puts selected data into the list view.
 
-            if (c.getArtworkSeller() == (Run.database.getCurrentUser().getId())) {
+            if (c.getArtworkSeller() == (Main.database.getCurrentUser().getId())) {
                 artworksForUser.add(c);
                 lstArtworks.getItems().add(String.format("%-30s%-30s%-5s", "Title: " + c.getArtworkTitle(), "Creator: "
                         + c.getArtworkCreator(), "Reserve: " + c.getReservePrice()));
@@ -120,15 +120,15 @@ public class artworkViewerController {
             Painting newPainting = new Painting();
             Sculpture newSculpture = new Sculpture();
 
-            int index = (Run.database.getAllArtworks().get(Run.database.getAllArtworks().size() - 1).getId() + 1);
+            int index = (Main.database.getAllArtworks().get(Main.database.getAllArtworks().size() - 1).getId() + 1);
 
             // load the edit page controller with a new painting and sculpture object with the new id number.
             controller.artworkToAdd(newPainting, newSculpture, index);
 
-            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
-            editStage.setTitle(Run.EDITP_WINDOW_TITLE);
+            editStage.setTitle(Main.EDITP_WINDOW_TITLE);
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
 
@@ -165,10 +165,10 @@ public class artworkViewerController {
             ArtworkController controller = fxmlLoader.<ArtworkController>getController();
             controller.getArtwork(selectedPainting);
 
-            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
-            editStage.setTitle(Run.EDITP_WINDOW_TITLE);
+            editStage.setTitle(Main.EDITP_WINDOW_TITLE);
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
 
@@ -197,10 +197,10 @@ public class artworkViewerController {
 
             controller.getArtwork(selectedSculpture);
 
-            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
-            editStage.setTitle(Run.EDITS_WINDOW_TITLE);
+            editStage.setTitle(Main.EDITS_WINDOW_TITLE);
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
 
@@ -220,13 +220,13 @@ public class artworkViewerController {
         btnEdit.setVisible(false);
         artworksForUser.clear();
         lstArtworks.getItems().clear();
-        artworksForUser = Run.database.getCompletedAuctions();
+        artworksForUser = Main.database.getCompletedAuctions();
 
         for (Artwork c : artworksForUser) {
 
 
             lstArtworks.getItems().add(c.getArtworkTitle() + "  " + c.getHighestBid().getAmount() + "  " +
-                    Run.database.getUser(c.getHighestBid().getUserID()).getUserName());
+                    Main.database.getUser(c.getHighestBid().getUserID()).getUserName());
 
         }
 
@@ -241,10 +241,10 @@ public class artworkViewerController {
         artworksForUser.clear();
         lstArtworks.getItems().clear();
 
-        for (Integer a : Run.database.getCurrentUser().getWonArtworks()) {
+        for (Integer a : Main.database.getCurrentUser().getWonArtworks()) {
             System.out.println(a);
-            artworksForUser.add(Run.database.getArtwork(a));
-            lstArtworks.getItems().add(Run.database.getArtwork(a).getArtworkTitle());
+            artworksForUser.add(Main.database.getArtwork(a));
+            lstArtworks.getItems().add(Main.database.getArtwork(a).getArtworkTitle());
         }
 
     }

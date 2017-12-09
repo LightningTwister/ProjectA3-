@@ -1,12 +1,11 @@
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class Run extends Application {
+public class Main extends Application {
     private static final int MAIN_WINDOW_WIDTH = 600;
     private static final int MAIN_WINDOW_HEIGHT = 400;
     private static final String WINDOW_TITLE = "Log In";
@@ -34,7 +33,6 @@ public class Run extends Application {
 
 
         try {
-            //Parent root = FXMLLoader.load(getClass().getResource("/Fxml/logInPage.fxml"));
 
             Parent root = FXMLLoader.load(getClass().getResource("/Fxml/logInPage.fxml"));
 
