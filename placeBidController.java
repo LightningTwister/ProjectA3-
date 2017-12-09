@@ -49,12 +49,14 @@ public class placeBidController {
                 errorTooLow.setVisible(false);
                 errorBidTwice.setVisible(false);
                 placeBid();
+                goBack();
             }catch (FileAlreadyExistsException c1){
                 errorBidTwice.setVisible(true);
 
             }catch (Exception e2){
                 errorTooLow.setVisible(true);
             }
+
         });
 
 
