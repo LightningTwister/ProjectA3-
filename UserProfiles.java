@@ -64,15 +64,17 @@ public class UserProfiles {
 	}
 
 	/**
-	 *
-	 * @param userName
-	 * @param firstName
-	 * @param lastName
-	 * @param phoneNumber
-	 * @param address
-	 * @param postCode
-	 * @param profilePicture
-	 * @param id
+	 * Constructor to create a user profile object
+	 * @param id id of the user main distinguishing characteristic of the user
+	 * @param userName username of the user
+	 * @param firstName first name of the user
+	 * @param lastName last name of the user
+	 * @param phoneNumber phone number of the user
+	 * @param address address of the user
+	 * @param postCode post code of the user
+	 * @param profilePicture profile picture of the user
+	 * @param date date that is profile last logged in
+	 * @param fUsers list of favourite users
 	 */
 	public UserProfiles (String userName, String firstName, String lastName, String phoneNumber,
 						 	ArrayList<String> address, String postCode ,String profilePicture, int id, String date, ArrayList<Integer> fUsers){
@@ -97,10 +99,18 @@ public class UserProfiles {
 
 	}
 
+	/**
+	 * Get the last log in date of this profile
+	 * @return String formatted date
+	 */
 	public String getLogInDate() {
 		return logInDate;
 	}
 
+	/**
+	 * Set the last log in date of this profile
+	 * @param logInDate String formatted date to save
+	 */
 	public void setLogInDate(String logInDate) {
 		this.logInDate = logInDate;
 	}
@@ -339,8 +349,8 @@ public class UserProfiles {
 
 
 	/**
-	 *
-	 * @param id
+	 *	Toggle wether a user is favourited for this account
+	 * @param id id of the user to be toggled
 	 */
 	public void toggleFaveUser(int id){
 		boolean existed = false;
