@@ -35,13 +35,14 @@ public class BrowseBidsController {
     private Label labelOf, labelTitle;
     @FXML
     private TextArea descBox;
-
     @FXML
     private CheckBox checkPainting, checkSculpture, checkFave;
     @FXML
     private ImageView imgView;
 
-
+    /**
+     * Initialize method to link buttons and checkboxes from the gui to methods to be run
+     */
     public void initialize() {
         btnPrev.setOnAction(e -> {
             index = index - 1;
@@ -66,12 +67,10 @@ public class BrowseBidsController {
         });
 
         checkPainting.setOnAction(e -> {
-
             scrollList.clear();
             updateScrollList(artworksToBidOn);
         });
         checkSculpture.setOnAction(e -> {
-
             scrollList.clear();
             updateScrollList(artworksToBidOn);
         });
@@ -84,9 +83,11 @@ public class BrowseBidsController {
         checkPainting.setSelected(true);
         checkSculpture.setSelected(true);
         checkFave.setSelected(false);
-
-
     }
+
+    /**
+     *  View the pictures of this artwork
+     */
     private void viewSelectedArtwork(){
         try{
 
@@ -94,9 +95,6 @@ public class BrowseBidsController {
             BorderPane root = (BorderPane) fxmlLoader.load();
 
             ArtworkController controller = fxmlLoader.<ArtworkController>getController() ;
-
-
-
 
             // load the edit page controller with a new painting and sculpture object with the new id number.
             controller.artworkToBid(currentArtwork);
@@ -108,14 +106,14 @@ public class BrowseBidsController {
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
 
-
-
-
         }catch(Exception e){
             e.printStackTrace();
         }
     }
 
+    /**
+     * Filter the Artworks that can be bid on, to ones placed by favourited users
+     */
     private void faveUsersOnly(){
 
             if (checkFave.isSelected()){
@@ -130,8 +128,10 @@ public class BrowseBidsController {
         }
 
     }
-
-
+    /**
+     *  Update the list of Artworks to be displayed based on the filtering selections
+     * @param checkList List of artworks to be arranged in the viewer list
+     */
     private void updateScrollList(ArrayList<Artwork> checkList) {
 
 
@@ -149,7 +149,6 @@ public class BrowseBidsController {
                 }
                 if (checkSculpture.isSelected()) {
                     if (artwork instanceof Sculpture) {
-
                         scrollList.add(artwork);
                     }
                 }
@@ -164,6 +163,9 @@ public class BrowseBidsController {
         }
     }
 
+    /**
+     * Method that handles if no artwork is found in the scroll list
+     */
     private void noArtworkFound() {
         labelTitle.setText("Title: NO ARTWORK COULD BE FOUND");
         imgView.setImage(Utilities.getImage(Run.database.NO_IMAGE_PATH));
@@ -173,7 +175,10 @@ public class BrowseBidsController {
         labelOf.setText("0 of 0");
     }
 
-
+    /**
+     * Get all the artworks and then sort them so its artworks the user can bid on
+     * @param artworkList List of artworks that can be bid on
+     */
     public void loadArtworks(ArrayList<Artwork> artworkList) {
 
         for (Artwork art : artworkList) {
@@ -196,6 +201,9 @@ public class BrowseBidsController {
 
     }
 
+    /**
+     * Method that once the next button is clicked, sets the gui to show the next artwork in the scroll list
+     */
     private void nextArtwork() {
         labelTitle.setText("Title: " + currentArtwork.getArtworkTitle());
         imgView.setImage(Utilities.getImage(currentArtwork.getPicture()));
@@ -204,7 +212,10 @@ public class BrowseBidsController {
         recheckButtons();
 
     }
-
+    
+    /**
+     * Method to update the button and gui text when a new artwork is loaded
+     */
     private void recheckButtons() {
         if (index == 0) {
             btnPrev.setVisible(false);
