@@ -264,6 +264,16 @@ public class Database {
         return artworks;
     }
 
+    public ArrayList<Artwork> getWonAuctions(){
+        ArrayList<Artwork> artworks = new ArrayList<>();
+        ArrayList<Integer> artIDs = currentUser.getWonArtworks();
+        for(int id : artIDs){
+            artworks.add(this.artworks.get(id));
+
+        }
+        return artworks;
+    }
+
     public ArrayList<UserProfiles> getFaveUsers(){
         ArrayList<UserProfiles> result = new ArrayList<UserProfiles>();
         for(int id : currentUser.getFaveUsers()){
