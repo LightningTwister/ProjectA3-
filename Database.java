@@ -35,7 +35,7 @@ public class Database {
 
     /**
      *  Get method that returns a current user
-     * @return
+     * @return The profile of the users using the system at the moment
      */
     public UserProfiles getCurrentUser() {
         return currentUser;
@@ -94,14 +94,12 @@ public class Database {
         }
     }
 
+    /**
+     * Method that loads the bids to the system
+     */
     private void loadBids(){
         bids = new HashMap<>();
-        //ArrayList<Bid> rBids;
-        //rBids= FileReader.readFile(BID_PATH,"bidList");
 
-        //for(Bid a: rBids){
-        //    bids.put(Integer.valueOf(a.getBidID()),a);
-        //}
     }
 
     /**
@@ -169,6 +167,9 @@ public class Database {
         return result;
     }*/
 
+    /**
+     *  Return the bid history for a bid object
+     */
     public ArrayList<String> getBidHistory(int id){
         ArrayList<Integer> idList = artworks.get(id).getBidHistory();
         ArrayList<String> result = new ArrayList<>();
@@ -183,7 +184,12 @@ public class Database {
         return result;
     }
 
-
+    /**
+     *  Place a new bid on an artwork
+     * @param amount Amount being placed on the artwork
+     * @param artID Artwork Identifier
+     * @throws Exception
+     */
 	 public void placeBid(double amount, int artID) throws Exception{
         Artwork art = this.getArtwork(artID);
         int bid = this.getNextIDBid();
@@ -200,6 +206,11 @@ public class Database {
          }
     }
 
+    /**
+     *  Get the list of artworks based on which type you want
+     * @param typeOfList Parameter to determine which artworks are wanted
+     * @return List of appropriate artworks
+     */
     public ArrayList<Artwork> getArtworkList(String typeOfList){
         int paint1Sculp2All = -1;
         switch (typeOfList){
@@ -235,25 +246,11 @@ public class Database {
         return result;
     }
 
-    public static HashMap<Integer, Artwork> browseArtworks(HashMap<Integer, Artwork> artworkList, boolean isPaintings){
-        HashMap<Integer, Artwork> result = new HashMap<Integer, Artwork>();
-        for (Map.Entry artwork : artworkList.entrySet())
-        {
-            if(isPaintings){
-                if (artwork.getValue() instanceof  Sculpture) {
-                    result.put((Integer) artwork.getKey(), (Artwork) artwork.getValue());
-                }
-            }else{
-                if (artwork.getValue() instanceof  Painting) {
-                    result.put((Integer) artwork.getKey(), (Artwork) artwork.getValue());
-                }
-            }
 
-
-        }
-        return result;
-    }
-
+    /**
+     *  Return a list of artworks where the auction has ended
+     * @return List of artworks that have been bought
+     */
     public ArrayList<Artwork> getCompletedAuctions(){
         ArrayList<Artwork> artworks = new ArrayList<>();
         ArrayList<Integer> artIDs = currentUser.getCompletedAuctions();
@@ -264,6 +261,10 @@ public class Database {
         return artworks;
     }
 
+    /**
+     *  Get auctions that have been won by the current user
+     * @return List of artworks that the current user has won
+     */
     public ArrayList<Artwork> getWonAuctions(){
         ArrayList<Artwork> artworks = new ArrayList<>();
         ArrayList<Integer> artIDs = currentUser.getWonArtworks();
@@ -274,64 +275,11 @@ public class Database {
         return artworks;
     }
 
-    public ArrayList<UserProfiles> getFaveUsers(){
-        ArrayList<UserProfiles> result = new ArrayList<UserProfiles>();
-        for(int id : currentUser.getFaveUsers()){
-            result.add(users.get(id));
-        }
-        return result;
-    }
-    
-
-
-   // public int bid(int artworkID, int Amount){
-    //    Integer bidID = getNextID(bids);
-    //    Artwork artwork = getArtwork(artworkID);
-    //    try{
-    //        Bid newBid = new Bid(Amount, currentUser.getID(), bidID, artwork.getArtworkBid();
-    //        bids.put(bidID, newBid);
-    //        artwork.bid(bidID,newBid);
-    //        return 0;
-    //    }catch (Exception e){
-    //        return 1;
-    //    }
-
-   // }
-
-   // public void toggleFavouriteUser(int userID){
-     //   currentUser.toggleFavouriteUser(userID);
-    //}
-
-    //public void newArtwork( ArrayList<Object> info){
-    //    Integer artworkID = getNextID(artworks);
-    //    int type = (int)info.get(0);
-     //   String artworkTitle = (String) info.get(1);
-     //   String artworkDescription = (String) info.get(2);
-     //   String artworkCreator = (String) info.get(3);
-     //   int artworkYearCreated = (int)info.get(4);
-    //    double reservePrice = (double)info.get(5);
-    ////    int numOfBids = (int)info.get(6);
-     //   String userNameSeller = (String) info.get(7);
-    //    int width = (int)info.get(8);
-    //    int height = (int)info.get(9);
-
-        //Bid currentBid = new Bid(reervePrice);
-
-    //    if(type == 0){
-     //       Painting painting = new Painting(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated,
-    //                            reservePrice, numOfBids, userNameSeller, width, height);
-     //       artworks.put(artworkID, painting);
-     //   }else{
-     //       int depth = (int)info.get(10);
-     //       String material = (String) info.get(11);
-//
-    //        Sculpture sculpture = new Sculpture(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated, reservePrice,
-     //                             numOfBids,String userNameSeller, width, height, depth, material);
-//
-    //        artworks.put(artworkID, sculpture);
-    //    }
-   // }
-
+    /**
+     * Create a new user for the artatawe system
+     * @param info A list of data that has been created for the user
+     * @return Boolean to determine if the user has been created with valid data
+     */
     public  boolean createUser( ArrayList<Object> info) {
         Integer userID = getNextIDProfile();
 
@@ -377,74 +325,10 @@ public class Database {
 
     }
 
-
-
-
-
-/* not implementing sincelastlogin
-    public ArrayList<Artwork> newArtworks(){
-
-    }
-
-    public ArrayList<Artwork> newBids(){
-
-    }
-*/
-
-
-
-   // public void logout(){
-    //    FileWriter.writeToFile(USER_PATH,ARTWORK_PATH,BID_PATH,users,artworks,bids);
-   // }
-
-
-   // public void setCurrentUser(String username){
-   //     for (Map.Entry current : users.entrySet())
-    //    {
-    //        if(current.getValue().getUsername().equalsIgnoreCase(username)){
-     //           currentUser = (UserProfile) current.getValue();
-     //       }
-     //   }
-    //}
-
-
-
-   // private void readUsers(){
-    //    users = FileReader.readFile(USER_PATH,"userList");
-    //}
-
- //   private void readBids(){
-  //      bids = FileReader.readFile(BID_PATH, "bidList");
-  //  }
-
-
-   // private void updateArtworks(){
-   //     artworks = FileWriter.writeFile(ARTWORK_PATH,"userList");
-   // }
-
-  //  private void updateUsers(){
-    //    users = FileWriter.writeFile(USER_PATH,"userList");
-    //}
-
-   // private void updateBids(){
-    //    bids = FileWriter.writeFile(BID_PATH, "bidList");
-   // }
-
-    private Integer getNextIDArtwork(){
-        if(artworks.size() == 0) return 1;
-        Integer id = 0;
-        Integer currentID = 0;
-        for (Map.Entry current : artworks.entrySet())
-        {
-            currentID = (Integer)current.getKey();
-            if(currentID>id){
-                id = currentID;
-            }
-        }
-        id++;
-        return id;
-    }
-
+    /**
+     *  get the next available id for a profile
+     * @return An available id for a new profile
+     */
     private Integer getNextIDProfile(){
         if(users.size() == 0) return 1;
         Integer id = 0;
@@ -460,6 +344,10 @@ public class Database {
         return id;
     }
 
+    /**
+     * get the next available id fro a bid object
+     * @return An available id for a new bid
+     */
     private Integer getNextIDBid(){
         if(bids.size() == 0) return 1;
         Integer id = 0;
@@ -476,15 +364,31 @@ public class Database {
 
         return id;
     }
+
+    /**
+     * Find a user profile based on its id number
+     * @param id of the user you are looking for
+     * @return The uersprofile of the user searching for
+     */
     public UserProfiles getUser(Integer id){
 
         return Utilities.getUser(id);
     }
 
+    /**
+     * Get an artwork based on its id number
+     * @param id of the artwork being searched for
+     * @return Artwork searched for
+     */
     public Artwork getArtwork(Integer id){
         return artworks.get(id);
     }
 
+    /**
+     *  Get a bid object based on its id number
+     * @param id of the bid object being searched for
+     * @return The bid object
+     */
     public Bid getBid(Integer id){
         return bids.get(id);
     }
