@@ -281,7 +281,7 @@ public class Database {
         }
         return result;
     }
-
+    
 
 
    // public int bid(int artworkID, int Amount){
@@ -485,9 +485,9 @@ public class Database {
         return artworks.get(id);
     }
 
-   // public Bid getBids(Integer id){
-     //   return bids.get(id);
-    //}
+    public Bid getBid(Integer id){
+        return bids.get(id);
+    }
 
 
 }
