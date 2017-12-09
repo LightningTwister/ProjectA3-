@@ -8,7 +8,7 @@ public class Bid {
     private int ubidID;
     private int uartworkID;
     private double uamount;
-    private Date udatePlaced;
+    private String udatePlaced;
 
     public Bid(double amount){
         uamount = amount;
@@ -20,10 +20,18 @@ public class Bid {
         setUserID(userID);
 
         bidAccepted(currBid);
-
-        //udatePlaced = new Date();
-        //udatePlaced.setTime();
+        udatePlaced = Utilities.getDate();
     }
+
+    //For File I/O
+    public Bid(int bidID, double amount, int userID, int artworkID, String udatePlaced) {
+        setAmount(amount);
+        setArtworkID(artworkID);
+        setBidID(bidID);
+        setUserID(userID);
+        setDatePlaced(udatePlaced);
+    }
+
     private void bidAccepted(Bid currBid) throws Exception{
         if(uamount < currBid.getAmount()) {
             throw new Exception("Bid too low");
@@ -46,7 +54,7 @@ public class Bid {
         uamount = amount;
     }
 
-    public void datePlaced(Date udatePlaced){
+    public void setDatePlaced(String udatePlaced){
         this.udatePlaced = udatePlaced;
     }
 
@@ -65,7 +73,7 @@ public class Bid {
         return uamount;
     }
 
-    public Date getDatePlaced(){
+    public String getDatePlaced(){
         return udatePlaced;
     }
 

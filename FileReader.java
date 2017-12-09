@@ -79,7 +79,7 @@ public class FileReader {
 			faveUsers.add(in.nextInt());
 		}
 		userList.add(new UserProfiles(userName, firstName, lastName, phoneNumber,userAddress, postCode ,path,
-				Integer.valueOf(id), faveUsers, date));
+				Integer.valueOf(id), date));
     	return userList;
     }
     private static ArrayList loadPaintingsToSystem(Scanner in){

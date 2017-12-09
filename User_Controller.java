@@ -153,6 +153,7 @@ public class User_Controller {
 
             faveUserController controller = fxmlLoader.<faveUserController>getController();
 
+
             controller.getUser(Run.database.getUser(fuserDrop.getValue().toString()));
 
             Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
@@ -177,10 +178,11 @@ public class User_Controller {
     private void goToBidHistory(){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/UserBidHistory.fxml"));
-            BorderPane root = (BorderPane) fxmlLoader.load();
+            Pane root = fxmlLoader.load();
 
             Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
+
             editStage.setScene(editScene);
             editStage.setTitle("BidHistory");
             editStage.initModality(Modality.APPLICATION_MODAL);

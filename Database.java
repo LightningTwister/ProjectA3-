@@ -6,7 +6,7 @@ import java.util.*;
  */
 public class Database {
 
-    private final String ARTWORK_PATH ="Data/artworkfile1.txt";
+    private final String ARTWORK_PATH ="Data/artworkfile.txt";
     private final String USER_PATH = "Data/UserList1.txt";
     private final String BID_HISTORY_PATH = "Data/bidhistory.txt";
     public final String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
@@ -158,14 +158,31 @@ public class Database {
         }
         return result;
     }
-    public ArrayList<Bid> getBidHistory(int id){
+
+    /*public ArrayList<Bid> getBidHistory(int id){
         ArrayList<Integer> idList = artworks.get(id).getBidHistory();
         ArrayList<Bid> result = new ArrayList<Bid>();
         for(int bid : idList){
             result.add(bids.get(bid));
         }
         return result;
+    }*/
+
+    public ArrayList<String> getBidHistory(int id){
+        ArrayList<Integer> idList = artworks.get(id).getBidHistory();
+        ArrayList<String> result = new ArrayList<>();
+        UserProfiles user;
+        Bid currBid;
+        for(int bid : idList){
+            currBid = bids.get(bid);
+            user = users.get(currBid.getUserID());
+            result.add("Username of Bidder: " + user.getUserName() + "Amount Bid: " + currBid.getAmount() + " on " + currBid.getDatePlaced());
+        }
+
+        return result;
     }
+
+
 	 public void placeBid(double amount, int artID) throws Exception{
         Artwork art = this.getArtwork(artID);
         int bid = this.getNextIDBid();
@@ -314,7 +331,7 @@ public class Database {
             String reportDate = df.format(today);
 
             UserProfiles newUser = new UserProfiles (userName, firstName, lastName, phoneNumber, address, postCode ,
-                    profilePicture, userID, fUsers,reportDate );
+                    profilePicture, userID,reportDate );
             users.put(userID, newUser);
         }catch (Exception e){
             e.printStackTrace();

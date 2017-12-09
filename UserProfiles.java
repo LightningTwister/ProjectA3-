@@ -42,7 +42,7 @@ public class UserProfiles {
 	 * @param bidHistory list of bid IDs of bids the user has placed
 	 */
 	public UserProfiles (int id, String userName, String firstName, String lastName, String phoneNumber,
-						 ArrayList<String> address, String postCode ,String profilePicture,
+						 ArrayList<String> address, String postCode ,String profilePicture, String logInDate,
 						 ArrayList<Integer> faveUsers, ArrayList<Integer> currentAuctions, ArrayList<Integer> wonArtworks,
 						 ArrayList<Integer> completedAuctions, ArrayList<Integer> bidHistory){
 		this.userName = userName;
@@ -51,7 +51,7 @@ public class UserProfiles {
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.postCode = postCode;
-		//this.logInDate = logInDate;
+		this.logInDate = logInDate;
 		this.profilePicture = profilePicture;
 		this.id = id;
 
@@ -73,11 +73,9 @@ public class UserProfiles {
 	 * @param postCode
 	 * @param profilePicture
 	 * @param id
-	 * @param fUsers
 	 */
 	public UserProfiles (String userName, String firstName, String lastName, String phoneNumber,
-						 	ArrayList<String> address, String postCode ,String profilePicture, int id,
-								 ArrayList<Integer> fUsers, String date){
+						 	ArrayList<String> address, String postCode ,String profilePicture, int id, String date){
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -87,13 +85,12 @@ public class UserProfiles {
 		this.logInDate = date;
 		this.profilePicture = profilePicture;
 		this.id = id;
-		this.faveUsers = fUsers;
 
 		currentAuctions = new ArrayList<Integer>();
 		wonArtworks = new ArrayList<Integer>();
 		completedAuctions = new ArrayList<Integer>();
 		bidHistory = new ArrayList<Integer>();
-		//faveUsers = new ArrayList<Integer>();
+		faveUsers = new ArrayList<Integer>();
 
 	}
 
@@ -162,15 +159,10 @@ public class UserProfiles {
 		this.address = address;
 	}
 
-	public void addFaveUsers(int user) {
-		this.faveUsers.add(user);
-	}
-
 	/**
 	 * Sets the postcode of the user
 	 * @param postCode the postcode of the user
 	 */
-
 	public void setPostCode (String postCode) {
 		if(Utilities.checkPostCode(postCode)){
 			this.postCode = postCode;
