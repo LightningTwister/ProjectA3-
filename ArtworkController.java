@@ -321,10 +321,13 @@ public class ArtworkController {
             heightBox.setText(String.valueOf(this.painting.getHeight()));
             this.picturePath = this.painting.getPictures();
         }
+        
 
     }
     private void toggleUserToFaves(){
         Run.database.getCurrentUser().toggleFaveUser(userId);
+        Run.database.saveUsers();
+        
         Utilities.savedInput();
         btnFave.setVisible(false);
     }

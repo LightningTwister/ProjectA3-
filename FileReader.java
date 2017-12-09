@@ -76,10 +76,12 @@ public class FileReader {
 		String path = in.next();
 		ArrayList<Integer> faveUsers = new ArrayList<>();
 		while (in.hasNextInt()){
-			faveUsers.add(in.nextInt());
+			int i = in.nextInt();
+			faveUsers.add(i);
 		}
+
 		userList.add(new UserProfiles(userName, firstName, lastName, phoneNumber,userAddress, postCode ,path,
-				Integer.valueOf(id), date));
+				Integer.valueOf(id), date, faveUsers));
     	return userList;
     }
     private static ArrayList loadPaintingsToSystem(Scanner in){
@@ -163,6 +165,9 @@ public class FileReader {
             System.out.println("Cannot open: " + fileName);
             System.exit(0);
         }
+
+
+
         return readDataFile(in, type);
     }
     public static ArrayList<UserProfiles> getProfiles(){

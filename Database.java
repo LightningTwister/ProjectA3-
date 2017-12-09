@@ -6,7 +6,7 @@ import java.util.*;
  */
 public class Database {
 
-    private final String ARTWORK_PATH ="Data/artworkfile.txt";
+    private final String ARTWORK_PATH ="Data/artworkfile1.txt";
     private final String USER_PATH = "Data/UserList1.txt";
     private final String BID_HISTORY_PATH = "Data/bidhistory.txt";
     public final String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
@@ -49,7 +49,6 @@ public class Database {
         loadUsers();
         loadBids();
 
-
     }
 
     /**
@@ -73,6 +72,7 @@ public class Database {
         users = new HashMap<>();
         ArrayList<UserProfiles> rProfiles;
         rProfiles= FileReader.readFile(USER_PATH,"userlist");
+
 
         for(UserProfiles a: rProfiles){
             users.put(Integer.valueOf(a.getId()),a);
@@ -331,8 +331,10 @@ public class Database {
             Date today = Calendar.getInstance().getTime();
             String reportDate = df.format(today);
 
+
+
             UserProfiles newUser = new UserProfiles (userName, firstName, lastName, phoneNumber, address, postCode ,
-                    profilePicture, userID,reportDate );
+                    profilePicture, userID,reportDate,fUsers );
             users.put(userID, newUser);
         }catch (Exception e){
             e.printStackTrace();

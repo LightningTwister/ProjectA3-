@@ -20,7 +20,7 @@ public class UserProfiles {
 	private ArrayList<Integer> wonArtworks;
 	private ArrayList<Integer> completedAuctions;
 	private ArrayList<Integer> bidHistory;
-	private ArrayList<Integer> faveUsers;
+	private ArrayList<Integer> faveUsers ;
 
 
 
@@ -75,7 +75,7 @@ public class UserProfiles {
 	 * @param id
 	 */
 	public UserProfiles (String userName, String firstName, String lastName, String phoneNumber,
-						 	ArrayList<String> address, String postCode ,String profilePicture, int id, String date){
+						 	ArrayList<String> address, String postCode ,String profilePicture, int id, String date, ArrayList<Integer> fUsers){
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -86,11 +86,14 @@ public class UserProfiles {
 		this.profilePicture = profilePicture;
 		this.id = id;
 
+		this.faveUsers = fUsers;
+
+
 		currentAuctions = new ArrayList<Integer>();
 		wonArtworks = new ArrayList<Integer>();
 		completedAuctions = new ArrayList<Integer>();
 		bidHistory = new ArrayList<Integer>();
-		faveUsers = new ArrayList<Integer>();
+
 
 	}
 
@@ -256,6 +259,7 @@ public class UserProfiles {
 	 * @return the list of favourite users the user has
 	 */
 	public ArrayList<Integer> getFaveUsers () {
+
 		return faveUsers;
 
 	}
@@ -335,7 +339,7 @@ public class UserProfiles {
 
 
 	/**
-	 * WTF IS THIS ?
+	 *
 	 * @param id
 	 */
 	public void toggleFaveUser(int id){
@@ -358,7 +362,7 @@ public class UserProfiles {
 
 	@Override
 	public String toString() {
-		return "UserProfile{" +
+		String a = "UserProfile{" +
 				"userName='" + userName + '\'' +
 				", firstName='" + firstName + '\'' +
 				", lastName='" + lastName + '\'' +
@@ -369,6 +373,14 @@ public class UserProfiles {
 				", auctionID=" + auctionID +
 				", logInDate=" + logInDate +
 				", id=" + id +
+
 				'}';
+
+
+		for(Integer b: faveUsers){
+
+			a = a + " FAVE USER: "+b;
+		}
+		return a;
 	}
 }

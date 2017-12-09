@@ -72,6 +72,7 @@ public class User_Controller {
 
     private void populateCombo(){
         fuserDrop.getItems().clear();
+
         for(Integer u: this.user.getFaveUsers()){
             fuserDrop.getItems().add(Run.database.getUser(u).getUserName());
         }
