@@ -86,10 +86,14 @@ import java.util.Date;
     public void setPicture(String picture) {
         this.picture = picture;
     }
-protected void placeBid(Bid newBid)throws Exception {
-        highestBid = newBid;
-        bidHistory.add(newBid.getBidID());
-        numOfBids--;
+
+    protected void placeBid(Bid newBid)throws Exception {
+            if(numOfBids == 0){
+                throw new Exception("Artwork is completed");
+            }
+            highestBid = newBid;
+            bidHistory.add(newBid.getBidID());
+            numOfBids--;
     }
 
     public Bid getHighestBid(){
