@@ -195,7 +195,11 @@ public class Database {
         art.placeBid(newBid);
         currentUser.addBid(bid);
         bids.put(bid,newBid);
+         if(art.getNumOfBids() == 0){
+             currentUser.addWonArtwork(newBid.getBidID());
+         }
     }
+
     public ArrayList<Artwork> getArtworkList(String typeOfList){
         int paint1Sculp2All = -1;
         switch (typeOfList){
@@ -248,6 +252,16 @@ public class Database {
 
         }
         return result;
+    }
+
+    public ArrayList<Artwork> getCompletedAuctions(){
+        ArrayList<Artwork> artworks = new ArrayList<>();
+        ArrayList<Integer> artIDs = currentUser.getCompletedAuctions();
+        for(int id : artIDs){
+            artworks.add(this.artworks.get(id));
+
+        }
+        return artworks;
     }
 
     public ArrayList<UserProfiles> getFaveUsers(){
