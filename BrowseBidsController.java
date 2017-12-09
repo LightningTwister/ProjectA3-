@@ -30,7 +30,7 @@ public class BrowseBidsController {
     private Artwork currentArtwork;
 
     @FXML
-    private Button btnPrev, btnNext, btnCompleted, btnWon, btnView;
+    private Button btnPrev, btnNext, btnView;
     @FXML
     private Label labelOf, labelTitle;
     @FXML
@@ -55,12 +55,7 @@ public class BrowseBidsController {
             currentArtwork = scrollList.get(index);
             nextArtwork();
         });
-        btnCompleted.setOnAction(e -> {
-
-        });
-        btnWon.setOnAction(e -> {
-
-        });
+      
         btnView.setOnAction(e -> {
             viewSelectedArtwork();
 
@@ -212,7 +207,7 @@ public class BrowseBidsController {
         recheckButtons();
 
     }
-    
+
     /**
      * Method to update the button and gui text when a new artwork is loaded
      */

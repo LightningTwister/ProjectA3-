@@ -27,11 +27,6 @@
                         <Insets left="5.0" right="10.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnCompleted" mnemonicParsing="false" text="Completed Auctions">
-                     <HBox.margin>
-                        <Insets left="140.0" right="10.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
                   <Button fx:id="btnWon" mnemonicParsing="false" text="Won Auctions">
                      <HBox.margin>
                         <Insets top="5.0" />
