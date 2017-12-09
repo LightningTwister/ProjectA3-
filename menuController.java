@@ -14,19 +14,20 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
 /**
- *  This class controls the main menu page
- *  @author Tim Watson 880158
- *  @version 1
+ * This class controls the main menu page
+ *
+ * @author Tim Watson 880158
+ * @version 1
  */
-public class menuController{
+public class menuController {
     @FXML
-    private Button btnProfile,btnBid,btnArtworks, btnSold,btnWon;
+    private Button btnProfile, btnBid, btnArtworks, btnSold, btnWon;
     @FXML
-    Pane rootPane;
+    private Pane rootPane;
     @FXML
-    ImageView imgBanner,imgIcon;
+    private ImageView imgBanner, imgIcon;
     @FXML
-    Label labelLastLogIn;
+    private Label labelLastLogIn;
 
 
     /**
@@ -43,52 +44,53 @@ public class menuController{
         btnArtworks.setOnAction(e -> {
             artworkPage();
         });
-        btnSold.setOnAction(e ->{
+        btnSold.setOnAction(e -> {
             openSold();
         });
-        btnWon.setOnAction(e ->{
+        btnWon.setOnAction(e -> {
             openWon();
         });
         imgBanner.setImage(Utilities.getImage(Run.database.BANNER_PATH));
         imgIcon.setImage(Utilities.getImage(Run.database.ICON_PATH));
-        labelLastLogIn.setText("You Last Logged in: "+ Run.database.getCurrentUser().getLogInDate());
+        labelLastLogIn.setText("You Last Logged in: " + Run.database.getCurrentUser().getLogInDate());
 
     }
-    private void openSold(){
-        try{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
-        BorderPane root = (BorderPane) fxmlLoader.load();
 
-        artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
-
-        controller.soldView();
-
-
-        Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
-        Stage editStage = new Stage();
-        editStage.setScene(editScene);
-        editStage.setTitle("Sold Artworks");
-        editStage.initModality(Modality.APPLICATION_MODAL);
-        editStage.showAndWait();
-
-
-
-
-    }catch(Exception e){
-        e.printStackTrace();
-    }
-
-    }
-    private void openWon(){
-
-        try{
+    /**
+     * Open the window to show the artworks the user has managed to sell
+     */
+    private void openSold() {
+        try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
 
             artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
 
-            controller.wonView();
+            controller.soldView();
+            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+            editStage.setTitle("Sold Artworks");
+            editStage.initModality(Modality.APPLICATION_MODAL);
+            editStage.showAndWait();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * Open a window to list all the artworks this user has won
+     */
+    private void openWon() {
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
+            BorderPane root = (BorderPane) fxmlLoader.load();
+
+            artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
+            controller.wonView();
 
             Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
@@ -98,15 +100,16 @@ public class menuController{
             editStage.showAndWait();
 
 
-
-
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void openBidWindow(){
-        try{
+    /**
+     * Open the window to browse available artworks that can be bid on
+     */
+    private void openBidWindow() {
+        try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/browseBids.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
@@ -117,8 +120,6 @@ public class menuController{
             controller.loadArtworks(Run.database.getAllArtworks());
 
 
-
-
             Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
@@ -126,7 +127,7 @@ public class menuController{
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -135,9 +136,9 @@ public class menuController{
     /**
      * Method that trys to open the user page using the current logged in user.
      */
-    private void userPage(){
+    private void userPage() {
 
-        try{
+        try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/User_Page.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
@@ -154,7 +155,7 @@ public class menuController{
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -163,8 +164,8 @@ public class menuController{
      * When the artwork button is pressed this method trys to open a viewing page of the artworks
      * this user is linked too
      */
-    private void artworkPage(){
-        try{
+    private void artworkPage() {
+        try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
@@ -182,15 +183,10 @@ public class menuController{
             editStage.showAndWait();
 
 
-
-
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
-
 
 
 }

@@ -16,13 +16,13 @@ import javafx.stage.Stage;
 /**
  * Class that controls the log in page of the gui
  * @author Tim Watson 880158
- * @version 2
+ * @version 3
  */
 public class logInController{
     @FXML
     private Button btnLogIn, createUser;
     @FXML
-    Pane rootPane;
+    private Pane rootPane;
     @FXML
     private TextField usernameBox;
     @FXML
@@ -63,17 +63,6 @@ public class logInController{
                 editStage.setTitle("Main Menu");
                 editStage.initModality(Modality.APPLICATION_MODAL);
 
-                /**
-                try {
-                    Run.database.placeBid(Double.MAX_VALUE,1);
-                }catch (Exception e){
-                    Utilities.BidTooLow();
-                }
-
-                Run.database.getCurrentUser().addCurrentAuction(1);
-                Run.database.getCurrentUser().completeAuction(1);
-                Run.database.getCurrentUser().addCurrentAuction(2);
-*/
                 editStage.show();
                 Utilities.closeWindow(rootPane);
 
@@ -90,6 +79,9 @@ public class logInController{
 
     }
 
+    /**
+     * Method that opens up a new window to create a new user
+     */
 	@FXML
     private void registerNewUser(){
 		try{

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Class to create a Painting Object.
  * @author Tim Watson 880158
- * @version 1
+ * @version 2
  */
 public class Painting extends Artwork {
     private int width;
@@ -21,6 +21,8 @@ public class Painting extends Artwork {
      * @param userId of the seller of the Painting.
      * @param width Width of the painting in cm's.
      * @param height Height of the painting in cm's.
+     * @param id Id of this artwork object
+     * @param picture Paths to pictures of this object
      */
     public Painting(String artworkTitle, String artworkDescription, 
                 String artworkCreator, int artworkYearCreated, 
@@ -36,7 +38,22 @@ public class Painting extends Artwork {
 
     }
 
-    //For File I/O
+    /**
+     * Constructor that creates a painting object
+     * @param artworkTitle Name of Painting.
+     * @param artworkDescription Description of Painting.
+     * @param artworkCreator Creator of the Painting.
+     * @param artworkYearCreated Year the Painting was created.
+     * @param reservePrice The minimum price the Painting can be sold for.
+     * @param numOfBids Maximum number of bids on the painting.
+     * @param userId of the seller of the Painting.
+     * @param width Width of the painting in cm's.
+     * @param height Height of the painting in cm's.
+     * @param id Id of this artwork object
+     * @param picture Paths to pictures of this object
+     * @param currBid Current bid on this object
+     * @param bidHistory History of bids that have been placed on this object
+     */
     public Painting(String artworkTitle, String artworkDescription,
                     String artworkCreator, int artworkYearCreated,
                     double reservePrice, int numOfBids, int userId,
@@ -52,21 +69,42 @@ public class Painting extends Artwork {
 
     }
 
+    /**
+     * Get the paths to pictures stored on this object
+     * @return List of paths to images
+     */
     public ArrayList<String> getPathToPictures() {
         return pathToPictures;
     }
 
+    /**
+     * Set paths to all the pictures
+     * @param pathToPictures new list of paths to images
+     */
     public void setPathToPictures(ArrayList<String> pathToPictures) {
         this.pathToPictures = pathToPictures;
     }
 
+    /**
+     * Get all the paths to images
+     * @return List of paths
+     */
     public ArrayList<String> getPictures() {
         return pathToPictures;
     }
 
+    /**
+     * Add a picture path to the list of paths
+     * @param picture Path to pictures
+     */
     public void addPicture(String picture) {
         this.pathToPictures.add( picture);
     }
+
+    /**
+     * Remove a specific path to a picture
+     * @param path path to a picture that needs to be removed
+     */
     public void removePicture(String path){
         for(String artworkPath: this.pathToPictures){
             if (path.equals(artworkPath)){
@@ -74,10 +112,18 @@ public class Painting extends Artwork {
             }
         }
     }
+
+    /**
+     * Set picture paths
+     * @param pictures new picture paths to be saved
+     */
     public void setPicture(ArrayList<String> pictures){
         this.pathToPictures = pictures;
     }
 
+    /**
+     * Empty constructor
+     */
     public Painting(){
 
     }
