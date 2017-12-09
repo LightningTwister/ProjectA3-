@@ -6,7 +6,7 @@ import java.util.Date;
  * Abstract Artwork class to create the basis for creating an artwork entity.
  *
  * @author Tim Watson 880158
- * @version 1
+ * @version 3
  */
  abstract class Artwork {
 
@@ -55,7 +55,20 @@ import java.util.Date;
 
     }
 
-    //For File I/O
+    /**
+     *  Constructor for Artwork
+     * @param artworkTitle Title of the artwork
+     * @param artworkDescription Optional description of this artwork object
+     * @param artworkCreator Person who created this artwork
+     * @param artworkYearCreated The year the artwork was created
+     * @param reservePrice Minimum price a bid can be for
+     * @param numOfBids Number of bids left in this auction
+     * @param idOfSeller The id of the of the account selling this artwork
+     * @param id Id of this artwork
+     * @param picture Path to picture
+     * @param highestBid Highest bid on this artwork
+     * @param bidHistory History of bids placed on this artwork
+     */
     protected Artwork(String artworkTitle, String artworkDescription,
                       String artworkCreator, int artworkYearCreated, double reservePrice,
                       int numOfBids, int idOfSeller, int id, String picture, Bid highestBid, ArrayList<Integer> bidHistory) {
@@ -79,14 +92,27 @@ import java.util.Date;
 
     }
 
+    /**
+     *  Get picture path for this artwork
+     * @return path to picture.
+     */
     public String getPicture() {
         return picture;
     }
 
+    /**
+     *  Set a new picture for this artwork
+     * @param picture new path to a picture
+     */
     public void setPicture(String picture) {
         this.picture = picture;
     }
 
+    /**
+     *  Add another bid to this object if the artwork is still being auctioned
+     * @param newBid the new bid object
+     * @throws Exception
+     */
     protected void placeBid(Bid newBid)throws Exception {
             if(numOfBids == 0){
                 throw new Exception("Artwork is completed");
@@ -96,10 +122,18 @@ import java.util.Date;
             numOfBids--;
     }
 
+    /**
+     *  Return highest bid on this object
+     * @return Bid object of the highest bid.
+     */
     public Bid getHighestBid(){
         return highestBid;
     }
 
+    /**
+     *  Get the list of bids made on this object
+     * @return
+     */
 	public ArrayList getBidHistory(){
         return bidHistory;
     }
@@ -195,9 +229,9 @@ import java.util.Date;
     }
 
     /**
-     * Get method to retrieve the maximum number of bids on this Artwork
+     * Get method to retrieve the number of bids left on this artwork
      *
-     * @return
+     * @return Number of bids left.
      */
     protected int getNumOfBids() {
         return numOfBids;
@@ -257,10 +291,18 @@ import java.util.Date;
         return artworkSellerId;
     }
 
+    /**
+     *  Get the artwork identifier of this Artwork
+     * @return Identifier of the artwork object
+     */
     public int getId() {
         return this.id;
     }
 
+    /**
+     *  Set a new id for this object
+     * @param id Integer value of new artwork
+     */
     public void setId(int id){
         this.id = id;
     }
