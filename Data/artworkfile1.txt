@@ -6,3 +6,7 @@ s,Sculpture,,w,4,4.0,4,1,231240124,4,4,4,4,w,file:Data\ArtworkPictures\sculpture
 p,Painting,,u,1,1.0,1,1,231240124,1,1,5,file:Data\ArtworkPictures\painting.jpg,
 s,Another Sculpture,,t,7,7.0,7,0,231240124,7,7,6,7,t,file:Data\ArtworkPictures\sculpture.jpg,
 p,Another Painting,,p,5,5.0,5,0,231240124,5,5,7,file:Data\ArtworkPictures\painting.jpg,
+s,Another1 Sculpture,,t,7,7.0,7,3,231240124,7,8,8,7,t,file:Data\ArtworkPictures\sculpture.jpg,
+p,Another1 Painting,,p,5,5.0,5,3,231240124,5,5,9,file:Data\ArtworkPictures\painting.jpg,
+s,Another2 Sculpture,,t,7,7.0,7,3,231240124,7,7,10,7,t,file:Data\ArtworkPictures\sculpture.jpg,
+p,Another2 Painting,,p,5,5.0,5,3,231240124,5,5,11,file:Data\ArtworkPictures\painting.jpg,

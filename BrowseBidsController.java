@@ -22,12 +22,13 @@ import javafx.stage.Stage;
  * @version 1
  */
 public class BrowseBidsController {
-    private ArrayList<Artwork> artworksToBidOn = new ArrayList<Artwork>();
+    private ArrayList<Artwork> artworksToBidOn = new ArrayList<>();
 
     private static ArrayList<Artwork> scrollList = new ArrayList<>();
+    private static ArrayList<Artwork> faveUserList = new ArrayList<>();
     private int index = 0;
     private Artwork currentArtwork;
-    private boolean painting, sculpture;
+
     @FXML
     private Button btnPrev, btnNext, btnCompleted, btnWon, btnView;
     @FXML
@@ -36,7 +37,7 @@ public class BrowseBidsController {
     private TextArea descBox;
 
     @FXML
-    private CheckBox checkPainting, checkSculpture;
+    private CheckBox checkPainting, checkSculpture, checkFave;
     @FXML
     private ImageView imgView;
 
@@ -64,45 +65,60 @@ public class BrowseBidsController {
         });
 
         checkPainting.setOnAction(e -> {
-            if (checkPainting.isSelected()) {
-                painting = true;
 
-            } else {
-
-                painting = false;
-            }
-            updateScrollList();
+            scrollList.clear();
+            updateScrollList(artworksToBidOn);
         });
         checkSculpture.setOnAction(e -> {
-            if (checkSculpture.isSelected()) {
-                sculpture = true;
-            } else {
-                sculpture = false;
-            }
-            updateScrollList();
+
+            scrollList.clear();
+            updateScrollList(artworksToBidOn);
+        });
+        checkFave.setOnAction(e ->{
+            scrollList.clear();
+            faveUserList.clear();
+            faveUsersOnly();
+
         });
         checkPainting.setSelected(true);
         checkSculpture.setSelected(true);
+        checkFave.setSelected(false);
 
 
     }
 
-    private void updateScrollList() {
-        scrollList.clear();
+    private void faveUsersOnly(){
+
+            if (checkFave.isSelected()){
+                for (Artwork artwork: artworksToBidOn){
+                    if(Run.database.getCurrentUser().getFaveUsers().contains(artwork.getArtworkSeller()) ){
+                        faveUserList.add(artwork);
+                    }
+                }
+                updateScrollList(faveUserList);
+            }else{
+                updateScrollList(artworksToBidOn);
+        }
+
+    }
+
+
+    private void updateScrollList(ArrayList<Artwork> checkList) {
+
 
         index = 0;
-        if ((!painting) && (!sculpture)) {
+        if ((!checkPainting.isSelected()) && (!checkSculpture.isSelected())) {
 
             noArtworkFound();
 
         } else {
-            for (Artwork artwork : artworksToBidOn) {
-                if (painting) {
+            for (Artwork artwork : checkList) {
+                if (checkPainting.isSelected()) {
                     if (artwork instanceof Painting) {
                         scrollList.add(artwork);
                     }
                 }
-                if (sculpture) {
+                if (checkSculpture.isSelected()) {
                     if (artwork instanceof Sculpture) {
 
                         scrollList.add(artwork);
@@ -130,9 +146,6 @@ public class BrowseBidsController {
 
 
     public void loadArtworks(ArrayList<Artwork> artworkList) {
-        painting = true;
-        sculpture = true;
-
 
         for (Artwork art : artworkList) {
             if (!(art.getArtworkSeller() == Run.database.getCurrentUser().getId()) && (art.getNumOfBids() > 0)) {
