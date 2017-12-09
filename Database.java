@@ -49,6 +49,7 @@ public class Database {
         loadUsers();
         loadBids();
 
+
     }
 
     /**

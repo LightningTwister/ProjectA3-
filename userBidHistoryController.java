@@ -38,16 +38,6 @@ public class userBidHistoryController {
             goBack();
         });
 
-        try {
-            Run.database.placeBid(Double.MAX_VALUE,1);
-        }catch (Exception e){
-            Utilities.BidTooLow();
-        }
-
-        Run.database.getCurrentUser().addCurrentAuction(1);
-        Run.database.getCurrentUser().completeAuction(1);
-        Run.database.getCurrentUser().addCurrentAuction(2);
-
         populateTree();
         stackPane.getChildren().add(treeView);
 
