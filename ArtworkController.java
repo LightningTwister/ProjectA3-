@@ -23,6 +23,7 @@ import java.util.Set;
  * @version 1
  */
 public class ArtworkController {
+    private Artwork artwork;
     private Painting painting;
     private Sculpture sculpture;
     private int nextId, userId;
@@ -68,6 +69,12 @@ public class ArtworkController {
             showPictures();
 
         }));
+
+        btnBid.setOnAction(e ->{
+            goToPlaceBid();
+
+        });
+
         btnFave.setOnAction(e -> {
             toggleUserToFaves();
         });
@@ -278,6 +285,8 @@ public class ArtworkController {
     }
 
     public void artworkToBid(Artwork artwork){
+        this.artwork = artwork;
+
         bid = true;
         btnBid.setVisible(true);
         btnFave.setVisible(true);
@@ -330,6 +339,27 @@ public class ArtworkController {
         
         Utilities.savedInput();
         btnFave.setVisible(false);
+    }
+
+
+    private void goToPlaceBid(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/placeBid.fxml"));
+            Pane root = fxmlLoader.load();
+            placeBidController controller = fxmlLoader.getController();
+            controller.setArtwork(artwork);
+
+            Scene editScene = new Scene(root, (Run.EDIT_WINDOW_WIDTH/2), (Run.EDIT_WINDOW_HEIGHT/2));
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+            editStage.setTitle("Place Bid");
+            editStage.initModality(Modality.APPLICATION_MODAL);
+
+            editStage.show();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 
