@@ -41,6 +41,23 @@ public class Sculpture extends Artwork {
         this.pathToPictures = picture;
 
     }
+    //For File I/O
+    public Sculpture(String artworkTitle, String artworkDescription, String artworkCreator, int artworkYearCreated,
+                     double reservePrice, int numOfBids,int sellerId, int width, int height,int id,
+                     int depth, String material,ArrayList<String> picture, Bid highestBid, ArrayList<Integer> bidHistory) {
+
+        super(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated, reservePrice, numOfBids,
+                sellerId, id, picture.get(0), highestBid, bidHistory);
+
+        this.width = width;
+        this.height = height;
+        this.depth = depth;
+        this.material = material;
+        this.pathToPictures = picture;
+
+    }
+
+
     public ArrayList<String> getPictures() {
         return pathToPictures;
     }

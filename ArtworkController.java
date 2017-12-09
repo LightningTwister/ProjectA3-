@@ -69,7 +69,7 @@ public class ArtworkController {
 
         }));
         btnFave.setOnAction(e -> {
-            addUserToFaves();
+            toggleUserToFaves();
         });
         bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
         this.userId = Run.database.getCurrentUser().getId();
@@ -323,8 +323,8 @@ public class ArtworkController {
         }
 
     }
-    private void addUserToFaves(){
-        Run.database.getCurrentUser().addFaveUsers(userId);
+    private void toggleUserToFaves(){
+        Run.database.getCurrentUser().toggleFaveUser(userId);
         Utilities.savedInput();
         btnFave.setVisible(false);
     }

@@ -53,11 +53,32 @@ import java.util.Date;
         this.id = id;
         this.picture = picture;
 
-        //this.artworkBid = new Bid(reservePrice, numOfBids, id);
     }
-protected  Artwork(){
 
-}
+    //For File I/O
+    protected Artwork(String artworkTitle, String artworkDescription,
+                      String artworkCreator, int artworkYearCreated, double reservePrice,
+                      int numOfBids, int idOfSeller, int id, String picture, Bid highestBid, ArrayList<Integer> bidHistory) {
+
+        this.artworkTitle = artworkTitle;
+        this.artworkDescription = artworkDescription;
+        this.artworkCreator = artworkCreator;
+        this.artworkYearCreated = artworkYearCreated;
+        this.reservePrice = reservePrice;
+        this.numOfBids = numOfBids;
+        this.dateTimeArtworkPlaced = new Date();
+        this.artworkSellerId = idOfSeller;
+        this.highestBid = highestBid;
+        this.bidHistory = bidHistory;
+        this.id = id;
+        this.picture = picture;
+
+    }
+
+    protected Artwork(){
+
+    }
+
     public String getPicture() {
         return picture;
     }

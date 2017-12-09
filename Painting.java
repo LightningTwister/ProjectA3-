@@ -36,6 +36,22 @@ public class Painting extends Artwork {
 
     }
 
+    //For File I/O
+    public Painting(String artworkTitle, String artworkDescription,
+                    String artworkCreator, int artworkYearCreated,
+                    double reservePrice, int numOfBids, int userId,
+                    int width, int height , int id,
+                    ArrayList<String> picture, Bid currBid, ArrayList<Integer> bidHistory) {
+
+        super(artworkTitle, artworkDescription, artworkCreator,
+                artworkYearCreated, reservePrice, numOfBids, userId, id, picture.get(0),currBid, bidHistory );
+
+        this.width = width;
+        this.height = height;
+        this.pathToPictures = picture;
+
+    }
+
     public ArrayList<String> getPathToPictures() {
         return pathToPictures;
     }
