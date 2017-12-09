@@ -5,22 +5,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Set;
+
 
 
 /**
  * This class controls the add artwork gui page
  * @author Tim Watson 880158
- * @version 1
+ * @version 2
  */
 public class ArtworkController {
     private Artwork artwork;
@@ -34,13 +32,13 @@ public class ArtworkController {
     private TextField nameBox, yearBox, reserveBox, bidsBox, userNameBox, widthBox, heightBox, depthBox, materialBox
             ,nameOfArtwork, descriptionBox ;
     @FXML
-    RadioButton sculptureRadio, paintingRadio;
+    private RadioButton sculptureRadio, paintingRadio;
     @FXML
-    Button buttonId, cancelButton, btnViewImage, btnBid, btnFave;
+    private Button buttonId, cancelButton, btnViewImage, btnBid, btnFave;
     @FXML
-    Pane rootPane;
+    private Pane rootPane;
     @FXML
-    Label depthText, materialText, depthUnits;
+    private Label depthText, materialText, depthUnits;
     @FXML
     private ImageView bannerImg;
 
@@ -81,6 +79,10 @@ public class ArtworkController {
         bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
         this.userId = Run.database.getCurrentUser().getId();
     }
+
+    /**
+     * Method that brings up a new page with all pictures currently stored for this artwork
+     */
     private void showPictures() {
         try {
 
@@ -113,26 +115,22 @@ public class ArtworkController {
     }
 
 
+    /**
+     *  Method that takes either a reference to a painting or sculpture object to be edited and saved
+     * @param artwork Artwork object to be edited
+     */
     public void getArtwork(Object artwork){
         bid = false;
         if (artwork instanceof Painting){
             this.painting = (Painting) artwork;
-
-
             this.picturePath = this.painting.getPictures();
-
-
-
 
             nameBox.setText(painting.getArtworkCreator());
             yearBox.setText(String.valueOf(painting.getArtworkYearCreated()));
             reserveBox.setText(String.valueOf(painting.getReservePrice()));
             bidsBox.setText(String.valueOf(painting.getNumOfBids()));
-
             nextId = painting.getId();
-
             userNameBox.setText(Run.database.getUser(userId).getUserName());
-
             widthBox.setText(String.valueOf(painting.getWidth()));
             heightBox.setText(String.valueOf(painting.getHeight()));
             nameOfArtwork.setText(painting.getArtworkTitle());
@@ -152,9 +150,7 @@ public class ArtworkController {
             reserveBox.setText(String.valueOf(sculpture.getReservePrice()));
             bidsBox.setText(String.valueOf(sculpture.getNumOfBids()));
             nextId = sculpture.getId();
-
             userNameBox.setText(Run.database.getUser(userId).getUserName());
-
             widthBox.setText(String.valueOf(sculpture.getWidth()));
             heightBox.setText(String.valueOf(sculpture.getHeight()));
             descriptionBox.setText(sculpture.getArtworkDescription());
@@ -284,6 +280,10 @@ public class ArtworkController {
 
     }
 
+    /**
+     *  Method that takes an artwork that can be bid on and shows its details aswell as displays bidding button
+     * @param artwork Artwork that can be bid on
+     */
     public void artworkToBid(Artwork artwork){
         this.artwork = artwork;
 
@@ -333,6 +333,10 @@ public class ArtworkController {
         
 
     }
+
+    /**
+     * Adds the seller of this artwork to the current users favourite user list
+     */
     private void toggleUserToFaves(){
         Run.database.getCurrentUser().toggleFaveUser(userId);
         Run.database.saveUsers();
@@ -342,6 +346,9 @@ public class ArtworkController {
     }
 
 
+    /**
+     *  Open the bid window, to place a bid
+     */
     private void goToPlaceBid(){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/placeBid.fxml"));
