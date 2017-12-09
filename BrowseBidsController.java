@@ -61,6 +61,7 @@ public class BrowseBidsController {
 
         });
         btnView.setOnAction(e -> {
+            viewSelectedArtwork();
 
         });
 
@@ -85,6 +86,34 @@ public class BrowseBidsController {
         checkFave.setSelected(false);
 
 
+    }
+    private void viewSelectedArtwork(){
+        try{
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/ArtworkPage.fxml"));
+            BorderPane root = (BorderPane) fxmlLoader.load();
+
+            ArtworkController controller = fxmlLoader.<ArtworkController>getController() ;
+
+
+
+
+            // load the edit page controller with a new painting and sculpture object with the new id number.
+            controller.artworkToBid(currentArtwork);
+
+            Scene editScene = new Scene(root, Run.EDIT_WINDOW_WIDTH, Run.EDIT_WINDOW_HEIGHT);
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+            editStage.setTitle(Run.EDITP_WINDOW_TITLE);
+            editStage.initModality(Modality.APPLICATION_MODAL);
+            editStage.showAndWait();
+
+
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void faveUsersOnly(){

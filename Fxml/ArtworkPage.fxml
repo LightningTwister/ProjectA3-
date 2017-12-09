@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArtworkController" >
+<BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArtworkController">
    <center>
       <VBox prefHeight="400.0" prefWidth="640.0">
         <children>
           <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="505.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
             <children>
-                  <TextField fx:id="widthBox" alignment="CENTER" layoutX="466.0" layoutY="107.0" promptText="Width" />
+                  <TextField fx:id="widthBox" alignment="CENTER" layoutX="470.0" layoutY="107.0" promptText="Width" />
                   <TextField id="heightBox" fx:id="heightBox" alignment="CENTER" layoutX="470.0" layoutY="175.0" promptText="Height" />
                   <TextField fx:id="depthBox" alignment="CENTER" layoutX="470.0" layoutY="238.0" promptText="Depth" />
                   <TextField fx:id="materialBox" alignment="CENTER" layoutX="469.0" layoutY="304.0" promptText="Material" />
@@ -33,8 +33,8 @@
                   <TextField layoutX="-166.0" layoutY="272.0" promptText="ARTWORK CREATOR" />
                   <Label alignment="CENTER" layoutX="527.0" layoutY="91.0" text="Width" />
                   <Label alignment="CENTER" layoutX="526.0" layoutY="158.0" text="Height" />
-                  <Button fx:id="buttonId" layoutX="67.0" layoutY="349.0" mnemonicParsing="false" text="Save" />
-                  <Button fx:id="cancelButton" layoutX="136.0" layoutY="349.0" mnemonicParsing="false" text="Cancel" />
+                  <Button fx:id="buttonId" layoutX="22.0" layoutY="349.0" mnemonicParsing="false" text="Save" />
+                  <Button fx:id="cancelButton" layoutX="81.0" layoutY="349.0" mnemonicParsing="false" text="Cancel" />
                 <Button fx:id="btnViewImage" layoutX="503.0" layoutY="349.0" mnemonicParsing="false" text="View Images" />
                   <Label fx:id="depthText" alignment="CENTER" layoutX="527.0" layoutY="221.0" text="Depth" />
                   <Label fx:id="materialText" alignment="CENTER" layoutX="522.0" layoutY="276.0" text="Material" />
@@ -47,7 +47,7 @@
                         </ImageView>
                   <TextField fx:id="nameOfArtwork" alignment="CENTER" layoutX="246.0" layoutY="107.0" promptText="Artwork Title" />
                   <Label alignment="CENTER" layoutX="284.0" layoutY="75.0" text="Artworks Title" />
-                  <TextField fx:id="descriptionBox" alignment="CENTER" layoutX="214.0" layoutY="161.0" prefHeight="197.0" prefWidth="230.0" />
+                  <TextField fx:id="descriptionBox" alignment="CENTER" layoutX="203.0" layoutY="140.0" prefHeight="197.0" prefWidth="230.0" />
                   <RadioButton fx:id="sculptureRadio" layoutX="469.0" layoutY="44.0" mnemonicParsing="false" selected="true" text="Sculpture">
                      <toggleGroup>
                         <ToggleGroup fx:id="selectObject" />
@@ -56,6 +56,8 @@
                   <RadioButton fx:id="paintingRadio" layoutX="469.0" layoutY="66.0" mnemonicParsing="false" text="Painting" toggleGroup="$selectObject">
 
                   </RadioButton>
+                  <Button fx:id="btnBid" layoutX="177.0" layoutY="349.0" mnemonicParsing="false" text="Add Bid" />
+                  <Button fx:id="btnFave" layoutX="258.0" layoutY="349.0" mnemonicParsing="false" text="Add Favourite User" />
 
             </children>
           </AnchorPane>

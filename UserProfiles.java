@@ -162,10 +162,15 @@ public class UserProfiles {
 		this.address = address;
 	}
 
+	public void addFaveUsers(int user) {
+		this.faveUsers.add(user);
+	}
+
 	/**
 	 * Sets the postcode of the user
 	 * @param postCode the postcode of the user
 	 */
+
 	public void setPostCode (String postCode) {
 		if(Utilities.checkPostCode(postCode)){
 			this.postCode = postCode;

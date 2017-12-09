@@ -27,6 +27,7 @@ public class ArtworkController {
     private Sculpture sculpture;
     private int nextId, userId;
     private ArrayList<String> picturePath = new ArrayList<>();
+    private boolean bid;
 
     @FXML
     private TextField nameBox, yearBox, reserveBox, bidsBox, userNameBox, widthBox, heightBox, depthBox, materialBox
@@ -34,7 +35,7 @@ public class ArtworkController {
     @FXML
     RadioButton sculptureRadio, paintingRadio;
     @FXML
-    Button buttonId, cancelButton, btnViewImage;
+    Button buttonId, cancelButton, btnViewImage, btnBid, btnFave;
     @FXML
     Pane rootPane;
     @FXML
@@ -67,6 +68,9 @@ public class ArtworkController {
             showPictures();
 
         }));
+        btnFave.setOnAction(e -> {
+            addUserToFaves();
+        });
         bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
         this.userId = Run.database.getCurrentUser().getId();
     }
@@ -81,9 +85,9 @@ public class ArtworkController {
             ArtworkPictureController controller = fxmlLoader.<ArtworkPictureController>getController();
 
             if (paintingRadio.isSelected()){
-                controller.showPictures(picturePath, "painting");
+                controller.showPictures(picturePath, "painting",bid);
             }else{
-                controller.showPictures(picturePath, "sculpture");
+                controller.showPictures(picturePath, "sculpture",bid);
             }
 
 
@@ -103,6 +107,7 @@ public class ArtworkController {
 
 
     public void getArtwork(Object artwork){
+        bid = false;
         if (artwork instanceof Painting){
             this.painting = (Painting) artwork;
 
@@ -154,6 +159,8 @@ public class ArtworkController {
             sculptureRadio.setVisible(false);
 
         }
+        btnBid.setVisible(false);
+        btnFave.setVisible(false);
     }
 
     /**
@@ -258,14 +265,68 @@ public class ArtworkController {
     public void artworkToAdd(Painting painting, Sculpture sculpture, int id) {
 
 
-
+        bid = false;
         this.painting = painting;
         this.sculpture = sculpture;
         this.nextId = id;
         this.userNameBox.setText(Run.database.getCurrentUser().getUserName());
         this.bidsBox.setEditable(true);
+        btnBid.setVisible(false);
+        btnFave.setVisible(false);
 
 
+    }
+
+    public void artworkToBid(Artwork artwork){
+        bid = true;
+        btnBid.setVisible(true);
+        btnFave.setVisible(true);
+        buttonId.setVisible(false);
+        paintingRadio.setVisible(false);
+        sculptureRadio.setVisible(false);
+
+
+        nameBox.setText(artwork.getArtworkCreator());
+        yearBox.setText(String.valueOf(artwork.getArtworkYearCreated()));
+        reserveBox.setText(String.valueOf(artwork.getReservePrice()));
+        bidsBox.setText(String.valueOf(artwork.getNumOfBids()));
+
+
+        userId = artwork.getArtworkSeller();
+        if(Run.database.getCurrentUser().getFaveUsers().contains(userId)){
+            btnFave.setVisible(false);
+        }
+
+        userNameBox.setText(String.valueOf(Run.database.getUser(artwork.getArtworkSeller()).getUserName()));
+        nameOfArtwork.setText(artwork.getArtworkTitle());
+        descriptionBox.setText(artwork.getArtworkDescription());
+
+
+        if(artwork instanceof Sculpture){
+            this.sculpture = (Sculpture) artwork;
+            widthBox.setText(String.valueOf(this.sculpture.getWidth()));
+            heightBox.setText(String.valueOf(this.sculpture.getHeight()));
+            depthBox.setText(String.valueOf(this.sculpture.getDepth()));
+            materialBox.setText(this.sculpture.getMaterial());
+            this.picturePath = this.sculpture.getPictures();
+
+        }else{
+            depthBox.setVisible(false);
+            materialBox.setVisible(false);
+            materialText.setVisible(false);
+            depthUnits.setVisible(false);
+            depthText.setVisible(false);
+            this.painting = (Painting) artwork;
+            widthBox.setText(String.valueOf(this.painting.getWidth()));
+            heightBox.setText(String.valueOf(this.painting.getHeight()));
+            this.picturePath = this.painting.getPictures();
+        }
+
+    }
+    private void addUserToFaves(){
+        Run.database.getCurrentUser().addFaveUsers(userId);
+        Utilities.savedInput();
+        btnFave.setVisible(false);
     }
 
 

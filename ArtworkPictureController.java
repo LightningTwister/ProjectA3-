@@ -125,7 +125,13 @@ public class ArtworkPictureController {
         labelOf.setText(index+ 1+" of "+ artworkList.size());
     }
 
-    public void showPictures(ArrayList<String> artworkStrings, String artwork){
+    public void showPictures(ArrayList<String> artworkStrings, String artwork, boolean bid){
+        if(bid){
+            btnSave.setVisible(false);
+            btnAdd.setVisible(false);
+            btnRemove.setVisible(false);
+
+        }
         ArrayList<Image> newArtworkList = new ArrayList<>();
         this.artwork = artwork;
         this.index = 0;
