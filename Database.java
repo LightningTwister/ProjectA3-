@@ -6,7 +6,7 @@ import java.util.*;
  */
 public class Database {
 
-    private final String ARTWORK_PATH ="Data/artworkfile.txt";
+    private final String ARTWORK_PATH ="Data/artworkfile1.txt";
     private final String USER_PATH = "Data/UserList1.txt";
     private final String BID_HISTORY_PATH = "Data/bidhistory.txt";
     public final String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";

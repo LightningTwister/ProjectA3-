@@ -60,12 +60,7 @@ public class BrowseBidsController{
         btnView.setOnAction(e ->{
 
         });
-       // checkPainting.selectedProperty().addListener(new ChangeListener<Boolean>() {
-         //   @Override
-         //   public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-         //       Utilities.cancelled();
-         //   }
-       // });
+
         checkPainting.setOnAction(e ->{
             Utilities.cancelled();
         });
@@ -104,7 +99,7 @@ public class BrowseBidsController{
                 imgView.setImage(Utilities.getImage(currentArtwork.getPicture()));
                 descBox.setText(currentArtwork.getArtworkDescription());
                 btnPrev.setVisible(false);
-                //recheckButtons();
+                recheckButtons();
         }
 
     }

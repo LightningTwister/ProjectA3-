@@ -251,7 +251,7 @@ protected void placeBid(Bid newBid)throws Exception {
                 ", artworkYearCreated=" + artworkYearCreated +
                 ", reservePrice=" + reservePrice +
                 ", numOfBids=" + numOfBids +
-
+                ", id="+id +
                 ", dateTimeArtworkPlaced=" + dateTimeArtworkPlaced +
                 ", artworkSeller='" + artworkSellerId + '\'' +
                 '}';

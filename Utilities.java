@@ -208,7 +208,7 @@ public class Utilities {
             newSculpture.setWidth(width);
             newSculpture.setHeight(height);
             newSculpture.setDepth(depth);
-
+            newSculpture.setId(id);
             newSculpture.setArtworkCreator(creatorName);
             newSculpture.setArtworkSeller(userId);
             newSculpture.setMaterial(material);
@@ -249,7 +249,7 @@ public class Utilities {
             newPainting.setHeight(height);
             newPainting.setArtworkCreator(creatorName);
             newPainting.setArtworkSeller(userId);
-
+            newPainting.setId(id);
             newPainting.setArtworkTitle(title);
             newPainting.setArtworkDescription(desc);
             newPainting.setPicture(picLocation);

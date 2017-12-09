@@ -68,6 +68,7 @@ public class ArtworkController {
 
         }));
         bannerImg.setImage(Utilities.getImage(Run.database.BANNER_PATH));
+        this.userId = Run.database.getCurrentUser().getId();
     }
     private void showPictures() {
         try {
@@ -101,7 +102,7 @@ public class ArtworkController {
     }
 
 
-    public void getArtwork(Object artwork, int id){
+    public void getArtwork(Object artwork){
         if (artwork instanceof Painting){
             this.painting = (Painting) artwork;
 
@@ -115,7 +116,8 @@ public class ArtworkController {
             yearBox.setText(String.valueOf(painting.getArtworkYearCreated()));
             reserveBox.setText(String.valueOf(painting.getReservePrice()));
             bidsBox.setText(String.valueOf(painting.getNumOfBids()));
-            userId =id;
+
+            nextId = painting.getId();
 
             userNameBox.setText(Run.database.getUser(userId).getUserName());
 
@@ -137,7 +139,7 @@ public class ArtworkController {
             yearBox.setText(String.valueOf(sculpture.getArtworkYearCreated()));
             reserveBox.setText(String.valueOf(sculpture.getReservePrice()));
             bidsBox.setText(String.valueOf(sculpture.getNumOfBids()));
-            userId = id;
+            nextId = sculpture.getId();
 
             userNameBox.setText(Run.database.getUser(userId).getUserName());
 
@@ -191,7 +193,8 @@ public class ArtworkController {
             }
 
             checkLetters.add(nameOfArtwork.getText());
-            checkLetters.add(descriptionBox.getText());
+            checkLetters.add(nameBox.getText());
+            //checkLetters.add(descriptionBox.getText());
 
             if (!Utilities.checkInputAreAlpha(checkLetters)){
                 throw new Exception("Input type is incorrect");
@@ -253,6 +256,8 @@ public class ArtworkController {
      * @param id        the id of this new object
      */
     public void artworkToAdd(Painting painting, Sculpture sculpture, int id) {
+
+
 
         this.painting = painting;
         this.sculpture = sculpture;
