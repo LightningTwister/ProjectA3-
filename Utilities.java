@@ -18,7 +18,7 @@ import javafx.stage.FileChooser;
 /**
 * This class contains repeated code in static methods to be used by the whole program 
 * @author Tim Watson 880158
-* @version 1
+* @version 5
 */
 public class Utilities {
 	/**
@@ -96,6 +96,10 @@ public class Utilities {
         alert.setContentText("No image found, please specify a path for an image");
         alert.showAndWait();
     }
+
+    /**
+     * Create a popup to inform the user that the bid that was placed was not large enough
+     */
 	 public static void BidTooLow(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -103,6 +107,10 @@ public class Utilities {
         alert.setContentText("Bid too low/Already the highest bidder");
         alert.showAndWait();
     }
+
+    /**
+     * Create a popup for no images for this artwork were found.
+     */
     public static void noImagesInList(){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
@@ -110,6 +118,10 @@ public class Utilities {
         alert.setContentText("There are now no images for this artwork, default image added!");
         alert.showAndWait();
     }
+
+    /**
+     * Create a pop up to inform the user they cannot add anymore pictures
+     */
     public static void maximumPicturesReached(){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
@@ -117,6 +129,10 @@ public class Utilities {
         alert.setContentText("You can't have more than one image for a painting!");
         alert.showAndWait();
     }
+
+    /**
+     * Create a pop up to inform the user this username is taken and is unavailable
+     */
     public static void userNameTaken(){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
@@ -124,18 +140,7 @@ public class Utilities {
         alert.setContentText("Username taken, select another");
         alert.showAndWait();
     }
-	/**
-	* Temporary class that creates a pop up because class is not implemented yet
-	* DELETE THIS *************************************************
-	*/
-    public static void classNotImplemented(){
 
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("CLASS NOT IMPLEMENTED!");
-        alert.showAndWait();
-    }
 	/**
 	* Method that checks all characters are alphabetical characters(or space)
 	*
@@ -240,7 +245,6 @@ public class Utilities {
     public static void savePainting(Painting newPainting, int year, double reservePrice, int bids, int width, int height
                                      , String creatorName,int userId, String title, String desc, int id, ArrayList<String> picLocation){
 
-
         try{
             newPainting.setArtworkYearCreated(year);
             newPainting.setReservePrice(reservePrice);
@@ -321,6 +325,11 @@ public class Utilities {
         stage.close();
     }
 
+    /**
+     *  Find an image based on the path given
+     * @param path Path to the image being searched for
+     * @return Image that can be used by the system to be displayed
+     */
     public static Image getImage(String path){
         try{
             Image image = new Image(path);
@@ -330,6 +339,12 @@ public class Utilities {
             return new Image(Run.database.NO_IMAGE_PATH);
         }
     }
+
+    /**
+     *  Get a user profile based on their id number
+     * @param id number of the user profile
+     * @return User profile that matches this id number
+     */
     public static UserProfiles getUser(int id){
         int iterator = 0;
         for (UserProfiles a : Run.database.getAllUsers()){
@@ -341,6 +356,12 @@ public class Utilities {
         }
         return null;
     }
+
+    /**
+     *  Check that images were added worked
+     * @param paths Paths to images
+     * @return True or false if the pictures exist
+     */
     public static boolean checkImagesAdded(ArrayList<String> paths){
         if(paths == null){
             return false;
@@ -354,7 +375,13 @@ public class Utilities {
         }
         return true;
     }
-    
+
+    /**
+     *  Opens a window to change or add a picture and returns the path to this new selected image
+     * @param title Title of this window
+     * @param folder Destination to open the file manager at
+     * @return Path to image
+     */
     public static String changeImage(String title,String folder){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle(title);
@@ -381,11 +408,23 @@ public class Utilities {
         }
         return "FAILED";
     }
+
+    /**
+     * Validation method to check a phone number is a valid uk mobile number
+     * @param phoneNum String to be validated to be of the right type
+     * @return True or false if the phone number passes validation
+     */
     public static boolean checkPhoneNum(String phoneNum){
 
         return (phoneNum.charAt(0) == '0' && phoneNum.charAt(1) == '7' &&
                 phoneNum.length() == 11 && phoneNum.matches("[0-9]+"));
     }
+
+    /**
+     * Validate post code to check it is a valid uk postcode
+     * @param postcode String to be validated
+     * @return Boolean if validation passes or not
+     */
     public static boolean checkPostCode(String postcode){
 
 
@@ -393,6 +432,12 @@ public class Utilities {
                 "| (([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9] " +
                 "[abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$");
     }
+
+    /**
+     * Method to check the user details that are entered are all the correct type and exist
+     * @param info List of details to be checked
+     * @return Boolean if validation passes
+     */
     public static boolean checkUserDetails(ArrayList<Object> info){
 
         boolean check = true;
@@ -428,6 +473,11 @@ public class Utilities {
         return check;
 
     }
+
+    /**
+     * Return the date and time of now
+     * @return Formatted string of date and time now
+     */
     public static String getDate(){
         Date today = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("EEE dd MMM yyyy hh:mm:ss");
