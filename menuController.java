@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class menuController {
     @FXML
-    private Button btnProfile, btnBid, btnArtworks, btnSold, btnWon;
+    private Button btnProfile, btnBid, btnArtworks, btnSold, btnWon, btnViewUsers;
     @FXML
     private Pane rootPane;
     @FXML
@@ -50,11 +50,35 @@ public class menuController {
         btnWon.setOnAction(e -> {
             openWon();
         });
+        btnViewUsers.setOnAction(e ->{
+            openBrowse();
+        });
         imgBanner.setImage(Utilities.getImage(Main.database.BANNER_PATH));
         imgIcon.setImage(Utilities.getImage(Main.database.ICON_PATH));
         labelLastLogIn.setText("You Last Logged in: " + Main.database.getCurrentUser().getLogInDate());
         Main.database.getCurrentUser().setLogInDate(Utilities.getDate());
         Main.database.saveUsers();
+
+    }
+
+    private void openBrowse(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
+            BorderPane root = (BorderPane) fxmlLoader.load();
+
+            artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
+
+            controller.loadUsers();
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+            editStage.setTitle("Browse Users");
+            editStage.initModality(Modality.APPLICATION_MODAL);
+            editStage.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
