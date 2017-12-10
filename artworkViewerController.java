@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -18,9 +19,10 @@ import javafx.stage.Stage;
  */
 public class artworkViewerController {
     private static ArrayList<Artwork> artworksForUser = new ArrayList<Artwork>();
+    private static ArrayList<UserProfiles> profiles = new ArrayList<>();
 
     @FXML
-    private Button btnEdit, btnAdd;
+    private Button btnEdit, btnAdd, btnViewUser;
     @FXML
     private ListView<String> lstArtworks;
 
@@ -37,8 +39,59 @@ public class artworkViewerController {
         btnAdd.setOnAction(e -> {
             addPage();
         });
+        btnViewUser.setOnAction(e ->{
+            openUser();
+        });
 
         //refreshArtworkList();
+    }
+
+    private void openUser(){
+        int selectedIndex = lstArtworks.getSelectionModel().getSelectedIndex();
+
+
+        // Check if user selected an item
+        if (selectedIndex < 0) {
+            Utilities.nothingSelected();
+            return;
+        }else{
+            try {
+
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/faveUserPage.fxml"));
+                Pane root = (Pane) fxmlLoader.load();
+
+                faveUserController controller = fxmlLoader.<faveUserController>getController();
+
+
+                controller.getUser(profiles.get(selectedIndex));
+
+                Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
+                Stage editStage = new Stage();
+                editStage.setScene(editScene);
+                editStage.setTitle("Favourite User");
+                editStage.initModality(Modality.APPLICATION_MODAL);
+                editStage.showAndWait();
+
+
+            } catch (Exception e) {
+                Utilities.nothingSelected();
+
+            }
+
+        }
+
+    }
+    public void loadUsers(){
+        btnEdit.setVisible(false);
+        btnAdd.setVisible(false);
+
+        for(UserProfiles a: Main.database.getAllUsers()){
+            if(a.getId() != Main.database.getCurrentUser().getId()){
+                profiles.add(a);
+                lstArtworks.getItems().add(a.getUserName());
+            }
+        }
     }
 
     /**
@@ -79,7 +132,7 @@ public class artworkViewerController {
      */
     public void loadArtworks(ArrayList<Artwork> artworkList) {
         this.artworksForUser = new ArrayList<>(artworkList);
-
+        btnViewUser.setVisible(false);
 
         refreshArtworkList();
     }

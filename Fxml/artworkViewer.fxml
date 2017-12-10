@@ -6,9 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="artworkViewerController">
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="artworkViewerController">
    <center>
 
        
@@ -19,6 +17,7 @@
             <ListView fx:id="lstArtworks" layoutX="80.0" layoutY="32.0" prefHeight="285.0" prefWidth="423.0" />
             <Button fx:id="btnEdit" layoutX="158.0" layoutY="326.0" mnemonicParsing="false" text="Edit Artwork" />
             <Button fx:id="btnAdd" layoutX="300.0" layoutY="326.0" mnemonicParsing="false" text="Add Artwork" />
+            <Button fx:id="btnViewUser" layoutX="429.0" layoutY="326.0" mnemonicParsing="false" text="View User" />
          </children>
       </Pane>
    </center>

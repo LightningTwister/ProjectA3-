@@ -22,7 +22,7 @@ public class faveUserController {
         @FXML
         private ImageView imgProfile;
         @FXML
-        private Button btnCancel, btnFaveUser;
+        private Button btnCancel, btnFaveUser, btnAdd;
         @FXML
         private Pane rootPane;
 
@@ -37,6 +37,14 @@ public class faveUserController {
         id = user.getId();
         Image profileImage = Utilities.getImage(Main.database.getUser(id).getProfilePicture());
         imgProfile.setImage(profileImage);
+        if(Main.database.getCurrentUser().getFaveUsers().contains(user.getId())){
+            btnAdd.setVisible(false);
+            btnFaveUser.setVisible(true);
+        }else{
+            btnAdd.setVisible(true);
+            btnFaveUser.setVisible(false);
+        }
+
 
         }
 
@@ -52,7 +60,10 @@ public class faveUserController {
                 removeFaveUser();
                 Utilities.closeWindow(rootPane);
             });
-
+            btnAdd.setOnAction(e ->{
+                addFaveUser();
+                Utilities.closeWindow(rootPane);
+            });
 
 
         }
