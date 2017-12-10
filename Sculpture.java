@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Class to create a sculpture Object.
@@ -59,7 +60,7 @@ public class Sculpture extends Artwork {
      */
     public Sculpture(String artworkTitle, String artworkDescription, String artworkCreator, int artworkYearCreated,
                      double reservePrice, int numOfBids,int sellerId, int width, int height,int id,
-                     int depth, String material,ArrayList<String> picture, Bid highestBid, ArrayList<Integer> bidHistory) {
+                     int depth, String material,ArrayList<String> picture, Bid highestBid, HashMap<Integer,Bid> bidHistory) {
 
         super(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated, reservePrice, numOfBids,
                 sellerId, id, picture.get(0), highestBid, bidHistory);

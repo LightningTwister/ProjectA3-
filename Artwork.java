@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Abstract Artwork class to create the basis for creating an artwork entity.
@@ -19,7 +20,7 @@ import java.util.Date;
     private int numOfBids;
     private Date dateTimeArtworkPlaced;
     private Bid highestBid;
-    private ArrayList<Integer> bidHistory = new ArrayList<>();
+    private HashMap<Integer, Bid> bidHistory = new HashMap<>();
     private int artworkSellerId;
     private int id;
     private String picture;
@@ -71,7 +72,7 @@ import java.util.Date;
      */
     protected Artwork(String artworkTitle, String artworkDescription,
                       String artworkCreator, int artworkYearCreated, double reservePrice,
-                      int numOfBids, int idOfSeller, int id, String picture, Bid highestBid, ArrayList<Integer> bidHistory) {
+                      int numOfBids, int idOfSeller, int id, String picture, Bid highestBid, HashMap<Integer,Bid> bidHistory) {
 
         this.artworkTitle = artworkTitle;
         this.artworkDescription = artworkDescription;
@@ -118,7 +119,7 @@ import java.util.Date;
                 throw new Exception("Artwork is completed");
             }
             highestBid = newBid;
-            bidHistory.add(newBid.getBidID());
+            bidHistory.put(newBid.getBidID(),newBid);
             numOfBids--;
     }
 
@@ -134,7 +135,7 @@ import java.util.Date;
      *  Get the list of bids made on this object
      * @return
      */
-	public ArrayList getBidHistory(){
+	public HashMap getBidHistory(){
         return bidHistory;
     }
     

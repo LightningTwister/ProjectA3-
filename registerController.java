@@ -48,7 +48,7 @@ public class registerController {
      * Open a select picture gui, to select a default image for this profile
      */
     private void getPicture(){
-        String fileLocation = Utilities.changeImage("Select a profile picture", Main.database.DEFAULT_PROFILE_PATH);
+        String fileLocation = Utilities.changeImage("Select a profile picture", "Data/ProfilePictures/Built In");
         if (fileLocation.equals("FAILED")){
             Utilities.noImageFound();
         }else{
@@ -72,10 +72,6 @@ public class registerController {
             String phone1 = String.valueOf(phone.getText());
             String addressArray[] = StringUtils.splitString(address.getText(),"\n");
             ArrayList<String> addressList = new ArrayList<>();
-            if(!(addressArray.length == 3) ){
-                Utilities.addressSizeWarning();
-                return;
-            }
             for(String a: addressArray){
                 addressList.add(a);
             }
@@ -101,7 +97,7 @@ public class registerController {
 
 
         }catch (Exception e){
-            //e.printStackTrace();
+            e.printStackTrace();
             Utilities.wrongInputFound();
         }
     }

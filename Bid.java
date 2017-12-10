@@ -28,13 +28,13 @@ public class Bid {
      * @throws Exception
      */
     public Bid(int bidID, double amount, int userID, int artworkID, Bid currBid) throws Exception{
+
         setAmount(amount);
         setArtworkID(artworkID);
         setBidID(bidID);
         setUserID(userID);
-
-        bidAccepted(currBid);
         udatePlaced = Utilities.getDate();
+        bidAccepted(currBid);
     }
 
     /**
