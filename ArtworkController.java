@@ -107,9 +107,13 @@ public class ArtworkController {
             editStage.setTitle("Pictures");
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
+            if(paintingRadio.isSelected()){
+                painting.setPicture(picturePath.get(0));
+            }else{
+                sculpture.setPicture(picturePath.get(0));
+            }
 
-            painting.setPicture(picturePath.get(0));
-            sculpture.setPicture(picturePath.get(0));
+
 
 
         } catch (Exception e) {

@@ -99,7 +99,7 @@ public class artworkViewerController {
 
             // Add each artwork to the displayed list
             for (Artwork c : Main.database.getAllArtworks()) {
-                System.out.println(c.getPicture());
+
                 if (c.getArtworkSeller() == (Main.database.getCurrentUser().getId())) {
                     artworksForUser.add(c);
                     lstArtworks.getItems().add(String.format("%-30s%-30s%-5s", "Title: " + c.getArtworkTitle(), "Creator: "

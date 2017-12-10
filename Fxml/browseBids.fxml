@@ -11,7 +11,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BrowseBidsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BrowseBidsController">
    <top>
       <VBox prefHeight="76.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -25,11 +26,6 @@
                   <Button fx:id="btnNext" mnemonicParsing="false" text="Next Artwork">
                      <HBox.margin>
                         <Insets left="5.0" right="10.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnWon" mnemonicParsing="false" text="Won Auctions">
-                     <HBox.margin>
-                        <Insets top="5.0" />
                      </HBox.margin>
                   </Button>
                </children>

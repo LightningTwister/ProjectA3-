@@ -501,7 +501,7 @@ public class Utilities {
      */
     public static String getDate(){
         Date today = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("EEE dd MMM yyyy hh:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("EEE dd MMM yyyy HH:mm:ss");
         String reportDate = df.format(today);
         return reportDate;
     }
