@@ -158,4 +158,14 @@ public class Bid {
         return udatePlaced;
     }
 
+    @Override
+    public String toString() {
+        return "Bid{" +
+                "userID=" + userID +
+                ", ubidID=" + ubidID +
+                ", uartworkID=" + uartworkID +
+                ", uamount=" + uamount +
+                ", udatePlaced='" + udatePlaced + '\'' +
+                '}';
+    }
 }

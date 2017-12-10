@@ -103,17 +103,24 @@ public class FileWriter {
             //write out a bid
         } else if (type.toLowerCase().equals("bidlist")) {
             System.out.println("Writing bidhistory to file.");
-            for (Bid b : Main.database.getBidsIO()) {
-                out.print(b.getBidID());
-                out.print(b.getUserID());
-                out.print(b.getArtworkID());
-                out.print(b.getAmount());
-                out.print(b.getDatePlaced());
-                out.println();
-            }
-            out.close();
-        }
+            try {
 
+                System.out.println(Main.database.getAllBids().size());
+                for (Bid b : Main.database.getAllBids()) {
+                    out.print(b.getBidID() + delim);
+                    out.print(b.getUserID() + delim);
+                    out.print(b.getArtworkID() + delim);
+                    out.print(b.getAmount() + delim);
+                    out.print(b.getDatePlaced() + delim);
+                    out.println();
+                }
+                out.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     /**

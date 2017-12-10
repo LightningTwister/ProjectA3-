@@ -13,15 +13,16 @@ public class Database {
     public final static String USER_SPECIFIER = "userlist";
     public final static String PROFILE_PATH = "Data/ProfilePictures/";
     public final static String DEFAULT_PROFILE_PATH = "Data/ProfilePictures/Built In";
+    public final static String BID_PATH = "Data/bidlist.txt";
     public final static String BID_HISTORY_PATH = "Data/bidhistory.txt";
     public final static String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
     public final static String ICON_PATH = "file:Data/SystemPictures/Artatawe Logo.jpg";
     public final static String NO_IMAGE_PATH = "file:Data/SystemPictures/noImageFound.jpg";
     //private final String BID_PATH;
     private UserProfiles currentUser;
-    private HashMap<Integer, UserProfiles> users;
-    private HashMap<Integer, Artwork> artworks;
-    private HashMap<Integer, Bid> bids;
+    private HashMap<Integer, UserProfiles> users = new HashMap<>();
+    private HashMap<Integer, Artwork> artworks = new HashMap<>();
+    private static HashMap<Integer, Bid> bids = new HashMap<>();
 
     /**
      * Constructor that instantiates a database
@@ -93,7 +94,14 @@ public class Database {
      * Method that loads the bids to the system
      */
     private void loadBids() {
-        bids = new HashMap<>();
+        this.bids = FileReader.readFile(BID_PATH,"bidlist");
+        bids.put(3,new Bid(1,99.2,1,9,"10 Dec 2017 16:01:25"));
+        System.out.println(getBidsIO().size());
+        for(Bid a: getAllBids()){
+            System.out.println(a);
+        }
+        saveBids();
+
 
     }
 
@@ -111,6 +119,17 @@ public class Database {
                 aArtworks.add(a);
             }
             return aArtworks;
+        }
+    }
+    public static ArrayList<Bid> getAllBids(){
+        ArrayList<Bid> returnBids = new ArrayList<>();
+        if (bids.isEmpty()){
+            return returnBids;
+        }else{
+            for(Bid a: bids.values()){
+                returnBids.add(a);
+            }
+            return returnBids;
         }
     }
 
@@ -160,14 +179,9 @@ public class Database {
         return result;
     }
 
-    /*public ArrayList<Bid> getBidHistory(int id){
-        ArrayList<Integer> idList = artworks.get(id).getBidHistory();
-        ArrayList<Bid> result = new ArrayList<Bid>();
-        for(int bid : idList){
-            result.add(bids.get(bid));
-        }
-        return result;
-    }*/
+    public void saveBids(){
+        FileWriter.openFile(BID_PATH,"bidlist");
+    }
 
     /**
      * Return the bid history for a bid object
@@ -413,13 +427,12 @@ public class Database {
 
         ArrayList<Bid> result = new ArrayList<Bid>();
 
-        for (Map.Entry artwork : users.entrySet())
+        for (Bid n : bids.values()) {
 
-        {
-
-            result.add((Bid) artwork.getValue());
+            result.add(n);
 
         }
+
 
         return result;
 

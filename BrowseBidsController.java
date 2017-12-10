@@ -179,23 +179,28 @@ public class BrowseBidsController {
      */
     public void loadArtworks(ArrayList<Artwork> artworkList) {
 
-        for (Artwork art : artworkList) {
-            if (!(art.getArtworkSeller() == Main.database.getCurrentUser().getId()) && (art.getNumOfBids() > 0)) {
+        if (artworkList.size() == 0){
+            noArtworkFound();
+        }else{
+            for (Artwork art : artworkList) {
+                if (!(art.getArtworkSeller() == Main.database.getCurrentUser().getId()) && (art.getNumOfBids() > 0)) {
 
-                this.artworksToBidOn.add(art);
+                    this.artworksToBidOn.add(art);
+                }
+            }
+
+            scrollList = new ArrayList<>(artworksToBidOn);
+
+            if (scrollList.get(index) == null) {
+                Utilities.artworkSelectionFailed();
+
+            } else {
+
+                currentArtwork = scrollList.get(index);
+                nextArtwork();
             }
         }
 
-        scrollList = new ArrayList<>(artworksToBidOn);
-
-        if (scrollList.get(index) == null) {
-            Utilities.artworkSelectionFailed();
-
-        } else {
-
-            currentArtwork = scrollList.get(index);
-            nextArtwork();
-        }
 
     }
 

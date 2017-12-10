@@ -69,13 +69,20 @@ public class FileReader {
             if (!in.hasNext()) {
                 return new HashMap();
             } else {
+
                 while (in.hasNext()) {
+
                     String curLine = in.nextLine();
 
+
                     Scanner line = new Scanner(curLine);
+                    line.useDelimiter(",");
+
                     file = loadArtworkBids(line);
+
                     line.close();
                 }
+
             }
         }
 
@@ -188,13 +195,15 @@ public class FileReader {
      * @param in The scanner of each line for a bid
      * @return Arraylist of those objects from the file
      */
-    public static HashMap loadArtworkBids(Scanner in) {
+    private static HashMap loadArtworkBids(Scanner in) {
         in.useDelimiter(",");
         int bidID = in.nextInt();
         int userID = in.nextInt();
         int artworkID = in.nextInt();
         double amount = in.nextDouble();
         String datePlaced = in.next();
+
+
         bidList.put(bidID, new Bid(bidID, amount, userID, artworkID, datePlaced));
         return bidList;
     }
