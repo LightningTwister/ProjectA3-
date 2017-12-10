@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Created by LT on 10/11/2017.
+ * @author Martin Tsvetkov 951797
  */
 public class Database {
 
