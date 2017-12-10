@@ -2,9 +2,11 @@ import java.util.ArrayList;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -22,7 +24,7 @@ public class artworkViewerController {
     private static ArrayList<UserProfiles> profiles = new ArrayList<>();
 
     @FXML
-    private Button btnEdit, btnAdd, btnViewUser;
+    private Button btnEdit, btnAdd, btnViewUser, backButton;
     @FXML
     private ListView<String> lstArtworks;
 
@@ -44,6 +46,11 @@ public class artworkViewerController {
         });
         btnViewUser.setOnAction(e -> {
             openUser();
+        });
+
+        backButton.setOnAction(e -> {
+            Stage editScene = (Stage) ((Node)e.getSource()).getScene().getWindow();
+            backToMainMenu(editScene);
         });
 
         //refreshArtworkList();
@@ -131,6 +138,28 @@ public class artworkViewerController {
         } else {
             Utilities.artworkSelectionFailed();
             return;
+        }
+
+    }
+
+    /**
+     * Logs you out
+     */
+    private void backToMainMenu(Stage editStage) {
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/menu.fxml"));
+            AnchorPane root =  fxmlLoader.load();
+
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
+            editStage.setScene(editScene);
+            editStage.setTitle("Main Menu");
+
+            editStage.show();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }

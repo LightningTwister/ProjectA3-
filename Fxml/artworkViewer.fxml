@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="artworkViewerController">
+<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="artworkViewerController">
    <children>
       <VBox layoutX="2.0" layoutY="2.0" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -45,6 +45,14 @@
                      </HBox.margin>
                   </Button>
                   <Button fx:id="btnViewUser" mnemonicParsing="false" text="View User">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="backButton" mnemonicParsing="false" text="Back">
                      <font>
                         <Font size="15.0" />
                      </font>

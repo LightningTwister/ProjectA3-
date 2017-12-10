@@ -1,6 +1,7 @@
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import javafx.stage.Modality;
@@ -34,8 +36,6 @@ public class User_Controller {
     @FXML
     private Button btnSave, btnFave, btnChangeImage, bidHistories, btnDraw;
     @FXML
-    private Pane rootPane;
-    @FXML
     private ImageView imgProfile;
 
     /**
@@ -46,6 +46,7 @@ public class User_Controller {
     public void getUser(UserProfiles user) {
         this.user = user;
         String a = "";
+
 
         userBox.setText(this.user.getUserName());
         fNameBox.setText(this.user.getFirstName());
@@ -77,7 +78,9 @@ public class User_Controller {
      */
     public void initialize() {
         btnSave.setOnAction(e -> {
+            Stage editScene = (Stage) ((Node)e.getSource()).getScene().getWindow();
             saveChanges();
+            backToMainMenu(editScene);
         });
 
         btnFave.setOnAction(e -> {
@@ -137,6 +140,28 @@ public class User_Controller {
         } else {
             imgProfile.setImage((Utilities.getImage("file:" + fileLocation)));
             this.picturePath = "file:" + fileLocation;
+        }
+
+    }
+
+    /**
+     * Logs you out
+     */
+    private void backToMainMenu(Stage editStage) {
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/menu.fxml"));
+            AnchorPane root =  fxmlLoader.load();
+
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
+            editStage.setScene(editScene);
+            editStage.setTitle("Main Menu");
+
+            editStage.show();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -243,7 +268,6 @@ public class User_Controller {
                 Utilities.savedInput();
                 Main.database.saveUsers();
                 Main.database.saveUsers();
-                Utilities.closeWindow(rootPane);
             }
 
 

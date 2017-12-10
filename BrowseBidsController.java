@@ -5,6 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 
 import javafx.scene.control.*;
@@ -12,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -30,7 +32,7 @@ public class BrowseBidsController {
     private Artwork currentArtwork;
 
     @FXML
-    private Button btnPrev, btnNext, btnView;
+    private Button btnPrev, btnNext, btnView, backButton;
     @FXML
     private Label labelOf, labelTitle;
     @FXML
@@ -75,6 +77,23 @@ public class BrowseBidsController {
             faveUsersOnly();
 
         });
+        backButton.setOnAction(e -> {
+            try {
+                Stage stageTheEventSourceNodeBelongs = (Stage) ((Node)e.getSource()).getScene().getWindow();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/menu.fxml"));
+                AnchorPane root =  fxmlLoader.load();
+
+                Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
+                stageTheEventSourceNodeBelongs.setTitle("Main Menu");
+                stageTheEventSourceNodeBelongs.setScene(editScene);
+            } catch (Exception e1) {
+             e1.printStackTrace();
+            }
+
+        });
+
+
+
         checkPainting.setSelected(true);
         checkSculpture.setSelected(true);
         checkFave.setSelected(false);

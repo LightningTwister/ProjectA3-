@@ -1,5 +1,6 @@
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -35,7 +36,8 @@ public class logInController {
      */
     public void initialize() {
         btnLogIn.setOnAction(e -> {
-            ChangeScreen();
+            Stage editScene = (Stage) ((Node)e.getSource()).getScene().getWindow();
+            ChangeScreen(editScene);
         });
 
         createUser.setOnAction(e -> {
@@ -50,7 +52,7 @@ public class logInController {
      * Method that when clicked checks username entered and if it is accepted navigate to the menu page.
      */
     @FXML
-    private void ChangeScreen() {
+    private void ChangeScreen(Stage editStage ) {
         if (Utilities.checkUsername(usernameBox.getText())) {
             Main.database.setCurrentUser(Main.database.getUser(usernameBox.getText()));
             try {
@@ -59,13 +61,10 @@ public class logInController {
                 AnchorPane root = (AnchorPane) fxmlLoader.load();
 
                 Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
-                Stage editStage = new Stage();
                 editStage.setScene(editScene);
                 editStage.setTitle("Main Menu");
-                editStage.initModality(Modality.APPLICATION_MODAL);
 
                 editStage.show();
-                Utilities.closeWindow(rootPane);
 
             } catch (Exception e) {
                 e.printStackTrace();

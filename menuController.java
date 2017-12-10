@@ -1,5 +1,7 @@
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,9 +22,7 @@ import javafx.scene.layout.Pane;
  */
 public class menuController {
     @FXML
-    private Button btnProfile, btnBid, btnArtworks, btnSold, btnWon, btnViewUsers;
-    @FXML
-    private Pane rootPane;
+    private Button btnProfile, btnBid, btnArtworks, btnSold, btnWon, btnViewUsers, logout;
     @FXML
     private ImageView imgBanner, imgIcon;
     @FXML
@@ -35,23 +35,34 @@ public class menuController {
      */
     public void initialize() {
         btnProfile.setOnAction(e -> {
-            userPage();
+            Stage editScene = (Stage) ((Node)e.getSource()).getScene().getWindow();
+            userPage(editScene);
         });
         btnBid.setOnAction(e -> {
-            openBidWindow();
+            Stage editScene = (Stage) ((Node)e.getSource()).getScene().getWindow();
+            openBidWindow(editScene);
         });
         btnArtworks.setOnAction(e -> {
-            artworkPage();
+            Stage editScene = (Stage) ((Node)e.getSource()).getScene().getWindow();
+            artworkPage(editScene);
         });
         btnSold.setOnAction(e -> {
-            openSold();
+            Stage editScene = (Stage) ((Node)e.getSource()).getScene().getWindow();
+            openSold(editScene);
         });
         btnWon.setOnAction(e -> {
-            openWon();
+            Stage editScene = (Stage) ((Node)e.getSource()).getScene().getWindow();
+            openWon(editScene);
         });
         btnViewUsers.setOnAction(e -> {
-            openBrowse();
+            Stage editScene = (Stage) ((Node)e.getSource()).getScene().getWindow();
+            openBrowse(editScene);
         });
+        logout.setOnAction(e -> {
+            Stage editScene = (Stage) ((Node)e.getSource()).getScene().getWindow();
+            openLoginWindow(editScene);
+        });
+
         imgBanner.setImage(Utilities.getImage(Main.database.BANNER_PATH));
         imgIcon.setImage(Utilities.getImage(Main.database.ICON_PATH));
         labelLastLogIn.setText("You Last Logged in: " + Main.database.getCurrentUser().getLogInDate());
@@ -63,7 +74,7 @@ public class menuController {
     /**
      * Method that opens the window for the user to browse all other accounts on the system
      */
-    private void openBrowse() {
+    private void openBrowse(Stage editStage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
             Pane root =  fxmlLoader.load();
@@ -72,11 +83,9 @@ public class menuController {
 
             controller.loadUsers();
             Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
-            Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Browse Users");
-            editStage.initModality(Modality.APPLICATION_MODAL);
-            editStage.showAndWait();
+            editStage.show();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,7 +96,7 @@ public class menuController {
     /**
      * Open the window to show the artworks the user has managed to sell
      */
-    private void openSold() {
+    private void openSold(Stage editStage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
             Pane root = fxmlLoader.load();
@@ -96,10 +105,8 @@ public class menuController {
 
             controller.soldView();
             Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
-            Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Sold Artworks");
-            editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
 
         } catch (Exception e) {
@@ -111,7 +118,7 @@ public class menuController {
     /**
      * Open a window to list all the artworks this user has won
      */
-    private void openWon() {
+    private void openWon(Stage editStage) {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
@@ -121,11 +128,9 @@ public class menuController {
             controller.wonView();
 
             Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
-            Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Won Artworks");
-            editStage.initModality(Modality.APPLICATION_MODAL);
-            editStage.showAndWait();
+            editStage.show();
 
 
         } catch (Exception e) {
@@ -136,11 +141,11 @@ public class menuController {
     /**
      * Open the window to browse available artworks that can be bid on
      */
-    private void openBidWindow() {
+    private void openBidWindow(Stage editStage) {
         try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/browseBids.fxml"));
-            BorderPane root = (BorderPane) fxmlLoader.load();
+            BorderPane root =  fxmlLoader.load();
 
             BrowseBidsController controller = fxmlLoader.<BrowseBidsController>getController();
 
@@ -149,11 +154,10 @@ public class menuController {
 
 
             Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
-            Stage editStage = new Stage();
+
             editStage.setScene(editScene);
             editStage.setTitle("Browse Bids");
-            editStage.initModality(Modality.APPLICATION_MODAL);
-            editStage.showAndWait();
+            editStage.show();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -164,12 +168,12 @@ public class menuController {
     /**
      * Method that trys to open the user page using the current logged in user.
      */
-    private void userPage() {
+    private void userPage(Stage editStage) {
 
         try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/User_Page.fxml"));
-            BorderPane root = (BorderPane) fxmlLoader.load();
+            BorderPane root = fxmlLoader.load();
 
             User_Controller controller = fxmlLoader.<User_Controller>getController();
 
@@ -177,11 +181,9 @@ public class menuController {
 
 
             Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
-            Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("User Page");
-            editStage.initModality(Modality.APPLICATION_MODAL);
-            editStage.showAndWait();
+            editStage.show();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -189,10 +191,32 @@ public class menuController {
     }
 
     /**
+     * Logs you out
+     */
+    private void openLoginWindow(Stage editStage) {
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/logInPage.fxml"));
+            Parent root = fxmlLoader.load();
+
+
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
+
+            editStage.setScene(editScene);
+            editStage.setTitle("Browse Bids");
+            editStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
      * When the artwork button is pressed this method trys to open a viewing page of the artworks
      * this user is linked too
      */
-    private void artworkPage() {
+    private void artworkPage(Stage editStage) {
         try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
@@ -204,7 +228,6 @@ public class menuController {
 
 
             Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
-            Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Artwork Page");
             editStage.initModality(Modality.APPLICATION_MODAL);
