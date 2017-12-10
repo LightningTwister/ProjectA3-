@@ -8,7 +8,7 @@ import javafx.scene.layout.StackPane;
 import java.util.ArrayList;
 
 /**
- * Created by LT on 07/12/2017.
+ * @author Martin Tsvetkov 915797
  */
 public class userBidHistoryController {
 
