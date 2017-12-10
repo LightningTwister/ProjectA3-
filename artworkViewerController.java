@@ -26,6 +26,9 @@ public class artworkViewerController {
     @FXML
     private ListView<String> lstArtworks;
 
+    @FXML
+    private Label typeOfList;
+
 
     /**
      * When the artwork viewer page is opened the two buttons are linked with methods
@@ -90,6 +93,7 @@ public class artworkViewerController {
      * If the users are being viewed this method loads all users that aren't the current user of the system
      */
     public void loadUsers() {
+        typeOfList.setText("All Users: ");
         btnEdit.setVisible(false);
         btnAdd.setVisible(false);
 
@@ -288,6 +292,7 @@ public class artworkViewerController {
      * Show all the artworks the current user has sold in list format
      */
     public void soldView() {
+        typeOfList.setText("Sold Artworks: ");
         btnAdd.setVisible(false);
         btnEdit.setVisible(false);
         artworksForUser.clear();
@@ -308,6 +313,7 @@ public class artworkViewerController {
      * Show all artworks the current user has won in list format
      */
     public void wonView() {
+        typeOfList.setText("Won Artworks: ");
         btnAdd.setVisible(false);
         btnEdit.setVisible(false);
         artworksForUser.clear();
