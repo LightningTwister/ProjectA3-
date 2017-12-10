@@ -1,4 +1,4 @@
-import com.sun.deploy.util.StringUtils;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -70,7 +70,7 @@ public class registerController {
             String postCode = String.valueOf(postcode.getText());
 
             String phone1 = String.valueOf(phone.getText());
-            String addressArray[] = StringUtils.splitString(address.getText(), "\n");
+            String addressArray[] = address.getText().split("\\r?\\n");
             ArrayList<String> addressList = new ArrayList<>();
             if (!(addressArray.length == 3)) {
                 Utilities.addressSizeWarning();

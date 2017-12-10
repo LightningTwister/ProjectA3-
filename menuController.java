@@ -4,14 +4,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sun.plugin.javascript.navig.Anchor;
+
 import javafx.scene.layout.Pane;
 
-import java.util.ArrayList;
+
 
 /**
  * This class controls the main menu page
