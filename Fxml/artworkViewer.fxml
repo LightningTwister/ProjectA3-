@@ -9,19 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
 <Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="artworkViewerController">
    <children>
       <VBox layoutX="2.0" layoutY="2.0" prefHeight="400.0" prefWidth="600.0">
-=======
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="artworkViewerController">
-   <center>
-
-       
-   </center>
-   <center>
-      <Pane prefHeight="351.0" prefWidth="600.0" BorderPane.alignment="CENTER">
->>>>>>> 0cd07273b5d230ba8d03b6f89dab17d53bd4c45e
          <children>
             <HBox prefHeight="80.0" prefWidth="600.0">
                <children>

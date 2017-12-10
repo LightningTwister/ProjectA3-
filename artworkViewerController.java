@@ -293,6 +293,7 @@ public class artworkViewerController {
      */
     public void soldView() {
         typeOfList.setText("Sold Artworks: ");
+        btnViewUser.setVisible(false);
         btnAdd.setVisible(false);
         btnEdit.setVisible(false);
         artworksForUser.clear();
@@ -314,6 +315,7 @@ public class artworkViewerController {
      */
     public void wonView() {
         typeOfList.setText("Won Artworks: ");
+        btnViewUser.setVisible(false);
         btnAdd.setVisible(false);
         btnEdit.setVisible(false);
         artworksForUser.clear();
