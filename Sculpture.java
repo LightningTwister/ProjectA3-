@@ -32,8 +32,8 @@ public class Sculpture extends Artwork {
      */
     public Sculpture(String artworkTitle, String artworkDescription, String artworkCreator, int artworkYearCreated,
                      double reservePrice, int numOfBids, int sellerId, int width, int height, int id,
-                     int depth, String material, ArrayList<String> picture) {
-        super(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated, reservePrice, numOfBids, sellerId, id, picture.get(0));
+                     int depth, String material, ArrayList<String> picture, String date) {
+        super(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated, reservePrice, numOfBids, sellerId, id, picture.get(0), date);
 
         this.width = width;
         this.height = height;
@@ -64,10 +64,10 @@ public class Sculpture extends Artwork {
      */
     public Sculpture(String artworkTitle, String artworkDescription, String artworkCreator, int artworkYearCreated,
                      double reservePrice, int numOfBids, int sellerId, int width, int height, int id,
-                     int depth, String material, ArrayList<String> picture, Bid highestBid, ArrayList<Integer> bidHistory) {
+                     int depth, String material, ArrayList<String> picture, Bid highestBid, ArrayList<Integer> bidHistory, String date) {
 
         super(artworkTitle, artworkDescription, artworkCreator, artworkYearCreated, reservePrice, numOfBids,
-                sellerId, id, picture.get(0), highestBid, bidHistory);
+                sellerId, id, picture.get(0), highestBid, bidHistory, date);
 
         this.width = width;
         this.height = height;
