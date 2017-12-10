@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * Class to save system data to file
  *
- * @author Nick
+ * @author Nick Doukas 879228
  * @version 1
  */
 public class FileWriter {
