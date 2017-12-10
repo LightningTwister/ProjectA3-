@@ -28,8 +28,9 @@ public class FileReader {
     	HashMap file = null;
 
     	if (type.toLowerCase().equals(Main.database.USER_SPECIFIER)){
+
     		if(!in.hasNext()){
-    			return new HashMap();
+    			return userList;
 			}else{
 				while (in.hasNext()){
 					String curLine = in.nextLine();
@@ -43,7 +44,7 @@ public class FileReader {
 			//Read in an artwork
     	}else if (type.toLowerCase().equals(Main.database.ARTWORK_SPECIFIER)) {
 			if (!in.hasNext()) {
-				return new HashMap();
+				return artworkList;
 			} else {
 				while (in.hasNext()) {
 					String curLine = in.nextLine();

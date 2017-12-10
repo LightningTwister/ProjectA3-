@@ -123,7 +123,8 @@ public class ArtworkController {
         bid = false;
         if (artwork instanceof Painting){
             this.painting = (Painting) artwork;
-            this.picturePath = this.painting.getPictures();
+
+            this.picturePath = this.painting.getPathToPictures();
 
             nameBox.setText(painting.getArtworkCreator());
             yearBox.setText(String.valueOf(painting.getArtworkYearCreated()));
@@ -241,9 +242,9 @@ public class ArtworkController {
                 throw new Exception("Error: Radio button not selected");
             }
 
-            for(Artwork a: Main.database.getAllArtworks()){
-                System.out.println(a.toString());
-            }
+            //for(Artwork a: Main.database.getAllArtworks()){
+            //    System.out.println(a.toString());
+           // }
 
             Utilities.savedInput();
 

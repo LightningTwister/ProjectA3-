@@ -162,9 +162,13 @@ public class Painting extends Artwork {
 
     @Override
     public String toString() {
-        return "Painting{" +
+        String a = "Painting{" +
                 "width=" + width +
                 ", height=" + height +
                 "} " + super.toString();
+        for(String b: pathToPictures){
+            a = a + " PATH: "+ b;
+        }
+        return a;
     }
 }

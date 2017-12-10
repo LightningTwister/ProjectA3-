@@ -7,7 +7,8 @@ import java.util.*;
 public class Database {
 
     public final static String ARTWORK_PATH ="Data/artworkfile.txt";
-    public final static String ARTWORK_SPECIFIER = "artworkList";
+    public final static String ARTWORK_SPECIFIER = "artworklist";
+    public final static String ARTWORK_FOLDER_PATH = "Data/ArtworkPictures";
     public final static String USER_PATH = "Data/UserList.txt";
     public final static String USER_SPECIFIER ="userlist";
     public final static String PROFILE_PATH = "Data/ProfilePictures/";
@@ -97,10 +98,14 @@ public class Database {
      */
     public ArrayList<Artwork> getAllArtworks(){
         ArrayList<Artwork> aArtworks = new ArrayList<>();
-        for(Artwork a: artworks.values()){
-            aArtworks.add(a);
+        if (artworks.isEmpty()){
+            return aArtworks;
+        }else{
+            for(Artwork a: artworks.values()){
+                aArtworks.add(a);
+            }
+            return aArtworks;
         }
-        return aArtworks;
     }
 
     /**

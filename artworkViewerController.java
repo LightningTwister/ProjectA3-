@@ -38,7 +38,7 @@ public class artworkViewerController {
             addPage();
         });
 
-        refreshArtworkList();
+        //refreshArtworkList();
     }
 
     /**
@@ -92,18 +92,24 @@ public class artworkViewerController {
         lstArtworks.getItems().clear();
         artworksForUser.clear();
 
-        // Add each artwork to the displayed list
-        for (Artwork c : Main.database.getAllArtworks()) {
-            // Puts selected data into the list view.
+        if (Main.database.getAllArtworks().size() <1 ){
+            Utilities.noArtworksInDatabase();
 
-            if (c.getArtworkSeller() == (Main.database.getCurrentUser().getId())) {
-                artworksForUser.add(c);
-                lstArtworks.getItems().add(String.format("%-30s%-30s%-5s", "Title: " + c.getArtworkTitle(), "Creator: "
-                        + c.getArtworkCreator(), "Reserve: " + c.getReservePrice()));
+        }else{
+
+            // Add each artwork to the displayed list
+            for (Artwork c : Main.database.getAllArtworks()) {
+                System.out.println(c.getPicture());
+                if (c.getArtworkSeller() == (Main.database.getCurrentUser().getId())) {
+                    artworksForUser.add(c);
+                    lstArtworks.getItems().add(String.format("%-30s%-30s%-5s", "Title: " + c.getArtworkTitle(), "Creator: "
+                            + c.getArtworkCreator(), "Reserve: " + c.getReservePrice()));
 
 
+                }
             }
         }
+
     }
 
     /**
@@ -120,7 +126,13 @@ public class artworkViewerController {
             Painting newPainting = new Painting();
             Sculpture newSculpture = new Sculpture();
 
-            int index = (Main.database.getAllArtworks().get(Main.database.getAllArtworks().size() - 1).getId() + 1);
+            int index;
+            if (Main.database.getAllArtworks().size() ==0){
+                index =0;
+            }else{
+                index =Main.database.getAllArtworks().get(Main.database.getAllArtworks().size() - 1).getId() +1;
+            }
+
 
             // load the edit page controller with a new painting and sculpture object with the new id number.
             controller.artworkToAdd(newPainting, newSculpture, index);
@@ -135,10 +147,10 @@ public class artworkViewerController {
             // Checks what object is being saved by the user, it will either be a painting or sculpture.
             if (newPainting.getArtworkCreator() == null &&
                     !(newSculpture.getArtworkCreator() == null)) {
-                artworksForUser.add(newSculpture);
+                Main.database.addArtwork((newSculpture));
             } else if (!(newPainting.getArtworkCreator() == null) &&
                     (newSculpture.getArtworkCreator() == null)) {
-                artworksForUser.add(newPainting);
+                Main.database.addArtwork(newPainting);
             }
 
 

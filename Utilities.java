@@ -141,6 +141,7 @@ public class Utilities {
         alert.showAndWait();
     }
     /**
+     *
      * Create a pop up to inform the user the input address is the wrong size
      */
     public static void addressSizeWarning(){
@@ -148,6 +149,16 @@ public class Utilities {
         alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText("Addresses must be three lines long!");
+        alert.showAndWait();
+    }
+    /**
+     * Create a pop up to inform the user the input address is the wrong size
+     */
+    public static void noArtworksInDatabase(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("There are no artworks in the database");
         alert.showAndWait();
     }
 

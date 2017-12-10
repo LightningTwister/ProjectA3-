@@ -38,6 +38,8 @@ public class ArtworkPictureController {
             }
             ScrollPane.setContent(new ImageView(artworkList.get(index)));
             btnPrevious.setVisible(true);
+            labelOf.setText(index+ 1+" of "+ artworkList.size());
+
         });
         btnPrevious.setOnAction(e ->{
             index --;
@@ -46,6 +48,8 @@ public class ArtworkPictureController {
             }
             ScrollPane.setContent(new ImageView(artworkList.get(index)));
             btnNext.setVisible(true);
+            labelOf.setText(index+ 1+" of "+ artworkList.size());
+
         });
         btnRemove.setOnAction(e -> {
             deletePicture();
@@ -91,7 +95,7 @@ public class ArtworkPictureController {
             Utilities.maximumPicturesReached();
 
         }else{
-            String fileLocation = Utilities.changeImage("Select an artwork picture", Main.database.ARTWORK_PATH);
+            String fileLocation = Utilities.changeImage("Select an artwork picture", Main.database.ARTWORK_FOLDER_PATH);
             if (fileLocation.equals("FAILED")){
                 Utilities.noImageFound();
             }else{
@@ -131,6 +135,8 @@ public class ArtworkPictureController {
             btnPrevious.setVisible(true);
         }
         if (artworkList.size() ==1){
+            btnNext.setVisible(false);
+        }else if(artworkList.size() == index -1){
             btnNext.setVisible(false);
         }
         else{

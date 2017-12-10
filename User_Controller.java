@@ -215,6 +215,10 @@ public class User_Controller {
 
 
             String addressArray[] = addressBox.getText().split("\\r?\\n");
+            if(!(addressArray.length==3)){
+                Utilities.addressSizeWarning();
+                return;
+            }
             ArrayList<String> addressList = new ArrayList<>();
             for (String a : addressArray) {
                 addressList.add(a);
