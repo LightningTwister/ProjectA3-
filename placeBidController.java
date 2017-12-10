@@ -73,6 +73,8 @@ public class placeBidController {
      * @throws Exception
      */
     private void placeBid() throws Exception {
+
+
         if (Main.database.getCurrentUser().getId() == artwork.getHighestBid().getUserID()) {
             throw new FileAlreadyExistsException("Can't Bid when you're the highest bidder");
         }

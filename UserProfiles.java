@@ -13,7 +13,6 @@ public class UserProfiles {
 	private ArrayList<String> address;
 	private String postCode;
 	private String profilePicture;
-	private int auctionID;
 	private String logInDate;
 	private int id;
 	private ArrayList<Integer> currentAuctions;
@@ -380,7 +379,6 @@ public class UserProfiles {
 				", address=" + address +
 				", postCode='" + postCode + '\'' +
 				", profilePicture='" + profilePicture + '\'' +
-				", auctionID=" + auctionID +
 				", logInDate=" + logInDate +
 				", id=" + id +
 

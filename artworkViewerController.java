@@ -90,7 +90,7 @@ public class artworkViewerController {
     private void refreshArtworkList() {
         // Clear the displayed list
         lstArtworks.getItems().clear();
-        artworksForUser.clear();
+        //artworksForUser.clear();
 
         // Add each artwork to the displayed list
         for (Artwork c : Main.database.getAllArtworks()) {

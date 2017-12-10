@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Class to create a Painting Object.
@@ -58,7 +59,7 @@ public class Painting extends Artwork {
                     String artworkCreator, int artworkYearCreated,
                     double reservePrice, int numOfBids, int userId,
                     int width, int height , int id,
-                    ArrayList<String> picture, Bid currBid, ArrayList<Integer> bidHistory) {
+                    ArrayList<String> picture, Bid currBid, HashMap<Integer,Bid> bidHistory) {
 
         super(artworkTitle, artworkDescription, artworkCreator,
                 artworkYearCreated, reservePrice, numOfBids, userId, id, picture.get(0),currBid, bidHistory );

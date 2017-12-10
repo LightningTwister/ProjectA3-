@@ -6,16 +6,12 @@ import java.util.*;
  */
 public class Database {
 
-    public final static String ARTWORK_PATH ="Data/artworkfile.txt";
-    public final static String ARTWORK_SPECIFIER = "artworkList";
-    public final static String USER_PATH = "Data/UserList.txt";
-    public final static String USER_SPECIFIER ="userlist";
-    public final static String PROFILE_PATH = "Data/ProfilePictures/";
-    public final static String DEFAULT_PROFILE_PATH= "Data/ProfilePictures/Built In";
-    public final static String BID_HISTORY_PATH = "Data/bidhistory.txt";
-    public final static  String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
-    public final static String ICON_PATH = "file:Data/SystemPictures/Artatawe Logo.jpg";
-	public final static String NO_IMAGE_PATH = "file:Data/SystemPictures/noImageFound.jpg";
+    private final String ARTWORK_PATH ="Data/artworkfile1.txt";
+    private final String USER_PATH = "Data/UserList1.txt";
+    private final String BID_HISTORY_PATH = "Data/bidhistory.txt";
+    public final String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
+    public final String ICON_PATH = "file:Data/SystemPictures/Artatawe Logo.jpg";
+	public final String NO_IMAGE_PATH = "file:Data/SystemPictures/noImageFound.jpg";
     //private final String BID_PATH;
     private UserProfiles currentUser;
     private HashMap<Integer, UserProfiles> users;
@@ -73,14 +69,14 @@ public class Database {
      *  Method that gets users from a file and stores them
      */
     private void loadUsers(){
-        users = FileReader.readFile(USER_PATH,USER_SPECIFIER);
+        users = FileReader.readFile(USER_PATH,"userlist");
     }
 
     /**
      *  Method that gets artworks from a file and stores them
      */
     private void loadArtworks(){
-        artworks =FileReader.readFile(ARTWORK_PATH,ARTWORK_SPECIFIER);
+        artworks =FileReader.readFile(ARTWORK_PATH,"artworkList");
     }
 
     /**
@@ -128,14 +124,14 @@ public class Database {
      * Saves all artworks stored in database to file
      */
     public void saveArtwork(){
-        FileWriter.openFile(ARTWORK_PATH,ARTWORK_SPECIFIER);
+        FileWriter.openFile("Data/artworkfile1.txt","artworkList");
     }
 
     /**
      * Saves all users stored in the database to file
      */
     public void saveUsers(){
-        FileWriter.openFile(USER_PATH, USER_SPECIFIER);
+        FileWriter.openFile("Data/Userlist1.txt", "userlist");
     }
 
     public ArrayList<Bid> getBidHistory(){
@@ -160,15 +156,14 @@ public class Database {
      *  Return the bid history for a bid object
      */
     public ArrayList<String> getBidHistory(int id){
-        ArrayList<Integer> idList = artworks.get(id).getBidHistory();
+        HashMap<Integer, Bid> bidList = artworks.get(id).getBidHistory();
         ArrayList<String> result = new ArrayList<>();
         UserProfiles user;
         Bid currBid;
-        for(int bid : idList){
-            currBid = bids.get(bid);
+        for(Map.Entry<Integer,Bid> b : bidList.entrySet()){
+            currBid = bids.get(b);
             user = users.get(currBid.getUserID());
-            result.add("Username of Bidder: " + user.getUserName() + "Amount Bid: " + currBid.getAmount()
-                    + " on " + currBid.getDatePlaced());
+            result.add("Username of Bidder: " + user.getUserName() + "Amount Bid: " + currBid.getAmount() + " on " + currBid.getDatePlaced());
         }
 
         return result;
@@ -184,7 +179,7 @@ public class Database {
         Artwork art = this.getArtwork(artID);
         int bid = this.getNextIDBid();
         Bid currentHighest = art.getHighestBid();
-        if(currentHighest.getUserID() == currentUser.getId()){
+        if(currentHighest.getUserID() == currentUser.getId() && currentHighest.getUserID() != 0){
             throw new Exception("You can't bid again");
         }
         Bid newBid= new Bid(bid ,amount, currentUser.getId(), artID, currentHighest);

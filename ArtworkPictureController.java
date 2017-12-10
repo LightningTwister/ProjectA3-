@@ -91,7 +91,7 @@ public class ArtworkPictureController {
             Utilities.maximumPicturesReached();
 
         }else{
-            String fileLocation = Utilities.changeImage("Select an artwork picture", Main.database.ARTWORK_PATH);
+            String fileLocation = Utilities.changeImage("Select an artwork picture", "Data/ArtworkPictures");
             if (fileLocation.equals("FAILED")){
                 Utilities.noImageFound();
             }else{

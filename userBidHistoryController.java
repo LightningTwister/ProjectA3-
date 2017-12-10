@@ -100,9 +100,6 @@ public class userBidHistoryController {
                 newBranch(j,placeholder);
             }
         }
-
-
-
     }
 
     /**
