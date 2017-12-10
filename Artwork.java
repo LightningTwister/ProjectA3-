@@ -40,7 +40,7 @@ abstract class Artwork {
      */
     protected Artwork(String artworkTitle, String artworkDescription,
                       String artworkCreator, int artworkYearCreated, double reservePrice,
-                      int numOfBids, int idOfSeller, int id, String picture) {
+                      int numOfBids, int idOfSeller, int id, String picture, String date) {
 
         this.artworkTitle = artworkTitle;
         this.artworkDescription = artworkDescription;
@@ -53,6 +53,7 @@ abstract class Artwork {
         highestBid = new Bid(reservePrice);
         this.id = id;
         this.picture = picture;
+        this.dateTimeArtworkPlaced = date;
 
     }
 
@@ -73,7 +74,7 @@ abstract class Artwork {
      */
     protected Artwork(String artworkTitle, String artworkDescription,
                       String artworkCreator, int artworkYearCreated, double reservePrice,
-                      int numOfBids, int idOfSeller, int id, String picture, Bid highestBid, ArrayList<Integer> bidHistory) {
+                      int numOfBids, int idOfSeller, int id, String picture, Bid highestBid, ArrayList<Integer> bidHistory, String date) {
 
         this.artworkTitle = artworkTitle;
         this.artworkDescription = artworkDescription;
@@ -81,7 +82,7 @@ abstract class Artwork {
         this.artworkYearCreated = artworkYearCreated;
         this.reservePrice = reservePrice;
         this.numOfBids = numOfBids;
-        this.dateTimeArtworkPlaced = Utilities.getDate();
+        this.dateTimeArtworkPlaced = date;
         this.artworkSellerId = idOfSeller;
         this.highestBid = highestBid;
         this.bidHistory = bidHistory;

@@ -134,7 +134,7 @@ public class FileReader {
         double reservePrice = in.nextDouble();
         int numOfBids = in.nextInt();
         int userNameSeller = in.nextInt();
-        Date auctionPlaced = new Date(in.nextLong());
+        String auctionPlaced = in.next();
         int dWidth = in.nextInt();
         int dHeight = in.nextInt();
         int id = in.nextInt();
@@ -142,7 +142,7 @@ public class FileReader {
             artworkPaths.add(in.next());
         }
         artworkList.put(id, new Painting(artworkTitle, description, creatorName, yearCreated,
-                reservePrice, numOfBids, userNameSeller, dWidth, dHeight, id, artworkPaths));
+                reservePrice, numOfBids, userNameSeller, dWidth, dHeight, id, artworkPaths, auctionPlaced));
         in.close();
 
         return artworkList;
@@ -165,7 +165,7 @@ public class FileReader {
         double reservePrice = in.nextDouble();
         int numOfBids = in.nextInt();
         int userNameSeller = in.nextInt();
-        Date auctionPlaced = new Date(in.nextLong());
+        String auctionPlaced = in.next();
         int dWidth = in.nextInt();
         int dHeight = in.nextInt();
         int id = in.nextInt();
@@ -177,7 +177,7 @@ public class FileReader {
         }
 
         artworkList.put(id, new Sculpture(artworkTitle, description, creatorName, yearCreated,
-                reservePrice, numOfBids, userNameSeller, dWidth, dHeight, id, dDepth, material, artworkPaths));
+                reservePrice, numOfBids, userNameSeller, dWidth, dHeight, id, dDepth, material, artworkPaths, auctionPlaced));
         in.close();
         return artworkList;
     }

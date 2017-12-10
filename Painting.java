@@ -29,10 +29,10 @@ public class Painting extends Artwork {
     public Painting(String artworkTitle, String artworkDescription,
                     String artworkCreator, int artworkYearCreated,
                     double reservePrice, int numOfBids, int userId,
-                    int width, int height, int id, ArrayList<String> picture) {
+                    int width, int height, int id, ArrayList<String> picture, String date) {
 
         super(artworkTitle, artworkDescription, artworkCreator,
-                artworkYearCreated, reservePrice, numOfBids, userId, id, picture.get(0));
+                artworkYearCreated, reservePrice, numOfBids, userId, id, picture.get(0),date);
 
         this.width = width;
         this.height = height;
@@ -61,10 +61,10 @@ public class Painting extends Artwork {
                     String artworkCreator, int artworkYearCreated,
                     double reservePrice, int numOfBids, int userId,
                     int width, int height, int id,
-                    ArrayList<String> picture, Bid currBid, ArrayList<Integer> bidHistory) {
+                    ArrayList<String> picture, Bid currBid, ArrayList<Integer> bidHistory, String date) {
 
         super(artworkTitle, artworkDescription, artworkCreator,
-                artworkYearCreated, reservePrice, numOfBids, userId, id, picture.get(0), currBid, bidHistory);
+                artworkYearCreated, reservePrice, numOfBids, userId, id, picture.get(0), currBid, bidHistory,date);
 
         this.width = width;
         this.height = height;
