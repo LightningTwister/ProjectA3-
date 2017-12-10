@@ -1,7 +1,7 @@
 import java.util.Date;
 
 /**
- * @author Martin Cvetkov 915797
+ * @author Martin Tsvetkov 915797
  */
 public class Bid {
     private int userID;
