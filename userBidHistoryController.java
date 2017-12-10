@@ -8,7 +8,7 @@ import javafx.scene.layout.StackPane;
 import java.util.ArrayList;
 
 /**
- * @author Martin Tsvetkov 915797
+ * Created by LT on 07/12/2017.
  */
 public class userBidHistoryController {
 
@@ -31,7 +31,7 @@ public class userBidHistoryController {
     public void initialize() {
 
 
-        backButton.setOnAction(e ->{
+        backButton.setOnAction(e -> {
             goBack();
         });
 
@@ -41,13 +41,14 @@ public class userBidHistoryController {
     }
 
     /**
-     *  Makes a string into a treeitem then adds it to the parent node
-     * @param s String to be added to node
+     * Makes a string into a treeitem then adds it to the parent node
+     *
+     * @param s      String to be added to node
      * @param parent Node that is being added too
      * @return Tree item of the new tree
      */
     @FXML
-    private TreeItem<String> newBranch(String s, TreeItem<String> parent){
+    private TreeItem<String> newBranch(String s, TreeItem<String> parent) {
         TreeItem<String> branch = new TreeItem<>(s);
         branch.setExpanded(true);
         parent.getChildren().add(branch);
@@ -58,7 +59,7 @@ public class userBidHistoryController {
      * Populates data into a tree format
      */
     @FXML
-    public void populateTree(){
+    public void populateTree() {
         ArrayList<Integer> currentAuctions = Main.database.getCurrentUser().getCurrentAuctions();
         ArrayList<Integer> completedAuctions = Main.database.getCurrentUser().getCompletedAuctions();
         artworks = new ArrayList();
@@ -76,31 +77,30 @@ public class userBidHistoryController {
         TreeItem<String> completedArtworkRoot = newBranch("My Completed Auctions", artworkRoot);
 
 
-        for(Bid bid: bids){
+        for (Bid bid : bids) {
             Artwork artwork = Main.database.getArtwork(bid.getArtworkID());
 
-            newBranch(("Artwork name: " + artwork.getArtworkTitle() + " Amount Bid: " +  bid.getAmount()  + " Date Placed: " + bid.getDatePlaced()),userHistoryRoot);
+            newBranch(("Artwork name: " + artwork.getArtworkTitle() + " Amount Bid: " + bid.getAmount() + " Date Placed: " + bid.getDatePlaced()), userHistoryRoot);
         }
 
-        for(int i = 0; i < currentAuctions.size(); i++){
+        for (int i = 0; i < currentAuctions.size(); i++) {
             int currentID = currentAuctions.get(i);
             artworks.add(Main.database.getArtwork(currentID));
             placeholder = newBranch(artworks.get(i).getArtworkTitle(), currentArtworkRoot);
-            for(String j : Main.database.getBidHistory(artworks.get(i).getId())){
-                newBranch(j,placeholder);
+            for (String j : Main.database.getBidHistory(artworks.get(i).getId())) {
+                newBranch(j, placeholder);
             }
         }
 
         artworks = new ArrayList<>();
-        for(int i = 0; i < completedAuctions.size(); i++){
+        for (int i = 0; i < completedAuctions.size(); i++) {
             int currentID = completedAuctions.get(i);
             artworks.add(Main.database.getArtwork(currentID));
             placeholder = newBranch(artworks.get(i).getArtworkTitle(), completedArtworkRoot);
-            for(String j : Main.database.getBidHistory(artworks.get(i).getId())){
-                newBranch(j,placeholder);
+            for (String j : Main.database.getBidHistory(artworks.get(i).getId())) {
+                newBranch(j, placeholder);
             }
         }
-
 
 
     }
@@ -109,10 +109,9 @@ public class userBidHistoryController {
      * Exit window
      */
     @FXML
-    private void goBack(){
+    private void goBack() {
         Utilities.closeWindow(rootPane);
     }
-
 
 
 }

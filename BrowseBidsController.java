@@ -69,7 +69,7 @@ public class BrowseBidsController {
             scrollList.clear();
             updateScrollList(artworksToBidOn);
         });
-        checkFave.setOnAction(e ->{
+        checkFave.setOnAction(e -> {
             scrollList.clear();
             faveUserList.clear();
             faveUsersOnly();
@@ -81,15 +81,15 @@ public class BrowseBidsController {
     }
 
     /**
-     *  View the pictures of this artwork
+     * View the pictures of this artwork
      */
-    private void viewSelectedArtwork(){
-        try{
+    private void viewSelectedArtwork() {
+        try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/ArtworkPage.fxml"));
             BorderPane root = (BorderPane) fxmlLoader.load();
 
-            ArtworkController controller = fxmlLoader.<ArtworkController>getController() ;
+            ArtworkController controller = fxmlLoader.<ArtworkController>getController();
 
             // load the edit page controller with a new painting and sculpture object with the new id number.
             controller.artworkToBid(currentArtwork);
@@ -101,7 +101,7 @@ public class BrowseBidsController {
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -109,22 +109,24 @@ public class BrowseBidsController {
     /**
      * Filter the Artworks that can be bid on, to ones placed by favourited users
      */
-    private void faveUsersOnly(){
+    private void faveUsersOnly() {
 
-            if (checkFave.isSelected()){
-                for (Artwork artwork: artworksToBidOn){
-                    if(Main.database.getCurrentUser().getFaveUsers().contains(artwork.getArtworkSeller()) ){
-                        faveUserList.add(artwork);
-                    }
+        if (checkFave.isSelected()) {
+            for (Artwork artwork : artworksToBidOn) {
+                if (Main.database.getCurrentUser().getFaveUsers().contains(artwork.getArtworkSeller())) {
+                    faveUserList.add(artwork);
                 }
-                updateScrollList(faveUserList);
-            }else{
-                updateScrollList(artworksToBidOn);
+            }
+            updateScrollList(faveUserList);
+        } else {
+            updateScrollList(artworksToBidOn);
         }
 
     }
+
     /**
-     *  Update the list of Artworks to be displayed based on the filtering selections
+     * Update the list of Artworks to be displayed based on the filtering selections
+     *
      * @param checkList List of artworks to be arranged in the viewer list
      */
     private void updateScrollList(ArrayList<Artwork> checkList) {
@@ -172,6 +174,7 @@ public class BrowseBidsController {
 
     /**
      * Get all the artworks and then sort them so its artworks the user can bid on
+     *
      * @param artworkList List of artworks that can be bid on
      */
     public void loadArtworks(ArrayList<Artwork> artworkList) {

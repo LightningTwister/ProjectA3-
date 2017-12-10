@@ -10,21 +10,22 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 /**
- *  This class controls the fave user page gui
- *  @author Tim Watson 880158
- *  @version 1.1
+ * This class controls the fave user page gui
+ *
+ * @author Tim Watson 880158
+ * @version 1.1
  */
 public class faveUserController {
-        private int id;
+    private int id;
 
-        @FXML
-        private TextField userBox;
-        @FXML
-        private ImageView imgProfile;
-        @FXML
-        private Button btnCancel, btnFaveUser, addButton;
-        @FXML
-        private Pane rootPane;
+    @FXML
+    private TextField userBox;
+    @FXML
+    private ImageView imgProfile;
+    @FXML
+    private Button btnCancel, btnFaveUser, btnAdd;
+    @FXML
+    private Pane rootPane;
 
     /**
      * Method that gets the current user of the program and loads the relevant information into the editing boxes
@@ -37,46 +38,52 @@ public class faveUserController {
         id = user.getId();
         Image profileImage = Utilities.getImage(Main.database.getUser(id).getProfilePicture());
         imgProfile.setImage(profileImage);
-
+        if (Main.database.getCurrentUser().getFaveUsers().contains(user.getId())) {
+            btnAdd.setVisible(false);
+            btnFaveUser.setVisible(true);
+        } else {
+            btnAdd.setVisible(true);
+            btnFaveUser.setVisible(false);
         }
+
+
+    }
 
     /**
      * When the user page is opened save button is linked to the save method
      */
     public void initialize() {
-            btnCancel.setOnAction(e -> {
-                Utilities.closeWindow(rootPane);
+        btnCancel.setOnAction(e -> {
+            Utilities.closeWindow(rootPane);
 
-            });
-            btnFaveUser.setOnAction(e -> {
-                removeFaveUser();
-                Utilities.closeWindow(rootPane);
-            });
-            addButton.setOnAction(e ->{
+        });
+        btnFaveUser.setOnAction(e -> {
+            removeFaveUser();
+            Utilities.closeWindow(rootPane);
+        });
+        btnAdd.setOnAction(e -> {
+            addFaveUser();
+            Utilities.closeWindow(rootPane);
+        });
 
-                addFaveUser();
-                Utilities.closeWindow(rootPane);
-            });
 
-
-        }
+    }
 
     /**
      * Add a Favourite user when the fave user button is clicked
      */
-    private void addFaveUser(){
+    private void addFaveUser() {
         Main.database.getCurrentUser().toggleFaveUser(id);
-        }
+    }
 
     /**
      * Remove a favourite user the delete button is pressed
      */
-    private void removeFaveUser(){
+    private void removeFaveUser() {
         Main.database.getCurrentUser().toggleFaveUser(id);
     }
 
 
-
-    }
+}
 
 

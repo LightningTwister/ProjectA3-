@@ -215,7 +215,7 @@ public class User_Controller {
 
 
             String addressArray[] = addressBox.getText().split("\\r?\\n");
-            if(!(addressArray.length==3)){
+            if (!(addressArray.length == 3)) {
                 Utilities.addressSizeWarning();
                 return;
             }

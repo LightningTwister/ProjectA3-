@@ -14,9 +14,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 
-
 /**
  * This class controls the add artwork gui page
+ *
  * @author Tim Watson 880158
  * @version 2
  */
@@ -29,8 +29,7 @@ public class ArtworkController {
     private boolean bid;
 
     @FXML
-    private TextField nameBox, yearBox, reserveBox, bidsBox, userNameBox, widthBox, heightBox, depthBox, materialBox
-            ,nameOfArtwork, descriptionBox ;
+    private TextField nameBox, yearBox, reserveBox, bidsBox, userNameBox, widthBox, heightBox, depthBox, materialBox, nameOfArtwork, descriptionBox;
     @FXML
     private RadioButton sculptureRadio, paintingRadio;
     @FXML
@@ -44,10 +43,10 @@ public class ArtworkController {
 
 
     /**
-     *  When the artwork add page is opened this method links buttons to methods and radio buttons
+     * When the artwork add page is opened this method links buttons to methods and radio buttons
      */
     public void initialize() {
-        buttonId.setOnAction(e ->{
+        buttonId.setOnAction(e -> {
             saveChanges();
 
         });
@@ -63,12 +62,12 @@ public class ArtworkController {
         paintingRadio.setOnAction(e -> {
             toggleBoxes(false);
         });
-        btnViewImage.setOnAction((e ->{
+        btnViewImage.setOnAction((e -> {
             showPictures();
 
         }));
 
-        btnBid.setOnAction(e ->{
+        btnBid.setOnAction(e -> {
             goToPlaceBid();
 
         });
@@ -93,12 +92,11 @@ public class ArtworkController {
 
             ArtworkPictureController controller = fxmlLoader.<ArtworkPictureController>getController();
 
-            if (paintingRadio.isSelected()){
-                controller.showPictures(picturePath, "painting",bid);
-            }else{
-                controller.showPictures(picturePath, "sculpture",bid);
+            if (paintingRadio.isSelected()) {
+                controller.showPictures(picturePath, "painting", bid);
+            } else {
+                controller.showPictures(picturePath, "sculpture", bid);
             }
-
 
 
             Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
@@ -107,9 +105,11 @@ public class ArtworkController {
             editStage.setTitle("Pictures");
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
-
-            painting.setPicture(picturePath.get(0));
-            sculpture.setPicture(picturePath.get(0));
+            if (paintingRadio.isSelected() && (!bid)) {
+                painting.setPicture(picturePath.get(0));
+            } else if (!(paintingRadio.isSelected()) && !bid) {
+                sculpture.setPicture(picturePath.get(0));
+            }
 
 
         } catch (Exception e) {
@@ -120,12 +120,13 @@ public class ArtworkController {
 
 
     /**
-     *  Method that takes either a reference to a painting or sculpture object to be edited and saved
+     * Method that takes either a reference to a painting or sculpture object to be edited and saved
+     *
      * @param artwork Artwork object to be edited
      */
-    public void getArtwork(Object artwork){
+    public void getArtwork(Object artwork) {
         bid = false;
-        if (artwork instanceof Painting){
+        if (artwork instanceof Painting) {
             this.painting = (Painting) artwork;
 
             this.picturePath = this.painting.getPathToPictures();
@@ -146,7 +147,7 @@ public class ArtworkController {
             toggleBoxes(false);
 
 
-        }else{
+        } else {
             this.sculpture = (Sculpture) artwork;
 
             this.picturePath = this.sculpture.getPictures();
@@ -172,11 +173,12 @@ public class ArtworkController {
     }
 
     /**
-     *  This method un/hides the boxes for depth and material if the object the user wants to add is either a
-     *  sculpture or not
+     * This method un/hides the boxes for depth and material if the object the user wants to add is either a
+     * sculpture or not
+     *
      * @param objectView Value that determines if this add object is a sculpture or not.
      */
-    private void toggleBoxes(boolean objectView){
+    private void toggleBoxes(boolean objectView) {
         depthBox.setVisible(objectView);
         materialBox.setVisible(objectView);
         depthText.setVisible(objectView);
@@ -189,20 +191,20 @@ public class ArtworkController {
      * When the save button is pressed this method verifies the variable types and then adds this new object to the
      * artwork list.
      */
-    
+
     private void saveChanges() {
-        try{
-           int year = Integer.valueOf(yearBox.getText());
-           double reserve = Double.valueOf(reserveBox.getText());
-           int bids =Integer.valueOf(bidsBox.getText());
-           int width =Integer.valueOf(widthBox.getText());
-           int height = Integer.valueOf(heightBox.getText());
+        try {
+            int year = Integer.valueOf(yearBox.getText());
+            double reserve = Double.valueOf(reserveBox.getText());
+            int bids = Integer.valueOf(bidsBox.getText());
+            int width = Integer.valueOf(widthBox.getText());
+            int height = Integer.valueOf(heightBox.getText());
 
 
             ArrayList checkLetters = new ArrayList<String>();
 
 
-            if(!Utilities.checkImagesAdded(this.picturePath)){
+            if (!Utilities.checkImagesAdded(this.picturePath)) {
                 throw new Exception("No image specified please add one");
 
             }
@@ -211,7 +213,7 @@ public class ArtworkController {
             checkLetters.add(nameBox.getText());
             //checkLetters.add(descriptionBox.getText());
 
-            if (!Utilities.checkInputAreAlpha(checkLetters)){
+            if (!Utilities.checkInputAreAlpha(checkLetters)) {
                 throw new Exception("Input type is incorrect");
             }
             String creatorName = nameBox.getText();
@@ -220,41 +222,40 @@ public class ArtworkController {
             String desc = descriptionBox.getText();
 
 
-
-            if (sculptureRadio.isSelected()){
-               int depth = Integer.valueOf(depthBox.getText());
+            if (sculptureRadio.isSelected()) {
+                int depth = Integer.valueOf(depthBox.getText());
 
                 checkLetters.add(materialBox.getText());
 
-                if (!Utilities.checkInputAreAlpha(checkLetters)){
+                if (!Utilities.checkInputAreAlpha(checkLetters)) {
                     throw new Exception("Error ");
                 }
 
                 String material = materialBox.getText();
-               Utilities.saveSculpture(sculpture,year, reserve, bids, width,height,depth,
-                        creatorName,userId,material,title,desc,nextId, this.picturePath );
+                Utilities.saveSculpture(sculpture, year, reserve, bids, width, height, depth,
+                        creatorName, userId, material, title, desc, nextId, this.picturePath);
                 Main.database.addArtwork(sculpture);
                 Main.database.saveArtwork();
 
-            }else if (paintingRadio.isSelected()){
-               Utilities.savePainting(painting, year, reserve, bids, width,height,
-                        creatorName,userId,title,desc, nextId, this.picturePath);
+            } else if (paintingRadio.isSelected()) {
+                Utilities.savePainting(painting, year, reserve, bids, width, height,
+                        creatorName, userId, title, desc, nextId, this.picturePath);
 
                 Main.database.addArtwork(painting);
                 Main.database.saveArtwork();
-            }else{
+            } else {
                 throw new Exception("Error: Radio button not selected");
             }
 
             //for(Artwork a: Main.database.getAllArtworks()){
             //    System.out.println(a.toString());
-           // }
+            // }
 
             Utilities.savedInput();
 
             Utilities.closeWindow(rootPane);
 
-        }catch(Exception e){
+        } catch (Exception e) {
 
             Utilities.wrongInputFound();
         }
@@ -286,10 +287,11 @@ public class ArtworkController {
     }
 
     /**
-     *  Method that takes an artwork that can be bid on and shows its details aswell as displays bidding button
+     * Method that takes an artwork that can be bid on and shows its details aswell as displays bidding button
+     *
      * @param artwork Artwork that can be bid on
      */
-    public void artworkToBid(Artwork artwork){
+    public void artworkToBid(Artwork artwork) {
         this.artwork = artwork;
 
         bid = true;
@@ -307,7 +309,7 @@ public class ArtworkController {
 
 
         userId = artwork.getArtworkSeller();
-        if(Main.database.getCurrentUser().getFaveUsers().contains(userId)){
+        if (Main.database.getCurrentUser().getFaveUsers().contains(userId)) {
             btnFave.setVisible(false);
         }
 
@@ -316,7 +318,7 @@ public class ArtworkController {
         descriptionBox.setText(artwork.getArtworkDescription());
 
 
-        if(artwork instanceof Sculpture){
+        if (artwork instanceof Sculpture) {
             this.sculpture = (Sculpture) artwork;
             widthBox.setText(String.valueOf(this.sculpture.getWidth()));
             heightBox.setText(String.valueOf(this.sculpture.getHeight()));
@@ -324,7 +326,7 @@ public class ArtworkController {
             materialBox.setText(this.sculpture.getMaterial());
             this.picturePath = this.sculpture.getPictures();
 
-        }else{
+        } else {
             depthBox.setVisible(false);
             materialBox.setVisible(false);
             materialText.setVisible(false);
@@ -335,33 +337,33 @@ public class ArtworkController {
             heightBox.setText(String.valueOf(this.painting.getHeight()));
             this.picturePath = this.painting.getPictures();
         }
-        
+
 
     }
 
     /**
      * Adds the seller of this artwork to the current users favourite user list
      */
-    private void toggleUserToFaves(){
+    private void toggleUserToFaves() {
         Main.database.getCurrentUser().toggleFaveUser(userId);
         Main.database.saveUsers();
-        
+
         Utilities.savedInput();
         btnFave.setVisible(false);
     }
 
 
     /**
-     *  Open the bid window, to place a bid
+     * Open the bid window, to place a bid
      */
-    private void goToPlaceBid(){
-        try{
+    private void goToPlaceBid() {
+        try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/placeBid.fxml"));
             Pane root = fxmlLoader.load();
             placeBidController controller = fxmlLoader.getController();
             controller.setArtwork(artwork);
 
-            Scene editScene = new Scene(root, (Main.EDIT_WINDOW_WIDTH/2), (Main.EDIT_WINDOW_HEIGHT/2));
+            Scene editScene = new Scene(root, (Main.EDIT_WINDOW_WIDTH / 2), (Main.EDIT_WINDOW_HEIGHT / 2));
             Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Place Bid");
@@ -369,7 +371,7 @@ public class ArtworkController {
 
             editStage.show();
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -15,10 +15,11 @@ import javafx.stage.Stage;
 
 /**
  * Class that controls the log in page of the gui
+ *
  * @author Tim Watson 880158
  * @version 3
  */
-public class logInController{
+public class logInController {
     @FXML
     private Button btnLogIn, createUser;
     @FXML
@@ -46,13 +47,13 @@ public class logInController{
 
 
     /**
-     *  Method that when clicked checks username entered and if it is accepted navigate to the menu page.
+     * Method that when clicked checks username entered and if it is accepted navigate to the menu page.
      */
     @FXML
-    private void ChangeScreen(){
-        if (Utilities.checkUsername(usernameBox.getText())){
+    private void ChangeScreen() {
+        if (Utilities.checkUsername(usernameBox.getText())) {
             Main.database.setCurrentUser(Main.database.getUser(usernameBox.getText()));
-            try{
+            try {
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/menu.fxml"));
                 AnchorPane root = (AnchorPane) fxmlLoader.load();
@@ -66,15 +67,13 @@ public class logInController{
                 editStage.show();
                 Utilities.closeWindow(rootPane);
 
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
-        }else{
+        } else {
             Utilities.userNotFound();
         }
-
-
 
 
     }
@@ -82,23 +81,23 @@ public class logInController{
     /**
      * Method that opens up a new window to create a new user
      */
-	@FXML
-    private void registerNewUser(){
-		try{
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/CreateUser.fxml"));
-			BorderPane root = (BorderPane) fxmlLoader.load();
+    @FXML
+    private void registerNewUser() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/CreateUser.fxml"));
+            BorderPane root = (BorderPane) fxmlLoader.load();
 
-			Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
-			Stage editStage = new Stage();
-			editStage.setScene(editScene);
-			editStage.setTitle("Registration");
-			editStage.initModality(Modality.APPLICATION_MODAL);
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+            editStage.setTitle("Registration");
+            editStage.initModality(Modality.APPLICATION_MODAL);
 
-			editStage.show();
+            editStage.show();
 
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

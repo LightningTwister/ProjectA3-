@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class menuController {
     @FXML
-    private Button btnProfile, btnBid, btnArtworks, btnSold, btnWon;
+    private Button btnProfile, btnBid, btnArtworks, btnSold, btnWon, btnViewUsers;
     @FXML
     private Pane rootPane;
     @FXML
@@ -50,6 +50,9 @@ public class menuController {
         btnWon.setOnAction(e -> {
             openWon();
         });
+        btnViewUsers.setOnAction(e -> {
+            openBrowse();
+        });
         imgBanner.setImage(Utilities.getImage(Main.database.BANNER_PATH));
         imgIcon.setImage(Utilities.getImage(Main.database.ICON_PATH));
         labelLastLogIn.setText("You Last Logged in: " + Main.database.getCurrentUser().getLogInDate());
@@ -59,12 +62,36 @@ public class menuController {
     }
 
     /**
+     * Method that opens the window for the user to browse all other accounts on the system
+     */
+    private void openBrowse() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
+            BorderPane root = (BorderPane) fxmlLoader.load();
+
+            artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
+
+            controller.loadUsers();
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+            editStage.setTitle("Browse Users");
+            editStage.initModality(Modality.APPLICATION_MODAL);
+            editStage.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
      * Open the window to show the artworks the user has managed to sell
      */
     private void openSold() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
-            Pane root = fxmlLoader.load();
+            BorderPane root = (BorderPane) fxmlLoader.load();
 
             artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
 
@@ -89,7 +116,7 @@ public class menuController {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
-            Pane root = fxmlLoader.load();
+            BorderPane root = (BorderPane) fxmlLoader.load();
 
             artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
             controller.wonView();
@@ -170,14 +197,14 @@ public class menuController {
         try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
-            Pane root =  fxmlLoader.load();
+            BorderPane root = (BorderPane) fxmlLoader.load();
 
             artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
 
             controller.loadArtworks(Main.database.getAllArtworks());
 
 
-            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH,Main.EDIT_WINDOW_HEIGHT);
+            Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Artwork Page");

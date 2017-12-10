@@ -8,7 +8,7 @@ import java.util.Date;
  * @author Tim Watson 880158
  * @version 3
  */
- abstract class Artwork {
+abstract class Artwork {
 
     private String artworkTitle;
     private String artworkDescription;
@@ -25,21 +25,22 @@ import java.util.Date;
     private String picture;
 
 
-
     /**
      * Constructor to create a new artwork.
      *
-     * @param artworkTitle Name of Artwork
+     * @param artworkTitle       Name of Artwork
      * @param artworkDescription Description of this piece of Art.
-     * @param artworkCreator Name of the creator of this Art piece.
+     * @param artworkCreator     Name of the creator of this Art piece.
      * @param artworkYearCreated The year this Art piece was created.
-     * @param reservePrice Price for the Artwork to be sold at.
-     * @param numOfBids Maximum number of bids allowed on this Artwork.
-     * @param idOfSeller user selling this artwork.
+     * @param reservePrice       Price for the Artwork to be sold at.
+     * @param numOfBids          Maximum number of bids allowed on this Artwork.
+     * @param idOfSeller         user selling this artwork.
+     * @param id                 Id value of this artwork.
+     * @param picture            Path to the main picture of this artwork
      */
     protected Artwork(String artworkTitle, String artworkDescription,
-            String artworkCreator, int artworkYearCreated, double reservePrice,
-            int numOfBids, int idOfSeller, int id, String picture) {
+                      String artworkCreator, int artworkYearCreated, double reservePrice,
+                      int numOfBids, int idOfSeller, int id, String picture) {
 
         this.artworkTitle = artworkTitle;
         this.artworkDescription = artworkDescription;
@@ -49,25 +50,26 @@ import java.util.Date;
         this.numOfBids = numOfBids;
         this.dateTimeArtworkPlaced = new Date();
         this.artworkSellerId = idOfSeller;
-		highestBid = new Bid(reservePrice);
+        highestBid = new Bid(reservePrice);
         this.id = id;
         this.picture = picture;
 
     }
 
     /**
-     *  Constructor for Artwork
-     * @param artworkTitle Title of the artwork
+     * Constructor for Artwork
+     *
+     * @param artworkTitle       Title of the artwork
      * @param artworkDescription Optional description of this artwork object
-     * @param artworkCreator Person who created this artwork
+     * @param artworkCreator     Person who created this artwork
      * @param artworkYearCreated The year the artwork was created
-     * @param reservePrice Minimum price a bid can be for
-     * @param numOfBids Number of bids left in this auction
-     * @param idOfSeller The id of the of the account selling this artwork
-     * @param id Id of this artwork
-     * @param picture Path to picture
-     * @param highestBid Highest bid on this artwork
-     * @param bidHistory History of bids placed on this artwork
+     * @param reservePrice       Minimum price a bid can be for
+     * @param numOfBids          Number of bids left in this auction
+     * @param idOfSeller         The id of the of the account selling this artwork
+     * @param id                 Id of this artwork
+     * @param picture            Path to picture
+     * @param highestBid         Highest bid on this artwork
+     * @param bidHistory         History of bids placed on this artwork
      */
     protected Artwork(String artworkTitle, String artworkDescription,
                       String artworkCreator, int artworkYearCreated, double reservePrice,
@@ -88,12 +90,13 @@ import java.util.Date;
 
     }
 
-    protected Artwork(){
+    protected Artwork() {
 
     }
 
     /**
-     *  Get picture path for this artwork
+     * Get picture path for this artwork
+     *
      * @return path to picture.
      */
     public String getPicture() {
@@ -101,7 +104,8 @@ import java.util.Date;
     }
 
     /**
-     *  Set a new picture for this artwork
+     * Set a new picture for this artwork
+     *
      * @param picture new path to a picture
      */
     public void setPicture(String picture) {
@@ -109,35 +113,38 @@ import java.util.Date;
     }
 
     /**
-     *  Add another bid to this object if the artwork is still being auctioned
+     * Add another bid to this object if the artwork is still being auctioned
+     *
      * @param newBid the new bid object
      * @throws Exception
      */
-    protected void placeBid(Bid newBid)throws Exception {
-            if(numOfBids == 0){
-                throw new Exception("Artwork is completed");
-            }
-            highestBid = newBid;
-            bidHistory.add(newBid.getBidID());
-            numOfBids--;
+    protected void placeBid(Bid newBid) throws Exception {
+        if (numOfBids == 0) {
+            throw new Exception("Artwork is completed");
+        }
+        highestBid = newBid;
+        bidHistory.add(newBid.getBidID());
+        numOfBids--;
     }
 
     /**
-     *  Return highest bid on this object
+     * Return highest bid on this object
+     *
      * @return Bid object of the highest bid.
      */
-    public Bid getHighestBid(){
+    public Bid getHighestBid() {
         return highestBid;
     }
 
     /**
-     *  Get the list of bids made on this object
+     * Get the list of bids made on this object
+     *
      * @return
      */
-	public ArrayList getBidHistory(){
+    public ArrayList getBidHistory() {
         return bidHistory;
     }
-    
+
     /**
      * Get Method to retrieve the name of this Artwork
      *
@@ -292,7 +299,8 @@ import java.util.Date;
     }
 
     /**
-     *  Get the artwork identifier of this Artwork
+     * Get the artwork identifier of this Artwork
+     *
      * @return Identifier of the artwork object
      */
     public int getId() {
@@ -300,14 +308,14 @@ import java.util.Date;
     }
 
     /**
-     *  Set a new id for this object
+     * Set a new id for this object
+     *
      * @param id Integer value of new artwork
      */
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
 
-   
 
     @Override
     public String toString() {
@@ -318,7 +326,7 @@ import java.util.Date;
                 ", artworkYearCreated=" + artworkYearCreated +
                 ", reservePrice=" + reservePrice +
                 ", numOfBids=" + numOfBids +
-                ", id="+id +
+                ", id=" + id +
                 ", dateTimeArtworkPlaced=" + dateTimeArtworkPlaced +
                 ", artworkSeller='" + artworkSellerId + '\'' +
                 '}';

@@ -62,6 +62,7 @@ public class placeBidController {
 
     /**
      * Gets the artwork to be bid on and saves the reference
+     *
      * @param artwork Artwork object a bid is being added for
      */
     public void setArtwork(Artwork artwork) {
@@ -69,7 +70,8 @@ public class placeBidController {
     }
 
     /**
-     *  Method that checks the bid being created is valid
+     * Method that checks the bid being created is valid
+     *
      * @throws Exception
      */
     private void placeBid() throws Exception {

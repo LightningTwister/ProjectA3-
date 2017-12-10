@@ -47,21 +47,21 @@ public class registerController {
     /**
      * Open a select picture gui, to select a default image for this profile
      */
-    private void getPicture(){
+    private void getPicture() {
         String fileLocation = Utilities.changeImage("Select a profile picture", Main.database.DEFAULT_PROFILE_PATH);
-        if (fileLocation.equals("FAILED")){
+        if (fileLocation.equals("FAILED")) {
             Utilities.noImageFound();
-        }else{
+        } else {
 
-            this.picPath = "file:"+fileLocation;
+            this.picPath = "file:" + fileLocation;
         }
     }
 
     /**
      * Method that checks all inputs are valid and then creates a new profile
      */
-    private void saveProfile(){
-        try{
+    private void saveProfile() {
+        try {
 
             String userName = username.getText();
             String fName = firstName.getText();
@@ -70,17 +70,17 @@ public class registerController {
             String postCode = String.valueOf(postcode.getText());
 
             String phone1 = String.valueOf(phone.getText());
-            String addressArray[] = StringUtils.splitString(address.getText(),"\n");
+            String addressArray[] = StringUtils.splitString(address.getText(), "\n");
             ArrayList<String> addressList = new ArrayList<>();
-            if(!(addressArray.length == 3) ){
+            if (!(addressArray.length == 3)) {
                 Utilities.addressSizeWarning();
                 return;
             }
-            for(String a: addressArray){
+            for (String a : addressArray) {
                 addressList.add(a);
             }
 
-            ArrayList<Object> user= new ArrayList<>();
+            ArrayList<Object> user = new ArrayList<>();
             user.add(userName);
             user.add(fName);
             user.add(sName);
@@ -91,16 +91,16 @@ public class registerController {
 
             boolean emptyCheck = Main.database.createUser(user);
 
-            if (emptyCheck == true){
+            if (emptyCheck == true) {
                 Utilities.savedInput();
                 Main.database.saveUsers();
                 Utilities.closeWindow(rootPane);
-            }else{
+            } else {
                 Utilities.wrongInputFound();
             }
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
             //e.printStackTrace();
             Utilities.wrongInputFound();
         }

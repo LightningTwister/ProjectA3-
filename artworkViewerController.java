@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -18,16 +19,12 @@ import javafx.stage.Stage;
  */
 public class artworkViewerController {
     private static ArrayList<Artwork> artworksForUser = new ArrayList<Artwork>();
+    private static ArrayList<UserProfiles> profiles = new ArrayList<>();
 
     @FXML
-    private Label typeOfList;
-
-    @FXML
-    private Button btnEdit, btnAdd;
+    private Button btnEdit, btnAdd, btnViewUser;
     @FXML
     private ListView<String> lstArtworks;
-
-
 
 
     /**
@@ -42,8 +39,66 @@ public class artworkViewerController {
         btnAdd.setOnAction(e -> {
             addPage();
         });
+        btnViewUser.setOnAction(e -> {
+            openUser();
+        });
 
         //refreshArtworkList();
+    }
+
+    /**
+     * Gets the selected user from the list view and opens a window of limited details to be viewed
+     */
+    private void openUser() {
+        int selectedIndex = lstArtworks.getSelectionModel().getSelectedIndex();
+
+
+        // Check if user selected an item
+        if (selectedIndex < 0) {
+            Utilities.nothingSelected();
+            return;
+        } else {
+            try {
+
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/faveUserPage.fxml"));
+                Pane root = (Pane) fxmlLoader.load();
+
+                faveUserController controller = fxmlLoader.<faveUserController>getController();
+
+
+                controller.getUser(profiles.get(selectedIndex));
+
+                Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
+                Stage editStage = new Stage();
+                editStage.setScene(editScene);
+                editStage.setTitle("Favourite User");
+                editStage.initModality(Modality.APPLICATION_MODAL);
+                editStage.showAndWait();
+
+
+            } catch (Exception e) {
+                Utilities.nothingSelected();
+
+            }
+
+        }
+
+    }
+
+    /**
+     * If the users are being viewed this method loads all users that aren't the current user of the system
+     */
+    public void loadUsers() {
+        btnEdit.setVisible(false);
+        btnAdd.setVisible(false);
+
+        for (UserProfiles a : Main.database.getAllUsers()) {
+            if (a.getId() != Main.database.getCurrentUser().getId()) {
+                profiles.add(a);
+                lstArtworks.getItems().add(a.getUserName());
+            }
+        }
     }
 
     /**
@@ -84,7 +139,7 @@ public class artworkViewerController {
      */
     public void loadArtworks(ArrayList<Artwork> artworkList) {
         this.artworksForUser = new ArrayList<>(artworkList);
-
+        btnViewUser.setVisible(false);
 
         refreshArtworkList();
     }
@@ -97,13 +152,14 @@ public class artworkViewerController {
         lstArtworks.getItems().clear();
         artworksForUser.clear();
 
-        if (Main.database.getAllArtworks().size() <1 ){
+        if (Main.database.getAllArtworks().size() < 1) {
             Utilities.noArtworksInDatabase();
 
-        }else{
+        } else {
 
             // Add each artwork to the displayed list
             for (Artwork c : Main.database.getAllArtworks()) {
+
                 if (c.getArtworkSeller() == (Main.database.getCurrentUser().getId())) {
                     artworksForUser.add(c);
                     lstArtworks.getItems().add(String.format("%-30s%-30s%-5s", "Title: " + c.getArtworkTitle(), "Creator: "
@@ -131,10 +187,10 @@ public class artworkViewerController {
             Sculpture newSculpture = new Sculpture();
 
             int index;
-            if (Main.database.getAllArtworks().size() ==0){
-                index =0;
-            }else{
-                index =Main.database.getAllArtworks().get(Main.database.getAllArtworks().size() - 1).getId() +1;
+            if (Main.database.getAllArtworks().size() == 0) {
+                index = 0;
+            } else {
+                index = Main.database.getAllArtworks().get(Main.database.getAllArtworks().size() - 1).getId() + 1;
             }
 
 
@@ -232,7 +288,6 @@ public class artworkViewerController {
      * Show all the artworks the current user has sold in list format
      */
     public void soldView() {
-        typeOfList.setText("Sold Artworks: ");
         btnAdd.setVisible(false);
         btnEdit.setVisible(false);
         artworksForUser.clear();
@@ -253,7 +308,6 @@ public class artworkViewerController {
      * Show all artworks the current user has won in list format
      */
     public void wonView() {
-        typeOfList.setText("Won Artworks: ");
         btnAdd.setVisible(false);
         btnEdit.setVisible(false);
         artworksForUser.clear();

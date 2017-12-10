@@ -27,7 +27,6 @@ public class Main extends Application {
     }
 
 
-
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -36,13 +35,12 @@ public class Main extends Application {
 
             Parent root = FXMLLoader.load(getClass().getResource("/Fxml/logInPage.fxml"));
 
-            Scene scene = new Scene(root,MAIN_WINDOW_WIDTH,MAIN_WINDOW_HEIGHT);
+            Scene scene = new Scene(root, MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
             primaryStage.setScene(scene);
             primaryStage.setTitle(WINDOW_TITLE);
             primaryStage.show();
 
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
