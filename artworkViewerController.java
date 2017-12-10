@@ -20,9 +20,14 @@ public class artworkViewerController {
     private static ArrayList<Artwork> artworksForUser = new ArrayList<Artwork>();
 
     @FXML
+    private Label typeOfList;
+
+    @FXML
     private Button btnEdit, btnAdd;
     @FXML
     private ListView<String> lstArtworks;
+
+
 
 
     /**
@@ -99,7 +104,6 @@ public class artworkViewerController {
 
             // Add each artwork to the displayed list
             for (Artwork c : Main.database.getAllArtworks()) {
-                System.out.println(c.getPicture());
                 if (c.getArtworkSeller() == (Main.database.getCurrentUser().getId())) {
                     artworksForUser.add(c);
                     lstArtworks.getItems().add(String.format("%-30s%-30s%-5s", "Title: " + c.getArtworkTitle(), "Creator: "
@@ -228,6 +232,7 @@ public class artworkViewerController {
      * Show all the artworks the current user has sold in list format
      */
     public void soldView() {
+        typeOfList.setText("Sold Artworks: ");
         btnAdd.setVisible(false);
         btnEdit.setVisible(false);
         artworksForUser.clear();
@@ -248,6 +253,7 @@ public class artworkViewerController {
      * Show all artworks the current user has won in list format
      */
     public void wonView() {
+        typeOfList.setText("Won Artworks: ");
         btnAdd.setVisible(false);
         btnEdit.setVisible(false);
         artworksForUser.clear();

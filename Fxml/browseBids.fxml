@@ -10,8 +10,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BrowseBidsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BrowseBidsController">
    <top>
       <VBox prefHeight="76.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -21,16 +22,17 @@
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" top="5.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Button>
                   <Button fx:id="btnNext" mnemonicParsing="false" text="Next Artwork">
                      <HBox.margin>
                         <Insets left="5.0" right="10.0" top="5.0" />
                      </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnWon" mnemonicParsing="false" text="Won Auctions">
-                     <HBox.margin>
-                        <Insets top="5.0" />
-                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Button>
                </children>
             </HBox>
@@ -40,21 +42,33 @@
                      <HBox.margin>
                         <Insets left="20.0" top="5.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Label>
                   <CheckBox fx:id="checkPainting" mnemonicParsing="false" text="Paintings">
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </CheckBox>
                   <CheckBox fx:id="checkSculpture" mnemonicParsing="false" text="Sculptures">
                      <HBox.margin>
                         <Insets left="20.0" top="5.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </CheckBox>
                   <CheckBox fx:id="checkFave" mnemonicParsing="false" text=" Favourite User Artworks">
                      <HBox.margin>
                         <Insets left="20.0" top="5.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </CheckBox>
                </children>
             </HBox>
@@ -64,11 +78,60 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imgView" fitHeight="150.0" fitWidth="200.0" layoutX="38.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="labelTitle" layoutX="97.0" layoutY="32.0" text="Title of Artwork" />
-            <TextArea fx:id="descBox" editable="false" layoutX="322.0" layoutY="51.0" prefHeight="200.0" prefWidth="200.0" text="Description Box" />
-            <Label fx:id="LabelDesc" layoutX="394.0" layoutY="24.0" text="Desctiption:" />
-            <Button fx:id="btnView" layoutX="505.0" layoutY="277.0" mnemonicParsing="false" text="View Artwork" />
+            <HBox prefHeight="325.0" prefWidth="600.0">
+               <children>
+                  <VBox minWidth="-Infinity" prefHeight="305.0" prefWidth="300.0">
+                     <children>
+                        <Label fx:id="labelTitle" text="Title of Artwork">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="imgView" fitHeight="240.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox minWidth="-Infinity" prefHeight="325.0" prefWidth="260.0">
+                     <children>
+                        <Label fx:id="LabelDesc" text="Desctiption:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="descBox" editable="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="220.0" text="Description Box">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </TextArea>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="btnView" mnemonicParsing="false" text="View Artwork">
+                                 <HBox.margin>
+                                    <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="backButton" mnemonicParsing="false" text="Back">
+                                 <HBox.margin>
+                                    <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
       </Pane>
    </center>

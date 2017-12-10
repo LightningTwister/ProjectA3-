@@ -64,7 +64,7 @@ public class menuController {
     private void openSold() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
-            BorderPane root = (BorderPane) fxmlLoader.load();
+            Pane root = fxmlLoader.load();
 
             artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
 
@@ -89,7 +89,7 @@ public class menuController {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
-            BorderPane root = (BorderPane) fxmlLoader.load();
+            Pane root = fxmlLoader.load();
 
             artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
             controller.wonView();
@@ -170,7 +170,7 @@ public class menuController {
         try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Fxml/artworkViewer.fxml"));
-            BorderPane root = (BorderPane) fxmlLoader.load();
+            Pane root =  fxmlLoader.load();
 
             artworkViewerController controller = fxmlLoader.<artworkViewerController>getController();
 
