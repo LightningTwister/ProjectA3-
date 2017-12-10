@@ -26,7 +26,8 @@ public class FileReader {
      */
      	private static HashMap readDataFile(Scanner in, String type){
     	HashMap file = null;
-    	if (type.toLowerCase().equals("userlist")){
+
+    	if (type.toLowerCase().equals(Main.database.USER_SPECIFIER)){
     		if(!in.hasNext()){
     			return new HashMap();
 			}else{
@@ -40,7 +41,7 @@ public class FileReader {
 			}
 
 			//Read in an artwork
-    	}else if (type.toLowerCase().equals("artworklist")) {
+    	}else if (type.toLowerCase().equals(Main.database.ARTWORK_SPECIFIER)) {
 			if (!in.hasNext()) {
 				return new HashMap();
 			} else {

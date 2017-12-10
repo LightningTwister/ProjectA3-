@@ -216,7 +216,7 @@ public class DrawingController {
         try {
             Image image = canvas.snapshot(null, null);
 
-            String fileName = "Data/ProfilePictures/" + Main.database.getCurrentUser().getUserName() + "Profile_Image.png";
+            String fileName = Main.database.PROFILE_PATH + Main.database.getCurrentUser().getUserName() + "Profile_Image.png";
 
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", new File(fileName));
             Main.database.getCurrentUser().setProfilePicture("file:" + fileName);

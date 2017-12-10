@@ -140,6 +140,16 @@ public class Utilities {
         alert.setContentText("Username taken, select another");
         alert.showAndWait();
     }
+    /**
+     * Create a pop up to inform the user the input address is the wrong size
+     */
+    public static void addressSizeWarning(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Addresses must be three lines long!");
+        alert.showAndWait();
+    }
 
 	/**
 	* Method that checks all characters are alphabetical characters(or space)

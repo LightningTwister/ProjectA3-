@@ -6,14 +6,16 @@ import java.util.*;
  */
 public class Database {
 
-    private final String ARTWORK_PATH ="Data/artworkfile.txt";
-    private final String ARTWORK_SPECIFIER = "artworkList";
-    private final String USER_PATH = "Data/UserList.txt";
-    private final String USER_SPECIFIER ="userlist";
-    private final String BID_HISTORY_PATH = "Data/bidhistory.txt";
-    public final String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
-    public final String ICON_PATH = "file:Data/SystemPictures/Artatawe Logo.jpg";
-	public final String NO_IMAGE_PATH = "file:Data/SystemPictures/noImageFound.jpg";
+    public final static String ARTWORK_PATH ="Data/artworkfile.txt";
+    public final static String ARTWORK_SPECIFIER = "artworkList";
+    public final static String USER_PATH = "Data/UserList.txt";
+    public final static String USER_SPECIFIER ="userlist";
+    public final static String PROFILE_PATH = "Data/ProfilePictures/";
+    public final static String DEFAULT_PROFILE_PATH= "Data/ProfilePictures/Built In";
+    public final static String BID_HISTORY_PATH = "Data/bidhistory.txt";
+    public final static  String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
+    public final static String ICON_PATH = "file:Data/SystemPictures/Artatawe Logo.jpg";
+	public final static String NO_IMAGE_PATH = "file:Data/SystemPictures/noImageFound.jpg";
     //private final String BID_PATH;
     private UserProfiles currentUser;
     private HashMap<Integer, UserProfiles> users;
