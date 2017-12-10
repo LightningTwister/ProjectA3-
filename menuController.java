@@ -148,10 +148,7 @@ public class menuController {
             BorderPane root =  fxmlLoader.load();
 
             BrowseBidsController controller = fxmlLoader.<BrowseBidsController>getController();
-
-
             controller.loadArtworks(Main.database.getAllArtworks());
-
 
             Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
 
@@ -230,8 +227,8 @@ public class menuController {
             Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             editStage.setScene(editScene);
             editStage.setTitle("Artwork Page");
-            editStage.initModality(Modality.APPLICATION_MODAL);
-            editStage.showAndWait();
+            //editStage.initModality(Modality.APPLICATION_MODAL);
+            editStage.show();
 
 
         } catch (Exception e) {

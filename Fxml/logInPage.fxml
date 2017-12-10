@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logInController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logInController">
    <children>
       <VBox layoutY="1.0" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -20,12 +20,12 @@
                   <ImageView fx:id="bannerImg" fitHeight="123.0" fitWidth="331.0" pickOnBounds="true" preserveRatio="true" />
                   <Pane prefHeight="123.0" prefWidth="377.0">
                      <children>
-                        <Label layoutX="29.0" layoutY="20.0" text="Error UserName Not Recognized">
+                        <Label fx:id="labelError" layoutX="29.0" layoutY="20.0" text="Error UserName Not Recognized">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="29.0" layoutY="53.0" text="Please Check Your Imput">
+                        <Label fx:id="labelInput" layoutX="29.0" layoutY="53.0" text="Please Check Your Imput">
                            <font>
                               <Font size="14.0" />
                            </font>

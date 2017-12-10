@@ -17,11 +17,12 @@ public class Database {
     public final static String BANNER_PATH = "file:Data/SystemPictures/Artatawe Banner.png";
     public final static String ICON_PATH = "file:Data/SystemPictures/Artatawe Logo.jpg";
     public final static String NO_IMAGE_PATH = "file:Data/SystemPictures/noImageFound.jpg";
+    public final static String BID_PATH = "Data/bidlist.txt";
     //private final String BID_PATH;
     private UserProfiles currentUser;
     private HashMap<Integer, UserProfiles> users;
     private HashMap<Integer, Artwork> artworks;
-    private HashMap<Integer, Bid> bids;
+    private static HashMap<Integer, Bid> bids;
 
     /**
      * Constructor that instantiates a database
@@ -93,7 +94,9 @@ public class Database {
      * Method that loads the bids to the system
      */
     private void loadBids() {
-        bids = new HashMap<>();
+        bids = FileReader.readFile(BID_PATH,"bidlist");
+        bids.put(3,new Bid(1,99.2,1,9,"10 Dec 2017 16:01:25"));
+        saveBids();
 
     }
 
@@ -112,6 +115,9 @@ public class Database {
             }
             return aArtworks;
         }
+    }
+    public void saveBids(){
+        FileWriter.openFile(BID_PATH,"bidlist");
     }
 
     /**
@@ -409,15 +415,13 @@ public class Database {
         return bids.get(id);
     }
 
-    public ArrayList<Bid> getBidsIO() {
+    public static ArrayList<Bid> getBidsIO() {
 
         ArrayList<Bid> result = new ArrayList<Bid>();
 
-        for (Map.Entry artwork : users.entrySet())
+        for (Bid a : bids.values()) {
 
-        {
-
-            result.add((Bid) artwork.getValue());
+            result.add(a);
 
         }
 
