@@ -11,10 +11,10 @@ import java.util.*;
  * @version 1
  */
 public class FileReader {
-	private static ArrayList<UserProfiles> userList = new ArrayList<>();
-	private static ArrayList<Artwork> artworkList = new ArrayList<>();
+	private static HashMap<Integer, UserProfiles> userList = new HashMap<>();
+	private static HashMap<Integer, Artwork> artworkList = new HashMap<>();
 	//private static ArrayList<FaveUsers> faveUsersList = new ArrayList<>();
-	private static ArrayList<Bid> bidList = new ArrayList<>();
+	private static HashMap<Integer,Bid> bidList = new HashMap<>();
 	private static final int ADDRESS_SIZE = 3;
 
 /**
@@ -24,8 +24,8 @@ public class FileReader {
      * @param type The type of objects that are being read currently from the scanner
      * @return Arraylist of the appropriate objects
      */
-     	private static ArrayList readDataFile(Scanner in, String type){
-    	ArrayList file = null;
+     	private static HashMap readDataFile(Scanner in, String type){
+    	HashMap file = null;
     	if (type.toLowerCase().equals("userlist")){
     		while (in.hasNext()){
     			String curLine = in.nextLine();
@@ -72,7 +72,7 @@ public class FileReader {
      * @return User Object added to the arrayList
      */
 
-    private static ArrayList loadUserToSystem(Scanner in){
+    private static HashMap loadUserToSystem(Scanner in){
 
         in.useDelimiter(",");
 		int id = in.nextInt();
@@ -85,7 +85,7 @@ public class FileReader {
     		userAddress.add(in.next());
     	}
     	String postCode = in.next();
-		Date date = new Date(in.nextLong());
+		String date = in.next();
 
 
 		String path = in.next();
@@ -95,7 +95,7 @@ public class FileReader {
 			faveUsers.add(i);
 		}
 
-		userList.add(new UserProfiles(userName, firstName, lastName, phoneNumber,userAddress, postCode ,path,
+		userList.put(id, new UserProfiles(userName, firstName, lastName, phoneNumber,userAddress, postCode ,path,
 				Integer.valueOf(id), date, faveUsers));
     	return userList;
     }
@@ -105,7 +105,7 @@ public class FileReader {
      * @param in Scanner of the line in the file
      * @return A arraylist with the current painting added to the file
      */
-    private static ArrayList loadPaintingsToSystem(Scanner in){
+    private static HashMap loadPaintingsToSystem(Scanner in){
     	in.useDelimiter(",");
     	ArrayList<String> artworkPaths = new ArrayList<>();
     	String artworkTitle = in.next();
@@ -123,7 +123,7 @@ public class FileReader {
 		while (in.hasNext()){
 			artworkPaths.add( in.next());
 		}
-		artworkList.add(new Painting(artworkTitle, description, creatorName, yearCreated,
+		artworkList.put(id, new Painting(artworkTitle, description, creatorName, yearCreated,
 				reservePrice, numOfBids, userNameSeller,dWidth, dHeight,id,artworkPaths));
 		in.close();
 
@@ -135,7 +135,7 @@ public class FileReader {
      * @param in Scanner of the line in the file
      * @return Arraylist with the new sculpture ammended to it
      */
-    private static ArrayList loadSculpturesToSystem(Scanner in) {
+    private static HashMap loadSculpturesToSystem(Scanner in) {
 		in.useDelimiter(",");
 		ArrayList<String> artworkPaths = new ArrayList<>();
 		String artworkTitle = in.next();
@@ -157,7 +157,7 @@ public class FileReader {
 			artworkPaths.add( in.next());
 		}
 
-		artworkList.add(new Sculpture(artworkTitle, description, creatorName, yearCreated,
+		artworkList.put(id, new Sculpture(artworkTitle, description, creatorName, yearCreated,
 				reservePrice, numOfBids, userNameSeller, dWidth, dHeight,id, dDepth, material,artworkPaths));
 		in.close();
 		return artworkList;
@@ -168,14 +168,14 @@ public class FileReader {
      * @param in The scanner of each line for a bid
      * @return Arraylist of those objects from the file
      */
-	public static ArrayList<Bid> loadArtworkBids(Scanner in){
+	public static HashMap loadArtworkBids(Scanner in){
 		in.useDelimiter(",");
 		int bidID = in.nextInt();
 		int userID = in.nextInt();
 		int artworkID = in.nextInt();
 		double amount = in.nextDouble();
 		String datePlaced = in.next();
-		bidList.add(new Bid(bidID,amount,userID,artworkID,datePlaced));
+		bidList.put(bidID, new Bid(bidID,amount,userID,artworkID,datePlaced));
 		return bidList;
 	}
 
@@ -186,7 +186,7 @@ public class FileReader {
      * @param type     The type of objects to be read from the file
      * @return Arraylist of those objects from the file
      */
-	public static ArrayList readFile(String fileName, String type){
+	public static HashMap readFile(String fileName, String type){
         Scanner in =  null;
         File inputFile = new File(fileName);
         try {
@@ -199,13 +199,5 @@ public class FileReader {
 
 
         return readDataFile(in, type);
-    }
-    public static ArrayList<UserProfiles> getProfiles(){
-    	return userList;
-	}
-
-	//For test don't use in final version.
-	public static void setProfile(UserProfiles p){
-        userList.add(p);
     }
 }

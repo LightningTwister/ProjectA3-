@@ -69,29 +69,14 @@ public class Database {
      *  Method that gets users from a file and stores them
      */
     private void loadUsers(){
-        users = new HashMap<>();
-        ArrayList<UserProfiles> rProfiles;
-        rProfiles= FileReader.readFile(USER_PATH,"userlist");
-
-
-        for(UserProfiles a: rProfiles){
-            users.put(Integer.valueOf(a.getId()),a);
-        }
+        users = FileReader.readFile(USER_PATH,"userlist");
     }
 
     /**
      *  Method that gets artworks from a file and stores them
      */
     private void loadArtworks(){
-        artworks = new HashMap<>();
-        ArrayList<Artwork> rArtworks;
-        rArtworks=FileReader.readFile(ARTWORK_PATH,"artworkList");
-
-
-        for(Artwork a: rArtworks){
-
-            artworks.put(Integer.valueOf(a.getId()),a);
-        }
+        artworks =FileReader.readFile(ARTWORK_PATH,"artworkList");
     }
 
     /**
@@ -393,5 +378,19 @@ public class Database {
         return bids.get(id);
     }
 
+    public ArrayList<Bid> getBidsIO(){
 
+        ArrayList<Bid> result = new ArrayList<Bid>();
+
+        for (Map.Entry artwork : users.entrySet())
+
+        {
+
+            result.add((Bid) artwork.getValue());
+
+        }
+
+        return result;
+
+    }
 }
