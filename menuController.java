@@ -53,6 +53,8 @@ public class menuController {
         imgBanner.setImage(Utilities.getImage(Main.database.BANNER_PATH));
         imgIcon.setImage(Utilities.getImage(Main.database.ICON_PATH));
         labelLastLogIn.setText("You Last Logged in: " + Main.database.getCurrentUser().getLogInDate());
+        Main.database.getCurrentUser().setLogInDate(Utilities.getDate());
+        Main.database.saveUsers();
 
     }
 

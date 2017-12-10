@@ -81,6 +81,7 @@ public class ArtworkPictureController {
             Utilities.noImageFound();
             return;
         }else{
+
             Utilities.savedInput();
             Utilities.closeWindow(rootPane);
         }

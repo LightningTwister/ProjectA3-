@@ -64,7 +64,9 @@ public class Database {
     public UserProfiles getUser(String username){
         for(UserProfiles a: users.values()){
             if (a.getUserName().equals(username)){
+                //a.setLogInDate(Utilities.getDate());
                 return a;
+
             }
         }
         return null;

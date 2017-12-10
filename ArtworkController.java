@@ -100,12 +100,16 @@ public class ArtworkController {
             }
 
 
+
             Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
             editStage.setScene(editScene);
             editStage.setTitle("Pictures");
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
+
+            painting.setPicture(picturePath.get(0));
+            sculpture.setPicture(picturePath.get(0));
 
 
         } catch (Exception e) {
