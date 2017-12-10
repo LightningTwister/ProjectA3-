@@ -1,3 +1,0 @@
-p, mona lisa, a famous painting, a famous bloke,2017,100000000000,10,0,2312430124,100,150,1,file:Data/ArtworkPictures/painting.jpg
-s, shitstain, penis sculpture, niko the sculpture master,2017,10000000,10,1,231231234,100,200,2,300,shit ,file:Data/ArtworkPictures/sculpture.jpg
-p, motherfucking paint, not a famous guy, hahahah,2016,20000,20,1,23102321031,100,200,3,file:Data/ArtworkPictures/painting.jpg

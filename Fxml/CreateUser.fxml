@@ -35,7 +35,7 @@
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>
-            <TextField fx:id="firstname" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="firstName" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>
@@ -47,7 +47,7 @@
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>
-            <TextArea fx:id="adress" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <TextArea fx:id="address" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextArea>

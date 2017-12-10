@@ -27,39 +27,53 @@ public class FileReader {
      	private static HashMap readDataFile(Scanner in, String type){
     	HashMap file = null;
     	if (type.toLowerCase().equals("userlist")){
-    		while (in.hasNext()){
-    			String curLine = in.nextLine();
+    		if(!in.hasNext()){
+    			return new HashMap();
+			}else{
+				while (in.hasNext()){
+					String curLine = in.nextLine();
 
-    			Scanner line = new Scanner(curLine);
-    			file = loadUserToSystem(line);
-    			line.close();
-    		}
+					Scanner line = new Scanner(curLine);
+					file = loadUserToSystem(line);
+					line.close();
+				}
+			}
+
 			//Read in an artwork
     	}else if (type.toLowerCase().equals("artworklist")) {
-			while (in.hasNext()) {
-				String curLine = in.nextLine();
+			if (!in.hasNext()) {
+				return new HashMap();
+			} else {
+				while (in.hasNext()) {
+					String curLine = in.nextLine();
 
-				Scanner line = new Scanner(curLine);
-				line.useDelimiter(",");
-				String artType = line.next();
-				if(artType.equals("p")) {
-					file = loadPaintingsToSystem(line);
-				}else if (artType.equals("s")){
-					file = loadSculpturesToSystem(line);
+					Scanner line = new Scanner(curLine);
+					line.useDelimiter(",");
+					String artType = line.next();
+					if (artType.equals("p")) {
+						file = loadPaintingsToSystem(line);
+					} else if (artType.equals("s")) {
+						file = loadSculpturesToSystem(line);
+					}
+					line.close();
 				}
-				line.close();
 			}
 
 
 		}
 		//Read in a bid 
 		else if (type.toLowerCase().equals("bidlist")){
-			while (in.hasNext()){
-				String curLine = in.nextLine();
 
-				Scanner line = new Scanner(curLine);
-				file = loadArtworkBids(line);
-				line.close();
+			if (!in.hasNext()) {
+				return new HashMap();
+			} else {
+				while (in.hasNext()){
+					String curLine = in.nextLine();
+
+					Scanner line = new Scanner(curLine);
+					file = loadArtworkBids(line);
+					line.close();
+				}
 			}
 		}
 
