@@ -107,9 +107,9 @@ public class ArtworkController {
             editStage.setTitle("Pictures");
             editStage.initModality(Modality.APPLICATION_MODAL);
             editStage.showAndWait();
-            if(paintingRadio.isSelected()){
+            if(paintingRadio.isSelected() && (!bid)){
                 painting.setPicture(picturePath.get(0));
-            }else{
+            }else if(!(paintingRadio.isSelected()) && !bid){
                 sculpture.setPicture(picturePath.get(0));
             }
 

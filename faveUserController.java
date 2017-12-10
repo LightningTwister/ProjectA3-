@@ -22,7 +22,7 @@ public class faveUserController {
         @FXML
         private ImageView imgProfile;
         @FXML
-        private Button btnCancel, btnFaveUser, addButton;
+        private Button btnCancel, btnFaveUser;
         @FXML
         private Pane rootPane;
 
@@ -52,11 +52,7 @@ public class faveUserController {
                 removeFaveUser();
                 Utilities.closeWindow(rootPane);
             });
-            addButton.setOnAction(e ->{
 
-                addFaveUser();
-                Utilities.closeWindow(rootPane);
-            });
 
 
         }

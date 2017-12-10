@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Class that reads the data for the system at start up
  *
- * @author Nick Doukas 879228
+ * @author Nick
  * @version 1
  */
 public class FileReader {
