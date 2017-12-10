@@ -1,7 +1,7 @@
 import java.util.Date;
 
 /**
- * Created by LT on 07/12/2017.
+ * @author Martin Cvetkov 915797
  */
 public class Bid {
     private int userID;
