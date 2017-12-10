@@ -17,7 +17,7 @@ abstract class Artwork {
     private int artworkYearCreated;
     private double reservePrice;
     private int numOfBids;
-    private Date dateTimeArtworkPlaced;
+    private String dateTimeArtworkPlaced;
     private Bid highestBid;
     private ArrayList<Integer> bidHistory = new ArrayList<>();
     private int artworkSellerId;
@@ -48,7 +48,7 @@ abstract class Artwork {
         this.artworkYearCreated = artworkYearCreated;
         this.reservePrice = reservePrice;
         this.numOfBids = numOfBids;
-        this.dateTimeArtworkPlaced = new Date();
+        this.dateTimeArtworkPlaced = Utilities.getDate();
         this.artworkSellerId = idOfSeller;
         highestBid = new Bid(reservePrice);
         this.id = id;
@@ -81,7 +81,7 @@ abstract class Artwork {
         this.artworkYearCreated = artworkYearCreated;
         this.reservePrice = reservePrice;
         this.numOfBids = numOfBids;
-        this.dateTimeArtworkPlaced = new Date();
+        this.dateTimeArtworkPlaced = Utilities.getDate();
         this.artworkSellerId = idOfSeller;
         this.highestBid = highestBid;
         this.bidHistory = bidHistory;
@@ -258,7 +258,7 @@ abstract class Artwork {
      *
      * @return The date of the artwork's creation on Artatawe.
      */
-    protected Date getDateTimeArtworkPlaced() {
+    protected String getDateTimeArtworkPlaced() {
         return dateTimeArtworkPlaced;
     }
 
@@ -276,7 +276,7 @@ abstract class Artwork {
      *
      * @param newDateTimePlaced New date and time.
      */
-    protected void setDateTimeArtworkPlaced(Date newDateTimePlaced) {
+    protected void setDateTimeArtworkPlaced(String newDateTimePlaced) {
         this.dateTimeArtworkPlaced = newDateTimePlaced;
     }
 

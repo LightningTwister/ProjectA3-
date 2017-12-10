@@ -60,7 +60,7 @@ public class FileWriter {
                     out.print(p.getReservePrice() + delim);
                     out.print(p.getNumOfBids() + delim);
                     out.print(p.getArtworkSeller() + delim);
-                    out.print(231240124 + delim);
+                    out.print(p.getDateTimeArtworkPlaced() + delim);
                     out.print(p.getWidth() + delim);
                     out.print(p.getHeight() + delim);
                     out.print(p.getId() + delim);
@@ -84,7 +84,7 @@ public class FileWriter {
                     out.print(s.getReservePrice() + delim);
                     out.print(s.getNumOfBids() + delim);
                     out.print(s.getArtworkSeller() + delim);
-                    out.print(231240124 + delim);
+                    out.print(s.getDateTimeArtworkPlaced() + delim);
                     out.print(s.getWidth() + delim);
                     out.print(s.getHeight() + delim);
                     out.print(s.getId() + delim);
