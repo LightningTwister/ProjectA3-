@@ -86,12 +86,14 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </HBox.margin>
                   </Button>
-                  <HBox prefHeight="65.0" prefWidth="497.0" />
-                  <Label fx:id="labelLastLogIn" text="Label">
-                     <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </HBox.margin>
-                  </Label>
+                  <HBox prefHeight="65.0" prefWidth="497.0">
+                     <children>
+                        <Label fx:id="labelLastLogIn" text="Label">
+                           <HBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children></HBox>
                </children>
             </HBox>
          </children>
