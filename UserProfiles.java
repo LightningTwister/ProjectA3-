@@ -1,11 +1,10 @@
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.regex.*;
 
+/**
+ * @author Martin Cvetkov 915797
+ */
 public class UserProfiles {
 
-    private final String PHONE_REGEX = "^0[0-9]{10}$";
-    private final String POSTCODE_REGEX = "^([A-PR-UWYZ](([0-9](([0-9]|[A-HJKSTUW])?)?)|([A-HK-Y][0-9]([0-9]|[ABEHMNPRVWXY])?)) ?[0-9][ABD-HJLNP-UW-Z]{2})$";
     private String userName;
     private String firstName;
     private String lastName;
@@ -13,7 +12,6 @@ public class UserProfiles {
     private ArrayList<String> address;
     private String postCode;
     private String profilePicture;
-    private int auctionID;
     private String logInDate;
     private int id;
     private ArrayList<Integer> currentAuctions;
@@ -408,7 +406,6 @@ public class UserProfiles {
                 ", address=" + address +
                 ", postCode='" + postCode + '\'' +
                 ", profilePicture='" + profilePicture + '\'' +
-                ", auctionID=" + auctionID +
                 ", logInDate=" + logInDate +
                 ", id=" + id +
 

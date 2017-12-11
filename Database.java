@@ -1,9 +1,10 @@
-import javax.jws.soap.SOAPBinding;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+
 /**
- * Created by LT on 10/11/2017.
+ * @author Martin Cvetkov 915797
  */
 public class Database {
 
@@ -221,6 +222,7 @@ public class Database {
         bids.put(bid, newBid);
         if (art.getNumOfBids() == 0) {
             currentUser.addWonArtwork(newBid.getArtworkID());
+            getUser(art.getArtworkSeller()).completeAuction(newBid.getArtworkID());
         }
         saveChanges();
     }

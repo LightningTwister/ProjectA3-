@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import java.nio.file.FileAlreadyExistsException;
 
 /**
- * Created by LT on 09/12/2017.
+ * @author Martin Cvetkov 915797
  */
 public class placeBidController {
     private Artwork artwork;

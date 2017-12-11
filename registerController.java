@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
 /**
- * Created by LT on 06/12/2017.
+ * @author Martin Cvetkov 915797
  */
 
 
