@@ -1,4 +1,5 @@
 
+import javax.jws.soap.SOAPBinding;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -78,6 +79,8 @@ public class FileWriter {
 
                 out.println();
             }
+
+
 
             out.close();
             //write out an artwork
@@ -176,6 +179,7 @@ public class FileWriter {
         }
 
     }
+
 
     /**
      * Method to open the file to be written too

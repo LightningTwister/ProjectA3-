@@ -149,6 +149,7 @@ public class Database {
      */
     public void addArtwork(Artwork a) {
         artworks.put(Integer.valueOf(a.getId()), a);
+        currentUser.addCurrentAuction(a.getId());
     }
 
     /**
@@ -220,7 +221,7 @@ public class Database {
         currentUser.addBid(bid);
         bids.put(bid, newBid);
         if (art.getNumOfBids() == 0) {
-            currentUser.addWonArtwork(newBid.getBidID());
+            currentUser.addWonArtwork(newBid.getArtworkID());
         }
         saveChanges();
     }

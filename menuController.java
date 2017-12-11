@@ -107,7 +107,7 @@ public class menuController {
             Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             editStage.setScene(editScene);
             editStage.setTitle("Sold Artworks");
-            editStage.showAndWait();
+            editStage.show();
 
         } catch (Exception e) {
             e.printStackTrace();
