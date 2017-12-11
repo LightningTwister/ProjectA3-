@@ -37,6 +37,7 @@ public class UserProfiles {
      * @param wonArtworks       list of IDs auctions the user has won on the site
      * @param completedAuctions list of auction IDs the user has put up which have since finished
      * @param bidHistory        list of bid IDs of bids the user has placed
+     * @param logInDate         Formatted string of the last time the user logged in
      */
     public UserProfiles(int id, String userName, String firstName, String lastName, String phoneNumber,
                         ArrayList<String> address, String postCode, String profilePicture, String logInDate,
@@ -336,7 +337,7 @@ public class UserProfiles {
     /**
      * adds an auction to current auctions the user has
      *
-     * @return the list of current auctions the user has
+     * @param auctionID Add an auction id to the user profile
      */
     public void addCurrentAuction(int auctionID) {
         currentAuctions.add(auctionID);
@@ -355,7 +356,7 @@ public class UserProfiles {
     /**
      * Method for changing an active auction to conpleted status
      *
-     * @param artworkID
+     * @param artworkID set an artwork that is being auction to completed
      */
     public void completeAuction(int artworkID) {
         boolean existed = false;

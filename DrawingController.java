@@ -180,7 +180,7 @@ public class DrawingController {
     }
 
     /**
-     * Draw a cirle based on mouse finish position and distance the mouse has travelled
+     * Draw a circle based on mouse finish position and distance the mouse has travelled
      */
     private void circle() {
         double width = abs(releaseX - pressX);

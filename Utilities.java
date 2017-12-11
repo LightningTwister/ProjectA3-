@@ -236,6 +236,8 @@ public class Utilities {
      * @param userId       Username of the person selling this artwork
      * @param desc         A brief description of the artwork
      * @param id           Identifier value of the artwork
+     * @param bid          bid id for this sculpture
+     * @param picLocation  list of locations of pictures for this sculpture
      */
     public static Sculpture saveSculpture(Sculpture newSculpture, int year, double reservePrice, int bids, int width, int height,
                                      int depth, String creatorName, int userId, String material, String title, String desc, int id, ArrayList<String> picLocation, Bid bid) {
@@ -276,6 +278,8 @@ public class Utilities {
      * @param title        Name of this artwork
      * @param desc         Brief description of what this artwork is
      * @param id           Identifier value of this artwork
+     * @param picLocation  list of pictures for this painting
+     * @param bid          bid id for this painting
      */
     public static Painting savePainting(Painting newPainting, int year, double reservePrice, int bids, int width, int height
             , String creatorName, int userId, String title, String desc, int id, ArrayList<String> picLocation, Bid bid) {
@@ -293,7 +297,7 @@ public class Utilities {
             newPainting.setArtworkDescription(desc);
             newPainting.setPicture(picLocation);
             newPainting.setHighestBid(bid);
-            if(newPainting.getDateTimeArtworkPlaced() == null){
+            if (newPainting.getDateTimeArtworkPlaced() == null) {
                 newPainting.setDateTimeArtworkPlaced(Utilities.getDate());
             }
 

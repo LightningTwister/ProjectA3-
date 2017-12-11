@@ -25,6 +25,7 @@ public class Painting extends Artwork {
      * @param height             Height of the painting in cm's.
      * @param id                 Id of this artwork object
      * @param picture            Paths to pictures of this object
+     * @param date The formatted string of a date
      */
     public Painting(String artworkTitle, String artworkDescription,
                     String artworkCreator, int artworkYearCreated,
@@ -56,6 +57,7 @@ public class Painting extends Artwork {
      * @param picture            Paths to pictures of this object
      * @param currBid            Current bid on this object
      * @param bidHistory         History of bids that have been placed on this object
+     * @param date The formatted date this object was placed on the system
      */
     public Painting(String artworkTitle, String artworkDescription,
                     String artworkCreator, int artworkYearCreated,
