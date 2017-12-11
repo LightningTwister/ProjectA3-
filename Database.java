@@ -150,6 +150,7 @@ public class Database {
     public void addArtwork(Artwork a) {
         artworks.put(Integer.valueOf(a.getId()), a);
         currentUser.addCurrentAuction(a.getId());
+        saveChanges();
     }
 
     /**
