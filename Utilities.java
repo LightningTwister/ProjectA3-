@@ -237,10 +237,10 @@ public class Utilities {
      * @param desc         A brief description of the artwork
      * @param id           Identifier value of the artwork
      */
-    public static void saveSculpture(Sculpture newSculpture, int year, double reservePrice, int bids, int width, int height,
+    public static Sculpture saveSculpture(Sculpture newSculpture, int year, double reservePrice, int bids, int width, int height,
                                      int depth, String creatorName, int userId, String material, String title, String desc, int id, ArrayList<String> picLocation, Bid bid) {
 
-        try {
+
             newSculpture.setArtworkYearCreated(year);
             newSculpture.setReservePrice(reservePrice);
             newSculpture.setNumOfBids(bids);
@@ -255,12 +255,11 @@ public class Utilities {
             newSculpture.setArtworkDescription(desc);
             newSculpture.setPicture(picLocation);
             newSculpture.setHighestBid(bid);
+            if(newSculpture.getDateTimeArtworkPlaced() == null){
+                newSculpture.setDateTimeArtworkPlaced(Utilities.getDate());
+            }
 
-
-        } catch (Exception e) {
-            Utilities.wrongInputFound();
-        }
-
+            return newSculpture;
     }
 
     /**
@@ -278,10 +277,10 @@ public class Utilities {
      * @param desc         Brief description of what this artwork is
      * @param id           Identifier value of this artwork
      */
-    public static void savePainting(Painting newPainting, int year, double reservePrice, int bids, int width, int height
+    public static Painting savePainting(Painting newPainting, int year, double reservePrice, int bids, int width, int height
             , String creatorName, int userId, String title, String desc, int id, ArrayList<String> picLocation, Bid bid) {
 
-        try {
+
             newPainting.setArtworkYearCreated(year);
             newPainting.setReservePrice(reservePrice);
             newPainting.setNumOfBids(bids);
@@ -299,10 +298,8 @@ public class Utilities {
             }
 
 
-        } catch (Exception e) {
-            Utilities.wrongInputFound();
-        }
 
+            return newPainting;
     }
 
     /**
