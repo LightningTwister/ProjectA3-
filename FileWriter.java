@@ -2,6 +2,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -12,6 +14,7 @@ import java.io.PrintWriter;
  */
 public class FileWriter {
     private static String delim = ",";
+    private static String delim1 = ";";
 
     /**
      * Method that takes a writer and the type of file to be written
@@ -31,22 +34,56 @@ public class FileWriter {
                 out.print(e.getLastName() + delim);
                 out.print(e.getPhoneNumber() + delim);
                 for (String s : e.getAddress()) {
-                    out.print(s + delim);
+                    out.print(s + delim1);
                 }
+                out.print(delim);
                 out.print(e.getPostCode() + delim);
 
                 out.print(e.getLogInDate() + delim);
                 out.print(e.getProfilePicture() + delim);
                 for (Integer a : e.getFaveUsers()) {
-                    out.print(a + delim);
+                    if (a != null) {
+                        out.print(a + delim1);
+                    }
                 }
+                out.print(delim);
+
+                for (Integer a : e.getCurrentAuctions()) {
+                    if (a != null) {
+                        out.print(a + delim1);
+                    }
+                }
+                out.print(delim);
+
+                for (Integer a : e.getCompletedAuctions()) {
+                    if (a != null) {
+                        out.print(a + delim1);
+                    }
+                }
+                out.print(delim);
+
+                for (Integer a : e.getWonArtworks()) {
+                    if (a != null) {
+                        out.print(a + delim1);
+                    }
+                }
+                out.print(delim);
+
+                for (Integer a : e.getBidHistory()) {
+                    if (a != null) {
+                        out.print(a + delim1);
+                    }
+                }
+                out.print(delim);
+
                 out.println();
             }
 
             out.close();
             //write out an artwork
         } else if (type.toLowerCase().equals("artworklist")) {
-            for (Artwork a : Main.database.getAllArtworks()) {
+            ArrayList<Artwork> artworks =  Main.database.getAllArtworks();
+            for (Artwork a : artworks) {
                 if (a instanceof Painting) {
 
                     Painting p = (Painting) a;
@@ -65,8 +102,19 @@ public class FileWriter {
                     out.print(p.getHeight() + delim);
                     out.print(p.getId() + delim);
                     for (String nextPicture : p.getPictures()) {
-                        out.print(nextPicture + delim);
+                        out.print(nextPicture + delim1);
                     }
+                    out.print(delim);
+                    ArrayList<Integer> bids = p.getBidHistory();
+                    for(int i : bids){
+                        out.print(i + delim1);
+                    }
+                    out.print(delim);
+                    out.print(p.getHighestBid().getBidID() + delim);
+                    out.print(p.getHighestBid().getUserID() + delim);
+                    out.print(p.getHighestBid().getArtworkID() + delim);
+                    out.print(p.getHighestBid().getAmount() + delim);
+                    out.print(p.getHighestBid().getDatePlaced() + delim);
 
                     out.println();
 
@@ -91,8 +139,20 @@ public class FileWriter {
                     out.print(s.getDepth() + delim);
                     out.print(s.getMaterial() + delim);
                     for (String nextPicture : s.getPictures()) {
-                        out.print(nextPicture + delim);
+                        out.print(nextPicture + delim1);
                     }
+                    out.print(delim);
+                    ArrayList<Integer> bids = s.getBidHistory();
+                    for(int i : bids){
+                        out.print(i + delim1);
+                    }
+
+                    out.print(delim);
+                    out.print(s.getHighestBid().getBidID() + delim);
+                    out.print(s.getHighestBid().getUserID() + delim);
+                    out.print(s.getHighestBid().getArtworkID() + delim);
+                    out.print(s.getHighestBid().getAmount() + delim);
+                    out.print(s.getHighestBid().getDatePlaced() + delim);
                     out.println();
                 }
 
@@ -102,13 +162,14 @@ public class FileWriter {
 
             //write out a bid
         } else if (type.toLowerCase().equals("bidlist")) {
-            System.out.println("Writing bidhistory to file.");
-            for (Bid b : Main.database.getBidsIO()) {
-                out.print(b.getBidID()+delim);
-                out.print(b.getUserID()+delim);
-                out.print(b.getArtworkID()+delim);
-                out.print(b.getAmount()+delim);
-                out.print(b.getDatePlaced()+delim);
+            System.out.println("Writing bids to file.");
+            ArrayList<Bid> bids = Main.database.getBidsIO();
+            for (Bid b : bids) {
+                out.print(b.getBidID() + delim);
+                out.print(b.getUserID() + delim);
+                out.print(b.getArtworkID() + delim);
+                out.print(b.getAmount() + delim);
+                out.print(b.getDatePlaced() + delim);
                 out.println();
             }
             out.close();

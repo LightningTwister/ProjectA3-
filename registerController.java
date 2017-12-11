@@ -48,7 +48,7 @@ public class registerController {
      * Open a select picture gui, to select a default image for this profile
      */
     private void getPicture() {
-        String fileLocation = Utilities.changeImage("Select a profile picture", Main.database.DEFAULT_PROFILE_PATH);
+        String fileLocation  = Utilities.changeImage("Select a profile picture", Main.database.DEFAULT_PROFILE_PATH);
         if (fileLocation.equals("FAILED")) {
             Utilities.noImageFound();
         } else {

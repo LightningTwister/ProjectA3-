@@ -1,3 +1,4 @@
+import javax.jws.soap.SOAPBinding;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -56,6 +57,13 @@ public class Database {
         loadArtworks();
         loadUsers();
         loadBids();
+
+    }
+
+    public void saveChanges() {
+        saveBids();
+        saveUsers();
+        saveArtwork();
 
     }
 
@@ -214,6 +222,7 @@ public class Database {
         if (art.getNumOfBids() == 0) {
             currentUser.addWonArtwork(newBid.getBidID());
         }
+        saveChanges();
     }
 
     /**
@@ -333,6 +342,7 @@ public class Database {
             UserProfiles newUser = new UserProfiles(userName, firstName, lastName, phoneNumber, address, postCode,
                     profilePicture, userID, reportDate, fUsers);
             users.put(userID, newUser);
+            saveChanges();
         } catch (Exception e) {
             e.printStackTrace();
             Utilities.wrongInputFound();
@@ -350,10 +360,35 @@ public class Database {
      * @return An available id for a new profile
      */
     private Integer getNextIDProfile() {
-        if (users.size() == 0) return 1;
+
+        if (users == null || users.size() == 0 ){
+            return 1;
+        }
         Integer id = 0;
         Integer currentID = 0;
         for (Map.Entry current : users.entrySet()) {
+            currentID = (Integer) current.getKey();
+            if (currentID > id) {
+                id = currentID;
+            }
+        }
+        id++;
+        return id;
+    }
+
+    /**
+     * get the next available id for a profile
+     *
+     * @return An available id for a new profile
+     */
+    public Integer getNextIDArtwork() {
+
+        if (artworks == null || artworks.size() == 0 ){
+            return 1;
+        }
+        Integer id = 0;
+        Integer currentID = 0;
+        for (Map.Entry current : artworks.entrySet()) {
             currentID = (Integer) current.getKey();
             if (currentID > id) {
                 id = currentID;
@@ -369,7 +404,7 @@ public class Database {
      * @return An available id for a new bid
      */
     private Integer getNextIDBid() {
-        if (bids.size() == 0) return 1;
+        if (bids == null || bids.size() == 0 ) return 1;
         Integer id = 0;
         Integer currentID = 0;
 

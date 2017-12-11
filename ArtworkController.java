@@ -223,6 +223,10 @@ public class ArtworkController {
 
 
             if (sculptureRadio.isSelected()) {
+                Bid highbid = painting.getHighestBid();
+                if(sculpture.getHighestBid() == null || sculpture.getHighestBid().getDatePlaced() == null){
+                    highbid = new Bid(reserve);
+                }
                 int depth = Integer.valueOf(depthBox.getText());
 
                 checkLetters.add(materialBox.getText());
@@ -233,13 +237,20 @@ public class ArtworkController {
 
                 String material = materialBox.getText();
                 Utilities.saveSculpture(sculpture, year, reserve, bids, width, height, depth,
-                        creatorName, userId, material, title, desc, nextId, this.picturePath);
+                        creatorName, Main.database.getNextIDArtwork(), material, title, desc, nextId, this.picturePath, highbid);
                 Main.database.addArtwork(sculpture);
                 Main.database.saveArtwork();
 
+
+
             } else if (paintingRadio.isSelected()) {
+                Bid highbid = painting.getHighestBid();
+                if(painting.getHighestBid() == null || painting.getHighestBid().getDatePlaced() == null){
+                    highbid = new Bid(reserve);
+                }
                 Utilities.savePainting(painting, year, reserve, bids, width, height,
-                        creatorName, userId, title, desc, nextId, this.picturePath);
+                        creatorName, Main.database.getNextIDArtwork(), title, desc, nextId, this.picturePath, highbid);
+
 
                 Main.database.addArtwork(painting);
                 Main.database.saveArtwork();
@@ -346,7 +357,7 @@ public class ArtworkController {
      */
     private void toggleUserToFaves() {
         Main.database.getCurrentUser().toggleFaveUser(userId);
-        Main.database.saveUsers();
+        Main.database.saveChanges();
 
         Utilities.savedInput();
         btnFave.setVisible(false);

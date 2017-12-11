@@ -76,9 +76,9 @@ public class userBidHistoryController {
         TreeItem<String> currentArtworkRoot = newBranch("My Current Auctions", artworkRoot);
         TreeItem<String> completedArtworkRoot = newBranch("My Completed Auctions", artworkRoot);
 
-
+        Artwork artwork;
         for (Bid bid : bids) {
-            Artwork artwork = Main.database.getArtwork(bid.getArtworkID());
+            artwork = Main.database.getArtwork(bid.getArtworkID());
 
             newBranch(("Artwork name: " + artwork.getArtworkTitle() + " Amount Bid: " + bid.getAmount() + " Date Placed: " + bid.getDatePlaced()), userHistoryRoot);
         }

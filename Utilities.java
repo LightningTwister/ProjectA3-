@@ -238,7 +238,7 @@ public class Utilities {
      * @param id           Identifier value of the artwork
      */
     public static void saveSculpture(Sculpture newSculpture, int year, double reservePrice, int bids, int width, int height,
-                                     int depth, String creatorName, int userId, String material, String title, String desc, int id, ArrayList<String> picLocation) {
+                                     int depth, String creatorName, int userId, String material, String title, String desc, int id, ArrayList<String> picLocation, Bid bid) {
 
         try {
             newSculpture.setArtworkYearCreated(year);
@@ -254,6 +254,7 @@ public class Utilities {
             newSculpture.setArtworkTitle(title);
             newSculpture.setArtworkDescription(desc);
             newSculpture.setPicture(picLocation);
+            newSculpture.setHighestBid(bid);
 
 
         } catch (Exception e) {
@@ -278,7 +279,7 @@ public class Utilities {
      * @param id           Identifier value of this artwork
      */
     public static void savePainting(Painting newPainting, int year, double reservePrice, int bids, int width, int height
-            , String creatorName, int userId, String title, String desc, int id, ArrayList<String> picLocation) {
+            , String creatorName, int userId, String title, String desc, int id, ArrayList<String> picLocation, Bid bid) {
 
         try {
             newPainting.setArtworkYearCreated(year);
@@ -292,6 +293,10 @@ public class Utilities {
             newPainting.setArtworkTitle(title);
             newPainting.setArtworkDescription(desc);
             newPainting.setPicture(picLocation);
+            newPainting.setHighestBid(bid);
+            if(newPainting.getDateTimeArtworkPlaced() == null){
+                newPainting.setDateTimeArtworkPlaced(Utilities.getDate());
+            }
 
 
         } catch (Exception e) {

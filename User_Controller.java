@@ -213,7 +213,6 @@ public class User_Controller {
 
             editStage.setScene(editScene);
             editStage.setTitle("BidHistory");
-            editStage.initModality(Modality.APPLICATION_MODAL);
 
             editStage.show();
 
@@ -266,8 +265,7 @@ public class User_Controller {
 
 
                 Utilities.savedInput();
-                Main.database.saveUsers();
-                Main.database.saveUsers();
+                Main.database.saveChanges();
             }
 
 

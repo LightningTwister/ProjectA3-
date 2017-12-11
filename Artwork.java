@@ -165,6 +165,15 @@ abstract class Artwork {
     }
 
     /**
+     * Sets a new Bid for ReservePrice for the artwork
+     *
+     * @param reservePrice The reserve price for the artwork.
+     */
+    protected void setHighestBid(Bid highestBid) {
+        this.highestBid = highestBid;
+    }
+
+    /**
      * Get method to retrieve the description of the Artwork
      *
      * @return Artwork Description
@@ -208,6 +217,8 @@ abstract class Artwork {
     protected int getArtworkYearCreated() {
         return artworkYearCreated;
     }
+
+
 
     /**
      * Set Method to change the year created to a new value.

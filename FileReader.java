@@ -11,6 +11,8 @@ import java.util.*;
  * @version 1
  */
 public class FileReader {
+    private static String delim = ",";
+    private static String delim1 = ";";
     private static HashMap<Integer, UserProfiles> userList = new HashMap<>();
     private static HashMap<Integer, Artwork> artworkList = new HashMap<>();
     //private static ArrayList<FaveUsers> faveUsersList = new ArrayList<>();
@@ -29,6 +31,7 @@ public class FileReader {
 
         if (type.toLowerCase().equals(Main.database.USER_SPECIFIER)) {
 
+            file = new HashMap<Integer, UserProfiles>();
             if (!in.hasNext()) {
                 return userList;
             } else {
@@ -36,13 +39,15 @@ public class FileReader {
                     String curLine = in.nextLine();
 
                     Scanner line = new Scanner(curLine);
-                    file = loadUserToSystem(line);
+                    UserProfiles p = loadUserToSystem(line);
+                    file.put(p.getId(),p);
                     line.close();
                 }
             }
 
             //Read in an artwork
         } else if (type.toLowerCase().equals(Main.database.ARTWORK_SPECIFIER)) {
+            file = new HashMap<Integer, Artwork>();
             if (!in.hasNext()) {
                 return artworkList;
             } else {
@@ -50,7 +55,7 @@ public class FileReader {
                     String curLine = in.nextLine();
 
                     Scanner line = new Scanner(curLine);
-                    line.useDelimiter(",");
+                    line.useDelimiter(delim);
                     String artType = line.next();
                     if (artType.equals("p")) {
                         file = loadPaintingsToSystem(line);
@@ -65,15 +70,16 @@ public class FileReader {
         }
         //Read in a bid
         else if (type.toLowerCase().equals("bidlist")) {
-
+            file = new HashMap<Integer, Bid>();
             if (!in.hasNext()) {
                 return new HashMap();
             } else {
                 while (in.hasNext()) {
                     String curLine = in.nextLine();
-
                     Scanner line = new Scanner(curLine);
-                    file = loadArtworkBids(line);
+                    Bid bid = loadArtworkBids(line);
+                    file.put(bid.getBidID(),bid);
+
                     line.close();
                 }
             }
@@ -89,32 +95,86 @@ public class FileReader {
      * @return User Object added to the arrayList
      */
 
-    private static HashMap loadUserToSystem(Scanner in) {
+    private static UserProfiles loadUserToSystem(Scanner in) {
 
-        in.useDelimiter(",");
+        in.useDelimiter(delim);
         int id = in.nextInt();
         String userName = in.next();
         String firstName = in.next();
         String lastName = in.next();
         String phoneNumber = in.next();
         ArrayList<String> userAddress = new ArrayList<>();
-        for (int i = 0; i < ADDRESS_SIZE; i++) {
-            userAddress.add(in.next());
+        String testString = in.next();
+        Scanner temp = new Scanner(testString);
+        temp.useDelimiter(delim1);
+        for(int i = 0; i < ADDRESS_SIZE; i++ )  {
+            String temp1 = temp.next();
+            if (temp1.length() > 0) {
+                userAddress.add(temp1);
+            }
         }
         String postCode = in.next();
         String date = in.next();
 
 
-        String path = in.next();
+        String profilePicture = in.next();
         ArrayList<Integer> faveUsers = new ArrayList<>();
-        while (in.hasNextInt()) {
-            int i = in.nextInt();
-            faveUsers.add(i);
+        temp = new Scanner(in.next());
+        temp.useDelimiter(delim1);
+        while (temp.hasNext()) {
+            String temp1 = temp.next();
+            if (temp1.length() > 0) {
+                faveUsers.add(Integer.parseInt(temp1));
+            }
         }
 
-        userList.put(id, new UserProfiles(userName, firstName, lastName, phoneNumber, userAddress, postCode, path,
-                Integer.valueOf(id), date, faveUsers));
-        return userList;
+        ArrayList<Integer> currentAuctions = new ArrayList<>();
+        temp = new Scanner(in.next());
+        temp.useDelimiter(delim1);
+        while (temp.hasNext()) {
+            String temp1 = temp.next();
+            if (temp1.length() > 0) {
+                currentAuctions.add(Integer.parseInt(temp1));
+            }
+        }
+
+        ArrayList<Integer> completedAuctions = new ArrayList<>();
+        temp = new Scanner(in.next());
+        temp.useDelimiter(delim1);
+        while (temp.hasNext()) {
+            String temp1 = temp.next();
+            if (temp1.length() > 0) {
+                completedAuctions.add(Integer.parseInt(temp1));
+            }
+        }
+
+
+        ArrayList<Integer> wonArtworks = new ArrayList<>();
+        temp = new Scanner(in.next());
+        temp.useDelimiter(delim1);
+        while (temp.hasNext()) {
+            String temp1 = temp.next();
+            if (temp1.length() > 0) {
+                wonArtworks.add(Integer.parseInt(temp1));
+            }
+        }
+
+        ArrayList<Integer> bidHistory = new ArrayList<>();
+        temp = new Scanner(in.next());
+        temp.useDelimiter(delim1);
+        while (temp.hasNext()) {
+            String temp1 = temp.next();
+            if (temp1.length() > 0) {
+                bidHistory.add(Integer.parseInt(temp1));
+            }
+        }
+
+
+        UserProfiles user = new UserProfiles( id,  userName,  firstName,  lastName,  phoneNumber,
+                userAddress,  postCode,  profilePicture,  date,
+                 faveUsers,  currentAuctions,  wonArtworks,
+                 completedAuctions,  bidHistory);
+        return user;
     }
 
     /**
@@ -124,25 +184,49 @@ public class FileReader {
      * @return A arraylist with the current painting added to the file
      */
     private static HashMap loadPaintingsToSystem(Scanner in) {
-        in.useDelimiter(",");
+        in.useDelimiter(delim);
         ArrayList<String> artworkPaths = new ArrayList<>();
         String artworkTitle = in.next();
         String description = in.next();
 
-        String creatorName = in.next();
-        int yearCreated = in.nextInt();
+        String artworkCreator = in.next();
+        int artworkYearCreated = in.nextInt();
         double reservePrice = in.nextDouble();
         int numOfBids = in.nextInt();
-        int userNameSeller = in.nextInt();
+        int userId = in.nextInt();
         String auctionPlaced = in.next();
+
         int dWidth = in.nextInt();
         int dHeight = in.nextInt();
         int id = in.nextInt();
-        while (in.hasNext()) {
-            artworkPaths.add(in.next());
+
+
+        Scanner temp = new Scanner(in.next());
+        temp.useDelimiter(delim1);
+        while (temp.hasNext()) {
+            String temp1 = temp.next();
+            if(temp1.length()>0) {
+                artworkPaths.add(temp1);
+            }
         }
-        artworkList.put(id, new Painting(artworkTitle, description, creatorName, yearCreated,
-                reservePrice, numOfBids, userNameSeller, dWidth, dHeight, id, artworkPaths, auctionPlaced));
+
+        ArrayList<Integer> bidHistory = new ArrayList<>();
+
+
+        temp = new Scanner(in.next());
+        temp.useDelimiter(delim1);
+        while (temp.hasNext()) {
+            String temp1 = temp.next();
+            if(temp1.length()>0) {
+                bidHistory.add(Integer.parseInt(temp1));
+            }
+        }
+        temp = new Scanner(in.nextLine());
+        Bid highestBid = loadArtworkBids(temp);
+
+        artworkList.put(id, new Painting( artworkTitle, description, artworkCreator,  artworkYearCreated,
+                            reservePrice,  numOfBids,  userId, dWidth,  dHeight,  id,
+                                    artworkPaths,  highestBid, bidHistory, auctionPlaced));
         in.close();
 
         return artworkList;
@@ -155,7 +239,7 @@ public class FileReader {
      * @return Arraylist with the new sculpture ammended to it
      */
     private static HashMap loadSculpturesToSystem(Scanner in) {
-        in.useDelimiter(",");
+        in.useDelimiter(delim);
         ArrayList<String> artworkPaths = new ArrayList<>();
         String artworkTitle = in.next();
         String description = in.next();
@@ -165,19 +249,39 @@ public class FileReader {
         double reservePrice = in.nextDouble();
         int numOfBids = in.nextInt();
         int userNameSeller = in.nextInt();
+
         String auctionPlaced = in.next();
         int dWidth = in.nextInt();
         int dHeight = in.nextInt();
         int id = in.nextInt();
-
         int dDepth = in.nextInt();
         String material = in.next();
-        while (in.hasNext()) {
-            artworkPaths.add(in.next());
+
+        String tempString = in.next();
+        Scanner temp = new Scanner(tempString);
+        temp.useDelimiter(delim1);
+        while (temp.hasNext()) {
+            String temp1 = temp.next();
+            if(temp1.length()>0) {
+                artworkPaths.add(temp1);
+            }
         }
 
+        ArrayList<Integer> bidHistory = new ArrayList<>();
+
+        temp = new Scanner(in.next());
+        temp.useDelimiter(delim1);
+        while (temp.hasNext()) {
+            String temp1 = temp.next();
+            if(temp1.length()>0) {
+                bidHistory.add(Integer.parseInt(temp1));
+            }
+        }
+        temp = new Scanner(in.nextLine());
+        Bid highestBid = loadArtworkBids(temp);
+
         artworkList.put(id, new Sculpture(artworkTitle, description, creatorName, yearCreated,
-                reservePrice, numOfBids, userNameSeller, dWidth, dHeight, id, dDepth, material, artworkPaths, auctionPlaced));
+                reservePrice, numOfBids, userNameSeller, dWidth, dHeight, id, dDepth, material, artworkPaths, highestBid, bidHistory,auctionPlaced));
         in.close();
         return artworkList;
     }
@@ -188,15 +292,15 @@ public class FileReader {
      * @param in The scanner of each line for a bid
      * @return Arraylist of those objects from the file
      */
-    public static HashMap loadArtworkBids(Scanner in) {
-        in.useDelimiter(",");
+    public static Bid loadArtworkBids(Scanner in) {
+        in.useDelimiter(delim);
         int bidID = in.nextInt();
         int userID = in.nextInt();
         int artworkID = in.nextInt();
         double amount = in.nextDouble();
         String datePlaced = in.next();
-        bidList.put(bidID, new Bid(bidID, amount, userID, artworkID, datePlaced));
-        return bidList;
+        Bid bid = new Bid(bidID, amount, userID, artworkID, datePlaced);
+        return bid;
     }
 
     /**
