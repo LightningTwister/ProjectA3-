@@ -23,7 +23,7 @@ public class Database {
     private UserProfiles currentUser;
     private HashMap<Integer, UserProfiles> users;
     private HashMap<Integer, Artwork> artworks;
-    private static HashMap<Integer, Bid> bids;
+    private HashMap<Integer, Bid> bids;
 
     /**
      * Constructor that instantiates a database
@@ -104,7 +104,6 @@ public class Database {
     private void loadBids() {
         bids = FileReader.readFile(BID_PATH,"bidlist");
         bids.put(3,new Bid(1,99.2,1,9,"10 Dec 2017 16:01:25"));
-        saveBids();
 
     }
 
@@ -451,13 +450,13 @@ public class Database {
         return bids.get(id);
     }
 
-    public static ArrayList<Bid> getBidsIO() {
+    public  ArrayList<Bid> getBidsIO() {
 
         ArrayList<Bid> result = new ArrayList<Bid>();
 
         for (Bid a : bids.values()) {
 
-            result.add(a);
+            result.addAll(bids.values());
 
         }
 

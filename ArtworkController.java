@@ -27,6 +27,7 @@ public class ArtworkController {
     private int nextId, userId;
     private ArrayList<String> picturePath = new ArrayList<>();
     private boolean bid;
+    private boolean editing;
 
     @FXML
     private TextField nameBox, yearBox, reserveBox, bidsBox, userNameBox, widthBox, heightBox, depthBox, materialBox, nameOfArtwork, descriptionBox;
@@ -79,6 +80,10 @@ public class ArtworkController {
         this.userId = Main.database.getCurrentUser().getId();
     }
 
+    public void editing(boolean editing){
+        this.editing = editing;
+    }
+
     /**
      * Method that brings up a new page with all pictures currently stored for this artwork
      */
@@ -124,7 +129,8 @@ public class ArtworkController {
      *
      * @param artwork Artwork object to be edited
      */
-    public void getArtwork(Object artwork) {
+    public void getArtwork(Artwork artwork) {
+        this.artwork = artwork;
         bid = false;
         if (artwork instanceof Painting) {
             this.painting = (Painting) artwork;
@@ -193,7 +199,14 @@ public class ArtworkController {
      */
 
     private void saveChanges() {
+
+
         try {
+            int id = artwork.getId();
+            if(!editing){
+                id = Main.database.getNextIDArtwork();
+            }
+
             int year = Integer.valueOf(yearBox.getText());
             double reserve = Double.valueOf(reserveBox.getText());
             int bids = Integer.valueOf(bidsBox.getText());
@@ -223,7 +236,7 @@ public class ArtworkController {
 
 
             if (sculptureRadio.isSelected()) {
-                Bid highbid = painting.getHighestBid();
+                Bid highbid = artwork.getHighestBid();
                 if(sculpture.getHighestBid() == null || sculpture.getHighestBid().getDatePlaced() == null){
                     highbid = new Bid(reserve);
                 }
@@ -236,24 +249,24 @@ public class ArtworkController {
                 }
 
                 String material = materialBox.getText();
-                Utilities.saveSculpture(sculpture, year, reserve, bids, width, height, depth,
-                        creatorName, Main.database.getNextIDArtwork(), material, title, desc, nextId, this.picturePath, highbid);
+                Utilities.saveSculpture((Sculpture) artwork, year, reserve, bids, width, height, depth,
+                        creatorName, Main.database.getCurrentUser().getId(), material, title, desc, id, this.picturePath, highbid);
                 Main.database.addArtwork(sculpture);
                 Main.database.saveArtwork();
 
 
 
             } else if (paintingRadio.isSelected()) {
-                Bid highbid = painting.getHighestBid();
+                Bid highbid = artwork.getHighestBid();
                 if(painting.getHighestBid() == null || painting.getHighestBid().getDatePlaced() == null){
                     highbid = new Bid(reserve);
                 }
-                Utilities.savePainting(painting, year, reserve, bids, width, height,
-                        creatorName, Main.database.getNextIDArtwork(), title, desc, nextId, this.picturePath, highbid);
+                Utilities.savePainting((Painting) artwork, year, reserve, bids, width, height,
+                        creatorName, Main.database.getCurrentUser().getId(), title, desc, id, this.picturePath, highbid);
 
 
                 Main.database.addArtwork(painting);
-                Main.database.saveArtwork();
+                Main.database.saveUsers();
             } else {
                 throw new Exception("Error: Radio button not selected");
             }

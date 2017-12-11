@@ -269,6 +269,7 @@ public class artworkViewerController {
 
             ArtworkController controller = fxmlLoader.<ArtworkController>getController();
             controller.getArtwork(selectedPainting);
+            controller.editing(true);
 
             Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
@@ -301,6 +302,7 @@ public class artworkViewerController {
             ArtworkController controller = fxmlLoader.<ArtworkController>getController();
 
             controller.getArtwork(selectedSculpture);
+            controller.editing(true);
 
             Scene editScene = new Scene(root, Main.EDIT_WINDOW_WIDTH, Main.EDIT_WINDOW_HEIGHT);
             Stage editStage = new Stage();
