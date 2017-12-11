@@ -27,7 +27,7 @@ public class Bid {
      * @param userID    User that has placed this bid
      * @param artworkID Artwork they have bid on
      * @param currBid   The current amount the user has bid
-     * @throws Exception
+     * @throws Exception Mismatch error is thrown if any number cant be set
      */
     public Bid(int bidID, double amount, int userID, int artworkID, Bid currBid) throws Exception {
         setAmount(amount);

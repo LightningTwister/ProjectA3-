@@ -165,7 +165,7 @@ public class FileWriter {
 
             //write out a bid
         } else if (type.toLowerCase().equals("bidlist")) {
-            System.out.println("Writing bids to file.");
+           // System.out.println("Writing bids to file.");
             ArrayList<Bid> bids = Main.database.getBidsIO();
             for (Bid b : bids) {
                 out.print(b.getBidID() + delim);

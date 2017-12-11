@@ -36,7 +36,7 @@ public class Database {
     /**
      * Method that sets the current user to the one that logged in
      *
-     * @param a
+     * @param a New profile to be set as current profile
      */
     public void setCurrentUser(UserProfiles a) {
         this.currentUser = a;
@@ -186,6 +186,8 @@ public class Database {
 
     /**
      * Return the bid history for a bid object
+     * @param id find the bid history of this artwork
+     * @return list of users and how much they bid and when
      */
     public ArrayList<String> getBidHistory(int id) {
         ArrayList<Integer> idList = artworks.get(id).getBidHistory();
@@ -207,7 +209,7 @@ public class Database {
      *
      * @param amount Amount being placed on the artwork
      * @param artID  Artwork Identifier
-     * @throws Exception
+     * @throws Exception mismatch if the method cant match types
      */
     public void placeBid(double amount, int artID) throws Exception {
         Artwork art = this.getArtwork(artID);

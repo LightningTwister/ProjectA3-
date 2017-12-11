@@ -29,6 +29,7 @@ public class Sculpture extends Artwork {
      * @param material           The material the sculpture is made out of.
      * @param picture            List of paths to pictures for this sculpture.
      * @param id                 Id of this artwork
+     * @param date               formatted string of a date
      */
     public Sculpture(String artworkTitle, String artworkDescription, String artworkCreator, int artworkYearCreated,
                      double reservePrice, int numOfBids, int sellerId, int width, int height, int id,
@@ -61,6 +62,7 @@ public class Sculpture extends Artwork {
      * @param highestBid         Bid object that is currently the highest on this artwork
      * @param bidHistory         List of bids placed on this artwork
      * @param id                 Id of this artwork
+     * @param date               Formatted string of a date
      */
     public Sculpture(String artworkTitle, String artworkDescription, String artworkCreator, int artworkYearCreated,
                      double reservePrice, int numOfBids, int sellerId, int width, int height, int id,

@@ -280,7 +280,7 @@ public class ArtworkController {
             Utilities.closeWindow(rootPane);
 
         } catch (Exception e) {
-
+            //e.printStackTrace();
             Utilities.wrongInputFound();
         }
 

@@ -117,7 +117,7 @@ abstract class Artwork {
      * Add another bid to this object if the artwork is still being auctioned
      *
      * @param newBid the new bid object
-     * @throws Exception
+     * @throws Exception Mismatch exception if a bid is of the wrong type
      */
     protected void placeBid(Bid newBid) throws Exception {
         if (numOfBids == 0) {
@@ -140,7 +140,7 @@ abstract class Artwork {
     /**
      * Get the list of bids made on this object
      *
-     * @return
+     * @return List of bid histories
      */
     public ArrayList getBidHistory() {
         return bidHistory;
@@ -167,7 +167,7 @@ abstract class Artwork {
     /**
      * Sets a new Bid for ReservePrice for the artwork
      *
-     * @param reservePrice The reserve price for the artwork.
+     * @param highestBid The reserve price for the artwork.
      */
     protected void setHighestBid(Bid highestBid) {
         this.highestBid = highestBid;
